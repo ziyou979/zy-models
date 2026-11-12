@@ -7,13 +7,11 @@ import {
   parseModelTypes,
 } from "@models.dev/core/src/filter.js";
 import type { ModelTypeValue } from "@models.dev/core/src/filter.js";
-import { hitEvent } from "@models.dev/core/src/hit.js";
 
+// zy-models: upstream's PostHog / Lake hit reporting is removed; the worker
+// only serves the static site and the filtered catalog endpoints.
 export interface Env {
   ASSETS: any;
-  PosthogToken: string;
-  LakeEndpoint: string;
-  LakeToken: string;
 }
 
 export default {
@@ -23,47 +21,6 @@ export default {
     ctx: ExecutionContext,
   ): Promise<Response> {
     const url = new URL(request.url);
-    const ip = request.headers.get("cf-connecting-ip") ?? undefined;
-    const country = request.headers.get("cf-ipcountry") ?? undefined;
-    const agent = request.headers.get("user-agent") ?? undefined;
-    if (agent?.includes("opencode") || agent?.includes("bun")) {
-      ctx.waitUntil(
-        fetch("https://us.i.posthog.com/i/v0/e/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            api_key: JSON.parse(env.PosthogToken).value,
-            event: "hit",
-            distinct_id: ip ?? "unknown",
-            properties: {
-              $process_person_profile: false,
-              user_agent: agent ?? "unknown",
-              country: country ?? "unknown",
-              path: url.pathname,
-            },
-          }),
-        }),
-      );
-
-      ctx.waitUntil(
-        sendHit(
-          JSON.parse(env.LakeEndpoint).value,
-          JSON.parse(env.LakeToken).value,
-          JSON.stringify([
-            hitEvent(new Date().toISOString(), {
-              method: request.method,
-              path: url.pathname,
-              useragent: agent,
-              ip,
-              cf_country: country,
-            }),
-          ]),
-        ),
-      );
-    }
-
     if (url.pathname === "/model-schema.json") {
       const apiResponse = await catalogResponse(url, request, env, "api");
       if (!apiResponse.ok) return apiResponse;
@@ -81,7 +38,7 @@ export default {
 
       const schema = {
         $schema: "https://json-schema.org/draft/2020-12/schema",
-        $id: "https://models.dev/model-schema.json",
+        $id: "https://zy-models.ziyou979.workers.dev/model-schema.json",
         $defs: {
           Model: {
             type: "string",
@@ -112,7 +69,7 @@ export default {
       url.pathname === "/index.html" ||
       url.pathname === "/index"
     ) {
-      url.pathname = "/_index";
+      url.pathname = "/_index.html"; // zy-models: exact file (wrangler html_handling = "none")
     } else if (isHtmlRoute(url.pathname)) {
       url.pathname = htmlRouteAssetPath(url.pathname);
     } else if (url.pathname.startsWith("/logos/")) {
@@ -144,29 +101,6 @@ export default {
     });
   },
 };
-
-async function sendHit(endpoint: string, token: string, body: string) {
-  for (let attempt = 0; attempt < 3; attempt++) {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body,
-      signal: AbortSignal.timeout(5_000),
-    }).catch(() => undefined);
-    await response?.body?.cancel();
-    if (response?.ok) return;
-    const retryable =
-      !response || response.status === 429 || response.status >= 500;
-    if (!retryable || attempt === 2)
-      throw new Error(
-        `Lake hit delivery failed: ${response?.status ?? "network error"}`,
-      );
-    await new Promise((resolve) => setTimeout(resolve, 250 * 2 ** attempt));
-  }
-}
 
 type CatalogEndpoint = "api" | "models" | "catalog" | "experimental_v2.0_api";
 

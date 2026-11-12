@@ -1,3 +1,4 @@
+import "./cn-client"; // zy-models
 import { costSummary } from "./shared.js";
 
 type SortDirection = "asc" | "desc";

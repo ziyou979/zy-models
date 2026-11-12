@@ -114,93 +114,30 @@ describe("catalog API model type filtering", () => {
   });
 });
 
-describe("hit tracking", () => {
-  test("retries temporary stream failures with the original event", async () => {
-    const bodies: string[] = [];
+// zy-models: upstream's PostHog / Lake hit reporting was removed from the worker.
+describe("telemetry", () => {
+  test("sends no hit events, even for opencode clients", async () => {
+    const sent: string[] = [];
     const fetch = spyOn(globalThis, "fetch").mockImplementation(
-      async (input: RequestInfo | URL, init?: RequestInit) => {
-        if (String(input).includes("posthog"))
-          return new Response(null, { status: 204 });
-        bodies.push(String(init?.body));
-        return new Response(null, { status: bodies.length === 1 ? 503 : 204 });
-      },
-    );
-    const pending: Promise<unknown>[] = [];
-    try {
-      await request("/api.json", { "user-agent": "bun/1.3.14" }, (promise) =>
-        pending.push(promise),
-      );
-      await Promise.all(pending);
-      expect(bodies).toHaveLength(2);
-      expect(bodies[0]).toBe(bodies[1]);
-    } finally {
-      fetch.mockRestore();
-    }
-  });
-
-  test("reports permanent stream rejections", async () => {
-    const fetch = spyOn(globalThis, "fetch").mockImplementation(
-      async (input: RequestInfo | URL) =>
-        new Response(null, {
-          status: String(input).includes("posthog") ? 204 : 401,
-        }),
-    );
-    const pending: Promise<unknown>[] = [];
-    try {
-      await request("/api.json", { "user-agent": "opencode/test" }, (promise) =>
-        pending.push(promise),
-      );
-      const results = await Promise.allSettled(pending);
-      expect(
-        results.filter((result) => result.status === "rejected"),
-      ).toHaveLength(1);
-    } finally {
-      fetch.mockRestore();
-    }
-  });
-
-  test("sends opencode hits to the lake event stream", async () => {
-    const sent: Request[] = [];
-    const fetch = spyOn(globalThis, "fetch").mockImplementation(
-      async (input: RequestInfo | URL, init?: RequestInit) => {
-        sent.push(new Request(input, init));
+      async (input: RequestInfo | URL) => {
+        sent.push(String(input));
         return new Response(null, { status: 204 });
       },
     );
     const pending: Promise<unknown>[] = [];
     try {
-      await request(
+      const response = await request(
         "/api.json?type=all",
-        {
-          "user-agent": "opencode/1.18.34",
-          "cf-connecting-ip": "203.0.113.45",
-          "cf-ipcountry": "US",
-        },
+        { "user-agent": "opencode/1.18.34", "cf-connecting-ip": "203.0.113.45" },
         (promise) => pending.push(promise),
       );
       await Promise.all(pending);
+      expect(response.status).toBe(200);
+      expect(pending).toHaveLength(0);
+      expect(sent).toHaveLength(0);
     } finally {
       fetch.mockRestore();
     }
-
-    const lake = sent.find((item) => item.url === "https://stream.example/");
-    expect(lake?.method).toBe("POST");
-    expect(lake?.headers.get("authorization")).toBe("Bearer lake-token");
-    const events = await lake?.json();
-    expect(events).toEqual([
-      {
-        source: "models",
-        type: "hit",
-        timestamp: expect.any(String),
-        payload: {
-          method: "GET",
-          path: "/api.json",
-          useragent: "opencode/1.18.34",
-          ip: "203.0.113.45",
-          cf_country: "US",
-        },
-      },
-    ]);
   });
 });
 

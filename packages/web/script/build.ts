@@ -104,4 +104,13 @@ for (const [suffix, filter] of variants) {
   );
 }
 
+// zy-models: /cn.json = /api.json filtered to providers with region = "cn".
+{
+  const view = filterCatalogByModelType(catalog, "default").providers as Record<string, { region?: string }>;
+  await Bun.write(
+    "./dist/cn.json",
+    JSON.stringify(Object.fromEntries(Object.entries(view).filter(([, p]) => p.region === "cn"))),
+  );
+}
+
 await fs.rm("./dist/index.html", { force: true });

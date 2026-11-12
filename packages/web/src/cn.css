@@ -1,0 +1,180 @@
+/* zy-models: styles for the Chinese-platform extension UI (cn.tsx). */
+
+html,
+body {
+  font-family: 'Rubik', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', 'Source Han Sans SC', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+html[data-cn-only] tr[data-cn="0"] {
+  display: none;
+}
+
+.cn-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.8125rem;
+}
+
+.cn-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  cursor: pointer;
+  user-select: none;
+  color: var(--color-text);
+}
+
+.cn-filter input {
+  accent-color: var(--color-brand);
+  width: 0.9375rem;
+  height: 0.9375rem;
+}
+
+.cn-filter-hint {
+  color: var(--color-text-tertiary);
+}
+
+td.cny {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+.cny-price {
+  white-space: nowrap;
+}
+
+.cny-marks {
+  display: block;
+  margin-top: 0.125rem;
+  font-family: 'Rubik', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: var(--color-brand);
+}
+
+/* 编程套餐 */
+.cn-plan-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+  border-top: 1px solid var(--color-border);
+}
+
+.cn-plan {
+  min-width: 0;
+  padding: 1rem 0.75rem;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cn-plan-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.cn-plan-head h4 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cn-plan-price {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-brand);
+}
+
+.cn-plan-facts {
+  display: grid;
+  gap: 0.625rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.cn-plan-facts dt {
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: var(--color-text-tertiary);
+  margin-bottom: 0.3125rem;
+}
+
+.cn-plan-facts dd {
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.cn-plan-url {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.cn-plan-url code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.cn-plan-proto {
+  flex: none;
+  padding: 0 0.3125rem;
+  border: 1px solid var(--color-border);
+  font-size: 0.6875rem;
+  color: var(--color-text-tertiary);
+}
+
+.cn-plan-models {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.cn-chip {
+  padding: 0.0625rem 0.375rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 0.75rem;
+}
+
+.cn-plan-restriction dd {
+  color: var(--color-text);
+  border-left: 2px solid var(--color-brand);
+  padding-left: 0.5rem;
+}
+
+.cn-plan-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+}
+
+.cn-notes-body {
+  padding: 0 0.75rem 1rem;
+  max-width: 64rem;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.cn-help-note {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
+}
+
+@media (max-width: 40rem) {
+  .cn-plan-list {
+    grid-template-columns: 1fr;
+  }
+  .cn-filter-hint {
+    display: none;
+  }
+}

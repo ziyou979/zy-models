@@ -6,6 +6,23 @@
 - 每天自动合并上游 models.dev，通过校验后以 PR 形式进入本仓库。
 - 国内数据只取官方文档、官方价格页、官方 API 返回或官方博客；每个模型都带 `sources` 与 `checked_at`。
 
+## 网站（试用）
+
+**https://zy-models.ziyou979.workers.dev** —— models.dev 同款网页，界面中文为主：模型表多了「人民币价（输入/输出/缓存）」和「默认思考」两列，有中文名时显示中文名；平台页显示中文名、区域和编程套餐（价格、接入地址、包含模型、额度、使用限制）；勾选「仅国内平台」只看国内平台。
+
+站点同样提供 JSON：`/api.json`、`/models.json`、`/catalog.json`（均支持 `?type=`，同 models.dev）和 `/cn.json`（仅国内平台），都带 `Access-Control-Allow-Origin: *`。
+
+> ⚠️ **`*.workers.dev` 在中国大陆可能无法访问**（DNS 污染 / 间歇性阻断）。国内长期使用需要给 Worker 绑定自有域名（Cloudflare → Workers → zy-models → Settings → Domains & Routes → Custom Domain），国内程序取数据仍建议优先用下方的 npmmirror 地址。
+
+部署（不用上游的 SST / PostHog / Lake 上报）：
+
+```bash
+(cd packages/web && ./script/build.ts)   # 生成 packages/web/dist（静态页 + 搜索索引 + JSON）
+bun x wrangler deploy                    # 读取 wrangler.toml：Worker 名 zy-models，assets = packages/web/dist
+```
+
+需要环境变量 `CLOUDFLARE_API_TOKEN`（Workers Scripts 编辑权限）和 `CLOUDFLARE_ACCOUNT_ID`。
+
 ## 访问地址
 
 包名：`zy-models`（npm）。文件都是静态 JSON，可直接 `fetch`。
@@ -69,6 +86,9 @@
 
 ```
 packages/core/src/cn/ext.ts   扩展 schema、overlay 加载、扩展键输出（上游代码只加了几处钩子）
+packages/web/src/cn*.ts(x)    网站的国内扩展界面（人民币价、默认思考、编程套餐、仅国内平台筛选、中文文案），render.tsx 只加了几处钩子
+packages/function/src/zy-worker.ts  Worker 入口（包一层上游 worker.ts：JSON 加 CORS、HTML 标注 UTF-8）；上游的统计上报已删除
+wrangler.toml                 用 wrangler 部署到 Cloudflare Workers（替代上游 sst.config.ts）
 overlays/                     对上游文件的覆盖：overlays/<与上游相同路径>.toml，加载时深合并
 overlays/removed.json         本库移除的上游过时模型（下架 / 改名）
 research/                     国内平台调研数据（*.json，格式见 research/FORMAT.md）与导入报告
