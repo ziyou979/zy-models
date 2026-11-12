@@ -1,0 +1,35 @@
+# Imported from research/qianfan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j
+# Source: https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.8, output 2.8, cache_read 0.23
+schema = 2
+base_model = "zhipuai/glm-5.3-flash"
+sources = ["https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j", "https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya", "https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv"]
+checked_at = "2026-11-12"
+notes = "模型更新记录称原生理解图片视频；思考仅支持开启。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 0.11965664
+
+[cost.text.input.cache]
+read = 0.03440128
+
+[cost.text.output]
+price = 0.41879824
+
+[cost_cny]
+input = 0.8
+output = 2.8
+cache_read = 0.23
+
+[reasoning_default]
+value = "enabled"
+source = "https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv"

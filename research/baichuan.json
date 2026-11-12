@@ -1,0 +1,513 @@
+{
+  "provider_id": "baichuan",
+  "modelsdev_id": null,
+  "name_zh": "百川智能开放平台",
+  "name_en": "Baichuan AI Platform",
+  "doc": "https://platform.baichuan-ai.com/docs/api",
+  "pricing_page": "https://platform.baichuan-ai.com/prices",
+  "env": [
+    "BAICHUAN_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://api.baichuan-ai.com/v1",
+      "source": "https://platform.baichuan-ai.com/docs/api"
+    }
+  ],
+  "plans": [],
+  "models": [
+    {
+      "id": "Baichuan-M3-Plus",
+      "name": "Baichuan-M3-Plus",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "baichuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32000,
+        "input": null,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 5,
+        "output": 9,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.baichuan-ai.com/prices",
+        "https://platform.baichuan-ai.com/docs/medical"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "医疗模型。价格页 0.005/0.009 元/千 tokens；按对话全流程节点 token 总数计费，并自动触发『医疗搜索』0.03 元/次另计。返回 thinking 思考区状态与 grounding 证据，不返回 reasoning_content；不支持 system 角色。官网有『海纳百川计划·免费使用 M3Plus API』。免费期内限速 30 rpm。"
+    },
+    {
+      "id": "Baichuan-M3",
+      "name": "Baichuan-M3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "baichuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32000,
+        "input": null,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 10,
+        "output": 30,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.baichuan-ai.com/prices",
+        "https://platform.baichuan-ai.com/docs/medical"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "医疗模型。thinking.budget_tokens ≥1024 且 < max_tokens（仅 M2/M3）；未写开关及默认值。max_tokens [1,32000]。"
+    },
+    {
+      "id": "Baichuan-M2-Plus",
+      "name": "Baichuan-M2-Plus",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "baichuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32000,
+        "input": null,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 10,
+        "output": 30,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.baichuan-ai.com/prices",
+        "https://platform.baichuan-ai.com/docs/medical"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "同 M3-Plus：自动医疗搜索 0.03 元/次另计。"
+    },
+    {
+      "id": "Baichuan-M2",
+      "name": "Baichuan-M2",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "baichuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32000,
+        "input": null,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 20,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.baichuan-ai.com/prices",
+        "https://platform.baichuan-ai.com/docs/medical"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "医疗模型，thinking.budget_tokens 同 M3。"
+    },
+    {
+      "id": "Baichuan4-Turbo",
+      "name": "Baichuan4-Turbo",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "baichuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32000,
+        "input": null,
+        "output": 2048
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": false,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 15,
+        "output": 15,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.baichuan-ai.com/prices",
+        "https://platform.baichuan-ai.com/docs/api"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "输入输出同价 0.015 元/千 tokens。通用接口 max_tokens [1,2048]；支持 function / web_search / retrieval 工具与 json_object。"
+    },
+    {
+      "id": "Baichuan4-Air",
+      "name": "Baichuan4-Air",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "baichuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32000,
+        "input": null,
+        "output": 2048
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": false,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.98,
+        "output": 0.98,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.baichuan-ai.com/prices",
+        "https://platform.baichuan-ai.com/docs/api"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "0.00098 元/千 tokens（含输入输出）。"
+    },
+    {
+      "id": "Baichuan4",
+      "name": "Baichuan4",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "baichuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32000,
+        "input": null,
+        "output": 2048
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": false,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 100,
+        "output": 100,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.baichuan-ai.com/prices",
+        "https://platform.baichuan-ai.com/docs/api"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "0.1 元/千 tokens。官方建议评测搜索效果用 Baichuan4 + search_mode=quality_first。"
+    },
+    {
+      "id": "Baichuan3-Turbo",
+      "name": "Baichuan3-Turbo",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "baichuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32000,
+        "input": null,
+        "output": 2048
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": false,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 12,
+        "output": 12,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.baichuan-ai.com/prices",
+        "https://platform.baichuan-ai.com/docs/api"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "0.012 元/千 tokens。"
+    },
+    {
+      "id": "Baichuan3-Turbo-128k",
+      "name": "Baichuan3-Turbo-128k",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "baichuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 128000,
+        "input": null,
+        "output": 2048
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": true,
+      "reasoning": {
+        "supported": false,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 24,
+        "output": 24,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.baichuan-ai.com/prices",
+        "https://platform.baichuan-ai.com/docs/api"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "0.024 元/千 tokens；function 支持列表未包含该模型。Baichuan2-Turbo-192k 已于 2024-08-16 下线并路由到此模型。"
+    },
+    {
+      "id": "Baichuan2-Turbo",
+      "name": "Baichuan2-Turbo",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "baichuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32000,
+        "input": null,
+        "output": 2048
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": false,
+      "reasoning": {
+        "supported": false,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 8,
+        "output": 8,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.baichuan-ai.com/prices",
+        "https://platform.baichuan-ai.com/docs/api"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "0.008 元/千 tokens；json_object 支持列表未包含该模型。"
+    }
+  ],
+  "notes": "价格页按『元/千 tokens』标价，本文件已×1000 换算为每百万。通用模型（Baichuan4/3/2 系列）输入输出同价；M 系列为医疗垂类、输入输出分开计价。搜索增强 web_search 0.03 元/次。速率：已认证账号 120 rpm，未认证 12 rpm 且每日 ≤300 次。新注册赠 80 元（3 个月有效，2024-05-22 规则）。价格页另列 Baichuan2-53B（分时价：0–8 点 0.01、8–24 点 0.02 元/千 tokens），但通用接口 model 可选值中已无此模型，未收录。文档正文由 platform.baichuan-ai.com 自身的 /api/gitlab/file 与 /api/gitlab/yaml 接口返回（POST {file:'medical.md'} / {file:'api.yaml'}）。"
+}

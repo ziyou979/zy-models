@@ -1,0 +1,29 @@
+# Imported from research/stepfun.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://platform.stepfun.com/docs/zh/guides/models/vision
+# Source: https://platform.stepfun.com/docs/zh/guides/models/list
+# Source: https://platform.stepfun.com/docs/zh/guides/pricing/details
+# 占位: limit.output 未公开，按上游惯例取 context
+# 占位: release_date 未公开，占位为核查日 2026-11-12
+# 占位: open_weights 未确认，写 false
+# 占位: tools 未确认，写 false
+# 占位: temperature/top_p/top_k 为默认值 true/true/false，未核实
+schema = 2
+name = "Step-1o Turbo Vision"
+description = "Step-1o Turbo Vision by StepFun."
+open_weights = false
+release_date = "2026-11-12"
+
+[modalities]
+input = ["text", "image", "video"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = false }
+reasoning = { supported = false }
+temperature = true
+top_p = true
+top_k = false
+
+[limit]
+context = 32_000
+output = 32_000

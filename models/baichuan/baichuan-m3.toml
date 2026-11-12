@@ -1,0 +1,27 @@
+# Imported from research/baichuan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://platform.baichuan-ai.com/prices
+# Source: https://platform.baichuan-ai.com/docs/medical
+# 占位: release_date 未公开，占位为核查日 2026-11-12
+# 占位: open_weights 未确认，写 false
+# 占位: tools 未确认，写 false
+# 占位: temperature/top_p/top_k 为默认值 true/true/false，未核实
+schema = 2
+name = "Baichuan-M3"
+description = "Baichuan-M3 by Baichuan."
+open_weights = false
+release_date = "2026-11-12"
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = false }
+reasoning = { supported = true }
+temperature = true
+top_p = true
+top_k = false
+
+[limit]
+context = 32_768
+output = 32_768

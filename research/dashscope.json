@@ -1,0 +1,1108 @@
+{
+  "provider_id": "dashscope",
+  "modelsdev_id": "alibaba-cn",
+  "name_zh": "阿里云百炼",
+  "name_en": "Alibaba Cloud Model Studio (DashScope)",
+  "doc": "https://help.aliyun.com/zh/model-studio/text-generation-model",
+  "pricing_page": "https://help.aliyun.com/zh/model-studio/model-pricing",
+  "env": [
+    "DASHSCOPE_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "source": "https://help.aliyun.com/zh/model-studio/regions"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://dashscope.aliyuncs.com/apps/anthropic",
+      "source": "https://help.aliyun.com/zh/model-studio/anthropic-api-messages"
+    },
+    {
+      "region": "cn",
+      "protocol": "native",
+      "base_url": "https://dashscope.aliyuncs.com/api/v1",
+      "source": "https://help.aliyun.com/zh/model-studio/regions"
+    },
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+      "source": "https://help.aliyun.com/zh/model-studio/compatibility-of-openai-with-dashscope"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/apps/anthropic",
+      "source": "https://help.aliyun.com/zh/model-studio/anthropic-api-messages"
+    },
+    {
+      "region": "intl",
+      "protocol": "openai-chat",
+      "base_url": "https://{WorkspaceId}.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+      "source": "https://www.alibabacloud.com/help/en/model-studio/compatibility-of-openai-with-dashscope"
+    },
+    {
+      "region": "intl",
+      "protocol": "anthropic",
+      "base_url": "https://{WorkspaceId}.ap-southeast-1.maas.aliyuncs.com/apps/anthropic",
+      "source": "https://www.alibabacloud.com/help/en/model-studio/anthropic-api-messages"
+    }
+  ],
+  "plans": [
+    {
+      "id": "token-plan-lite",
+      "name_zh": "百炼 Token Plan 个人版 Lite",
+      "base_url": "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": 39,
+      "quota_note": "每月 20,000 Credits；新用户限时 19.5 元/月（至 2026-11-30）。 以 Credits 计量，每月限额（9 月 22 日起取消周限额），用量包 100 元/20,000 Credits，最多 5 个。仅华北2（北京）。Anthropic 端点 https://token-plan.cn-beijing.maas.aliyuncs.com/apps/anthropic ；Key 以 sk-sp- 开头。限时夜间折扣：每晚 22:00-次日 08:00 qwen3.8-max/qwen3.8-flash 4 折，DeepSeek V4 系列 5 折；qwen4-max-preview 预览期（11/11-11/25）Credits 低至 2 折、夜间再 4 折。",
+      "models": [
+        "auto",
+        "qwen4-max-preview",
+        "qwen3.8-max",
+        "qwen3.8-flash",
+        "qwen3.7-max",
+        "qwen3.7-plus",
+        "qwen3.6-flash",
+        "deepseek-v4.1-flash",
+        "deepseek-v4.1-flash-1017",
+        "deepseek-v4-pro",
+        "deepseek-v4-pro-0813",
+        "deepseek-v4-flash-0731",
+        "glm-5.3",
+        "glm-5.2",
+        "decision-model-preview"
+      ],
+      "source": "https://help.aliyun.com/zh/model-studio/token-plan-personal-overview"
+    },
+    {
+      "id": "token-plan-essential",
+      "name_zh": "百炼 Token Plan 个人版 Essential",
+      "base_url": "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": 79,
+      "quota_note": "每月 45,000 Credits；新用户限时 39.5 元/月（至 2026-11-30）。 以 Credits 计量，每月限额（9 月 22 日起取消周限额），用量包 100 元/20,000 Credits，最多 5 个。仅华北2（北京）。Anthropic 端点 https://token-plan.cn-beijing.maas.aliyuncs.com/apps/anthropic ；Key 以 sk-sp- 开头。限时夜间折扣：每晚 22:00-次日 08:00 qwen3.8-max/qwen3.8-flash 4 折，DeepSeek V4 系列 5 折；qwen4-max-preview 预览期（11/11-11/25）Credits 低至 2 折、夜间再 4 折。",
+      "models": [
+        "auto",
+        "qwen4-max-preview",
+        "qwen3.8-max",
+        "qwen3.8-flash",
+        "qwen3.7-max",
+        "qwen3.7-plus",
+        "qwen3.6-flash",
+        "deepseek-v4.1-flash",
+        "deepseek-v4.1-flash-1017",
+        "deepseek-v4-pro",
+        "deepseek-v4-pro-0813",
+        "deepseek-v4-flash-0731",
+        "glm-5.3",
+        "glm-5.2",
+        "decision-model-preview"
+      ],
+      "source": "https://help.aliyun.com/zh/model-studio/token-plan-personal-overview"
+    },
+    {
+      "id": "token-plan-standard",
+      "name_zh": "百炼 Token Plan 个人版 Standard",
+      "base_url": "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": 139,
+      "quota_note": "每月 80,000 Credits，赠 Harness 权益。 以 Credits 计量，每月限额（9 月 22 日起取消周限额），用量包 100 元/20,000 Credits，最多 5 个。仅华北2（北京）。Anthropic 端点 https://token-plan.cn-beijing.maas.aliyuncs.com/apps/anthropic ；Key 以 sk-sp- 开头。限时夜间折扣：每晚 22:00-次日 08:00 qwen3.8-max/qwen3.8-flash 4 折，DeepSeek V4 系列 5 折；qwen4-max-preview 预览期（11/11-11/25）Credits 低至 2 折、夜间再 4 折。",
+      "models": [
+        "auto",
+        "qwen4-max-preview",
+        "qwen3.8-max",
+        "qwen3.8-flash",
+        "qwen3.7-max",
+        "qwen3.7-plus",
+        "qwen3.6-flash",
+        "deepseek-v4.1-flash",
+        "deepseek-v4.1-flash-1017",
+        "deepseek-v4-pro",
+        "deepseek-v4-pro-0813",
+        "deepseek-v4-flash-0731",
+        "glm-5.3",
+        "glm-5.2",
+        "decision-model-preview"
+      ],
+      "source": "https://help.aliyun.com/zh/model-studio/token-plan-personal-overview"
+    },
+    {
+      "id": "token-plan-pro",
+      "name_zh": "百炼 Token Plan 个人版 Pro",
+      "base_url": "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": 312,
+      "quota_note": "每月 200,000 Credits，赠 Harness 权益，并发 Agent 6-8 个。 以 Credits 计量，每月限额（9 月 22 日起取消周限额），用量包 100 元/20,000 Credits，最多 5 个。仅华北2（北京）。Anthropic 端点 https://token-plan.cn-beijing.maas.aliyuncs.com/apps/anthropic ；Key 以 sk-sp- 开头。限时夜间折扣：每晚 22:00-次日 08:00 qwen3.8-max/qwen3.8-flash 4 折，DeepSeek V4 系列 5 折；qwen4-max-preview 预览期（11/11-11/25）Credits 低至 2 折、夜间再 4 折。",
+      "models": [
+        "auto",
+        "qwen4-max-preview",
+        "qwen3.8-max",
+        "qwen3.8-flash",
+        "qwen3.7-max",
+        "qwen3.7-plus",
+        "qwen3.6-flash",
+        "deepseek-v4.1-flash",
+        "deepseek-v4.1-flash-1017",
+        "deepseek-v4-pro",
+        "deepseek-v4-pro-0813",
+        "deepseek-v4-flash-0731",
+        "glm-5.3",
+        "glm-5.2",
+        "decision-model-preview"
+      ],
+      "source": "https://help.aliyun.com/zh/model-studio/token-plan-personal-overview"
+    },
+    {
+      "id": "coding-plan-pro",
+      "name_zh": "百炼 Coding Plan（旧版）Pro",
+      "base_url": "https://coding.dashscope.aliyuncs.com/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": 200,
+      "quota_note": "每 5 小时 6,000 次请求、每周 45,000 次、每月 90,000 次（按模型调用次数计）；新客首月 ¥39.90；限量抢购每日 09:30 补充；Lite 已停售。Anthropic 端点 https://coding.dashscope.aliyuncs.com/apps/anthropic ；Key 以 sk-sp- 开头；严禁 API/脚本调用；使用期间输入输出将用于模型优化。文档已归入“Coding Plan（旧版）”。",
+      "models": [
+        "qwen3.7-plus",
+        "qwen3.6-plus",
+        "kimi-k2.5",
+        "glm-5",
+        "MiniMax-M2.5",
+        "qwen3.5-plus"
+      ],
+      "source": "https://help.aliyun.com/zh/model-studio/coding-plan"
+    }
+  ],
+  "models": [
+    {
+      "id": "qwen4-max-preview",
+      "name": "Qwen4-Max-Preview",
+      "name_zh": null,
+      "aliases": [
+        "qwen4.0-max-preview"
+      ],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "beta",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "default": "xhigh",
+        "default_source": "https://help.aliyun.com/zh/model-studio/qwen4-max-preview",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": null,
+        "output": null,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/qwen4-max-preview",
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/token-plan-personal-overview",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8-Max",
+      "name_zh": null,
+      "aliases": [
+        "qwen3.8-max-0902"
+      ],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 128000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 12,
+        "output": 36,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 6,
+        "cache_read": null
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "https://help.aliyun.com/zh/model-studio/context-cache"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "qwen3.8-flash",
+      "name": "Qwen3.8-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 128000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.8,
+        "output": 2.7,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 0.15,
+        "output": 0.47,
+        "cache_read": null
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "https://help.aliyun.com/zh/model-studio/context-cache"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "qwen3.7-plus",
+      "name": "Qwen3.7-Plus",
+      "name_zh": null,
+      "aliases": [
+        "qwen3.7-plus-2026-05-26"
+      ],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 128000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "0<input<=256K",
+            "input": 2,
+            "output": 8
+          },
+          {
+            "when": "256K<input<=1M",
+            "input": 6,
+            "output": 24
+          }
+        ],
+        "off_peak": "原价；官网标注限时 8 折（思考与非思考输出同价）"
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 0.4,
+        "output": 1.6,
+        "cache_read": null,
+        "tiers": [
+          {
+            "when": "0<input<=256K",
+            "input": 0.4,
+            "output": 1.6
+          },
+          {
+            "when": "256K<input<=1M",
+            "input": 1.2,
+            "output": 4.8
+          }
+        ],
+        "off_peak": "List price; limited-time 20% off"
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "https://help.aliyun.com/zh/model-studio/context-cache"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "qwen3.7-max",
+      "name": "Qwen3.7-Max",
+      "name_zh": null,
+      "aliases": [
+        "qwen3.7-max-2026-05-20",
+        "qwen3.7-max-2026-06-08"
+      ],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 12,
+        "output": 36,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 2.5,
+        "output": 7.5,
+        "cache_read": null
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "https://help.aliyun.com/zh/model-studio/token-plan-personal-overview"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "qwen3.7-flash",
+      "name": "Qwen3.7-Flash",
+      "name_zh": null,
+      "aliases": [
+        "qwen3.7-flash-2026-07-15"
+      ],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 64000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.2,
+        "output": 0.8,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "0<input<=32K",
+            "input": 0.2,
+            "output": 0.8
+          },
+          {
+            "when": "32K<input<=256K",
+            "input": 0.6,
+            "output": 2.4
+          },
+          {
+            "when": "256K<input<=1M",
+            "input": 1.2,
+            "output": 4.8
+          }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 0.03,
+        "output": 0.13,
+        "cache_read": null,
+        "tiers": [
+          {
+            "when": "0<input<=32K",
+            "input": 0.03,
+            "output": 0.13
+          },
+          {
+            "when": "32K<input<=256K",
+            "input": 0.1,
+            "output": 0.4
+          },
+          {
+            "when": "256K<input<=1M",
+            "input": 0.2,
+            "output": 0.8
+          }
+        ]
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "qwen3-coder-flash",
+      "name": "Qwen3-Coder-Flash",
+      "name_zh": null,
+      "aliases": [
+        "qwen3-coder-flash-2025-07-28"
+      ],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 1,
+        "output": 4,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "0<input<=32K",
+            "input": 1,
+            "output": 4
+          },
+          {
+            "when": "32K<input<=128K",
+            "input": 1.5,
+            "output": 6
+          },
+          {
+            "when": "128K<input<=256K",
+            "input": 2.5,
+            "output": 10
+          },
+          {
+            "when": "256K<input<=1M",
+            "input": 5,
+            "output": 25
+          }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 0.3,
+        "output": 1.5,
+        "cache_read": null,
+        "tiers": [
+          {
+            "when": "0<input<=32K",
+            "input": 0.3,
+            "output": 1.5
+          },
+          {
+            "when": "32K<input<=128K",
+            "input": 0.5,
+            "output": 2.5
+          },
+          {
+            "when": "128K<input<=256K",
+            "input": 0.8,
+            "output": 4
+          },
+          {
+            "when": "256K<input<=1M",
+            "input": 1.6,
+            "output": 9.6
+          }
+        ]
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "qwen3.8-omni-flash",
+      "name": "Qwen3.8-Omni-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.8,
+        "output": 2.7,
+        "cache_read": 0.1,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/models",
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "https://help.aliyun.com/zh/model-studio/omni"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "deepseek-v4.1-flash",
+      "name": "DeepSeek-V4.1-Flash",
+      "name_zh": null,
+      "aliases": [
+        "deepseek-v4.1-flash-1017"
+      ],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "闲时 22:00-08:00",
+            "input": 1,
+            "output": 4
+          }
+        ],
+        "off_peak": "百炼 DeepSeek 峰谷价：忙时北京时间 08:00-22:00，闲时 22:00-次日 08:00（与 DeepSeek 官方峰谷时段不同）。"
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": null,
+        "tiers": [
+          {
+            "when": "idle hours",
+            "input": 0.15,
+            "output": 0.6
+          }
+        ]
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "https://help.aliyun.com/zh/model-studio/token-plan-personal-overview"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "deepseek-v4-pro-0813",
+      "name": "DeepSeek-V4-Pro-0813",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 9,
+        "output": 27,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "闲时 22:00-08:00",
+            "input": 4.5,
+            "output": 13.5
+          }
+        ],
+        "off_peak": "百炼 DeepSeek 峰谷价：忙时北京时间 08:00-22:00，闲时 22:00-次日 08:00（与 DeepSeek 官方峰谷时段不同）。"
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 1.32,
+        "output": 3.96,
+        "cache_read": null,
+        "tiers": [
+          {
+            "when": "idle hours",
+            "input": 0.66,
+            "output": 1.98
+          }
+        ]
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "https://help.aliyun.com/zh/model-studio/token-plan-personal-overview"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "kimi-k3.1-pro",
+      "name": "Kimi-K3.1-Pro",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 13,
+        "output": 68,
+        "cache_read": 1.3,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.2
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "kimi-k3",
+      "name": "Kimi-K3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 20,
+        "output": 100,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 3,
+        "output": 15,
+        "cache_read": null
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "https://help.aliyun.com/zh/model-studio/kimi-k3"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 128000
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 8,
+        "output": 28,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": null
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/text-generation-model",
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "https://help.aliyun.com/zh/model-studio/glm-5-3"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "glm-5.2",
+      "name": "GLM-5.2",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 8,
+        "output": 28,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "unit": "per_million_tokens",
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": null
+      },
+      "sources": [
+        "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://help.aliyun.com/zh/model-studio/deep-thinking",
+        "https://help.aliyun.com/zh/model-studio/token-plan-personal-overview"
+      ],
+      "checked_at": "2026-11-12"
+    }
+  ],
+  "notes": "price_cny 取华北2（北京）原价；price_usd_intl 取国际站新加坡（International 部署范围）美元价（https://www.alibabacloud.com/help/en/model-studio/model-pricing）。中文价格页把新加坡价折成人民币（如 qwen3.8-max 14.988/44.965 元），未采用。阶梯按单次请求输入 token 总量整体定档（K=1000、M=1000000）。缓存：隐式缓存命中通常按输入单价 20%，显式缓存创建 125%、命中 10%；qwen3.8-max 与 qwen3.8-flash 为例外（比例不同、以控制台为准），故各模型 cache_read 除官方明列者（kimi-k3.1-pro 1.3 元、qwen3.8-omni-flash 0.1 元）外写 null。Batch 半价（部分模型）。新开通 90 天内北京地域多数新模型各有 100 万 token 免费额度。思考：Qwen3.5 及以后的 Plus/Max/Flash 均为混合思考、默认开启，用 enable_thinking 开关，thinking_budget 限制思考长度（不是档位）；qwen4-max-preview 用 reasoning_effort=low/medium/xhigh（默认 xhigh），且 max_tokens 起含思考与回答总量、preserve_thinking 默认开；glm-5.3 仅思考；kimi-k3.1-pro 在百炼文档中写“混合思考、默认开启”（与月之暗面官方“始终思考”不一致），kimi/kimi-k3.1-pro 等月之暗面直供版本为仅思考；kimi-k3.1-pro、kimi-k3 不支持 thinking_budget。qwen4-max-preview 仅 Token Plan 可用，预览期至 2026-11-25 24:00 后下线，无按量价。百炼 deepseek-v4-pro（非 0813 快照）按 12/24 元固定价，与 deepseek-v4-pro-0813 峰谷价不同，未单列。三方直供模型（如 kimi/kimi-k3.1-pro-highspeed、ZHIPU/GLM-5.3-Flash 等）仅中国站北京地域可用，需在控制台开通。地域：北京（cn）、新加坡（intl）、美国弗吉尼亚、德国法兰克福、日本东京、中国香港；API Key 按地域绑定，跨地域调用返回 401。推荐迁移至业务空间专属域名 {WorkspaceId}.<region>.maas.aliyuncs.com，旧域名 dashscope.aliyuncs.com / dashscope-intl.aliyuncs.com 仍可用。qwen3.8-max 等 max output 128k 取自“图像与视频参数”表；qwen3.7-flash 64k 取自旧版表。release_date 官方未给出（快照名中的日期见 aliases）。"
+}

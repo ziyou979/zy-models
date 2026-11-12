@@ -1,0 +1,27 @@
+# Imported from research/sensenova.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://platform.sensenova.cn/docs
+# Source: https://www.sensenova.cn/token-plan
+# 占位: release_date 未公开，占位为核查日 2026-11-12
+# 占位: open_weights 未确认，写 false
+# 占位: temperature/top_p/top_k 为默认值 true/true/false，未核实
+schema = 2
+name = "SenseNova 6.8 Flash"
+description = "SenseNova 6.8 Flash by SenseTime."
+open_weights = false
+release_date = "2026-11-12"
+name_zh = "日日新 6.8 Flash"
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = true }
+temperature = true
+top_p = true
+top_k = false
+
+[limit]
+context = 1_048_576
+output = 128_000

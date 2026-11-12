@@ -1,0 +1,29 @@
+# Imported from research/siliconflow.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://www.siliconflow.cn/pricing
+# Source: https://www.siliconflow.cn/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6, output 18, cache_read 0.3
+schema = 2
+base_model = "tencent/hy4-preview"
+status = "beta"
+sources = ["https://www.siliconflow.cn/pricing", "https://www.siliconflow.cn/models"]
+checked_at = "2026-11-12"
+notes = "页面标签：⚡️ New；参数规模（官方页 size 字段，单位 B）：770"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[cost.text.input]
+price = 0.89742479
+
+[cost.text.input.cache]
+read = 0.04487124
+
+[cost.text.output]
+price = 2.69227438
+
+[cost_cny]
+input = 6
+output = 18
+cache_read = 0.3

@@ -1,0 +1,48 @@
+# Imported from research/volcengine.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://www.volcengine.com/docs/82379/1330310
+# Source: https://www.volcengine.com/docs/82379/1544106
+# Source: https://www.volcengine.com/docs/ark/deep-thinking
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.8, output 2.7, cache_read 0.16
+schema = 2
+base_model = "bytedance-seed/seed-2.1-lite"
+aliases = ["doubao-seed-2.1-lite"]
+sources = ["https://www.volcengine.com/docs/82379/1330310", "https://www.volcengine.com/docs/82379/1544106", "https://www.volcengine.com/docs/ark/deep-thinking"]
+checked_at = "2026-11-12"
+notes = "在线推理（低延迟）1.6/5.4（缓存 0.32）；低优/批量 0.4/1.35（缓存 0.16）。音频理解推荐模型之一。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, effort = ["minimal", "low", "medium", "high"], default = { type = "effort", value = "high" } }
+structured_output = true
+
+[cost.text.input]
+price = 0.11965664
+
+[cost.text.input.cache]
+read = 0.02393133
+
+[cost.text.output]
+price = 0.40384116
+
+[cost_cny]
+input = 0.8
+output = 2.7
+cache_read = 0.16
+
+[[cost_cny.tiers]]
+when = "input<=1024k 非音频"
+context_max = 1_024_000
+input = 0.8
+output = 2.7
+cache_read = 0.16
+
+[[cost_cny.tiers]]
+when = "input<=1024k 音频输入"
+context_max = 1_024_000
+input = 12
+output = 2.7
+cache_read = 2.4
+
+[reasoning_default]
+value = "high"
+source = "https://www.volcengine.com/docs/ark/deep-thinking"

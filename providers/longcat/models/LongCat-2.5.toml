@@ -1,0 +1,33 @@
+# Imported from research/longcat.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://longcat.chat/platform/docs/zh/
+# Source: https://longcat.chat/platform/docs/zh/pricing/longcat-2.5
+# Source: https://longcat.chat/platform/docs/zh/api/model-params
+# Source: https://longcat.chat/platform/docs/zh/image-video-understanding
+# Source: https://longcat.chat/platform/docs/zh/change-log
+# Source: https://longcat.chat/platform/docs/zh/api-pay-as-you-go
+# Source: https://longcat.chat/platform/docs/zh/faq
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.04
+schema = 2
+base_model = "meituan/longcat-2.5"
+sources = ["https://longcat.chat/platform/docs/zh/", "https://longcat.chat/platform/docs/zh/pricing/longcat-2.5", "https://longcat.chat/platform/docs/zh/api/model-params", "https://longcat.chat/platform/docs/zh/image-video-understanding", "https://longcat.chat/platform/docs/zh/change-log", "https://longcat.chat/platform/docs/zh/api-pay-as-you-go", "https://longcat.chat/platform/docs/zh/faq"]
+checked_at = "2026-11-12"
+notes = "上下文 1,048,576；max_tokens 上限 262,144；thinking_budget 最大 262,144。thinking:{type:enabled|disabled} 开关；temperature 开思考固定 1.0、关思考固定 0.7。视频仅 URL 传入（≤100MB、<3600s、≤10 个）；图片 ≤100 张。changelog 写『工具调用』能力；Chat API 参数页未列 tools 字段。release_date 取 changelog『2026-11-02 LongCat-2.5 上线』。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true }
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.00598283
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.04
+discount_note = "标注为『平台初上线限时折扣价』，原价未公开；企业认证用户按月累计消费另享阶梯折扣：≥¥500 9折、≥¥2,000 8折、≥¥8,000 7折、≥¥40,000 6折"

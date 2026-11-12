@@ -1,0 +1,34 @@
+# Imported from research/tencent-tokenhub.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.tencent.com/document/product/1823/130051
+# Source: https://cloud.tencent.com/document/product/1823/130055
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 13, output 68, cache_read 1.3
+schema = 2
+base_model = "moonshotai/kimi-k3.1-pro"
+sources = ["https://cloud.tencent.com/document/product/1823/130051", "https://cloud.tencent.com/document/product/1823/130055"]
+checked_at = "2026-11-12"
+notes = "缓存写入分 5min（13 元）与 1h（26 元）两档。另有 kimi-k3.1-pro-highspeed（26/136/1.3，写入 26/52）。思考默认值未在文档列出。"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+input = 1_048_576
+output = 1_048_576
+
+[cost.text.input]
+price = 1.94442039
+
+[cost.text.input.cache]
+read = 0.19444204
+
+[cost.text.output]
+price = 10.17081434
+
+[cost_cny]
+input = 13
+output = 68
+cache_read = 1.3
+cache_write = 13
+cache_write_1h = 26

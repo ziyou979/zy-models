@@ -1,0 +1,21 @@
+# Imported from research/tencent-tokenhub.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.tencent.com/document/product/1823/130051
+# Source: https://cloud.tencent.com/document/product/1823/130055
+# Source: https://cloud.tencent.com/document/product/1823/130079
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2.4, output 9.6
+schema = 2
+base_model = "tencent/hunyuan-role-latest"
+sources = ["https://cloud.tencent.com/document/product/1823/130051", "https://cloud.tencent.com/document/product/1823/130055", "https://cloud.tencent.com/document/product/1823/130079"]
+checked_at = "2026-11-12"
+notes = "角色扮演模型；不支持 OpenAI Responses 协议。另有 hy-role（同价、同上下文）。"
+
+[cost.text.input]
+price = 0.35896992
+
+[cost.text.output]
+price = 1.43587967
+
+[cost_cny]
+input = 2.4
+output = 9.6

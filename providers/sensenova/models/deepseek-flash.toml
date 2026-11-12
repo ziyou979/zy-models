@@ -1,0 +1,17 @@
+# Imported from research/sensenova.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://platform.sensenova.cn/docs
+# Source: https://www.sensenova.cn/token-plan
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash-1017"
+status = "beta"
+sources = ["https://platform.sensenova.cn/docs", "https://www.sensenova.cn/token-plan"]
+checked_at = "2026-11-12"
+notes = "商汤平台上 model id 为 deepseek-flash（DeepSeek V4.1 Flash 1017 版）。max_tokens 默认 131072，范围 [1,393216]。视频输入仅 Chat Completions 支持。Chat 接口 reasoning_effort=none 可关思考，Messages 接口不能关。minimal→low，medium/xhigh→high 兼容映射。仅隐式缓存。"
+
+[capabilities]
+reasoning = { supported = true, effort = ["none", "low", "high", "max"], default = { type = "effort", value = "high" } }
+structured_output = true
+
+[reasoning_default]
+value = "high"
+source = "https://platform.sensenova.cn/docs"

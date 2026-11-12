@@ -1,0 +1,164 @@
+{
+  "provider_id": "deepseek",
+  "modelsdev_id": "deepseek",
+  "name_zh": "DeepSeek 开放平台",
+  "name_en": "DeepSeek Platform",
+  "doc": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+  "pricing_page": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+  "env": [
+    "DEEPSEEK_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://api.deepseek.com",
+      "source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://api.deepseek.com/anthropic",
+      "source": "https://api-docs.deepseek.com/zh-cn/guides/anthropic_api"
+    },
+    {
+      "region": "cn",
+      "protocol": "openai-responses",
+      "base_url": "https://api.deepseek.com/",
+      "source": "https://api-docs.deepseek.com/zh-cn/quick_start/agent_integrations/codex"
+    }
+  ],
+  "plans": [],
+  "models": [
+    {
+      "id": "deepseek-flash",
+      "name": "DeepSeek-V4.1-Flash-1017",
+      "name_zh": null,
+      "aliases": [
+        "deepseek-v4-flash",
+        "deepseek-v4-flash-vision-exp"
+      ],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": "2026-10-17",
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": null,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "default_source": "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.04,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "空闲时段（off-peak）",
+            "input": 1,
+            "output": 4,
+            "cache_read": 0.02
+          }
+        ],
+        "off_peak": "闲时价=高峰价一半。高峰时段：北京时间周一至周五（不含中国法定节假日）9:00-12:00、14:00-18:00；其余时段（含周末、法定节假日全天）为空闲时段。2026-08-17 0 时起实行峰谷定价。"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode",
+        "https://api-docs.deepseek.com/zh-cn/api/create-chat-completion",
+        "https://api-docs.deepseek.com/zh-cn/updates",
+        "https://api-docs.deepseek.com/zh-cn/guides/vision",
+        "https://api-docs.deepseek.com/zh-cn/quick_start/agent_integrations/codex"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek-V4-Pro-0813",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": "2026-08-13",
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": null,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "default_source": "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 9.0,
+        "output": 27.0,
+        "cache_read": 0.3,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "空闲时段（off-peak）",
+            "input": 4.5,
+            "output": 13.5,
+            "cache_read": 0.15
+          }
+        ],
+        "off_peak": "闲时价=高峰价一半。高峰时段：北京时间周一至周五（不含中国法定节假日）9:00-12:00、14:00-18:00；其余时段（含周末、法定节假日全天）为空闲时段。2026-08-17 0 时起实行峰谷定价。"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode",
+        "https://api-docs.deepseek.com/zh-cn/api/create-chat-completion",
+        "https://api-docs.deepseek.com/zh-cn/updates",
+        "https://api-docs.deepseek.com/zh-cn/quick_start/agent_integrations/codex"
+      ],
+      "checked_at": "2026-11-12"
+    }
+  ],
+  "notes": "价格为人民币/百万 tokens；model 对象 price_cny 主字段为高峰时段价，tiers 中为空闲时段价。思考模式默认开启且 effort 默认 high（OpenAI 格式 thinking.type=enabled/disabled + reasoning_effort=low/high/max；Anthropic 格式 thinking + output_config.effort；Responses 格式 reasoning.effort=none/low/high/max）；传入 minimal→low、medium/xhigh→high、ultra→max。max_tokens 取值 1–393216（384K），未设置时非思考模式默认 8K、思考模式默认 64K（effort=max 时 128K）。上下文 1M（Codex 接入文档 context_window=1048576）。deepseek-flash 当前指向 DeepSeek-V4.1-Flash-1017（2026-10-17 更新，V4.1-Flash 于 2026-09-10 发布，原生多模态图像理解）；旧名 deepseek-v4-flash、deepseek-v4-flash-vision-exp 已下线但仍可调用，路由到 V4.1 Flash 并按 Flash 计费。deepseek-v4-pro 不支持图像（图片会被替换为 [Unsupported Image]）。deepseek-chat / deepseek-reasoner 已于 2026-07-24 停止使用。Anthropic 端点下 claude-opus* 映射 deepseek-v4-pro，其他 claude* 映射 deepseek-flash；Anthropic 端点 cache_creation_input_tokens 恒为 0（无缓存写入计费）。FIM 补全仅非思考模式支持。并发限制：deepseek-flash 2500、deepseek-v4-pro 500。另有 Search/Fetch API 各 5 元/千次成功请求。DeepSeek 官方无订阅套餐。open_weights 未在官方 API 文档中确认，写 null。"
+}

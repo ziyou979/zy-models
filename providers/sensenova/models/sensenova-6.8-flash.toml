@@ -1,0 +1,18 @@
+# Imported from research/sensenova.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://platform.sensenova.cn/docs
+# Source: https://www.sensenova.cn/token-plan
+schema = 2
+base_model = "sensetime/sensenova-6.8-flash"
+status = "beta"
+name_zh = "日日新 6.8 Flash"
+sources = ["https://platform.sensenova.cn/docs", "https://www.sensenova.cn/token-plan"]
+checked_at = "2026-11-12"
+notes = "文档写『支持 1 M 上下文窗口』；max_tokens 默认 64K，范围 [1,128K]。思考默认开启且不支持关闭（thinking.type 仅 enabled）。JSON 模式 response_format=json_object。按 Token Plan 积分计费，未公开按 token 单价。"
+
+[capabilities]
+reasoning = { supported = true, effort = ["minimal", "low", "medium", "high", "xhigh", "max"], default = { type = "effort", value = "high" } }
+structured_output = true
+
+[reasoning_default]
+value = "high"
+source = "https://platform.sensenova.cn/docs"

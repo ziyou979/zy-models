@@ -1,0 +1,12 @@
+# Imported from research/baichuan.json by scripts/import-research.ts
+# cn openai-chat: https://api.baichuan-ai.com/v1 (https://platform.baichuan-ai.com/docs/api)
+name = "Baichuan AI Platform"
+env = ["BAICHUAN_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://api.baichuan-ai.com/v1"
+doc = "https://platform.baichuan-ai.com/docs/api"
+name_zh = "百川智能开放平台"
+region = "cn"
+pricing_page = "https://platform.baichuan-ai.com/prices"
+notes = "价格页按『元/千 tokens』标价，本文件已×1000 换算为每百万。通用模型（Baichuan4/3/2 系列）输入输出同价；M 系列为医疗垂类、输入输出分开计价。搜索增强 web_search 0.03 元/次。速率：已认证账号 120 rpm，未认证 12 rpm 且每日 ≤300 次。新注册赠 80 元（3 个月有效，2024-05-22 规则）。价格页另列 Baichuan2-53B（分时价：0–8 点 0.01、8–24 点 0.02 元/千 tokens），但通用接口 model 可选值中已无此模型，未收录。文档正文由 platform.baichuan-ai.com 自身的 /api/gitlab/file 与 /api/gitlab/yaml 接口返回（POST {file:'medical.md'} / {file:'api.yaml'}）。"

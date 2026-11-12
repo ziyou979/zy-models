@@ -1,0 +1,331 @@
+{
+  "provider_id": "sensenova",
+  "modelsdev_id": "sensenova",
+  "name_zh": "商汤日日新 SenseNova",
+  "name_en": "SenseNova (SenseTime)",
+  "doc": "https://platform.sensenova.cn/docs",
+  "pricing_page": "https://www.sensenova.cn/token-plan",
+  "env": [
+    "SENSENOVA_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://token.sensenova.cn/v1",
+      "source": "https://platform.sensenova.cn/docs"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://token.sensenova.cn",
+      "source": "https://platform.sensenova.cn/docs",
+      "note": "SDK 自动拼接 /v1/messages"
+    },
+    {
+      "region": "cn",
+      "protocol": "openai-responses",
+      "base_url": "https://token.sensenova.cn/v1",
+      "source": "https://platform.sensenova.cn/docs"
+    }
+  ],
+  "plans": [
+    {
+      "id": "token-plan",
+      "name_zh": "SenseNova Token Plan（公测）",
+      "base_url": "https://token.sensenova.cn/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": 0,
+      "quota_note": "公测期完全免费，Lite/Pro 付费档『即将上线』。积分制：通用积分池滚动 5 小时 120,000 积分、滚动周 1,200,000 积分（2026-10-27 起上调）；Flash-Lite 专属积分池 5 小时 60,000、周 600,000。各模型按实际用量扣不同积分，扣减比例未公开。最多 20 个 API Key。",
+      "models": [
+        "sensenova-6.8-flash",
+        "sensenova-6.8-flash-lite",
+        "deepseek-flash",
+        "glm-5.3",
+        "kimi-k3",
+        "sensenova-u1.5-lite",
+        "sensenova-u1.5-fast"
+      ],
+      "source": "https://www.sensenova.cn/token-plan"
+    }
+  ],
+  "models": [
+    {
+      "name_zh": "日日新 6.8 Flash",
+      "aliases": [],
+      "open_weights": null,
+      "release_date": null,
+      "status": "beta",
+      "structured_output": true,
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": null,
+        "output": null,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.sensenova.cn/docs",
+        "https://www.sensenova.cn/token-plan"
+      ],
+      "checked_at": "2026-11-12",
+      "id": "sensenova-6.8-flash",
+      "name": "SenseNova 6.8 Flash",
+      "lab": "sensetime",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 128000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": [
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "default_source": "https://platform.sensenova.cn/docs",
+        "field": "reasoning"
+      },
+      "notes": "文档写『支持 1 M 上下文窗口』；max_tokens 默认 64K，范围 [1,128K]。思考默认开启且不支持关闭（thinking.type 仅 enabled）。JSON 模式 response_format=json_object。按 Token Plan 积分计费，未公开按 token 单价。"
+    },
+    {
+      "name_zh": "日日新 6.8 Flash Lite",
+      "aliases": [],
+      "open_weights": null,
+      "release_date": null,
+      "status": "beta",
+      "structured_output": true,
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": null,
+        "output": null,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.sensenova.cn/docs",
+        "https://www.sensenova.cn/token-plan"
+      ],
+      "checked_at": "2026-11-12",
+      "id": "sensenova-6.8-flash-lite",
+      "name": "SenseNova 6.8 Flash Lite",
+      "lab": "sensetime",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": 65536
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "low",
+          "medium",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "default_source": "https://platform.sensenova.cn/docs",
+        "field": "reasoning"
+      },
+      "notes": "context/output 取自文档 List Models 响应示例（id=sensenova-6.8-flash-lite，context_length 262144，max_output_length 65536）；请求参数表 max_tokens 默认 65535、范围 [1,65536]。思考默认开启，thinking.type=disabled 或 reasoning_effort=none 关闭。Token Plan 公测期免费且有 Flash-Lite 专属积分池。"
+    },
+    {
+      "name_zh": null,
+      "aliases": [],
+      "open_weights": null,
+      "release_date": null,
+      "status": "beta",
+      "structured_output": true,
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": null,
+        "output": null,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.sensenova.cn/docs",
+        "https://www.sensenova.cn/token-plan"
+      ],
+      "checked_at": "2026-11-12",
+      "id": "deepseek-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "lab": "deepseek",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "none",
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "default_source": "https://platform.sensenova.cn/docs",
+        "field": "reasoning_content"
+      },
+      "notes": "商汤平台上 model id 为 deepseek-flash（DeepSeek V4.1 Flash 1017 版）。max_tokens 默认 131072，范围 [1,393216]。视频输入仅 Chat Completions 支持。Chat 接口 reasoning_effort=none 可关思考，Messages 接口不能关。minimal→low，medium/xhigh→high 兼容映射。仅隐式缓存。"
+    },
+    {
+      "name_zh": null,
+      "aliases": [],
+      "open_weights": null,
+      "release_date": null,
+      "status": "beta",
+      "structured_output": true,
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": null,
+        "output": null,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.sensenova.cn/docs",
+        "https://www.sensenova.cn/token-plan"
+      ],
+      "checked_at": "2026-11-12",
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "lab": "zhipu",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "default_source": "https://platform.sensenova.cn/docs",
+        "field": "reasoning_content"
+      },
+      "notes": "思考始终开启，thinking.type=disabled 会报错；max_tokens 默认 65536、范围 [1,131072]，思考与回答共享；tools 最多 128 个；thinking.clear_thinking 控制历史 reasoning_content。"
+    },
+    {
+      "name_zh": null,
+      "aliases": [],
+      "open_weights": true,
+      "release_date": null,
+      "status": "beta",
+      "structured_output": true,
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": null,
+        "output": null,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.sensenova.cn/docs",
+        "https://www.sensenova.cn/token-plan"
+      ],
+      "checked_at": "2026-11-12",
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "lab": "moonshot",
+      "limit": {
+        "context": 1048576,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "low",
+          "medium",
+          "high",
+          "max"
+        ],
+        "default": null,
+        "default_source": "https://platform.sensenova.cn/docs",
+        "field": "reasoning_content"
+      },
+      "notes": "max_completion_tokens 默认 128K，最大 = 1024*1024 - prompt_tokens。reasoning_effort 默认值文档自相矛盾：参数表写 max，思考强度表写 high『（默认值）』，故 default 记 null。图片仅支持 base64，不支持公网 URL。temperature 固定 1、top_p 固定 0.95。"
+    }
+  ],
+  "notes": "新版 SenseNova 平台（platform.sensenova.cn / token.sensenova.cn）目前只走 Token Plan 积分，未公开按量 token 单价，price_cny 全部为 null。Token Plan 页称公测免费档含 SenseNova 6.8 Flash Lite 与 U1 Fast，而文档模型总览另列 6.8 Flash、DeepSeek V4.1 Flash、GLM-5.3、Kimi K3（均可用同一 key 调用，扣通用积分）。注册需手机号验证。同时兼容 OpenAI Chat、Anthropic Messages、OpenAI Responses 三种协议。"
+}

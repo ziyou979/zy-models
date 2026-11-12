@@ -1,0 +1,50 @@
+# Imported from research/tencent-tokenhub.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.tencent.com/document/product/1823/130051
+# Source: https://cloud.tencent.com/document/product/1823/130055
+# Source: https://cloud.tencent.com/document/product/1823/131208
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2.1, output 8.4, cache_read 0.42
+schema = 2
+base_model = "minimax/MiniMax-M3"
+aliases = ["minimax-m-3-0"]
+sources = ["https://cloud.tencent.com/document/product/1823/130051", "https://cloud.tencent.com/document/product/1823/130055", "https://cloud.tencent.com/document/product/1823/131208"]
+checked_at = "2026-11-12"
+notes = "模型列表最大输出标“-”。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true }
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 0.31409868
+
+[cost.text.input.cache]
+read = 0.06281974
+
+[cost.text.output]
+price = 1.25639471
+
+[cost_cny]
+input = 2.1
+output = 8.4
+cache_read = 0.42
+
+[[cost_cny.tiers]]
+when = "input<=512k"
+context_max = 512_000
+input = 2.1
+output = 8.4
+cache_read = 0.42
+
+[[cost_cny.tiers]]
+when = "input>512k"
+context_min = 512_000
+input = 4.2
+output = 16.8
+cache_read = 0.84
+
+[reasoning_default]
+value = "adaptive"
+source = "https://cloud.tencent.com/document/product/1823/131208"

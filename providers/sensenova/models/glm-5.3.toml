@@ -1,0 +1,17 @@
+# Imported from research/sensenova.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://platform.sensenova.cn/docs
+# Source: https://www.sensenova.cn/token-plan
+schema = 2
+base_model = "zhipuai/glm-5.3"
+status = "beta"
+sources = ["https://platform.sensenova.cn/docs", "https://www.sensenova.cn/token-plan"]
+checked_at = "2026-11-12"
+notes = "思考始终开启，thinking.type=disabled 会报错；max_tokens 默认 65536、范围 [1,131072]，思考与回答共享；tools 最多 128 个；thinking.clear_thinking 控制历史 reasoning_content。"
+
+[capabilities]
+reasoning = { supported = true, effort = ["low", "high", "max"], default = { type = "effort", value = "max" } }
+structured_output = true
+
+[reasoning_default]
+value = "max"
+source = "https://platform.sensenova.cn/docs"

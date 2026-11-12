@@ -1,0 +1,34 @@
+# Imported from research/qianfan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j
+# Source: https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/xm95lyys5
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 4, output 18
+schema = 2
+base_model = "baidu/ernie-5.1"
+sources = ["https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j", "https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya", "https://cloud.baidu.com/doc/qianfan-docs/s/xm95lyys5"]
+checked_at = "2026-11-12"
+notes = "列于文本生成（非深度思考）分类；最大输出 [1,65536]。价格页无缓存价。"
+
+[cost.text.input]
+price = 0.5982832
+
+[cost.text.output]
+price = 2.69227438
+
+[cost_cny]
+input = 4
+output = 18
+
+[[cost_cny.tiers]]
+when = "input<=32k"
+context_max = 32_000
+input = 4
+output = 18
+
+[[cost_cny.tiers]]
+when = "32k<input<=128k"
+context_min = 32_000
+context_max = 128_000
+input = 6
+output = 22

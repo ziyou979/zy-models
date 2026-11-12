@@ -1,0 +1,340 @@
+{
+  "provider_id": "stepfun",
+  "modelsdev_id": "stepfun",
+  "name_zh": "阶跃星辰",
+  "name_en": "StepFun",
+  "doc": "https://platform.stepfun.com/docs/zh/guides/models/list",
+  "pricing_page": "https://platform.stepfun.com/docs/zh/guides/pricing/details",
+  "env": [
+    "STEP_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://api.stepfun.com/v1",
+      "source": "https://platform.stepfun.com/docs/zh/guides/models/step-3.5-flash"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://api.stepfun.com",
+      "source": "https://platform.stepfun.com/docs/zh/guides/models/step-3.5-flash",
+      "note": "POST /v1/messages；Anthropic SDK base_url 不带 /v1（同 Step Plan 文档说明）"
+    }
+  ],
+  "plans": [
+    {
+      "id": "step-plan",
+      "name_zh": "Step Plan（Token Plan）",
+      "base_url": "https://api.stepfun.com/step_plan/v1",
+      "protocol": "openai-chat",
+      "anthropic_base_url": "https://api.stepfun.com/step_plan",
+      "price_cny_month": {
+        "mini": 49,
+        "plus": 99,
+        "pro": 199,
+        "max": 699
+      },
+      "price_cny_quarter": {
+        "mini": 129,
+        "plus": 269,
+        "pro": 539,
+        "max": 1889
+      },
+      "price_cny_year": {
+        "mini": 456,
+        "plus": 936,
+        "pro": 1860,
+        "max": 6666
+      },
+      "quota_note": "月度 Credit：Mini 400M / Plus 1,600M / Pro 8,000M / Max 40,000M；1 元 = 1,000,000 Credit；当期剩余清零不结转。调用 step-5-preview 时工作日 09:00–12:00、14:00–18:00(北京时间) 高峰扣减为低谷 2 倍。加油包 ¥49=400M、¥99=1600M（30 天有效）。历史 Coding Plan（按请求次数）已停止新购。step-router-v1 仅 Step Plan 通道可用，在 step-5-preview 与 step-3.7-flash 间自动路由，按命中模型计费，max_tokens 上限 64K。支持微信/支付宝。",
+      "models": [
+        "step-5-preview",
+        "step-3.7-flash",
+        "step-3.5-flash",
+        "step-3.5-flash-2603",
+        "step-router-v1",
+        "stepaudio-2.5-realtime",
+        "stepaudio-2.5-chat",
+        "stepaudio-2.5-tts",
+        "stepaudio-2.5-asr"
+      ],
+      "source": "https://platform.stepfun.com/docs/zh/step-plan/pricing"
+    }
+  ],
+  "models": [
+    {
+      "id": "step-5-preview",
+      "name": "Step 5 Preview",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "stepfun",
+      "open_weights": null,
+      "release_date": null,
+      "status": "beta",
+      "limit": {
+        "context": 1000000,
+        "input": 1000000,
+        "output": 64000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "medium",
+        "default_source": "https://platform.stepfun.com/docs/zh/guides/developer/reasoning",
+        "field": "reasoning"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 7,
+        "output": 20,
+        "cache_read": 0.7,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.stepfun.com/docs/zh/guides/models/step-5-preview",
+        "https://platform.stepfun.com/docs/zh/guides/pricing/details",
+        "https://platform.stepfun.com/docs/zh/announcements/step-5-preview-price-adjustment",
+        "https://platform.stepfun.com/docs/zh/guides/developer/reasoning",
+        "https://platform.stepfun.com/docs/zh/api-reference/chat/chat-completion-create"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "缓存命中价自 2026-10-14 00:30(北京时间) 由 0.35 调为 0.70 元/百万；此前已用过按量 API 的老用户继续 0.35。推理强度表中 medium 标为『默认推荐』。官方未写可关闭思考。"
+    },
+    {
+      "id": "step-3.7-flash",
+      "name": "Step 3.7 Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "stepfun",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 256000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "medium",
+        "default_source": "https://platform.stepfun.com/docs/zh/guides/models/step-3.7-flash",
+        "field": "reasoning"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 1.35,
+        "output": 8.1,
+        "cache_read": 0.27,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.stepfun.com/docs/zh/guides/models/step-3.7-flash",
+        "https://platform.stepfun.com/docs/zh/guides/pricing/details",
+        "https://platform.stepfun.com/docs/zh/guides/developer/reasoning",
+        "https://platform.stepfun.com/docs/zh/guides/models/vision"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "198B 总参 / 11B 激活稀疏 MoE。medium 在官方表中标为『默认推荐』。"
+    },
+    {
+      "id": "step-3.5-flash",
+      "name": "Step 3.5 Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "stepfun",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 256000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://platform.stepfun.com/docs/zh/guides/developer/reasoning",
+        "field": "reasoning"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.7,
+        "output": 2.1,
+        "cache_read": 0.14,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.stepfun.com/docs/zh/guides/models/step-3.5-flash",
+        "https://platform.stepfun.com/docs/zh/guides/pricing/details",
+        "https://platform.stepfun.com/docs/zh/guides/developer/reasoning"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "196B 总参 / 11B 激活；官方称『最强大的开源基座模型』。文档未列出其支持 reasoning_effort。"
+    },
+    {
+      "id": "step-3.5-flash-2603",
+      "name": "Step 3.5 Flash 2603",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "stepfun",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 256000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": [
+          "low",
+          "high"
+        ],
+        "default": null,
+        "default_source": null,
+        "field": "reasoning"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.7,
+        "output": 2.1,
+        "cache_read": 0.14,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.stepfun.com/docs/zh/guides/models/step-3.5-flash",
+        "https://platform.stepfun.com/docs/zh/guides/pricing/details",
+        "https://platform.stepfun.com/docs/zh/api-reference/chat/chat-completion-create",
+        "https://platform.stepfun.com/docs/zh/guides/models/list"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "step-3.5-flash 的 Agent 优化版，可切换低推理模式；reasoning_effort 仅兼容 low/high。"
+    },
+    {
+      "id": "step-1o-turbo-vision",
+      "name": "Step-1o Turbo Vision",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "stepfun",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": false,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2.5,
+        "output": 8,
+        "cache_read": 0.5,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.stepfun.com/docs/zh/guides/models/vision",
+        "https://platform.stepfun.com/docs/zh/guides/models/list",
+        "https://platform.stepfun.com/docs/zh/guides/pricing/details"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "单次最多 60 张图、总 20M 内；视频为 <128MB 的 MP4。官方未说明是否有思考能力。"
+    }
+  ],
+  "notes": "按量价格人民币计价。思考内容默认放在 reasoning 字段，传 reasoning_format=\"deepseek-style\" 可得 reasoning_content（响应中两者也会一并返回）。推理强度：Chat Completions 用 reasoning_effort，Messages API 用 output_config.effort。max_tokens 默认 INF。按量 API 有按累计充值金额划分的阶梯限速。图片 URL 需中国大陆可访问。增值：联网搜索 0.04 元/次。"
+}

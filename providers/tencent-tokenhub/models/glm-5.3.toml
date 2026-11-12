@@ -1,0 +1,36 @@
+# Imported from research/tencent-tokenhub.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.tencent.com/document/product/1823/130051
+# Source: https://cloud.tencent.com/document/product/1823/130055
+# Source: https://cloud.tencent.com/document/product/1823/131208
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 8, output 28, cache_read 2
+schema = 2
+base_model = "zhipuai/glm-5.3"
+sources = ["https://cloud.tencent.com/document/product/1823/130051", "https://cloud.tencent.com/document/product/1823/130055", "https://cloud.tencent.com/document/product/1823/131208"]
+checked_at = "2026-11-12"
+notes = "思考默认 enabled 且不支持关闭。新加坡地域价 10.07524/31.66504/缓存 1.871116 元。"
+
+[capabilities]
+reasoning = { supported = true, effort = ["low", "high", "max"], default = { type = "effort", value = "max" } }
+structured_output = true
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 1.19656639
+
+[cost.text.input.cache]
+read = 0.2991416
+
+[cost.text.output]
+price = 4.18798238
+
+[cost_cny]
+input = 8
+output = 28
+cache_read = 2
+
+[reasoning_default]
+value = "max"
+source = "https://cloud.tencent.com/document/product/1823/131208"

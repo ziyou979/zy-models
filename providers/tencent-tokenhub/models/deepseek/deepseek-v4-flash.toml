@@ -1,0 +1,50 @@
+# Imported from research/tencent-tokenhub.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.tencent.com/document/product/1823/130051
+# Source: https://cloud.tencent.com/document/product/1823/130055
+# Source: https://cloud.tencent.com/document/product/1823/131208
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.04
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash-1017"
+aliases = ["deepseek-v4-flash-202605", "deepseek/deepseek-v4-flash-0731"]
+sources = ["https://cloud.tencent.com/document/product/1823/130051", "https://cloud.tencent.com/document/product/1823/130055", "https://cloud.tencent.com/document/product/1823/131208"]
+checked_at = "2026-11-12"
+notes = "原厂直供，无 SLA。深度思考文档以 deepseek-v4-flash-202605 列出，默认 enabled。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true }
+structured_output = true
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.00598283
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.04
+off_peak = "DeepSeek 峰谷计费：北京时间工作日 9:00–12:00、14:00–18:00 为高峰，其余及周末全天为空闲；按服务端接收请求时间判定。主价格字段填空闲时段价。 （导入时已统一：主字段为标准/高峰价，闲时价见 tiers。）"
+
+[[cost_cny.tiers]]
+when = "空闲时段"
+input = 1
+output = 4
+cache_read = 0.02
+
+[[cost_cny.tiers]]
+when = "高峰时段"
+input = 2
+output = 8
+cache_read = 0.04
+
+[reasoning_default]
+value = "enabled"
+source = "https://cloud.tencent.com/document/product/1823/131208"

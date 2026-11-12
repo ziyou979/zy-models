@@ -1,0 +1,27 @@
+# Imported from research/iflytek-spark.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://www.xfyun.cn/doc/spark/X2-Flash.html
+# Source: https://xinghuo.xfyun.cn/sparkapi
+# Source: https://maas.xfyun.cn/doc/guide/5%E3%80%81%E5%A5%97%E9%A4%90%E8%AE%A2%E9%98%85/5.2%20Tokenplan.html
+# 占位: release_date 未公开，占位为核查日 2026-11-12
+# 占位: open_weights 未确认，写 false
+# 占位: temperature/top_p/top_k 为默认值 true/true/false，未核实
+schema = 2
+name = "Spark-X2-Flash"
+description = "Spark-X2-Flash by iFlytek."
+open_weights = false
+release_date = "2026-11-12"
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = true }
+temperature = true
+top_p = true
+top_k = false
+
+[limit]
+context = 262_144
+output = 262_144

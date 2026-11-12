@@ -1,0 +1,50 @@
+# Imported from research/volcengine.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://www.volcengine.com/docs/82379/1330310
+# Source: https://www.volcengine.com/docs/82379/1544106
+# Source: https://www.volcengine.com/docs/ark/deep-thinking
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.04
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash"
+aliases = ["deepseek-v4-1-flash-260910", "deepseek-v4.1-flash"]
+sources = ["https://www.volcengine.com/docs/82379/1330310", "https://www.volcengine.com/docs/82379/1544106", "https://www.volcengine.com/docs/ark/deep-thinking"]
+checked_at = "2026-11-12"
+notes = "none 关闭思考，minimal→low，medium/xhigh→high，ultra→max。低优/批量 1/4/0.02（空闲时段按常规空闲价）。Coding Plan 内限时抵扣系数折扣至 2026-12-30。"
+
+[capabilities]
+reasoning = { supported = true, effort = ["none", "low", "high", "max"], default = { type = "effort", value = "high" } }
+structured_output = true
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.00598283
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.04
+off_peak = "deepseek-v4.1-flash 系列高峰：北京时间周一至周五 09:00–12:00、14:00–18:00；其余为空闲时段，按请求完成时间计费。主价格字段填空闲价。 （导入时已统一：主字段为标准/高峰价，闲时价见 tiers。）"
+
+[[cost_cny.tiers]]
+when = "空闲时段"
+input = 1
+output = 4
+cache_read = 0.02
+
+[[cost_cny.tiers]]
+when = "高峰时段"
+input = 2
+output = 8
+cache_read = 0.04
+
+[reasoning_default]
+value = "high"
+source = "https://www.volcengine.com/docs/ark/deep-thinking"

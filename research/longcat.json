@@ -1,0 +1,110 @@
+{
+  "provider_id": "longcat",
+  "modelsdev_id": "longcat",
+  "name_zh": "美团 LongCat API 开放平台",
+  "name_en": "LongCat API Platform (Meituan)",
+  "doc": "https://longcat.chat/platform/docs/zh/",
+  "pricing_page": "https://longcat.chat/platform/docs/zh/pricing/longcat-2.5",
+  "env": [
+    "LONGCAT_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://api.longcat.chat/openai",
+      "source": "https://longcat.chat/platform/docs/"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://api.longcat.chat/anthropic",
+      "source": "https://longcat.chat/platform/docs/"
+    },
+    {
+      "region": "cn",
+      "protocol": "openai-responses",
+      "base_url": "https://api.longcat.chat/openai",
+      "source": "https://longcat.chat/platform/docs/zh/api/responses",
+      "note": "文档目录列有 OpenAI Responses API，具体路径未逐页核对"
+    }
+  ],
+  "plans": [
+    {
+      "id": "token-pack",
+      "name_zh": "Token 资源包",
+      "base_url": "https://api.longcat.chat/openai",
+      "protocol": "openai-chat",
+      "price_cny_month": null,
+      "quota_note": "一次性购买固定 Token 额度，30 天有效；每日北京时间 10:00/16:00/21:00/23:00 限量开售、售罄即止；缓存命中不计入资源包消耗；未消耗可全额退款，30 天内未用自动退款；与按量余额独立、优先扣资源包。档位与价格在文档中未以文本给出（JS 页面），记 null。",
+      "models": [
+        "LongCat-2.5"
+      ],
+      "source": "https://longcat.chat/platform/docs/zh/token-pack"
+    }
+  ],
+  "models": [
+    {
+      "id": "LongCat-2.5",
+      "name": "LongCat-2.5",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "meituan",
+      "open_weights": null,
+      "release_date": "2026-11-02",
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": null,
+        "output": 262144
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.04,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null,
+        "discount_note": "标注为『平台初上线限时折扣价』，原价未公开；企业认证用户按月累计消费另享阶梯折扣：≥¥500 9折、≥¥2,000 8折、≥¥8,000 7折、≥¥40,000 6折"
+      },
+      "price_usd_intl": {
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": 0.006
+      },
+      "sources": [
+        "https://longcat.chat/platform/docs/zh/",
+        "https://longcat.chat/platform/docs/zh/pricing/longcat-2.5",
+        "https://longcat.chat/platform/docs/zh/api/model-params",
+        "https://longcat.chat/platform/docs/zh/image-video-understanding",
+        "https://longcat.chat/platform/docs/zh/change-log",
+        "https://longcat.chat/platform/docs/zh/api-pay-as-you-go",
+        "https://longcat.chat/platform/docs/zh/faq"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "上下文 1,048,576；max_tokens 上限 262,144；thinking_budget 最大 262,144。thinking:{type:enabled|disabled} 开关；temperature 开思考固定 1.0、关思考固定 0.7。视频仅 URL 传入（≤100MB、<3600s、≤10 个）；图片 ≤100 张。changelog 写『工具调用』能力；Chat API 参数页未列 tools 字段。release_date 取 changelog『2026-11-02 LongCat-2.5 上线』。"
+    }
+  ],
+  "notes": "按量付费当前仅支持 LongCat-2.5；LongCat-2.0 及更早 Flash 系列在本平台的按量价格页已不再列出（2026-05-29 已下线 6 个 Flash 系列模型）。中国大陆用户充值/买资源包前需实名认证。支持支付宝/微信；海外银行卡/Google Pay 以美元计价。调用失败（401/403/429/500）不计费。"
+}

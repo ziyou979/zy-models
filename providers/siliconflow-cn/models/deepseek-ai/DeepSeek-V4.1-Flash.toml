@@ -1,0 +1,40 @@
+# Imported from research/siliconflow.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://www.siliconflow.cn/pricing
+# Source: https://www.siliconflow.cn/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.04
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash"
+sources = ["https://www.siliconflow.cn/pricing", "https://www.siliconflow.cn/models"]
+checked_at = "2026-11-12"
+notes = "页面标签：⚡️ 1017；参数规模（官方页 size 字段，单位 B）：552"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.00598283
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.04
+off_peak = "分时计价：2点～8点 为 输入¥1.0/输出¥4.0/缓存¥0.02；其余时段(0点～2点/8点～24点)为标准价"
+
+[[cost_cny.tiers]]
+when = "北京时间 0点～2点/8点～24点"
+input = 2
+output = 8
+cache_read = 0.04
+
+[[cost_cny.tiers]]
+when = "北京时间 2点～8点"
+input = 1
+output = 4
+cache_read = 0.02

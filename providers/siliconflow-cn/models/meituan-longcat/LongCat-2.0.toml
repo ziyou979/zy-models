@@ -1,0 +1,27 @@
+# Imported from research/siliconflow.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://www.siliconflow.cn/pricing
+# Source: https://www.siliconflow.cn/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 5, output 20, cache_read 0.1
+schema = 2
+base_model = "meituan/longcat-2.0"
+sources = ["https://www.siliconflow.cn/pricing", "https://www.siliconflow.cn/models"]
+checked_at = "2026-11-12"
+notes = "页面标签：New；参数规模（官方页 size 字段，单位 B）：1600"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.747854
+
+[cost.text.input.cache]
+read = 0.01495708
+
+[cost.text.output]
+price = 2.99141598
+
+[cost_cny]
+input = 5
+output = 20
+cache_read = 0.1

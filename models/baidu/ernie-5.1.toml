@@ -1,0 +1,28 @@
+# Imported from research/qianfan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j
+# Source: https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/xm95lyys5
+# 占位: release_date 未公开，占位为核查日 2026-11-12
+# 占位: open_weights 未确认，写 false
+# 占位: temperature/top_p/top_k 为默认值 true/true/false，未核实
+schema = 2
+name = "ERNIE 5.1"
+description = "ERNIE 5.1 by Baidu."
+open_weights = false
+release_date = "2026-11-12"
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = false }
+temperature = true
+top_p = true
+top_k = false
+
+[limit]
+context = 131_072
+input = 121_856
+output = 65_536

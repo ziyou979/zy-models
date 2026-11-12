@@ -1,0 +1,462 @@
+{
+  "provider_id": "iflytek-spark",
+  "modelsdev_id": null,
+  "name_zh": "讯飞星火 / 讯飞星辰 MaaS",
+  "name_en": "iFlytek Spark (Astron MaaS)",
+  "doc": "https://maas.xfyun.cn/doc/guide/2%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/2.1.1%20Spark-X2.6.html",
+  "pricing_page": "https://xinghuo.xfyun.cn/sparkapi",
+  "env": [
+    "SPARK_API_PASSWORD"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://maas-api.cn-huabei-1.xf-yun.com/v2",
+      "source": "https://maas.xfyun.cn/doc/guide/1%E3%80%81%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/1.1%20API%E6%8E%A5%E5%85%A5.html"
+    },
+    {
+      "region": "cn",
+      "protocol": "openai-responses",
+      "base_url": "https://maas-api.cn-huabei-1.xf-yun.com/v1",
+      "source": "https://maas.xfyun.cn/doc/guide/1%E3%80%81%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/1.1%20API%E6%8E%A5%E5%85%A5.html"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://maas-api.cn-huabei-1.xf-yun.com/anthropic",
+      "source": "https://maas.xfyun.cn/doc/guide/1%E3%80%81%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/1.1%20API%E6%8E%A5%E5%85%A5.html"
+    },
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://spark-api-open.xf-yun.com/agent/v1",
+      "source": "https://www.xfyun.cn/doc/spark/X2-Flash.html",
+      "note": "仅 Spark-X2-Flash（model=spark-x）"
+    }
+  ],
+  "plans": [
+    {
+      "id": "coding-plan",
+      "name_zh": "Astron Coding Plan",
+      "base_url": "https://maas-coding-api.cn-huabei-1.xf-yun.com/v2",
+      "protocol": "openai-chat",
+      "price_cny_month": {
+        "高效版": 199,
+        "速通版": 999
+      },
+      "price_cny_quarter": {
+        "高效版": 538,
+        "速通版": 2997
+      },
+      "quota_note": "按请求次数流控：高效版每 5 小时约 6,000 次 / 每周约 45,000 / 每月约 90,000；速通版每月约 30,000 次（首月 ¥699/月、首季 ¥2697）。无忧版 ¥19、专业版 ¥39 已下线。波谷系数：工作日 22:00–次日 08:00、周末、节假日按 0.8 计。2026-07-23 起按模型抵扣系数扣次（Spark X2/X2 Agent 2、X2-Flash 1、GLM-5.2 5、DeepSeek-V4-Pro 5、Kimi-K2.7-Code 5 等）。仅限编程工具交互式场景，禁止自动化脚本/自建后端。官方文档把 Responses 与 Anthropic 两个地址写反了（Anthropic 实为 …/anthropic，Responses 实为 …/v1/responses）。统一 model 名 astron-code-latest，底层模型在控制台切换。",
+      "models": [
+        "xsparkx2agent",
+        "xsparkx2",
+        "xsparkx2flash",
+        "auto",
+        "xopglm52",
+        "xopglm51",
+        "xopglm5",
+        "xopdeepseekv4pro",
+        "xopdeepseekv4flash",
+        "xopdeepseekv32",
+        "xopkimik26",
+        "xopkimik25",
+        "xminimaxm25",
+        "xopqwen35397b",
+        "xopqwen36v35b",
+        "xopqwen35v35b",
+        "xop3qwencodernext",
+        "xopglmv47flash",
+        "xopkimi27code"
+      ],
+      "source": "https://maas.xfyun.cn/doc/guide/5%E3%80%81%E5%A5%97%E9%A4%90%E8%AE%A2%E9%98%85/5.1%20Codingplan.html"
+    },
+    {
+      "id": "token-plan",
+      "name_zh": "Astron Token Plan",
+      "base_url": "https://maas-token-api.cn-huabei-1.xf-yun.com/v2",
+      "protocol": "openai-chat",
+      "price_cny_month": {
+        "标准成员": 200,
+        "高级成员": 600,
+        "尊享成员": 2000
+      },
+      "quota_note": "按成员席位月付：标准 20,000 积分/月、TPM 200w；高级 60,000 积分、300w；尊享 200,000 积分、500w。积分 = 非缓存输入×输入积分 + 缓存×缓存积分 + 输出×输出积分 + 思考×思考积分（每百万 token），再乘时段系数。一经购买不退。赠 Skills 调用量与 AstronClaw 会员。Responses/Anthropic 地址同样被文档写反。",
+      "models": [
+        "spark-x2.5",
+        "xsparkx2flash",
+        "xopglm52",
+        "xopglm51",
+        "xopglm5",
+        "xopdeepseekv4pro",
+        "xopkimik26",
+        "xopkimik25",
+        "xminimaxm25",
+        "xopqwen35397b",
+        "xopqwen36v35b",
+        "xopqwen35v35b",
+        "xop3qwencodernext",
+        "xopglmv47flash"
+      ],
+      "source": "https://maas.xfyun.cn/doc/guide/5%E3%80%81%E5%A5%97%E9%A4%90%E8%AE%A2%E9%98%85/5.2%20Tokenplan.html"
+    }
+  ],
+  "models": [
+    {
+      "id": "spark-x2.6",
+      "name": "Spark-X2.6",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "iflytek",
+      "open_weights": null,
+      "release_date": "2026-10-20",
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://maas.xfyun.cn/doc/guide/3%E3%80%81API%20%E6%8E%A5%E5%8F%A3/3.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B%20API/3.1.1%20Chat.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.9,
+        "output": 3.6,
+        "cache_read": 0.08,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null,
+        "discount_note": "官网标『限时 6 折』，原价未单独列出"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://maas.xfyun.cn/doc/guide/2%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/2.1.1%20Spark-X2.6.html",
+        "https://xinghuo.xfyun.cn/sparkapi",
+        "https://maas.xfyun.cn/doc/guide/3%E3%80%81API%20%E6%8E%A5%E5%8F%A3/3.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B%20API/3.1.1%20Chat.html",
+        "https://maas.xfyun.cn/doc/guide/1%E3%80%81%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/1.1%20API%E6%8E%A5%E5%85%A5.html"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "293B-A30B MoE，国产算力训练。thinking.type 取 enabled/disabled/auto，默认 enabled（auto 为讯飞扩展）。max_completion_tokens 含 reasoning tokens；max_tokens 已废弃（<256K）。temperature 固定 1、top_p 固定 0.95。tools 最多 128 个，支持 function 与内置 web_search。"
+    },
+    {
+      "id": "spark-x2.6-4b",
+      "name": "Spark-X2.6-4B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "iflytek",
+      "open_weights": null,
+      "release_date": "2026-10-21",
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "high",
+          "low",
+          "none"
+        ],
+        "default": "on",
+        "default_source": "https://maas.xfyun.cn/doc/guide/3%E3%80%81API%20%E6%8E%A5%E5%8F%A3/3.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B%20API/3.1.1%20Chat.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0,
+        "output": 0,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null,
+        "discount_note": "官网标『限时免费』"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://maas.xfyun.cn/doc/guide/2%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/2.1.1%20Spark-X2.6.html",
+        "https://xinghuo.xfyun.cn/sparkapi"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "4B Dense 端侧模型；文档称新增 high/low/none 三档 reasoning effort（参数名未在 Chat 文档单列）。"
+    },
+    {
+      "id": "spark-x2.6-preview",
+      "name": "Spark-X2.6-Preview",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "iflytek",
+      "open_weights": null,
+      "release_date": "2026-10-13",
+      "status": "beta",
+      "limit": {
+        "context": 256000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://maas.xfyun.cn/doc/guide/3%E3%80%81API%20%E6%8E%A5%E5%8F%A3/3.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B%20API/3.1.1%20Chat.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": null,
+        "output": null,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://maas.xfyun.cn/doc/guide/2%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/2.1.1%20Spark-X2.6.html"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "X2.6 预览版；价格未在官网价格区列出。"
+    },
+    {
+      "id": "spark-x2.5",
+      "name": "Spark-X2.5",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "iflytek",
+      "open_weights": null,
+      "release_date": "2026-09-06",
+      "status": "deprecated",
+      "limit": {
+        "context": 256000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://maas.xfyun.cn/doc/guide/3%E3%80%81API%20%E6%8E%A5%E5%8F%A3/3.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B%20API/3.1.1%20Chat.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.96,
+        "output": 3.6,
+        "cache_read": 0.14,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null,
+        "discount_note": "官网标『限时 3 折』"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://maas.xfyun.cn/doc/guide/2%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/2.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B.html",
+        "https://xinghuo.xfyun.cn/sparkapi",
+        "https://maas.xfyun.cn/doc/guide/0%E3%80%81%E5%85%AC%E5%91%8A/0.4%20%E8%80%81%E6%97%A7%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%BA%BF%E9%80%9A%E7%9F%A5%EF%BC%88261124%EF%BC%89.html"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "293B-A30B MoE。将于 2026-11-24 10:00（UTC+8）下线，官方建议迁移 Spark-X2.6。Token Plan 积分：输入 320 / 缓存 48 / 输出 1200 / 思考 1200 积分每百万 token。"
+    },
+    {
+      "id": "spark-x2.5-1.7b",
+      "name": "Spark-X2.5-1.7B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "iflytek",
+      "open_weights": null,
+      "release_date": "2026-08-31",
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://maas.xfyun.cn/doc/guide/3%E3%80%81API%20%E6%8E%A5%E5%8F%A3/3.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B%20API/3.1.1%20Chat.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0,
+        "output": 0,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null,
+        "discount_note": "官网标『免费』"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://maas.xfyun.cn/doc/guide/2%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/2.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B.html",
+        "https://xinghuo.xfyun.cn/sparkapi"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "1.7B Dense 端侧模型，支持精调。"
+    },
+    {
+      "id": "spark-x2.5-4b",
+      "name": "Spark-X2.5-4B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "iflytek",
+      "open_weights": null,
+      "release_date": "2026-08-31",
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://maas.xfyun.cn/doc/guide/3%E3%80%81API%20%E6%8E%A5%E5%8F%A3/3.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B%20API/3.1.1%20Chat.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": null,
+        "output": null,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://maas.xfyun.cn/doc/guide/2%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/2.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B.html"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "4B Dense，支持精调；价格未在官网价格区列出。"
+    },
+    {
+      "id": "spark-x",
+      "name": "Spark-X2-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "iflytek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": 262144
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://maas.xfyun.cn/doc/guide/3%E3%80%81API%20%E6%8E%A5%E5%8F%A3/3.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B%20API/3.1.1%20Chat.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": null,
+        "output": null,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": "官网写『1 ~ 2 元/百万tokens』，未拆分输入/输出，故不填"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.xfyun.cn/doc/spark/X2-Flash.html",
+        "https://xinghuo.xfyun.cn/sparkapi",
+        "https://maas.xfyun.cn/doc/guide/5%E3%80%81%E5%A5%97%E9%A4%90%E8%AE%A2%E9%98%85/5.2%20Tokenplan.html"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "走旧版讯飞开放平台接口：OpenAI https://spark-api-open.xf-yun.com/agent/v1，Anthropic https://spark-api-open.xf-yun.com/anthropic/agent/v1/messages，model 固定为 spark-x，鉴权用控制台 APIpassword。max_tokens 范围 [1,262144]。在 Coding/Token Plan 中 modelId 为 xsparkx2flash（Token Plan 积分：输入 100 / 缓存 20 / 输出 200 / 思考 200）。"
+    }
+  ],
+  "notes": "讯飞有两套接口：新『星辰 MaaS』（maas-api.cn-huabei-1.xf-yun.com，model 如 spark-x2.6）与旧『讯飞开放平台』（spark-api-open.xf-yun.com，model 固定 spark-x，按路径区分 X1.5/X2/X2-Flash；旧 Lite/Pro/Max/4.0 Ultra 仍有文档，Max 已于 2026-03-10 并入 Ultra，未收录）。官网价格多为限时折扣价，原价不公开。MaaS 上的第三方开源模型（GLM-5.3、Kimi-K2.7-Code、DeepSeek-V4-Pro-0813 等）未逐个收录。旧版 X2（/x2 路径，输入 64K/输出 128K）在套餐中标为已下线，未收录。Spark-X2.5 与 MaaS 上 DeepSeek-V4-Pro（xopdeepseekv4pro）2026-11-24 下线。"
+}

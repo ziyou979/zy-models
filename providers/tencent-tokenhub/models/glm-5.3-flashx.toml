@@ -1,0 +1,36 @@
+# Imported from research/tencent-tokenhub.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.tencent.com/document/product/1823/130051
+# Source: https://cloud.tencent.com/document/product/1823/130055
+# Source: https://cloud.tencent.com/document/product/1823/131208
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 7, cache_read 0.57
+schema = 2
+base_model = "zhipuai/glm-5.3-flash"
+sources = ["https://cloud.tencent.com/document/product/1823/130051", "https://cloud.tencent.com/document/product/1823/130055", "https://cloud.tencent.com/document/product/1823/131208"]
+checked_at = "2026-11-12"
+notes = "官方标注为“多模态理解”。TokenHub 特有版本名。"
+
+[capabilities]
+reasoning = { supported = true, effort = ["low", "high", "max"], default = { type = "effort", value = "max" } }
+structured_output = true
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.08525536
+
+[cost.text.output]
+price = 1.04699559
+
+[cost_cny]
+input = 2
+output = 7
+cache_read = 0.57
+
+[reasoning_default]
+value = "max"
+source = "https://cloud.tencent.com/document/product/1823/131208"

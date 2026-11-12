@@ -1,0 +1,37 @@
+# Imported from research/qianfan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j
+# Source: https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/6m8r1x5hz
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 12, output 24, cache_read 1
+schema = 2
+base_model = "deepseek/deepseek-v4-pro-0813"
+sources = ["https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j", "https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya", "https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv", "https://cloud.baidu.com/doc/qianfan-docs/s/6m8r1x5hz"]
+checked_at = "2026-11-12"
+notes = "reasoning_effort 普通请求默认 high，复杂 Agent 请求（如 Claude Code）自动 max；low/medium→high，xhigh→max。无峰谷价。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, effort = ["high", "max"], default = { type = "effort", value = "high" } }
+structured_output = true
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 1.79484959
+
+[cost.text.input.cache]
+read = 0.1495708
+
+[cost.text.output]
+price = 3.58969918
+
+[cost_cny]
+input = 12
+output = 24
+cache_read = 1
+
+[reasoning_default]
+value = "high"
+source = "https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv"

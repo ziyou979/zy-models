@@ -1,0 +1,66 @@
+# Imported from research/qianfan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j
+# Source: https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/xm95lyys5
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/6m8r1x5hz
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 1, output 4, cache_read 0.1
+schema = 2
+base_model = "baidu/ernie-5.5-flash-preview"
+status = "beta"
+sources = ["https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j", "https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya", "https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv", "https://cloud.baidu.com/doc/qianfan-docs/s/xm95lyys5", "https://cloud.baidu.com/doc/qianfan-docs/s/6m8r1x5hz"]
+checked_at = "2026-11-12"
+notes = "思考仅支持开启；reasoning_effort 默认 high 且不支持调整。价格页标“活动价/原价”，活动截止日价格页未写明（Token Plan 侧该模型活动至 2026-11-30）。上下文 1M、最大输出 1M（含思维链）。"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[cost.text.input]
+price = 0.1495708
+
+[cost.text.input.cache]
+read = 0.01495708
+
+[cost.text.output]
+price = 0.5982832
+
+[cost_cny]
+input = 1
+output = 4
+cache_read = 0.1
+off_peak = "千帆峰谷：高峰 8:00-22:00，空闲 22:00-次日 8:00（文档未区分工作日）。主价格字段填空闲时段价。 （导入时已统一：主字段为标准/高峰价，闲时价见 tiers。）"
+
+[cost_cny.list_price]
+input = 2
+output = 8
+cache_read = 0.2
+
+[[cost_cny.tiers]]
+when = "高峰 8:00-22:00（活动价）"
+input = 1
+output = 4
+cache_read = 0.1
+
+[[cost_cny.tiers]]
+when = "空闲 22:00-8:00（活动价）"
+input = 0.5
+output = 2
+cache_read = 0.05
+
+[[cost_cny.tiers]]
+when = "高峰（原价）"
+input = 2
+output = 8
+cache_read = 0.2
+
+[[cost_cny.tiers]]
+when = "空闲（原价）"
+input = 1
+output = 4
+cache_read = 0.1
+
+[reasoning_default]
+value = "high"
+source = "https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv"

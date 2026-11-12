@@ -1,0 +1,30 @@
+# Imported from research/tencent-tokenhub.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.tencent.com/document/product/1823/130051
+# Source: https://cloud.tencent.com/document/product/1823/130055
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 1, output 4, cache_read 0.1
+schema = 2
+base_model = "minimax/MiniMax-M3.1-Flash"
+sources = ["https://cloud.tencent.com/document/product/1823/130051", "https://cloud.tencent.com/document/product/1823/130055"]
+checked_at = "2026-11-12"
+notes = "官方标注“多模态理解”。新加坡地域价 1.0795/4.3179/0.1079 元。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 0.1495708
+
+[cost.text.input.cache]
+read = 0.01495708
+
+[cost.text.output]
+price = 0.5982832
+
+[cost_cny]
+input = 1
+output = 4
+cache_read = 0.1

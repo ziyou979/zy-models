@@ -1,0 +1,35 @@
+# Imported from research/ant-ling.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://developer.ant-ling.com/zh-CN/docs/models/ling/
+# Source: https://developer.ant-ling.com/zh-CN/docs/models/price/
+# Source: https://developer.ant-ling.com/zh-CN/docs/getting-started/changelog/
+# Source: https://developer.ant-ling.com/zh-CN/docs/tutorials/multimodal-understanding/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.14, output 0.42, cache_read 0.028
+schema = 2
+base_model = "inclusionai/ling-3.0-flash-vl"
+sources = ["https://developer.ant-ling.com/zh-CN/docs/models/ling/", "https://developer.ant-ling.com/zh-CN/docs/models/price/", "https://developer.ant-ling.com/zh-CN/docs/getting-started/changelog/", "https://developer.ant-ling.com/zh-CN/docs/tutorials/multimodal-understanding/"]
+checked_at = "2026-11-12"
+notes = "124B / 5.5B 激活；文档称已在 Hugging Face 与 ModelScope 开源。Anthropic 协议仅支持图片。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, default = { type = "toggle", value = true } }
+structured_output = true
+
+[cost.text.input]
+price = 0.02093991
+
+[cost.text.input.cache]
+read = 0.00418798
+
+[cost.text.output]
+price = 0.06281974
+
+[cost_cny]
+input = 0.14
+output = 0.42
+cache_read = 0.028
+discount_note = "当前 2.8 折；原价 ¥0.5 / ¥1.5 / ¥0.1"
+
+[reasoning_default]
+value = "on"
+source = "https://developer.ant-ling.com/zh-CN/docs/api-reference/chat/openai/"

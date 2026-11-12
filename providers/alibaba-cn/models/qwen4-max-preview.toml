@@ -1,0 +1,19 @@
+# Imported from research/dashscope.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://help.aliyun.com/zh/model-studio/qwen4-max-preview
+# Source: https://help.aliyun.com/zh/model-studio/text-generation-model
+# Source: https://help.aliyun.com/zh/model-studio/token-plan-personal-overview
+# Source: https://help.aliyun.com/zh/model-studio/deep-thinking
+schema = 2
+base_model = "alibaba/qwen4-max-preview"
+status = "beta"
+aliases = ["qwen4.0-max-preview"]
+sources = ["https://help.aliyun.com/zh/model-studio/qwen4-max-preview", "https://help.aliyun.com/zh/model-studio/text-generation-model", "https://help.aliyun.com/zh/model-studio/token-plan-personal-overview", "https://help.aliyun.com/zh/model-studio/deep-thinking"]
+checked_at = "2026-11-12"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, effort = ["low", "medium", "xhigh"], default = { type = "effort", value = "xhigh" } }
+structured_output = true
+
+[reasoning_default]
+value = "xhigh"
+source = "https://help.aliyun.com/zh/model-studio/qwen4-max-preview"

@@ -1,0 +1,271 @@
+{
+  "provider_id": "moonshot",
+  "modelsdev_id": "moonshotai-cn",
+  "name_zh": "月之暗面 Kimi 开放平台",
+  "name_en": "Moonshot AI Kimi API Platform",
+  "doc": "https://platform.kimi.com/docs/models",
+  "pricing_page": "https://platform.kimi.com/docs/pricing/chat",
+  "env": [
+    "MOONSHOT_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://api.moonshot.cn/v1",
+      "source": "https://platform.kimi.com/docs/guide/kimi-k3-1-pro-quickstart"
+    },
+    {
+      "region": "cn",
+      "protocol": "openai-responses",
+      "base_url": "https://api.moonshot.cn/v1",
+      "source": "https://platform.kimi.com/docs/guide/codex-kimi"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://api.moonshot.cn/anthropic",
+      "source": "https://platform.kimi.com/docs/api/messages"
+    }
+  ],
+  "plans": [
+    {
+      "id": "kimi-code-plus",
+      "name_zh": "Kimi 会员 Plus（含 Kimi Code）",
+      "base_url": "https://api.kimi.com/coding/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": 99,
+      "quota_note": "连续包月 ¥99（连续包年 ¥948）。Plus 及以上可用 Kimi Code；Plus 档 k3.1-pro/k3 上下文上限 262144，kimi-for-coding 1048576。Kimi Code 与 Kimi 会员共享月度额度池，新套餐仅有滚动 5 小时频率窗口、无周限额；同一套额度也可走 OpenAI Responses（同 base_url）和 Anthropic 兼容端点 https://api.kimi.com/coding/ ；海外端点 https://api.kimi.ai/coding/v1 与 https://api.kimi.ai/coding/ 。Kimi Code API Key 与开放平台 Key 不通用。",
+      "models": [
+        "k3.1-pro",
+        "k3",
+        "k3-256k",
+        "kimi-for-coding"
+      ],
+      "source": "https://www.kimi.com/code/docs/kimi-code/models.html"
+    },
+    {
+      "id": "kimi-code-pro",
+      "name_zh": "Kimi 会员 Pro（含 Kimi Code）",
+      "base_url": "https://api.kimi.com/coding/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": 199,
+      "quota_note": "连续包月 ¥199（连续包年 ¥1,908）。Pro 及以上解锁 1M 上下文与高速版（k3.1-pro-highspeed、kimi-for-coding-highspeed）。Kimi Code 与 Kimi 会员共享月度额度池，新套餐仅有滚动 5 小时频率窗口、无周限额；同一套额度也可走 OpenAI Responses（同 base_url）和 Anthropic 兼容端点 https://api.kimi.com/coding/ ；海外端点 https://api.kimi.ai/coding/v1 与 https://api.kimi.ai/coding/ 。Kimi Code API Key 与开放平台 Key 不通用。",
+      "models": [
+        "k3.1-pro",
+        "k3.1-pro-highspeed",
+        "k3",
+        "k3-256k",
+        "kimi-for-coding",
+        "kimi-for-coding-highspeed"
+      ],
+      "source": "https://www.kimi.com/code/docs/kimi-code/models.html"
+    },
+    {
+      "id": "kimi-code-max",
+      "name_zh": "Kimi 会员 Max（含 Kimi Code）",
+      "base_url": "https://api.kimi.com/coding/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": 699,
+      "quota_note": "连续包月 ¥699（连续包年 ¥6,708），14 倍 Agent 额度。Kimi Code 与 Kimi 会员共享月度额度池，新套餐仅有滚动 5 小时频率窗口、无周限额；同一套额度也可走 OpenAI Responses（同 base_url）和 Anthropic 兼容端点 https://api.kimi.com/coding/ ；海外端点 https://api.kimi.ai/coding/v1 与 https://api.kimi.ai/coding/ 。Kimi Code API Key 与开放平台 Key 不通用。",
+      "models": [
+        "k3.1-pro",
+        "k3.1-pro-highspeed",
+        "k3",
+        "k3-256k",
+        "kimi-for-coding",
+        "kimi-for-coding-highspeed"
+      ],
+      "source": "https://www.kimi.com/code/docs/kimi-code/models.html"
+    },
+    {
+      "id": "kimi-code-ultra",
+      "name_zh": "Kimi 会员 Ultra（含 Kimi Code）",
+      "base_url": "https://api.kimi.com/coding/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": 1399,
+      "quota_note": "连续包月 ¥1,399（连续包年 ¥13,428），28 倍 Agent 额度。Kimi Code 与 Kimi 会员共享月度额度池，新套餐仅有滚动 5 小时频率窗口、无周限额；同一套额度也可走 OpenAI Responses（同 base_url）和 Anthropic 兼容端点 https://api.kimi.com/coding/ ；海外端点 https://api.kimi.ai/coding/v1 与 https://api.kimi.ai/coding/ 。Kimi Code API Key 与开放平台 Key 不通用。",
+      "models": [
+        "k3.1-pro",
+        "k3.1-pro-highspeed",
+        "k3",
+        "k3-256k",
+        "kimi-for-coding",
+        "kimi-for-coding-highspeed"
+      ],
+      "source": "https://www.kimi.com/code/docs/kimi-code/models.html"
+    }
+  ],
+  "models": [
+    {
+      "id": "kimi-k3.1-pro",
+      "name": "Kimi K3.1 Pro",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": null,
+        "output": 1048576
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "default_source": "https://platform.kimi.com/docs/api/models-overview",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 13,
+        "output": 68,
+        "cache_read": 1.3,
+        "cache_write": 13,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.kimi.com/docs/models",
+        "https://platform.kimi.com/docs/pricing/chat",
+        "https://platform.kimi.com/docs/api/models-overview",
+        "https://platform.kimi.com/docs/guide/use-reasoning-effort",
+        "https://platform.kimi.com/docs/api/chat",
+        "https://platform.kimi.com/docs/guide/kimi-k3-1-pro-quickstart"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "kimi-k3.1-pro-highspeed",
+      "name": "Kimi K3.1 Pro Highspeed",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": null,
+        "output": 1048576
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "default_source": "https://platform.kimi.com/docs/api/models-overview",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 26,
+        "output": 136,
+        "cache_read": 1.3,
+        "cache_write": 26,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.kimi.com/docs/models",
+        "https://platform.kimi.com/docs/pricing/chat",
+        "https://platform.kimi.com/docs/api/models-overview",
+        "https://platform.kimi.com/docs/api/chat",
+        "https://platform.kimi.com/docs/guide/kimi-k3-1-pro-quickstart"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": null,
+        "output": 1048576
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "default_source": "https://platform.kimi.com/docs/api/models-overview",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 20,
+        "output": 100,
+        "cache_read": 2,
+        "cache_write": 20,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://platform.kimi.com/docs/models",
+        "https://platform.kimi.com/docs/pricing/chat",
+        "https://platform.kimi.com/docs/api/models-overview",
+        "https://platform.kimi.com/docs/api/chat",
+        "https://platform.kimi.com/docs/guide/kimi-k3-quickstart"
+      ],
+      "checked_at": "2026-11-12"
+    }
+  ],
+  "notes": "开放平台为按量计费，不提供订阅；Kimi Code / Kimi 会员为独立订阅产品（plans 中列出，来源 https://www.kimi.com/zh-cn/help/membership/membership-overview 与 https://www.kimi.com/code/docs/kimi-code/membership.html）。Go 档（¥49/月）不含 Kimi Code。K3 系列（kimi-k3.1-pro、kimi-k3.1-pro-highspeed、kimi-k3）上下文 1,048,576；始终思考、不支持 thinking 参数，顶层 reasoning_effort=low/high/max，开放平台默认 max；max_completion_tokens 默认 131072、最大可设 1048576（受上下文限制）。temperature 固定 1.0、top_p 固定 0.95。缓存：自动前缀缓存，默认 TTL 5min；cache_write 字段为 5min 写入价，1h TTL 写入价：kimi-k3.1-pro ¥26、kimi-k3.1-pro-highspeed ¥52、kimi-k3 ¥40（/百万 tokens）。Batch API（kimi-k3.1-pro、kimi-k3）按标准价 60%。注意：Kimi Code 套餐内的模型 ID 与开放平台不同（k3.1-pro、k3、k3-256k、kimi-for-coding=K2.8 Preview、kimi-for-coding-highspeed=K2.7 Code Highspeed），且 Kimi Code 未传 effort 时 K3.1 Pro/K3 默认 high（K2.8 Preview 默认 max），与开放平台默认 max 不同；K3.1 Pro 关闭思考返回 HTTP 400，模型 ID 填错会兜底到 K2.8 Preview 无思考版。K2 系列（kimi-k2.7-code、kimi-k2.7-code-highspeed、kimi-k2.6）自 2026-10-31 起停止向新注册用户开放、计划 12 月底全部下线，按要求未收录。kimi-k3.1-pro 视觉输入不支持公网图片 URL（需 base64 或 ms://file-id）。新用户认证赠 15 元代金券，最低充值 10 元。K3 官方称已开源权重；K3.1 Pro 文档称“完整模型权重将于 11 月 4 日前发布”，截至核查未在官方文档确认，写 null。国际站（platform.moonshot.ai）未核查。发布日期官方文档未给出。"
+}

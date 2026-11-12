@@ -1,0 +1,32 @@
+# Imported from research/qianfan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j
+# Source: https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6.5, output 27, cache_read 1.1
+schema = 2
+base_model = "moonshotai/kimi-k2.6"
+status = "deprecated"
+sources = ["https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j", "https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya", "https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv"]
+checked_at = "2026-11-12"
+notes = "模型列表标注“即将下线”。千帆文档未说明多模态输入。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+input = 262_144
+
+[cost.text.input]
+price = 0.97221019
+
+[cost.text.input.cache]
+read = 0.16452788
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 6.5
+output = 27
+cache_read = 1.1

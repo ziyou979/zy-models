@@ -1,0 +1,22 @@
+# Imported from research/ant-ling.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://developer.ant-ling.com/zh-CN/docs/models/ling/
+# Source: https://developer.ant-ling.com/zh-CN/docs/api-reference/chat/openai/
+# Source: https://developer.ant-ling.com/zh-CN/docs/models/price/
+# Source: https://developer.ant-ling.com/zh-CN/docs/getting-started/changelog/
+# Source: https://developer.ant-ling.com/zh-CN/docs/tutorials/multimodal-understanding/
+schema = 2
+base_model = "inclusionai/ling-3.2-flash"
+sources = ["https://developer.ant-ling.com/zh-CN/docs/models/ling/", "https://developer.ant-ling.com/zh-CN/docs/api-reference/chat/openai/", "https://developer.ant-ling.com/zh-CN/docs/models/price/", "https://developer.ant-ling.com/zh-CN/docs/getting-started/changelog/", "https://developer.ant-ling.com/zh-CN/docs/tutorials/multimodal-understanding/"]
+checked_at = "2026-11-12"
+notes = "560B 总参 / 25B 激活，原生多模态。图片 JPEG/PNG、仅 Base64、单张 ≤32MiB、≤40 张；视频 MP4/MOV/WMV、≤30s、Base64 ≤32MiB。Anthropic 协议同样支持图片+视频。官方未确认开源。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, default = { type = "toggle", value = true } }
+structured_output = true
+
+[cost_cny]
+discount_note = "上线前 2 周限时免费；正式价格未在官方定价表列出"
+
+[reasoning_default]
+value = "on"
+source = "https://developer.ant-ling.com/zh-CN/docs/api-reference/chat/openai/"

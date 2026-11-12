@@ -1,0 +1,23 @@
+# Imported from research/baichuan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://platform.baichuan-ai.com/prices
+# Source: https://platform.baichuan-ai.com/docs/api
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 100, output 100
+schema = 2
+base_model = "baichuan/baichuan4"
+sources = ["https://platform.baichuan-ai.com/prices", "https://platform.baichuan-ai.com/docs/api"]
+checked_at = "2026-11-12"
+notes = "0.1 元/千 tokens。官方建议评测搜索效果用 Baichuan4 + search_mode=quality_first。"
+
+[capabilities]
+structured_output = true
+
+[cost.text.input]
+price = 14.95707991
+
+[cost.text.output]
+price = 14.95707991
+
+[cost_cny]
+input = 100
+output = 100

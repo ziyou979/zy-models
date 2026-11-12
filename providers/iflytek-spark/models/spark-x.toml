@@ -1,0 +1,19 @@
+# Imported from research/iflytek-spark.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://www.xfyun.cn/doc/spark/X2-Flash.html
+# Source: https://xinghuo.xfyun.cn/sparkapi
+# Source: https://maas.xfyun.cn/doc/guide/5%E3%80%81%E5%A5%97%E9%A4%90%E8%AE%A2%E9%98%85/5.2%20Tokenplan.html
+schema = 2
+base_model = "iflytek/spark-x"
+sources = ["https://www.xfyun.cn/doc/spark/X2-Flash.html", "https://xinghuo.xfyun.cn/sparkapi", "https://maas.xfyun.cn/doc/guide/5%E3%80%81%E5%A5%97%E9%A4%90%E8%AE%A2%E9%98%85/5.2%20Tokenplan.html"]
+checked_at = "2026-11-12"
+notes = "走旧版讯飞开放平台接口：OpenAI https://spark-api-open.xf-yun.com/agent/v1，Anthropic https://spark-api-open.xf-yun.com/anthropic/agent/v1/messages，model 固定为 spark-x，鉴权用控制台 APIpassword。max_tokens 范围 [1,262144]。在 Coding/Token Plan 中 modelId 为 xsparkx2flash（Token Plan 积分：输入 100 / 缓存 20 / 输出 200 / 思考 200）。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, default = { type = "toggle", value = true } }
+
+[cost_cny]
+off_peak = "官网写『1 ~ 2 元/百万tokens』，未拆分输入/输出，故不填"
+
+[reasoning_default]
+value = "on"
+source = "https://maas.xfyun.cn/doc/guide/3%E3%80%81API%20%E6%8E%A5%E5%8F%A3/3.1%20%E6%98%9F%E7%81%AB%E6%A8%A1%E5%9E%8B%20API/3.1.1%20Chat.html"

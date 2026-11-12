@@ -1,0 +1,256 @@
+{
+  "provider_id": "xiaomi-mimo",
+  "modelsdev_id": "xiaomi",
+  "name_zh": "小米 MiMo 开放平台",
+  "name_en": "Xiaomi MiMo API Open Platform",
+  "doc": "https://mimo.mi.com/docs/quick-start/summary/model",
+  "pricing_page": "https://mimo.mi.com/docs/price/pay-as-you-go",
+  "env": [
+    "MIMO_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://api.xiaomimimo.com/v1",
+      "source": "https://mimo.mi.com/docs/en-US/quick-start/summary/first-api-call"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://api.xiaomimimo.com/anthropic",
+      "source": "https://mimo.mi.com/docs/en-US/quick-start/summary/first-api-call"
+    },
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://batch-api-cn.xiaomimimo.com/v1",
+      "source": "https://mimo.mi.com/docs/en-US/quick-start/summary/first-api-call",
+      "note": "Batch API（仅 mimo-v2.6-pro / mimo-v2.6-flash，价格 5 折）"
+    }
+  ],
+  "plans": [
+    {
+      "id": "token-plan",
+      "name_zh": "Token Plan（个人版，另有团队版同价）",
+      "base_url": "https://token-plan-cn.xiaomimimo.com/v1",
+      "protocol": "openai-chat",
+      "anthropic_base_url": "https://token-plan-cn.xiaomimimo.com/anthropic",
+      "other_clusters": [
+        "https://token-plan-sgp.xiaomimimo.com/v1",
+        "https://token-plan-ams.xiaomimimo.com/v1"
+      ],
+      "price_cny_month": {
+        "lite": 39,
+        "standard": 99,
+        "pro": 329,
+        "max": 659
+      },
+      "price_cny_year": {
+        "lite": 408,
+        "standard": 1044,
+        "pro": 3468,
+        "max": 6948
+      },
+      "quota_note": "按 Credits 计：月额度 Lite 41亿 / Standard 110亿 / Pro 380亿 / Max 820亿 Credits；mimo-v2.6-pro 每 token 输入(未命中)300、输出600、缓存命中2.5 Credits，flash 为100/200/2；00:00–08:00(北京时间) 消耗 0.8x；首购 88 折、年付 88 折；不退款；额度仅限编程工具使用，禁止用作自动化脚本/应用后端；Key 前缀 tp-（团队 ttp-）；TTS 限免不扣额度。",
+      "models": [
+        "mimo-v2.6-pro",
+        "mimo-v2.6-flash",
+        "mimo-v2.5-asr",
+        "mimo-v2.5-tts",
+        "mimo-v2.5-tts-voiceclone",
+        "mimo-v2.5-tts-voicedesign"
+      ],
+      "source": "https://mimo.mi.com/docs/tokenplan/subscription"
+    }
+  ],
+  "models": [
+    {
+      "id": "mimo-v2.6-pro",
+      "name": "MiMo-V2.6-Pro",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "xiaomi",
+      "open_weights": true,
+      "release_date": "2026-09-22",
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 128000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://mimo.mi.com/docs/en-US/quick-start/usage-guide/text-generation/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 3.0,
+        "output": 6.0,
+        "cache_read": 0.025,
+        "cache_write": 0,
+        "tiers": [
+          {
+            "when": "batch_api",
+            "input": 1.5,
+            "output": 3.0,
+            "cache_read": 0.0125
+          }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "input": 0.435,
+        "output": 0.87,
+        "cache_read": 0.0036
+      },
+      "sources": [
+        "https://mimo.mi.com/docs/quick-start/summary/model",
+        "https://mimo.mi.com/docs/price/pay-as-you-go",
+        "https://mimo.mi.com/docs/en-US/quick-start/usage-guide/text-generation/deep-thinking",
+        "https://mimo.mi.com/docs/en-US/news/latest/v2-6"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "mimo-v2.6-flash",
+      "name": "MiMo-V2.6-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "xiaomi",
+      "open_weights": true,
+      "release_date": "2026-09-22",
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 128000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://mimo.mi.com/docs/en-US/quick-start/usage-guide/text-generation/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 1.0,
+        "output": 2.0,
+        "cache_read": 0.02,
+        "cache_write": 0,
+        "tiers": [
+          {
+            "when": "batch_api",
+            "input": 0.5,
+            "output": 1.0,
+            "cache_read": 0.01
+          }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "input": 0.14,
+        "output": 0.28,
+        "cache_read": 0.0028
+      },
+      "sources": [
+        "https://mimo.mi.com/docs/quick-start/summary/model",
+        "https://mimo.mi.com/docs/price/pay-as-you-go",
+        "https://mimo.mi.com/docs/en-US/quick-start/usage-guide/text-generation/deep-thinking",
+        "https://mimo.mi.com/docs/en-US/news/latest/v2-6"
+      ],
+      "checked_at": "2026-11-12"
+    },
+    {
+      "id": "mimo-v2.6-pro-ultraspeed",
+      "name": "MiMo-V2.6-Pro-Ultraspeed",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "xiaomi",
+      "open_weights": null,
+      "release_date": "2026-09-22",
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": 128000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://mimo.mi.com/docs/en-US/quick-start/usage-guide/text-generation/deep-thinking",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 30.0,
+        "output": 60.0,
+        "cache_read": 0.25,
+        "cache_write": 0,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": {
+        "input": 4.35,
+        "output": 8.7,
+        "cache_read": 0.036
+      },
+      "sources": [
+        "https://mimo.mi.com/docs/quick-start/summary/model",
+        "https://mimo.mi.com/docs/price/pay-as-you-go",
+        "https://mimo.mi.com/docs/en-US/quick-start/usage-guide/text-generation/deep-thinking",
+        "https://mimo.mi.com/docs/en-US/news/latest/v2-6"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "V2.6-Pro 的高速模式（官方称输出最高 20x），不支持 Batch API；限流需联系定制。open_weights 未单独说明，记 null。"
+    }
+  ],
+  "notes": "仅支持小米账号（个人账号）登录。mimo-v2.5-pro / mimo-v2.5 已于 2026-10-21 10:00(北京时间) 下线，model id 不再可用。国内计价人民币、海外美元；缓存写入限时免费；联网搜索另计 ¥16/千次（国内）。思考模式下 temperature/top_p 被强制为 1.0/0.95；多轮工具调用必须回传 reasoning_content，否则 400。官方 RPM 100 / TPM 10M（pro/flash）。"
+}

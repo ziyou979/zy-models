@@ -1,0 +1,115 @@
+{
+  "provider_id": "minimax",
+  "modelsdev_id": "minimax-cn",
+  "name_zh": "MiniMax 开放平台",
+  "name_en": "MiniMax Open Platform",
+  "doc": "https://platform.minimaxi.com/docs/faq/models",
+  "pricing_page": "https://platform.minimaxi.com/docs/pricing/overview",
+  "env": ["MINIMAX_API_KEY"],
+  "endpoints": [
+    { "region": "cn", "protocol": "anthropic", "base_url": "https://api.minimax.cn/anthropic", "source": "https://platform.minimaxi.com/docs/guides/text-generation" },
+    { "region": "cn", "protocol": "openai-chat", "base_url": "https://api.minimax.cn/v1", "source": "https://platform.minimaxi.com/docs/guides/text-generation" },
+    { "region": "cn", "protocol": "openai-responses", "base_url": "https://api.minimax.cn/v1", "source": "https://platform.minimaxi.com/docs/api-reference/responses-create" },
+    { "region": "intl", "protocol": "anthropic", "base_url": "https://api.minimax.io/anthropic", "source": "https://platform.minimax.io/docs/guides/text-generation" },
+    { "region": "intl", "protocol": "openai-chat", "base_url": "https://api.minimax.io/v1", "source": "https://platform.minimax.io/docs/guides/text-generation" }
+  ],
+  "plans": [
+    {
+      "id": "m-plan",
+      "name_zh": "M Plan（Go / Explore / Build，原 Token Plan 升级版）",
+      "base_url": "https://api.minimax.cn/anthropic",
+      "protocol": "anthropic",
+      "price_cny_month": 49,
+      "quota_note": "三档原价：Go ¥49/月、Explore ¥119/月、Build ¥469/月（价格取自已结束的首月五折活动页所列原价）。用量相对 Go：Explore 3 倍、Build 12 倍；额度按 5 小时窗口与周窗口（7 天，均自首次使用起计时）刷新，图片/视频模型仅受周窗口限制。文本模型三档均为 M3.1 Flash；H3 视频仅 Explore/Build；需使用订阅 Key（与按量计费 Key 相互独立，不能混用）。OpenAI 兼容地址同为 https://api.minimax.cn/v1。M2.5/M2.7 系列套餐请求自 2026-10-19 起统一路由到 M3.1 Flash，旧名称保留为兼容入口；MiniMax-M3.1-Flash-Preview 已下线、旧名由 M3.1-Flash 提供服务。国际站 M Plan 原价 Go $22/月、Explore $55/月、Build $132/月。",
+      "models": ["MiniMax-M3.1-Flash"],
+      "source": "https://platform.minimaxi.com/docs/m-plan/intro ; https://platform.minimaxi.com/docs/m-plan/usage-rules ; https://platform.minimaxi.com/docs/m-plan/monthly-offer ; https://platform.minimaxi.com/docs/m-plan/other-tools ; https://platform.minimaxi.com/docs/faq/models ; https://platform.minimax.io/docs/m-plan/monthly-offer"
+    }
+  ],
+  "models": [
+    {
+      "id": "MiniMax-M3.1-Flash",
+      "name": "MiniMax-M3.1-Flash",
+      "name_zh": null,
+      "aliases": ["MiniMax-M3.1-Flash-Preview（已下线，旧名请求由 M3.1-Flash 服务，M Plan 场景）"],
+      "lab": "minimax",
+      "open_weights": true,
+      "release_date": "2026-10-19",
+      "status": "ga",
+      "limit": { "context": 1000000, "input": null, "output": 524288 },
+      "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": ["low", "medium", "high", "xhigh", "max"],
+        "default": "max",
+        "default_source": "https://platform.minimaxi.com/docs/guides/text-generation",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 1.00, "output": 4.00, "cache_read": 0.10, "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": { "unit": "per_million_tokens", "input": 0.15, "output": 0.60, "cache_read": 0.015 },
+      "sources": [
+        "https://platform.minimaxi.com/docs/guides/text-generation",
+        "https://platform.minimaxi.com/docs/api-reference/text-chat-openai",
+        "https://platform.minimaxi.com/docs/api-reference/text-anthropic-api",
+        "https://platform.minimaxi.com/docs/pricing/overview",
+        "https://platform.minimax.io/docs/pricing/overview",
+        "https://platform.minimaxi.com/docs/release-notes/models",
+        "https://platform.minimaxi.com/docs/guides/local-deploy-m3-1-flash"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "思考强制开启，thinking.type=disabled 或 effort=none 返回 400；不支持 service_tier=priority。output=max_completion_tokens 上限 524288（推荐 131072）。temperature 固定 1、top_p 固定 0.95。Anthropic 接口 tool_choice 仅支持 auto。open_weights 依据官方自托管部署文档。"
+    },
+    {
+      "id": "MiniMax-M3",
+      "name": "MiniMax-M3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "minimax",
+      "open_weights": true,
+      "release_date": "2026-06-01",
+      "status": "ga",
+      "limit": { "context": 1000000, "input": null, "output": 524288 },
+      "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [],
+        "default": null,
+        "default_source": "https://platform.minimaxi.com/docs/api-reference/text-anthropic-api ; https://platform.minimaxi.com/docs/api-reference/text-chat-openai",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2.10, "output": 8.40, "cache_read": 0.42, "cache_write": null,
+        "tiers": [
+          { "when": "input<=512k (standard，永久五折后)", "input": 2.10, "output": 8.40, "cache_read": 0.42, "list_price": { "input": 4.20, "output": 16.80, "cache_read": 0.84 } },
+          { "when": "input>512k (standard，永久五折后)", "input": 4.20, "output": 16.80, "cache_read": 0.84, "list_price": { "input": 8.40, "output": 33.60, "cache_read": 1.68 } },
+          { "when": "service_tier=priority, input<=512k (五折后)", "input": 3.15, "output": 12.60, "cache_read": 0.63 },
+          { "when": "service_tier=priority, input>512k (五折后)", "input": 6.30, "output": 25.20, "cache_read": 1.26 }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": { "unit": "per_million_tokens", "input": 0.30, "output": 1.20, "cache_read": 0.06, "note": "≤512k 输入、永久五折后；>512k 为 0.60/2.40/0.12；priority ≤512k 0.45/1.80/0.09" },
+      "sources": [
+        "https://platform.minimaxi.com/docs/guides/text-generation",
+        "https://platform.minimaxi.com/docs/api-reference/text-chat-openai",
+        "https://platform.minimaxi.com/docs/api-reference/text-anthropic-api",
+        "https://platform.minimaxi.com/docs/pricing/overview",
+        "https://platform.minimax.io/docs/pricing/overview",
+        "https://platform.minimaxi.com/docs/release-notes/models"
+      ],
+      "checked_at": "2026-11-12",
+      "notes": "reasoning_effort 对 M3 无效（被忽略）。官方两处默认值矛盾：OpenAI 兼容接口文档称 thinking 默认 adaptive（开启），可传 disabled 关闭；Anthropic 兼容文档称省略 thinking 时关闭、传 adaptive 开启。故 default 记为 null。支持 service_tier=priority（1.5 倍价）。output 上限 524288 出自 OpenAI 接口 max_completion_tokens 说明。"
+    }
+  ],
+  "notes": "国内文档站 platform.minimaxi.com 所示 API 主机已为 api.minimax.cn（原 api.minimaxi.com）。M2.5/M2.7 系列 2026-10-19 起停止向新用户开放、2026-11-18 正式下线，M2.1/M2 等已下线，故未收录。价格单位为元/百万 tokens；国际站美元价见 price_usd_intl。音色复刻等能力需个人或企业认证。"
+}

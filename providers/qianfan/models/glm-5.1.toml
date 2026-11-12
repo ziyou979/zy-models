@@ -1,0 +1,50 @@
+# Imported from research/qianfan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j
+# Source: https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/6m8r1x5hz
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6, output 24, cache_read 1.3
+schema = 2
+base_model = "zhipuai/glm-5.1"
+status = "deprecated"
+sources = ["https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j", "https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya", "https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv", "https://cloud.baidu.com/doc/qianfan-docs/s/6m8r1x5hz"]
+checked_at = "2026-11-12"
+notes = "Token Plan 页标注“即将下线”。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true }
+structured_output = true
+
+[limit]
+context = 202_752
+input = 202_752
+
+[cost.text.input]
+price = 0.89742479
+
+[cost.text.input.cache]
+read = 0.19444204
+
+[cost.text.output]
+price = 3.58969918
+
+[cost_cny]
+input = 6
+output = 24
+cache_read = 1.3
+
+[[cost_cny.tiers]]
+when = "input<32k"
+context_max = 32_000
+input = 6
+output = 24
+cache_read = 1.3
+
+[[cost_cny.tiers]]
+when = "32k<input<=200k"
+context_min = 32_000
+context_max = 200_000
+input = 8
+output = 28
+cache_read = 2

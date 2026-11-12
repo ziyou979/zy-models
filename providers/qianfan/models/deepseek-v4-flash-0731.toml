@@ -1,0 +1,45 @@
+# Imported from research/qianfan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j
+# Source: https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya
+# Source: https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 3, output 9, cache_read 0.1
+schema = 2
+base_model = "deepseek/deepseek-v4-flash-0731"
+status = "deprecated"
+sources = ["https://cloud.baidu.com/doc/qianfan/s/rmh4stp0j", "https://cloud.baidu.com/doc/qianfan/s/wmh4sv6ya", "https://cloud.baidu.com/doc/qianfan-docs/s/Wm95lyynv"]
+checked_at = "2026-11-12"
+notes = "Token Plan 页标注“即将下线”。缓存价为已过期的限时价（9月9日-10月30日），cache_read 记 null。默认 TPM 仅 250000。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 0.4487124
+
+[cost.text.input.cache]
+read = 0.01495708
+
+[cost.text.output]
+price = 1.34613719
+
+[cost_cny]
+input = 3
+output = 9
+cache_read = 0.1
+off_peak = "千帆峰谷：高峰 8:00-22:00，空闲 22:00-次日 8:00（文档未区分工作日）。主价格字段填空闲时段价。 （导入时已统一：主字段为标准/高峰价，闲时价见 tiers。）"
+
+[[cost_cny.tiers]]
+when = "高峰 8:00-22:00"
+input = 3
+output = 9
+cache_read = 0.1
+
+[[cost_cny.tiers]]
+when = "空闲 22:00-8:00"
+input = 1.5
+output = 4.5
+cache_read = 0.05

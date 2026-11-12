@@ -1,0 +1,23 @@
+# Imported from research/baichuan.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://platform.baichuan-ai.com/prices
+# Source: https://platform.baichuan-ai.com/docs/medical
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 20
+schema = 2
+base_model = "baichuan/baichuan-m2"
+sources = ["https://platform.baichuan-ai.com/prices", "https://platform.baichuan-ai.com/docs/medical"]
+checked_at = "2026-11-12"
+notes = "医疗模型，thinking.budget_tokens 同 M3。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.output]
+price = 2.99141598
+
+[cost_cny]
+input = 2
+output = 20
