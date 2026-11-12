@@ -1,0 +1,49 @@
+# zy-models: validate + build on every push to main, then publish dist/ to the
+# `dist` branch (served by GitHub raw and jsDelivr gh). Upstream workflows in this
+# folder are guarded by `github.repository == 'anomalyco/models.dev'` and skip here.
+name: zy-models build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zy-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.repository == 'ziyou979/zy-models'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - name: Validate
+        run: bun validate > /tmp/validate.json
+      - name: Build dist
+        run: bun run build
+      - name: Size check
+        run: ls -la dist dist/v2
+      - name: Publish dist branch
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          cd dist
+          git init -q -b dist
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp ../LICENSE ../README.md . 2>/dev/null || true
+          git add -A
+          git commit -q -m "dist: build of ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" dist:dist

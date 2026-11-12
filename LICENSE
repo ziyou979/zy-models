@@ -19,3 +19,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---------------------------------------------------------------------------
+
+zy-models (https://github.com/ziyou979/zy-models) is a fork of models.dev
+(https://github.com/anomalyco/models.dev). The original copyright notice and
+permission notice above apply to all upstream files and are retained as
+required by the MIT License.
+
+Additions in this repository (the schema extension in packages/core/src/cn/,
+overlays/, research/, scripts/, docs/ and the Chinese-platform data) are:
+
+Copyright (c) 2026 ziyou979 and zy-models contributors
+
+released under the same MIT License terms as above.

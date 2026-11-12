@@ -1,3 +1,5 @@
+// zy-models
+import { isRemoved, readUpstreamToml } from "./cn/ext.js";
 import path from "path";
 import { existsSync } from "node:fs";
 import { mergeDeep } from "remeda";
@@ -99,6 +101,7 @@ async function loadProviderV2(
 
   const models: Record<string, ModelV2> = {};
   for await (const modelPath of scanTomls(modelsDir, "**/*.toml")) {
+    if (isRemoved(modelPath)) continue; // zy-models: delisted upstream model
     const modelID = path
       .relative(modelsDir, modelPath)
       .split(path.sep)
@@ -661,8 +664,8 @@ function scanTomls(cwd: string, pattern: string) {
 }
 
 async function readToml(filePath: string): Promise<Record<string, unknown>> {
-  const mod = await import(filePath, { with: { type: "toml" } });
-  return mod.default;
+  // zy-models: overlays merged, extension keys stripped (see ./cn/ext.ts).
+  return readUpstreamToml(filePath);
 }
 
 function parseWithCause<S extends z.ZodTypeAny>(

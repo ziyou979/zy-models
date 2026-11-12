@@ -1,0 +1,44 @@
+# zy-models: publish the npm package on a version tag (v1.2.3). npmmirror
+# (registry.npmmirror.com) mirrors npmjs automatically within minutes.
+# Requires repository secret NPM_TOKEN (an npm automation / granular token).
+name: zy-models publish
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    if: github.repository == 'ziyou979/zy-models'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: bun install
+      - run: bun validate > /tmp/validate.json
+      - run: bun run build
+      - name: Set version from tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: npm version --no-git-tag-version --allow-same-version "${GITHUB_REF_NAME#v}"
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "::error::secrets.NPM_TOKEN is not set; skipping npm publish."; exit 1
+          fi
+          npm pack --dry-run
+          npm publish --access public --provenance
+      - name: Ask npmmirror to sync now
+        run: curl -fsS -X PUT "https://registry-direct.npmmirror.com/-/package/zy-models/syncs" || true

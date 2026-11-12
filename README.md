@@ -1,297 +1,105 @@
-<p align="center">
-  <a href="https://models.dev">
-    <picture>
-      <source srcset="./logo-dark.svg" media="(prefers-color-scheme: dark)">
-      <source srcset="./logo-light.svg" media="(prefers-color-scheme: light)">
-      <img src="./logo-light.svg" alt="Models.dev logo">
-    </picture>
-  </a>
-</p>
+# zy-models · 中国版 models.dev
 
----
+开源的 AI 模型能力库：在 [models.dev](https://github.com/anomalyco/models.dev)（MIT）全量数据之上，补齐**国内平台**的数据——人民币价格（含阶梯、峰谷、原价）、编程/Token 套餐、不传参数时的默认思考档位、中文名、别名和官方来源链接。
 
-[Models.dev](https://models.dev) is a comprehensive open-source database of AI model specifications, pricing, and capabilities.
+- 与 models.dev **完全兼容**：`api.json` / `models.json` / `catalog.json` 的结构不变，只新增可选键，老客户端忽略即可。
+- 每天自动合并上游 models.dev，通过校验后以 PR 形式进入本仓库。
+- 国内数据只取官方文档、官方价格页、官方 API 返回或官方博客；每个模型都带 `sources` 与 `checked_at`。
 
-There's no single database with information about all the available AI models. We started Models.dev as a community-contributed project to address this. We also use it internally in [opencode](https://opencode.ai).
+## 访问地址
 
-## API
+包名：`zy-models`（npm）。文件都是静态 JSON，可直接 `fetch`。
 
-You can access this data through an API.
+| 用途 | 国内首选（npmmirror） | 海外（jsDelivr） | GitHub raw |
+| --- | --- | --- | --- |
+| 全量 providers（同 models.dev `/api.json`） | `https://registry.npmmirror.com/zy-models/latest/files/dist/api.json` | `https://cdn.jsdelivr.net/npm/zy-models@latest/dist/api.json` | `https://raw.githubusercontent.com/ziyou979/zy-models/dist/api.json` |
+| **仅国内平台**（体积小，约 0.4 MB） | `https://registry.npmmirror.com/zy-models/latest/files/dist/cn.json` | `https://cdn.jsdelivr.net/npm/zy-models@latest/dist/cn.json` | `https://raw.githubusercontent.com/ziyou979/zy-models/dist/cn.json` |
+| 模型元数据（同 `/models.json`） | `…/latest/files/dist/models.json` | `…/zy-models@latest/dist/models.json` | `…/dist/models.json` |
+| `{ providers, models }`（同 `/catalog.json`） | `…/latest/files/dist/catalog.json` | `…/zy-models@latest/dist/catalog.json` | `…/dist/catalog.json` |
+| v2（实验，同 `/experimental/v2.0/api.json`） | `…/latest/files/dist/v2/api.json` | `…/zy-models@latest/dist/v2/api.json` | `…/dist/v2/api.json` |
+| 构建信息 | `…/latest/files/dist/meta.json` | `…/zy-models@latest/dist/meta.json` | `…/dist/meta.json` |
+
+说明：
+
+- **国内请优先用 npmmirror**。jsDelivr 在中国大陆访问不稳定（时快时慢、偶发不可用），只建议海外使用；GitHub raw 在国内同样不稳定，适合 CI 或海外服务器。
+- npmmirror 在 npm 发布后几分钟内自动同步；`latest` 可换成具体版本号（如 `/zy-models/0.1.0/files/dist/api.json`）以锁定数据。
+- GitHub raw 读的是 `dist` 分支，每次 main 有新提交都会由 CI 重新构建（比 npm 发布更新得勤）。
+- 也可以 `npm i zy-models` 后 `import api from "zy-models/api.json"`。
+
+## 扩展字段
+
+全部是**可选**键，只在有数据时出现。TOML 里的写法与 JSON 输出同名。
+
+### provider 级
+
+| 键 | 说明 |
+| --- | --- |
+| `name_zh` | 中文名，如「阿里云百炼」 |
+| `region` | `cn`（国内站/大陆端点）或 `intl`；`cn.json` 只收 `region = "cn"` 的平台 |
+| `pricing_page` | 官方价格页 |
+| `plans[]` | 编程 / Token 套餐：`id`、`name_zh`、`price_cny_month`（数字，或 `{档位: 价格}`）、`price_cny_quarter`、`price_cny_year`、`base_url`、`anthropic_base_url`、`other_base_urls`、`protocol`（`openai-chat` / `openai-responses` / `anthropic` / `gemini` / `native`）、`models`（套餐内的 model id）、`quota_note`（额度原文要点）、`usage_restriction`、`sources` |
+| `notes` | 实名、备案、地域限制等官方说明 |
+
+> **套餐不能当普通 API 用。** 所有套餐都带 `usage_restriction`：额度仅限官方支持的编程工具 / Agent 交互使用，禁止自建应用、批量或程序化调用，违规可能被限流或封禁。
+
+### model 级
+
+| 键 | 说明 |
+| --- | --- |
+| `name_zh` | 官方中文名 |
+| `aliases` | 带日期的快照名、旧名等 |
+| `cost_cny` | 人民币价格，单位**元 / 百万 tokens**，与 `cost` 同思路：`input`、`output`、`cache_read`、`cache_write`、`cache_write_1h`、`reasoning`；`list_price`（原价，主字段为限时实付价时）、`discount_note`；`tiers[]`（`when` 为官方条件原文，长度分档另有 `context_min` / `context_max`）；`off_peak`（峰谷/闲时说明）；`note` |
+| `reasoning_default` | `{ value, source }`：请求**不传任何思考参数**时的默认档位（`on` / `off` / `low` / `high` / `max` / `budget:<n>`…）与官方出处。研究数据优先；没有研究数据时取上游 `capabilities.reasoning.default` |
+| `sources` | 官方来源链接 |
+| `checked_at` | 核查日期 |
+| `notes` | 模型说明（原价、限时活动、限制等原文要点） |
+
+`cost`（美元）仍按 models.dev 语义保留：国内平台的人民币价按导入当日汇率换算（汇率、日期写在文件头注释与 `research/IMPORT_REPORT.md`）。
+
+### 数据口径
+
+- **价格**：`cost` / `cost_cny` 的主字段一律是**标准价（高峰 / 常规时段）**；闲时、夜间、峰谷价在 `cost_cny.tiers` 和 `off_peak` 里。部分调研文件原本把闲时价放在主字段，导入时已统一。很多国内价格是**当前限时实付价**，原价见 `cost_cny.list_price` 或 `notes`。
+- **K / M 换算**：官方文档常写「128K」「1M」。各平台调研的换算基数不同（百炼、智谱按 1000；方舟、TokenHub、千帆按 1024）。导入时统一为：**同一模型上游已有数值就沿用上游的写法**；上游没有的，按该厂商在本库 `models/<lab>/` 中多数文件的写法换算（1024 进制时 1M = 1,048,576，1000 进制时 1M = 1,000,000）。逐条记录见 `research/IMPORT_REPORT.md`「K/M 换算口径差异」。
+- **占位值**：新建 lab 文件时，上游 schema 必填但官方未公开的字段（`release_date`、`open_weights`、未公开的最大输出等）用了占位值，文件头注释写明「占位」，报告里有完整清单。
+
+## 仓库结构
+
+保留上游目录结构（`models/`、`providers/`、`labs/`、`packages/`），只增加：
+
+```
+packages/core/src/cn/ext.ts   扩展 schema、overlay 加载、扩展键输出（上游代码只加了几处钩子）
+overlays/                     对上游文件的覆盖：overlays/<与上游相同路径>.toml，加载时深合并
+overlays/removed.json         本库移除的上游过时模型（下架 / 改名）
+research/                     国内平台调研数据（*.json，格式见 research/FORMAT.md）与导入报告
+scripts/import-research.ts    research → TOML 导入脚本（可重复运行）
+scripts/build-dist.ts         生成 dist/
+docs/upstream-fixes.md        上游过时数据修正清单（方便给 models.dev 提 PR）
+README.upstream.md            上游原版 README
+```
+
+为了让每日合并上游尽量不冲突，**上游已有的文件一律不改**：国内数据写在 `overlays/` 里（同路径深合并：表合并，数组/标量覆盖）；新平台、新模型直接按上游规则新建文件（托管模型用 `base_model` 指向 `models/<lab>/`）。
+
+## 本地使用
 
 ```bash
-curl https://models.dev/api.json
+bun install
+bun validate                      # 上游校验 + 扩展字段校验 + overlay 校验
+bun run build                     # 生成 dist/
+bun scripts/import-research.ts    # 重新导入 research/*.json（可加 --rate 6.685797 --rate-date 2026-11-12 固定汇率）
 ```
 
-Specialized model types are omitted by default. Filter by one or more
-comma-separated model types, or use `all` for the complete catalog:
+导入规则：已有上游 provider 按 id 合并；数值冲突（上下文、输出上限、价格）以研究数据为准，写进 overlay 并列入 `research/IMPORT_REPORT.md`；非数值差异只报告不覆盖；套餐优先挂到上游已有的套餐型 provider（如 `alibaba-token-plan-cn`、`kimi-code-plan-cn`、`zhipuai-coding-plan`）；`null` 字段不写。
 
-```bash
-curl "https://models.dev/api.json?type=decision"
-curl "https://models.dev/api.json?type=all"
-```
+## 自动化
 
-The currently supported model type is `decision`. The `type` parameter is also
-available on `models.json`, `catalog.json`, and `model-schema.json`.
+| 工作流 | 触发 | 作用 |
+| --- | --- | --- |
+| `zy-build.yml` | push / PR 到 main | `bun validate` + `bun run build`，并把 `dist/` 强推到 `dist` 分支 |
+| `zy-sync-upstream.yml` | 每天 09:30（北京时间） | 合并 `anomalyco/models.dev@dev`，校验构建通过后开 / 更新 PR；有冲突时开 issue |
+| `zy-publish.yml` | 推送 `v*` tag | 构建并以 tag 版本号发布 npm（需要仓库 secret `NPM_TOKEN`），然后请求 npmmirror 立即同步 |
 
-Use the **Model ID** field to do a lookup on any model; it's the identifier used by [AI SDK](https://ai-sdk.dev/).
+上游自带的工作流都限定 `github.repository == 'anomalyco/models.dev'`，在本仓库会自动跳过。
 
-Provider-agnostic model metadata is available separately:
+## 许可
 
-```bash
-curl https://models.dev/models.json
-```
-
-Use this for facts about the model itself, independent of where it is served. If you need both provider endpoints and model-only metadata in one response:
-
-```bash
-curl https://models.dev/catalog.json
-```
-
-### Logos
-
-Provider logos are available as SVG files:
-
-```bash
-curl https://models.dev/logos/{provider}.svg
-```
-
-Replace `{provider}` with the **Provider ID** (e.g., `anthropic`, `openai`, `google`). If we don't have a provider's logo, a default logo is served instead.
-
-## Contributing
-
-The data is stored in the repo as TOML files; organized by provider and model. The logo is stored as an SVG. This is used to generate this page and power the API.
-
-We need your help keeping the data up to date.
-
-### File Format
-
-Every model file uses the v2 format and starts with `schema = 2`; `bun validate` rejects files without it. The full file schema is in `packages/core/src/schema-v2.ts`, and `AGENTS.md` has the complete contributor rules. The filename (minus `.toml`) is the model ID; never add an `id` field.
-
-### Adding Model Metadata
-
-Model-only facts live in `models/<lab>/<model>.toml`. For example, `models/openai/gpt-5.toml` describes the underlying GPT-5 model, while `providers/openai/models/gpt-5.toml` describes how OpenAI serves it (reasoning controls, cache, pricing).
-
-Lab files hold only what is true on every host:
-
-```toml
-schema = 2
-name = "GPT-5"
-description = "Original GPT-5 workhorse for reasoning, coding, writing, and tool workflows"
-family = "gpt"
-open_weights = false
-knowledge = "2024-09-30"
-release_date = "2025-08-07"
-
-[modalities]
-input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp"]
-output = ["text"]
-
-[capabilities]
-tools = { supported = true }
-reasoning = { supported = true }
-temperature = false
-top_p = false
-top_k = false
-
-[limit]
-context = 400_000
-input = 272_000
-output = 128_000
-
-[[benchmarks]]
-name = "Benchmark Name"
-score = 72.5
-metric = "accuracy"
-source = "https://example.com/results"
-
-[[weights]]
-label = "Model weights"
-url = "https://huggingface.co/example/model"
-format = "safetensors"
-```
-
-Use MIME types for modalities where the lab documents them. `last_updated` is only needed when it differs from `release_date`. Reasoning controls, `structured_output`, cache, and service tiers are per host and go in provider files.
-
-### Adding a New Provider Model
-
-To add a new model, start by checking if the provider already exists in the `providers/` directory. If not, then:
-
-#### 1. Create a Provider
-
-If the provider isn't already in `providers/`:
-
-1. Create a new folder in `providers/` with the provider's ID. For example, `providers/newprovider/`.
-2. Add a `provider.toml` with the provider details:
-
-   ```toml
-   name = "Provider Name"
-   npm = "@ai-sdk/provider" # AI SDK Package name
-   env = ["PROVIDER_API_KEY"] # Environment Variable keys used for auth
-   doc = "https://example.com/docs/models" # Link to provider's documentation
-   ```
-
-   If the provider doesn’t publish an npm package but exposes an OpenAI-compatible endpoint, set the npm field accordingly and include the base URL:
-
-   ```toml
-   npm = "@ai-sdk/openai-compatible" # Use OpenAI-compatible SDK
-   api = "https://api.example.com/v1" # Required with openai-compatible
-   ```
-
-#### 2. Add a Logo (required for new providers)
-
-To add a logo for the provider:
-
-1. Add a `logo.svg` file to the provider's directory (e.g., `providers/newprovider/logo.svg`)
-2. Use SVG format with no fixed size or colors - use `currentColor` for fills/strokes
-
-Example SVG structure:
-
-```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-  <!-- Logo paths here -->
-</svg>
-```
-
-#### 3. Add a Model Definition
-
-Create a new TOML file in the provider's `models/` directory where the filename is the model ID. If the model ID contains `/`, use subfolders: for `openai/gpt-5`, create `openai/gpt-5.toml`.
-
-If the provider didn't create the model, point `base_model` at the lab file (add the lab file first if it's missing) and write only what differs on this host:
-
-```toml
-schema = 2
-base_model = "openai/gpt-5"
-
-[capabilities]
-reasoning = { supported = true, effort = ["minimal", "low", "medium", "high"] }
-structured_output = true
-cache = { implicit = { min_tokens = 1_024 } }
-
-[cost.text.input]
-price = 1.25              # USD per million input tokens
-cache = { read = 0.125 }  # USD per million cached input tokens
-
-[[cost.text.input.overrides]]
-when = { context = { gt = 272_000 } } # long-context pricing
-price = 2.5
-
-[cost.text.output]
-price = 10                # USD per million output tokens
-
-[limit]
-context = 200_000         # optional: only when this host serves a smaller window
-```
-
-Rules:
-
-- `base_model` must point to a file in `models/` using `<lab>/<model-id>`.
-- **Override-only:** do not restate the base's `name`, `description`, dates, `modalities`, `limit`, etc. unless this host actually differs.
-- Plain tables (`[limit]`, `[modalities]`, `[capabilities]`, inline tables) deep-merge; arrays and primitives replace.
-- `base_model_omit` removes inherited fields after merging, e.g. `base_model_omit = ["limit.input"]`.
-- Lifecycle goes in `status` (`alpha`, `beta`, `deprecated`). A model served through a different SDK, base URL, or reasoning field gets an `[api.<protocol>]` table, e.g. `[api.chat-completions] compatibility = { reasoning_field = "reasoning_content" }`.
-- A full definition without `base_model` is only for first-party labs and host-unique models. It has every lab field plus the provider fields.
-
-**Reasoning controls (short):** classify first-party lab vs multi-model relay (not by npm). Copy the underlying model’s controls from the lab's provider entry and same-surface peers: often `effort = ["low", "medium", "high"]` on GPT-style relays, but DeepSeek V4 is `toggle = true` with `effort = ["low", "high", "max"]`, etc. Don't drop controls from uncertainty on relays. Full policy: `AGENTS.md`.
-
-#### 4. Submit a Pull Request
-
-1. Fork this repo
-2. Create a new branch with your changes
-3. Add your provider and/or model files
-4. Open a PR with a clear description
-
-### Validation
-
-Run these before opening a PR (a GitHub Action runs them too):
-
-```bash
-bun validate      # schema, required fields, TOML syntax; rejects non-v2 model files
-bun run v1:check  # lists any change to the published v1 API output
-```
-
-### API Reference
-
-These are the fields of each model in the generated `api.json` (the v1 API). They are API response fields, not file fields: they are derived from the v2 files above (for example `attachment` comes from non-text input modalities, `reasoning_options` from `capabilities.reasoning`, and `cost.input` from `cost.text.input.price`).
-
-Generated provider models that use `base_model` expose its canonical lab/model ID as `canonical_model_id` in `api.json` and `catalog.json`. Consumers can use this field to attribute a provider-specific model ID to its originating lab without guessing from the model name.
-
-**Provider:**
-
-- `name`: String - Display name of the provider
-- `npm`: String - AI SDK Package name
-- `env`: String[] - Environment variable keys used for auth
-- `doc`: String - Link to the provider's documentation
-- `api` _(optional)_: String - OpenAI-compatible API endpoint
-
-**Model:**
-
-- `name`: String — Display name of the model
-- `type` _(optional)_: String — Specialized model behavior; currently supports `decision`
-- `attachment`: Boolean — Supports file attachments
-- `reasoning`: Boolean — Supports reasoning / chain-of-thought
-- `tool_call`: Boolean - Supports tool calling
-- `structured_output` _(optional)_: Boolean — Supports structured output feature
-- `temperature` _(optional)_: Boolean — Supports temperature control
-- `knowledge` _(optional)_: String — Knowledge-cutoff date in `YYYY-MM` or `YYYY-MM-DD` format
-- `release_date`: String — First public release date in `YYYY-MM` or `YYYY-MM-DD`
-- `last_updated`: String — Most recent update date in `YYYY-MM` or `YYYY-MM-DD`
-- `open_weights`: Boolean - Indicate the model's trained weights are publicly available
-- `interleaved` _(optional)_: Boolean or Object — Supports interleaved reasoning: `true`, or an object whose `field` names the format
-- `interleaved.field`: String — Name of the interleaved field (`"reasoning_content"` or `"reasoning_details"`)
-- `cost.input`: Number — Cost per million input tokens (USD)
-- `cost.output`: Number — Cost per million output tokens (USD)
-- `cost.reasoning` _(optional)_: Number — Cost per million reasoning tokens (USD)
-- `cost.cache_read` _(optional)_: Number — Cost per million cached read tokens (USD)
-- `cost.cache_write` _(optional)_: Number — Cost per million cached write tokens (USD)
-- `cost.input_audio` _(optional)_: Number — Cost per million audio input tokens, if billed separately (USD)
-- `cost.output_audio` _(optional)_: Number — Cost per million audio output tokens, if billed separately (USD)
-- `limit.context`: Number — Maximum context window (tokens)
-- `limit.input`: Number — Maximum input tokens
-- `limit.output`: Number — Maximum output tokens
-- `modalities.input`: Array of strings — Supported input modalities (e.g., ["text", "image", "audio", "video", "pdf"])
-- `modalities.output`: Array of strings — Supported output modalities (e.g., ["text"])
-- `status` _(optional)_: String — Supported status:
-  - `alpha` - Indicate the model is in alpha testing
-  - `beta` - Indicate the model is in beta testing
-  - `deprecated` - Indicate the model is no longer served by the provider's public API
-
-### Examples
-
-See existing providers in the `providers/` directory for reference:
-
-- `providers/anthropic/` - Anthropic Claude models
-- `providers/openai/` - OpenAI GPT models
-- `providers/google/` - Google Gemini models
-
-### Working on frontend
-
-Make sure you have [Bun](https://bun.sh/) installed.
-
-```bash
-$ bun install
-$ cd packages/web
-$ bun run dev
-```
-
-And it'll open the frontend at http://localhost:3000
-
-### Manual testing with opencode
-
-You can manually check provider changes with opencode by:
-
-```bash
-$ bun install
-$ cd packages/web
-$ bun run build
-$ OPENCODE_MODELS_PATH="dist/_api.json" opencode
-```
-
-### Questions?
-
-Open an issue if you need help or have questions about contributing.
-
----
-
-Models.dev is created by the maintainers of [SST](https://sst.dev).
-
-**Join our community** [Discord](https://sst.dev/discord) | [YouTube](https://www.youtube.com/c/sst-dev) | [X.com](https://x.com/SST_dev)
+MIT。上游 models.dev 的版权声明完整保留，见 [LICENSE](LICENSE)。

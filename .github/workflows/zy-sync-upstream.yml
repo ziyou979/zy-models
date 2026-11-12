@@ -1,0 +1,84 @@
+# zy-models: once a day, merge anomalyco/models.dev (branch dev) into a sync
+# branch, validate + build, and open (or update) a pull request against main.
+# Needs repo setting: Settings → Actions → General → "Allow GitHub Actions to
+# create and approve pull requests".
+name: zy-models sync upstream
+
+on:
+  schedule:
+    - cron: "30 1 * * *" # 09:30 Asia/Shanghai
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: zy-sync-upstream
+
+jobs:
+  sync:
+    if: github.repository == 'ziyou979/zy-models'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      BRANCH: sync/upstream
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Merge upstream
+        id: merge
+        run: |
+          set -uo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/anomalyco/models.dev.git
+          git fetch --no-tags upstream dev
+          if git merge-base --is-ancestor upstream/dev HEAD; then
+            echo "Already up to date with upstream."; echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          git checkout -B "$BRANCH"
+          if git merge --no-edit -m "chore(sync): merge upstream models.dev $(git rev-parse --short upstream/dev)" upstream/dev; then
+            echo "conflict=false" >> "$GITHUB_OUTPUT"
+          else
+            git diff --name-only --diff-filter=U > /tmp/conflicts.txt
+            echo "conflict=true" >> "$GITHUB_OUTPUT"
+            git merge --abort
+          fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Report conflicts
+        if: steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'true'
+        run: |
+          {
+            echo "每日同步上游 models.dev 时出现合并冲突，需要手工处理："
+            echo; sed 's/^/- `/; s/$/`/' /tmp/conflicts.txt
+            echo; echo "本地处理：\`git fetch upstream && git merge upstream/dev\`，解决冲突后运行 \`bun validate && bun run build\`。"
+          } > /tmp/body.md
+          num=$(gh issue list --label upstream-sync-conflict --state open --json number -q '.[0].number' || true)
+          gh label create upstream-sync-conflict --color B60205 2>/dev/null || true
+          if [ -n "$num" ]; then gh issue comment "$num" --body-file /tmp/body.md
+          else gh issue create --title "上游同步冲突" --label upstream-sync-conflict --body-file /tmp/body.md; fi
+          exit 1
+      - name: Validate and build
+        if: steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'false'
+        run: |
+          bun install
+          bun validate > /tmp/validate.json
+          bun run build
+      - name: Push branch and open PR
+        if: steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'false'
+        run: |
+          set -euo pipefail
+          git push -f origin "$BRANCH"
+          upstream_sha=$(git rev-parse --short upstream/dev)
+          body="自动合并上游 anomalyco/models.dev@${upstream_sha}，\`bun validate\` 与 \`bun run build\` 已通过。
+
+          合并后请检查：上游是否更新了我们 overlays/ 覆盖过的模型（必要时重新运行 \`bun scripts/import-research.ts\` 刷新冲突报告），以及 docs/upstream-fixes.md 中的条目是否已被上游修正。"
+          if gh pr view "$BRANCH" --json state -q .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit "$BRANCH" --body "$body"
+          else
+            gh pr create --base main --head "$BRANCH" --title "chore(sync): 同步上游 models.dev" --body "$body"
+          fi

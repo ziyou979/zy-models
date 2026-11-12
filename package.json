@@ -1,6 +1,45 @@
 {
+  "name": "zy-models",
+  "version": "0.1.0",
+  "description": "中国版 models.dev：AI 模型能力库（国内平台价格/套餐/推理默认值等扩展字段），基于 models.dev",
+  "license": "MIT",
   "type": "module",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ziyou979/zy-models.git"
+  },
+  "homepage": "https://github.com/ziyou979/zy-models#readme",
+  "bugs": {
+    "url": "https://github.com/ziyou979/zy-models/issues"
+  },
+  "keywords": [
+    "models.dev",
+    "llm",
+    "ai",
+    "models",
+    "pricing",
+    "china",
+    "deepseek",
+    "qwen",
+    "kimi",
+    "glm"
+  ],
+  "files": [
+    "dist/"
+  ],
+  "exports": {
+    "./api.json": "./dist/api.json",
+    "./cn.json": "./dist/cn.json",
+    "./models.json": "./dist/models.json",
+    "./catalog.json": "./dist/catalog.json",
+    "./v2/api.json": "./dist/v2/api.json",
+    "./meta.json": "./dist/meta.json",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "workspaces": {
     "packages": [
       "packages/*"
@@ -15,6 +54,8 @@
     }
   },
   "scripts": {
+    "build": "bun scripts/build-dist.ts",
+    "import:research": "bun scripts/import-research.ts",
     "test": "bun test",
     "validate": "bun ./packages/core/script/validate.ts",
     "v1:check": "bun ./packages/core/script/v1-check.ts",
@@ -51,7 +92,7 @@
     "sync:models": "bun ./packages/core/script/sync-models.ts",
     "sync:auto-merge": "bun ./packages/core/script/check-sync-auto-merge.ts"
   },
-  "dependencies": {
+  "devDependencies": {
     "@cloudflare/workers-types": "^4.20260424.1",
     "sst": "3.17.23"
   }

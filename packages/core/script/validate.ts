@@ -4,6 +4,7 @@ import { generate } from "../src/generate";
 import { generateV2 } from "../src/generate-v2";
 import { explicitFalseFlags, isSchemaV2, readLabMetadata } from "../src/translate";
 import { logoErrors } from "../src/logo";
+import { overlayErrors } from "../src/cn/ext";
 import path from "path";
 import { ZodError } from "zod";
 
@@ -42,6 +43,12 @@ try {
       "system_updates, effort_updates and tools.updates default to false. Leave them out instead of writing `= false` (see AGENTS.md):\n" +
         falseFlags.map((flag) => `  ${flag}`).join("\n"),
     );
+    process.exit(1);
+  }
+  // zy-models: overlays must sit over an existing upstream file.
+  const badOverlays = await overlayErrors();
+  if (badOverlays.length > 0) {
+    console.error("Orphan overlay files:\n" + badOverlays.map((e) => `  ${e}`).join("\n"));
     process.exit(1);
   }
   const unsafeLogos: string[] = [];

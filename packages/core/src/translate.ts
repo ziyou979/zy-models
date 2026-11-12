@@ -1,4 +1,8 @@
 import { readFileSync } from "node:fs";
+// zy-models: extension keys are not part of the upstream schema (see ./cn/ext.ts).
+import { MODEL_EXT_KEYS } from "./cn/ext.js";
+const withoutCnExt = (toml: Record<string, unknown>) =>
+  Object.fromEntries(Object.entries(toml).filter(([key]) => !MODEL_EXT_KEYS.includes(key)));
 
 import { MODEL_TYPES } from "./filter.js";
 import {
@@ -61,7 +65,7 @@ export function readLabMetadata(filePath: string): LabMetadataV2 {
   if (!isSchemaV2(toml)) {
     throw new Error(`Lab metadata must be v2. Add \`schema = 2\` to ${filePath}`);
   }
-  const { schema: _schema, ...raw } = toml;
+  const { schema: _schema, ...raw } = withoutCnExt(toml);
   const parsed = LabMetadataV2.safeParse(raw);
   if (!parsed.success) {
     parsed.error.cause = { labPath: filePath, toml };
@@ -100,7 +104,7 @@ export function labModelV2ToV1(
   toml: Record<string, unknown>,
   cause: Record<string, unknown> = {},
 ): Record<string, unknown> {
-  const { schema: _schema, ...raw } = toml;
+  const { schema: _schema, ...raw } = withoutCnExt(toml);
   const parsed = LabModelV2.safeParse(raw);
   if (!parsed.success) {
     parsed.error.cause = { ...cause, toml };
@@ -148,7 +152,7 @@ export function modelV2ToV1(
   cause: Record<string, unknown> = {},
   providerNpm?: string,
 ): Record<string, unknown> {
-  const { schema: _schema, ...raw } = toml;
+  const { schema: _schema, ...raw } = withoutCnExt(toml);
   const parsed = AuthoredModelV2.safeParse(raw);
   if (!parsed.success) {
     parsed.error.cause = { ...cause, toml };

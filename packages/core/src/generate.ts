@@ -11,6 +11,8 @@ import {
   ModelMetadata,
 } from "./schema.js";
 import { labModelV2ToV1, modelV2ToV1, providerTomlToV1, withoutV1ReasoningCost } from "./translate.js";
+// zy-models: extension keys + overlays (see ./cn/ext.ts)
+import { isRemoved, labModelExt, modelExtOutput, providerExtOutput, readModelToml, readProviderToml } from "./cn/ext.js";
 
 const BaseModel = AuthoredModelShape
   .deepPartial()
@@ -42,6 +44,10 @@ export async function generateCatalog(directory: string) {
   );
   // v2-only lab models stay available as base models but are left out of v1.
   for (const id of v2OnlyModels.get(models) ?? []) delete models[id];
+  // zy-models: lab-level extension keys (name_zh, aliases, …) on models.json.
+  for (const [id, model] of Object.entries(models)) {
+    Object.assign(model, modelExtOutput(labModelExt.get(id) ?? {}));
+  }
 
   return { models, providers };
 }
@@ -62,12 +68,9 @@ export async function generateModels(directory: string) {
     followSymlinks: true,
   })) {
     const modelID = path.relative(directory, modelPath).split(path.sep).join("/").slice(0, -5);
-    const toml = await import(modelPath, {
-      with: {
-        type: "toml",
-      },
-    }).then((mod) => mod.default);
+    const { toml, ext } = await readModelToml(modelPath);
     toml.id = modelID;
+    labModelExt.set(modelID, ext);
     if (toml.v2_only === true) v2Only.add(modelID);
 
     const model = ModelMetadata.safeParse(labModelV2ToV1(toml, { modelPath }));
@@ -99,11 +102,8 @@ async function generateProviders(
     absolute: true,
   })) {
     const providerID = path.basename(path.dirname(providerPath));
-    const { v1_alias, ...raw } = await import(providerPath, {
-      with: {
-        type: "toml",
-      },
-    }).then((mod) => mod.default);
+    const { toml: providerToml, ext: providerExt } = await readProviderToml(providerPath);
+    const { v1_alias, ...raw } = providerToml;
     const toml = providerTomlToV1(raw);
     toml.id = providerID;
     toml.models = {};
@@ -141,12 +141,9 @@ async function generateProviders(
       absolute: true,
       followSymlinks: true,
     })) {
+      if (isRemoved(modelPath)) continue; // zy-models: delisted upstream model
       const modelID = path.relative(modelsPath, modelPath).split(path.sep).join("/").slice(0, -5);
-      const raw = await import(modelPath, {
-        with: {
-          type: "toml",
-        },
-      }).then((mod) => mod.default);
+      const { toml: raw, ext: modelExt } = await readModelToml(modelPath);
       raw.id = modelID;
       // Models marked `v2_only = true` are only published in the v2 API.
       if (raw.v2_only === true) {
@@ -170,7 +167,8 @@ async function generateProviders(
         provider.data.models[modelID] = {
           ...normalizeModelCost(model.data),
           canonical_model_id: baseModel.data.base_model,
-        };
+          ...modelExtOutput(modelExt, baseModel.data.base_model, raw),
+        } as Model;
         continue;
       }
       const model = AuthoredModel.safeParse(toml);
@@ -178,7 +176,7 @@ async function generateProviders(
         model.error.cause = { modelPath, toml };
         throw model.error;
       }
-      provider.data.models[modelID] = normalizeModelCost(model.data);
+      provider.data.models[modelID] = { ...normalizeModelCost(model.data), ...modelExtOutput(modelExt, undefined, raw) } as Model;
     }
     if (Object.keys(provider.data.models).length === 0) {
       // A provider whose models are all v2-only is left out of v1.
@@ -187,7 +185,7 @@ async function generateProviders(
         cause: { providerPath },
       });
     }
-    result[providerID] = provider.data;
+    result[providerID] = Object.assign(provider.data, providerExtOutput(providerExt));
   }
 
   for (const { provider, alias, providerPath } of aliases) {
