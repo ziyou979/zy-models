@@ -311,4 +311,11 @@
 
 - bailing/Ling-3.0-tiny: 跳过（无 context，无法生成 lab 文件）
 
+## 占位 logo（平台名首字，非官方商标）（4）
+
+- baichuan（百川智能开放平台）
+- iflytek-spark（讯飞星火 / 讯飞星辰 MaaS）
+- qianfan（百度智能云千帆（百度千帆·大模型服务及Agent开发平台））
+- alibaba-token-plan-cn（百炼 Token Plan 个人版）
+
 overlay 文件数：118

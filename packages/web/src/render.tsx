@@ -24,6 +24,8 @@ import {
 import {
   CnFilter,
   CnHeaders,
+  HomeStats,
+  cnFirst,
   CnyCell,
   CN_COLUMNS,
   ProviderCnSections,
@@ -43,6 +45,7 @@ import {
   zhWord,
 } from "./cn.js";
 import { CnHelpDialog } from "./cn-help.js";
+import { PLANS_METADATA, PlansPage } from "./cn-plans.js";
 
 const root = path.join(import.meta.dir, "..", "..", "..");
 const Catalog = await generateCatalog(root);
@@ -57,7 +60,7 @@ const LabLogoSvgs = new Map<string, string>();
 type CatalogModel = ModelMetadata;
 type CatalogProvider = Provider;
 type CatalogProviderModel = Model;
-type ActiveSection = "models" | "providers" | "labs";
+type ActiveSection = "models" | "providers" | "labs" | "plans"; // zy-models: + plans
 
 interface PageMetadata {
   title: string;
@@ -407,6 +410,23 @@ function buildPages() {
     renderPage("providers", <ProvidersPage providers={providerList} />),
   );
   addPage("/labs", renderPage("labs", <LabsPage labs={LabEntries} />));
+  // zy-models: 编程套餐对比
+  addPage(
+    "/plans",
+    renderPage(
+      "plans",
+      <PlansPage
+        providers={Providers}
+        modelName={(providerId, modelId) => {
+          const entry = ProviderModelEntries.find((e) => e.providerId === providerId && e.modelId === modelId);
+          return entry ? modelExt(entry.model).name_zh ?? displayModelName(entry) : modelId;
+        }}
+        providerLink={(providerId) => <ProviderLink providerId={providerId} provider={Providers[providerId]!} />}
+        copy={(value) => <CopyButton value={value} label={`复制 ${value}`} />}
+      />,
+      PLANS_METADATA,
+    ),
+  );
 
   for (const model of modelList) {
     addPage(
@@ -615,6 +635,9 @@ function Header(props: { active: ActiveSection }) {
           <a class={props.active === "labs" ? "active" : ""} href="/labs">
             {T.labs}
           </a>
+          <a class={props.active === "plans" ? "active" : ""} href="/plans">
+            编程套餐
+          </a>
         </nav>
         <a
           class="github"
@@ -702,13 +725,15 @@ function HomePage(props: {
 }) {
   return (
     <Fragment>
-      <CnFilter hint="只显示国内平台在售的模型；人民币价取国内平台最低价，悬停查看阶梯/峰谷" />
+      <HomeStats providers={Providers} models={props.models} />
+      <CnFilter defaultOn hint="只显示国内平台在售的模型；人民币价取国内平台最低价，点击或悬停价格查看阶梯/峰谷" />
       <ModelTable models={props.models} title={T.canonical} hideHeading />
     </Fragment>
   );
 }
 
 function ProvidersPage(props: { providers: Array<[string, CatalogProvider]> }) {
+  const providers = cnFirst(props.providers); // zy-models: 国内平台置顶
   return (
       <Fragment>
       <CnFilter />
@@ -722,8 +747,8 @@ function ProvidersPage(props: { providers: Array<[string, CatalogProvider]> }) {
           <caption class="sr-only">{T.providers}</caption>
           <thead>
             <tr>
-              <SortableTh sort="ascending">{T.provider}</SortableTh>
-              <SortableTh>区域</SortableTh>
+              <SortableTh>{T.provider}</SortableTh>
+              <SortableTh sort="ascending">区域</SortableTh>
               <SortableTh type="number">{T.models}</SortableTh>
               <SortableTh>{T.package}</SortableTh>
               <SortableTh>{T.api}</SortableTh>
@@ -731,7 +756,7 @@ function ProvidersPage(props: { providers: Array<[string, CatalogProvider]> }) {
             </tr>
           </thead>
           <tbody>
-            {props.providers.map(([providerId, provider]) => {
+            {providers.map(([providerId, provider]) => {
               const models = ProviderModelEntries.filter(
                 (entry) => entry.providerId === providerId,
               );
@@ -1366,7 +1391,7 @@ function CopyButton(props: { value: string; label: string }) {
   );
 }
 
-function MobileMenu(props: { active: "models" | "providers" | "labs" }) {
+function MobileMenu(props: { active: ActiveSection }) {
   return (
     <dialog
       id="mobile-menu"
@@ -1410,6 +1435,9 @@ function MobileMenu(props: { active: "models" | "providers" | "labs" }) {
         </a>
         <a class={props.active === "labs" ? "active" : ""} href="/labs">
           {T.labs}
+        </a>
+        <a class={props.active === "plans" ? "active" : ""} href="/plans">
+          编程套餐
         </a>
         <button type="button" id="mobile-search-trigger">
           {T.search}

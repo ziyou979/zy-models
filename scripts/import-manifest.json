@@ -28,6 +28,7 @@
   "models/tencent/hunyuan-role-latest.toml",
   "providers/alibaba-cn/models/kimi-k3.1-pro.toml",
   "providers/alibaba-cn/models/qwen4-max-preview.toml",
+  "providers/alibaba-token-plan-cn/logo.svg",
   "providers/baichuan/logo.svg",
   "providers/baichuan/models/Baichuan-M2-Plus.toml",
   "providers/baichuan/models/Baichuan-M2.toml",

@@ -23,6 +23,6 @@ top_p = true
 top_k = false
 
 [limit]
-context = 1_000_000
-input = 1_000_000
-output = 256_000
+context = 1_048_576
+input = 1_048_576
+output = 262_144

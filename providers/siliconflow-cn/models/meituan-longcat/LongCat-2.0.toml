@@ -12,6 +12,9 @@ notes = "页面标签：New；参数规模（官方页 size 字段，单位 B）
 [capabilities]
 reasoning = { supported = true }
 
+[limit]
+context = 1_048_576
+
 [cost.text.input]
 price = 0.747854
 

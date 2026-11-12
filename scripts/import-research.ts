@@ -116,10 +116,12 @@ const MODEL_HINTS: Record<string, Record<string, Json>> = {
   },
 };
 
-// Token-count labels ("128K", "1M") were converted by the research with base 1000
-// for some platforms and 1024 for others. Two values with the same label are the
-// same official number: keep upstream's spelling when upstream has the model,
-// else use the lab's convention in models/<lab>/ (see README「数值口径」).
+// Token-count labels ("128K", "1M"): when the official doc gives a concrete number
+// (e.g. 百川 max_tokens 32000) the research file carries it verbatim and the import
+// writes it unchanged — no 1000/1024 conversion. The one exception is a model
+// upstream already has: if upstream's number and the research number are the same
+// nominal label (128000 vs 131072), upstream's value is kept and the pair is listed
+// in IMPORT_REPORT「K/M 换算口径差异」 (see README「数值口径」).
 function labels(v: number) {
   const out = new Set<string>();
   for (const [unit, tag] of [[1000, "K"], [1024, "K"], [1e6, "M"], [1048576, "M"]] as const) {
@@ -130,31 +132,6 @@ function labels(v: number) {
   return out;
 }
 const sameLabel = (a: number, b: number) => [...labels(a)].some((l) => labels(b).has(l));
-const labBaseCache = new Map<string, 1000 | 1024>();
-function labBase(labDir: string): 1000 | 1024 {
-  if (labBaseCache.has(labDir)) return labBaseCache.get(labDir)!;
-  let k1000 = 0, k1024 = 0;
-  const dir = path.join(ROOT, "models", labDir);
-  if (existsSync(dir)) {
-    for (const f of readdirSync(dir).filter((f) => f.endsWith(".toml"))) {
-      const lim = readToml(path.join(dir, f)).limit ?? {};
-      for (const v of [lim.context, lim.output]) {
-        if (!isNum(v)) continue;
-        if (v % 1024 === 0 && v % 1000 !== 0) k1024++;
-        else if (v % 1000 === 0 && v % 1024 !== 0) k1000++;
-      }
-    }
-  }
-  const base = k1024 >= k1000 ? 1024 : 1000;
-  labBaseCache.set(labDir, base);
-  return base;
-}
-function toLabBase(v: number, labDir: string) {
-  const base = labBase(labDir);
-  if (base === 1024 && v % 1000 === 0 && v % 1024 !== 0) return v % 1e6 === 0 ? (v / 1e6) * 1048576 : (v / 1000) * 1024;
-  if (base === 1000 && v % 1024 === 0 && v % 1000 !== 0) return v % 1048576 === 0 ? (v / 1048576) * 1e6 : (v / 1024) * 1000;
-  return v;
-}
 
 // Price normalisation (models.dev cost semantics): the main fields hold the
 // standard (peak / regular) price. Some research files put the off-peak price
@@ -256,6 +233,29 @@ async function writeFile(rel: string, content: string, track = true) {
   if (track && !rel.startsWith("overlays/")) generated.push(rel);
 }
 
+// Placeholder logo for a 国内平台 without an official logo in the repo: a rounded
+// square with the first character of the Chinese name (or the first letter of the
+// English name). Deliberately not a trademark copy; same style for every platform.
+function placeholderLogo(nameZh: string | undefined, nameEn: string | undefined, id: string) {
+  // "百度智能云千帆" → 千: skip a cloud vendor prefix when a product name follows.
+  const CLOUD = /^(百度智能云|阿里云|腾讯云|华为云|京东云|天翼云|移动云|联通云|金山云|火山引擎|UCloud\s*优刻得|优刻得)\s*/;
+  let zhName = nameZh ?? "";
+  const rest = zhName.replace(CLOUD, "");
+  if (rest !== zhName && /[\u4e00-\u9fff]/.test(rest)) zhName = rest;
+  const zh = zhName.match(/[\u4e00-\u9fff]/)?.[0];
+  const en = (nameEn ?? id).match(/[A-Za-z0-9]/)?.[0]?.toUpperCase();
+  const ch = zh ?? en ?? "?";
+  const size = zh ? 13 : 14;
+  return [
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">`,
+    `<!-- zy-models placeholder logo: first character of the platform name, not the official mark -->`,
+    `<rect x="1.25" y="1.25" width="21.5" height="21.5" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>`,
+    `<text x="12" y="12.5" fill="currentColor" font-family="PingFang SC, Microsoft YaHei, Noto Sans SC, Noto Sans CJK SC, Rubik, sans-serif" font-size="${size}" font-weight="600" text-anchor="middle" dominant-baseline="central">${ch}</text>`,
+    `</svg>`,
+    ``,
+  ].join("\n");
+}
+
 // ---------------------------------------------------------------- research → ext
 function tierBounds(when: string) {
   const n = (s: string) => {
@@ -337,6 +337,7 @@ const report = {
   differences: [] as string[],
   placeholders: [] as string[],
   unitKept: [] as string[],
+  logos: [] as string[],
   providers: [] as string[],
   newModels: [] as string[],
   newLabModels: [] as string[],
@@ -450,7 +451,8 @@ for (const file of files) {
       ? { name, env: r.env?.length ? r.env : [`${pid.toUpperCase().replace(/-/g, "_")}_API_KEY`], npm: "@ai-sdk/openai-compatible", opencodeai: "@opencode/ai/providers/openai-compatible", api: chat.base_url, doc: r.doc ?? r.pricing_page }
       : { name, env: r.env?.length ? r.env : [`${pid.toUpperCase().replace(/-/g, "_")}_API_KEY`], npm: "@ai-sdk/anthropic", opencodeai: "@opencode/ai/providers/anthropic-compatible", api: `${anth.base_url.replace(/\/$/, "")}/v1`, doc: r.doc ?? r.pricing_page };
     await writeFile(`providers/${pid}/provider.toml`, toToml({ ...body, ...pExt }, [`Imported from research/${file} by scripts/import-research.ts`, ...endpoints.map((e) => `${e.region} ${e.protocol}: ${e.base_url} (${e.source})`)]));
-    await writeFile(`providers/${pid}/logo.svg`, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>\n`);
+    await writeFile(`providers/${pid}/logo.svg`, placeholderLogo(r.name_zh, r.name_en, pid));
+    report.logos.push(`${pid}（${r.name_zh ?? r.name_en ?? pid}）`);
     report.providers.push(`${pid} (新建)`);
   } else {
     providerOverlay.set(pid, { ...(providerOverlay.get(pid) ?? {}), ...pExt });
@@ -551,12 +553,12 @@ for (const file of files) {
       const short = m.id.split("/").pop()!;
       const labId = `${labDir}/${labDir === "minimax" ? short : normalizeId(short)}`;
       const placeholders: string[] = [];
-      const ctx = isNum(m.limit?.context) ? toLabBase(m.limit.context, labDir) : undefined;
+      const ctx = isNum(m.limit?.context) ? m.limit.context : undefined;
       if (!isNum(ctx)) {
         report.placeholders.push(`${pid}/${m.id}: 跳过（无 context，无法生成 lab 文件）`);
         continue;
       }
-      let output = isNum(m.limit?.output) ? toLabBase(m.limit.output, labDir) : undefined;
+      let output = isNum(m.limit?.output) ? m.limit.output : undefined;
       if (!isNum(output)) { output = ctx; placeholders.push("limit.output 未公开，按上游惯例取 context"); }
       let release = m.release_date;
       if (!release) { release = m.checked_at; placeholders.push(`release_date 未公开，占位为核查日 ${m.checked_at}`); }
@@ -572,7 +574,7 @@ for (const file of files) {
         release_date: release,
         modalities: { input: m.modalities?.input ?? ["text"], output: m.modalities?.output ?? ["text"] },
         capabilities: { tools: { supported: tools }, reasoning: { supported: r0.supported === true }, temperature: true, top_p: true, top_k: false },
-        limit: { context: ctx, input: isNum(m.limit?.input) ? toLabBase(m.limit.input, labDir) : undefined, output },
+        limit: { context: ctx, input: isNum(m.limit?.input) ? m.limit.input : undefined, output },
         name_zh: m.name_zh,
       });
       await writeFile(`models/${labId}.toml`, toToml(lab, [...header, ...placeholders.map((p) => `占位: ${p}`)], ["capabilities.tools", "capabilities.reasoning"]));
@@ -585,8 +587,7 @@ for (const file of files) {
       const want = m.limit?.[k];
       const have = labToml.limit?.[k];
       if (!isNum(want) || want === have) continue;
-      if (isNum(have) && sameLabel(have, want)) continue; // same nominal value, lab spelling
-      limit[k] = toLabBase(want, baseModel.split("/")[0]);
+      limit[k] = want; // the platform's own documented number, verbatim
     }
     let reasoning: Json | undefined;
     if (r0.supported === true) {
@@ -652,6 +653,10 @@ for (const [pid, o] of providerOverlay) {
     ext.name_zh = (prefix.trim().replace(/[（(]$/, "").trim() || names[0]) as string;
   }
   await writeFile(`overlays/providers/${pid}/provider.toml`, toToml(stripNulls(ext), [`zy-models overlay for providers/${pid}/provider.toml (generated by scripts/import-research.ts)`]));
+  if (ext.region === "cn" && !existsSync(path.join(ROOT, "providers", pid, "logo.svg"))) {
+    await writeFile(`providers/${pid}/logo.svg`, placeholderLogo(ext.name_zh as string | undefined, baseline.providers[pid]?.name, pid));
+    report.logos.push(`${pid}（${ext.name_zh ?? baseline.providers[pid]?.name ?? pid}）`);
+  }
   report.overlays++;
 }
 for (const [rel, o] of modelOverlay) {
@@ -679,6 +684,7 @@ const md = [
   section("新增 provider 模型文件", report.newModels),
   section("新增 lab 模型文件", report.newLabModels),
   section("占位与跳过", report.placeholders),
+  section("占位 logo（平台名首字，非官方商标）", report.logos),
   `overlay 文件数：${report.overlays}`,
   ``,
 ].join("\n");

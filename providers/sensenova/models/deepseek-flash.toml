@@ -12,6 +12,9 @@ notes = "商汤平台上 model id 为 deepseek-flash（DeepSeek V4.1 Flash 1017 
 reasoning = { supported = true, effort = ["none", "low", "high", "max"], default = { type = "effort", value = "high" } }
 structured_output = true
 
+[limit]
+output = 393_216
+
 [reasoning_default]
 value = "high"
 source = "https://platform.sensenova.cn/docs"

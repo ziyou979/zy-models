@@ -23,5 +23,5 @@ top_p = true
 top_k = false
 
 [limit]
-context = 1_048_576
+context = 1_000_000
 output = 128_000

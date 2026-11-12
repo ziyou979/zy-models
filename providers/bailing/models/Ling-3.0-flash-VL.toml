@@ -15,6 +15,9 @@ notes = "124B / 5.5B 激活；文档称已在 Hugging Face 与 ModelScope 开源
 reasoning = { supported = true, toggle = true, default = { type = "toggle", value = true } }
 structured_output = true
 
+[limit]
+context = 256_000
+
 [cost.text.input]
 price = 0.02093991
 

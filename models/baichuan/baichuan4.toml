@@ -22,5 +22,5 @@ top_p = true
 top_k = false
 
 [limit]
-context = 32_768
+context = 32_000
 output = 2048

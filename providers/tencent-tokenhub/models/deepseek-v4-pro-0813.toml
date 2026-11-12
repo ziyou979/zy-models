@@ -14,7 +14,9 @@ reasoning = { supported = true }
 structured_output = true
 
 [limit]
+context = 1_048_576
 input = 1_048_576
+output = 393_216
 
 [cost.text.input]
 price = 1.34613719

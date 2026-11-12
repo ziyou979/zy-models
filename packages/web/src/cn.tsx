@@ -199,7 +199,7 @@ export function formatCny(value?: number) {
   return value === undefined ? "-" : `¥${cny.format(value)}`;
 }
 
-function costTooltip(cost: CostCny, via?: string) {
+function costLines(cost: CostCny, via?: string) {
   const lines: string[] = ["单位：元 / 百万 tokens"];
   if (via) lines.push(`最低价来自：${via}`);
   lines.push(
@@ -215,26 +215,55 @@ function costTooltip(cost: CostCny, via?: string) {
   }
   if (cost.off_peak) lines.push(`峰谷：${cost.off_peak}`);
   if (cost.note) lines.push(cost.note);
-  return lines.join("\n");
+  return lines;
 }
 
-/** 人民币价（输入/输出/缓存） cell. */
+const MARKS: Array<[key: string, label: string, test: (cost: CostCny) => boolean]> = [
+  ["tier", "阶梯", (cost) => Boolean(cost.tiers?.length)],
+  ["peak", "峰谷", (cost) => Boolean(cost.off_peak)],
+  ["deal", "优惠", (cost) => Boolean(cost.list_price || cost.discount_note)],
+];
+
+/**
+ * Price + 阶梯/峰谷/优惠 badges; the details open on hover (mouse) or on
+ * click / tap (cn-client.ts toggles .open), so they work on touch screens.
+ */
+export function CnyDetail(props: { cost: CostCny; via?: string; compact?: boolean }) {
+  const cost = props.cost;
+  const marks = MARKS.filter(([, , test]) => test(cost));
+  return (
+    <span class="cny-detail">
+      <button type="button" class="cny-toggle" aria-expanded="false" aria-label="查看人民币价格明细">
+        <span class="cny-price">
+          {formatCny(cost.input)} / {formatCny(cost.output)}
+          {props.compact ? null : <Fragment> / {formatCny(cost.cache_read)}</Fragment>}
+        </span>
+        {marks.length > 0 && (
+          <span class="cny-marks">
+            {marks.map(([key, label]) => (
+              <span class={`cny-badge cny-badge-${key}`}>{label}</span>
+            ))}
+          </span>
+        )}
+      </button>
+      <span class="cny-pop" role="tooltip">
+        {costLines(cost, props.via).map((line) => (
+          <span class="cny-pop-line">{line}</span>
+        ))}
+      </span>
+    </span>
+  );
+}
+
+/** 人民币价（输入/输出/缓存） cell. Sorts by input price; rows without a price sort last. */
 export function CnyCell(props: { cost?: CostCny; via?: string }) {
   const cost = props.cost;
   if (!cost || (cost.input === undefined && cost.output === undefined)) {
     return <td class="numeric cny" data-sort="">-</td>;
   }
-  const marks = [
-    cost.tiers?.length ? "阶梯" : undefined,
-    cost.list_price ? "优惠" : undefined,
-    cost.off_peak ? "峰谷" : undefined,
-  ].filter(Boolean);
   return (
-    <td class="numeric cny" data-sort={cost.input === undefined ? "" : String(cost.input)} title={costTooltip(cost, props.via)}>
-      <span class="cny-price">
-        {formatCny(cost.input)} / {formatCny(cost.output)} / {formatCny(cost.cache_read)}
-      </span>
-      {marks.length > 0 && <span class="cny-marks">{marks.join(" · ")}</span>}
+    <td class="numeric cny" data-sort={cost.input === undefined ? "" : String(cost.input)}>
+      <CnyDetail cost={cost} via={props.via} />
     </td>
   );
 }
@@ -295,11 +324,17 @@ export const CN_COLUMNS = 2;
 // ---------------------------------------------------------------- filter
 
 /** "仅国内平台" toggle shown above a table; rows carry data-cn="1"|"0". */
-export function CnFilter(props: { label?: string; hint?: string }) {
+export function CnFilter(props: { label?: string; hint?: string; defaultOn?: boolean; children?: unknown }) {
   return (
     <div class="cn-filter-bar">
+      {props.children}
       <label class="cn-filter">
-        <input type="checkbox" data-cn-filter />
+        <input
+          type="checkbox"
+          data-cn-filter
+          data-cn-default={props.defaultOn ? "1" : undefined}
+          checked={props.defaultOn ? true : undefined}
+        />
         <span>{props.label ?? T.cnOnly}</span>
       </label>
       {props.hint && <span class="cn-filter-hint">{props.hint}</span>}
@@ -468,13 +503,78 @@ export function ProviderCnSections(props: {
 export function modelFacts(cn: CanonicalCn): Array<[string, unknown]> {
   const items: Array<[string, unknown]> = [];
   if (cn.cost) {
-    items.push([
-      "人民币最低价",
-      <span title={costTooltip(cn.cost, cn.costProvider)}>
-        {formatCny(cn.cost.input)} / {formatCny(cn.cost.output)}
-      </span>,
-    ]);
+    items.push(["人民币最低价", <CnyDetail cost={cn.cost} via={cn.costProvider} compact />]);
   }
   if (cn.reasoningDefault) items.push(["默认思考", reasoningDefaultText(cn.reasoningDefault.value)]);
   return items;
+}
+
+// ---------------------------------------------------------------- shared bits
+
+/** Same markup as render.tsx SortableTh, so index.ts sorting picks it up. */
+export function SortTh(props: { type?: "text" | "number"; sort?: "ascending" | "descending"; children: unknown }) {
+  const type = props.type ?? "text";
+  const indicator = (
+    <span class="sort-indicator" aria-hidden="true">
+      {props.sort === "ascending" ? "↑" : props.sort === "descending" ? "↓" : ""}
+    </span>
+  );
+  return (
+    <th class="sortable" data-type={type} scope="col" aria-sort={props.sort}>
+      <button type="button" class="sort-button">
+        {type === "number" ? indicator : null}
+        {props.children}
+        {type === "text" ? indicator : null}
+      </button>
+    </th>
+  );
+}
+
+/** Provider list order: 国内平台 first, then 海外/国际站, then the rest; by name within each. */
+export function cnFirst<T extends [string, { name: string }]>(list: T[]): T[] {
+  const rank = (p: unknown) => ({ cn: 0, intl: 1 })[providerExt(p).region ?? ""] ?? 2;
+  return [...list].sort(([, a], [, b]) => rank(a) - rank(b) || a.name.localeCompare(b.name));
+}
+
+export function allPlans(providers: Record<string, unknown>) {
+  const out: Array<{ providerId: string; provider: { name: string }; plan: Plan }> = [];
+  for (const [providerId, provider] of Object.entries(providers)) {
+    for (const plan of providerExt(provider).plans ?? []) out.push({ providerId, provider: provider as { name: string }, plan });
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------- home stats
+
+/** One-line summary above the home table. */
+export function HomeStats(props: {
+  providers: Record<string, unknown>;
+  models: Array<{ metadata: unknown; providers: Array<ProviderEntryLike & { provider: { name: string } }> }>;
+}) {
+  const cnProviders = Object.values(props.providers).filter(isCnProvider);
+  const cnModels = props.models.filter((m) => m.providers.some((e) => isCnProvider(e.provider))).length;
+  let checked = "";
+  for (const provider of cnProviders) {
+    for (const model of Object.values((provider as { models?: Record<string, unknown> }).models ?? {})) {
+      const at = modelExt(model).checked_at;
+      if (at && at > checked) checked = at;
+    }
+  }
+  const items: Array<[string, string]> = [
+    ["国内平台", String(cnProviders.length)],
+    ["国内在售模型", String(cnModels)],
+    ["收录模型（全部）", String(props.models.length)],
+    ["编程套餐", String(allPlans(props.providers).length)],
+    ["数据核对", checked || "-"],
+  ];
+  return (
+    <dl class="cn-stats">
+      {items.map(([label, value]) => (
+        <div>
+          <dt>{label}</dt>
+          <dd>{label === "编程套餐" ? <a href="/plans">{value}</a> : value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
 }

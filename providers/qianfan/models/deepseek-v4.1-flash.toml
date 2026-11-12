@@ -15,7 +15,9 @@ notes = "同时列于视觉理解价格表。思维链长度 32k；支持 thinki
 reasoning = { supported = true }
 
 [limit]
+context = 1_048_576
 input = 1_048_576
+output = 393_216
 
 [cost.text.input]
 price = 0.2991416

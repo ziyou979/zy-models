@@ -15,7 +15,9 @@ notes = "Token Plan 页标注“即将下线”。价格页命中缓存为“限
 reasoning = { supported = true }
 
 [limit]
+context = 1_048_576
 input = 1_048_576
+output = 393_216
 
 [cost.text.input]
 price = 1.34613719

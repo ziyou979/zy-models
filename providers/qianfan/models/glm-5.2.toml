@@ -15,6 +15,7 @@ notes = "Token Plan 页标注“即将下线”。另有 GLM-5.2-Fast（价格�
 reasoning = { supported = true, toggle = true }
 
 [limit]
+context = 1_048_576
 input = 1_048_576
 
 [cost.text.input]

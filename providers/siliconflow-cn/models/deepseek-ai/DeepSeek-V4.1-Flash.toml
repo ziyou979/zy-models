@@ -12,6 +12,9 @@ notes = "页面标签：⚡️ 1017；参数规模（官方页 size 字段，单
 [capabilities]
 reasoning = { supported = true }
 
+[limit]
+context = 1_048_576
+
 [cost.text.input]
 price = 0.2991416
 

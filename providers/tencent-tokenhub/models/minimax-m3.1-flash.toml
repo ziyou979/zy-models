@@ -13,7 +13,9 @@ notes = "官方标注“多模态理解”。新加坡地域价 1.0795/4.3179/0.
 reasoning = { supported = true }
 
 [limit]
+context = 1_048_576
 input = 1_048_576
+output = 524_288
 
 [cost.text.input]
 price = 0.1495708

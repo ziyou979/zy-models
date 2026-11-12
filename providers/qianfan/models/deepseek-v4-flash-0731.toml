@@ -15,7 +15,9 @@ notes = "Token Plan 页标注“即将下线”。缓存价为已过期的限时
 reasoning = { supported = true }
 
 [limit]
+context = 1_048_576
 input = 1_048_576
+output = 393_216
 
 [cost.text.input]
 price = 0.4487124

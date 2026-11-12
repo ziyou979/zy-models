@@ -23,6 +23,6 @@ top_p = true
 top_k = false
 
 [limit]
-context = 4000
-input = 1000
-output = 3000
+context = 4096
+input = 1024
+output = 3072

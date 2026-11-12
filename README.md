@@ -8,7 +8,7 @@
 
 ## 网站（试用）
 
-**https://zy-models.ziyou979.workers.dev** —— models.dev 同款网页，界面中文为主：模型表多了「人民币价（输入/输出/缓存）」和「默认思考」两列，有中文名时显示中文名；平台页显示中文名、区域和编程套餐（价格、接入地址、包含模型、额度、使用限制）；勾选「仅国内平台」只看国内平台。
+**https://zy-models.ziyou979.workers.dev** —— models.dev 同款网页，界面中文为主：模型表多了「人民币价（输入/输出/缓存）」和「默认思考」两列，有中文名时显示中文名；平台页显示中文名、区域和编程套餐（价格、接入地址、包含模型、额度、使用限制）；首页默认勾选「仅国内平台」（可取消，选择会记住）；**[编程套餐对比](https://zy-models.ziyou979.workers.dev/plans)** 页把所有套餐放在一张表里，可按月价排序、按平台筛选。人民币价单元格点击或悬停可看阶梯 / 峰谷 / 优惠明细，手机上同样可用。
 
 站点同样提供 JSON：`/api.json`、`/models.json`、`/catalog.json`（均支持 `?type=`，同 models.dev）和 `/cn.json`（仅国内平台），都带 `Access-Control-Allow-Origin: *`。
 
@@ -76,9 +76,10 @@ bun x wrangler deploy                    # 读取 wrangler.toml：Worker 名 zy-
 ### 数据口径
 
 - **价格**：`cost` / `cost_cny` 的主字段一律是**标准价（高峰 / 常规时段）**；闲时、夜间、峰谷价在 `cost_cny.tiers` 和 `off_peak` 里。部分调研文件原本把闲时价放在主字段，导入时已统一。很多国内价格是**当前限时实付价**，原价见 `cost_cny.list_price` 或 `notes`。
-- **K / M 换算**：官方文档常写「128K」「1M」。各平台调研的换算基数不同（百炼、智谱按 1000；方舟、TokenHub、千帆按 1024）。导入时统一为：**同一模型上游已有数值就沿用上游的写法**；上游没有的，按该厂商在本库 `models/<lab>/` 中多数文件的写法换算（1024 进制时 1M = 1,048,576，1000 进制时 1M = 1,000,000）。逐条记录见 `research/IMPORT_REPORT.md`「K/M 换算口径差异」。
+- **上下文 / 最大输出**：官方文档给出具体数字就**原样使用**，不做 1000 / 1024 换算（例如百川 M 系列官方 `max_tokens` 最大 32000、上下文 32000，库里就是 32,000）。调研文件记录的就是各平台文档原值，导入时新建的 lab 文件和平台模型文件直接写入该值；同一模型在不同平台文档数字不同时，各平台文件各自写自己的数字。唯一的例外是**上游已收录的模型**：若上游数值与调研数值只是同一标称值的两种写法（如 128,000 与 131,072），保留上游数值不改，逐条列在 `research/IMPORT_REPORT.md`「K/M 换算口径差异」。
 - **v2-only 模型**：上游标记 `v2_only = true` 的模型（如百炼 `deepseek-v4-pro-0813`、智谱 `glm-5-turbo`）不进 v1 的 `api.json` / `cn.json`，它们的扩展字段只出现在 `dist/v2/api.json`。
 - **占位值**：新建 lab 文件时，上游 schema 必填但官方未公开的字段（`release_date`、`open_weights`、未公开的最大输出等）用了占位值，文件头注释写明「占位」，报告里有完整清单。
+- **占位 logo**：没有官方 logo 文件的国内平台，用统一风格的圆角方框 + 平台中文名首字（无中文名时用英文首字母）作为占位，不使用从别处下载的商标图；清单见报告「占位 logo」。
 
 ## 仓库结构
 
@@ -86,7 +87,7 @@ bun x wrangler deploy                    # 读取 wrangler.toml：Worker 名 zy-
 
 ```
 packages/core/src/cn/ext.ts   扩展 schema、overlay 加载、扩展键输出（上游代码只加了几处钩子）
-packages/web/src/cn*.ts(x)    网站的国内扩展界面（人民币价、默认思考、编程套餐、仅国内平台筛选、中文文案），render.tsx 只加了几处钩子
+packages/web/src/cn*.ts(x)    网站的国内扩展界面（人民币价、默认思考、编程套餐页 /plans、仅国内平台筛选、首页统计、移动端适配、中文文案），render.tsx 只加了几处钩子
 packages/function/src/zy-worker.ts  Worker 入口（包一层上游 worker.ts：JSON 加 CORS、HTML 标注 UTF-8）；上游的统计上报已删除
 wrangler.toml                 用 wrangler 部署到 Cloudflare Workers（替代上游 sst.config.ts）
 overlays/                     对上游文件的覆盖：overlays/<与上游相同路径>.toml，加载时深合并

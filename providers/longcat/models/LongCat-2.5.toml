@@ -17,6 +17,9 @@ notes = "上下文 1,048,576；max_tokens 上限 262,144；thinking_budget 最�
 [capabilities]
 reasoning = { supported = true, toggle = true }
 
+[limit]
+context = 1_048_576
+
 [cost.text.input]
 price = 0.2991416
 

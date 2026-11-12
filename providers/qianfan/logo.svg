@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<!-- zy-models placeholder logo: first character of the platform name, not the official mark -->
+<rect x="1.25" y="1.25" width="21.5" height="21.5" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="12" y="12.5" fill="currentColor" font-family="PingFang SC, Microsoft YaHei, Noto Sans SC, Noto Sans CJK SC, Rubik, sans-serif" font-size="13" font-weight="600" text-anchor="middle" dominant-baseline="central">千</text>
+</svg>

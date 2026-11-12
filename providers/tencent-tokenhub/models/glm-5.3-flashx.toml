@@ -15,6 +15,7 @@ reasoning = { supported = true, effort = ["low", "high", "max"], default = { typ
 structured_output = true
 
 [limit]
+context = 1_048_576
 input = 1_048_576
 
 [cost.text.input]

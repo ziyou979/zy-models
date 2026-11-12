@@ -14,6 +14,7 @@ notes = "模型更新记录称原生理解图片视频；思考仅支持开启�
 reasoning = { supported = true }
 
 [limit]
+context = 1_048_576
 input = 1_048_576
 
 [cost.text.input]
