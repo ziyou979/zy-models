@@ -10,7 +10,9 @@
 //   dist/meta.json     build info (upstream commit, counts)
 import path from "node:path";
 import fs from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { filterCatalogByModelType, generateCatalog, generateV2 } from "../packages/core/src/index.ts";
+import { modelExtOutput, readModelToml } from "../packages/core/src/cn/ext.ts";
 
 const root = path.resolve(import.meta.dir, "..");
 const out = path.join(root, "dist");
@@ -36,12 +38,17 @@ const PROVIDER_KEYS = ["name_zh", "region", "pricing_page", "plans", "notes"];
 const MODEL_KEYS = ["name_zh", "aliases", "cost_cny", "reasoning_default", "sources", "checked_at", "notes"];
 const v2 = (await generateV2(path.join(root, "providers"))) as Record<string, any>;
 for (const [providerID, provider] of Object.entries(v2)) {
-  const v1 = (catalog.providers as Record<string, any>)[providerID];
-  if (v1 === undefined) continue;
+  const v1 = (catalog.providers as Record<string, any>)[providerID] ?? { models: {} };
   for (const key of PROVIDER_KEYS) if (v1[key] !== undefined) provider[key] = v1[key];
   for (const [modelID, model] of Object.entries(provider.models as Record<string, any>)) {
-    const m1 = v1.models?.[modelID];
-    if (m1 === undefined) continue;
+    let m1 = v1.models?.[modelID];
+    if (m1 === undefined) {
+      // v2-only models are not in v1: read their extension keys from the file (+ overlay).
+      const file = path.join(root, "providers", providerID, "models", `${modelID}.toml`);
+      if (!existsSync(file)) continue;
+      const { toml, ext } = await readModelToml(file);
+      m1 = modelExtOutput(ext, toml.base_model as string | undefined, toml);
+    }
     for (const key of MODEL_KEYS) if (m1[key] !== undefined) model[key] = m1[key];
   }
 }
