@@ -1,0 +1,28 @@
+# Imported from research/youdao.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.youdao.com/new/token
+# Source: https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.8, output 2.7, cache_read 0.1
+schema = 2
+base_model = "alibaba/qwen3.8-flash"
+sources = ["https://ai.youdao.com/new/token", "https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/"]
+checked_at = "2026-11-13"
+notes = "上下文取平台 maxContextLength=1000000（十进制原值）；最大输出未公开。平台默认限流：总 TPM 10000000 / RPM 50000，单应用 TPM 5000000 / RPM 5000。『多模态』标签仅表示支持多模态输入，图像/视频具体范围未写明（此处按图像输入记，推断）。计费项原文：Qwen3.8-Flash,输入token=0.8；Qwen3.8-Flash,输出token=2.7；Qwen3.8-Flash,显式缓存创建=1.25；Qwen3.8-Flash,隐式缓存命中（默认）=0.1；Qwen3.8-Flash,显式缓存命中=0.1。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.11965664
+
+[cost.text.input.cache]
+read = 0.01495708
+
+[cost.text.output]
+price = 0.40384116
+
+[cost_cny]
+input = 0.8
+output = 2.7
+cache_read = 0.1
+cache_write = 1.25

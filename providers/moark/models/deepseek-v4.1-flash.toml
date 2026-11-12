@@ -1,0 +1,46 @@
+# Imported from research/gitee-ai.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://moark.com/serverless-api?model=deepseek-v4.1-flash&tab=info
+# Source: https://api.moark.com/v1/models?include_details=true
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.04
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash"
+sources = ["https://moark.com/serverless-api?model=deepseek-v4.1-flash&tab=info", "https://api.moark.com/v1/models?include_details=true"]
+checked_at = "2026-11-13"
+notes = "另有专属算力通道：文本对话(专属算力)、文本对话(天翼云专供2号-专属算力)（同价）；上下文/最大输出仅以标签显示（tooltip：上下文大小 / 最大生成长度）"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.00598283
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.04
+cache_write = 2
+off_peak = "峰谷价：空闲时段为北京时间每日 00:00–09:00、12:00–14:00、18:00–00:00，输入¥1/输出¥4/缓存命中¥0.02/缓存创建¥1（每百万 Token）"
+
+[[cost_cny.tiers]]
+when = "高峰"
+input = 2
+output = 8
+cache_read = 0.04
+cache_write = 2
+
+[[cost_cny.tiers]]
+when = "空闲（北京时间每日00:00–09:00、12:00–14:00、18:00–00:00）"
+input = 1
+output = 4
+cache_read = 0.02
+cache_write = 1
+
+[limit_label]
+context = "1M"

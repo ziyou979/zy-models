@@ -25,6 +25,7 @@ import {
   CnFilter,
   CnHeaders,
   HomeStats,
+  LimitCell,
   cnFirst,
   CnyCell,
   CN_COLUMNS,
@@ -1203,12 +1204,8 @@ function ProviderModelsTable(props: {
                   copyValue={`${entry.providerId}/${entry.modelId}`}
                 />
               </td>
-              <td class="numeric" data-sort={sortNumber(entry.model.limit.context)}>
-                {formatNumber(entry.model.limit.context)}
-              </td>
-              <td class="numeric" data-sort={sortNumber(entry.model.limit.output)}>
-                {formatNumber(entry.model.limit.output)}
-              </td>
+              <LimitCell value={entry.model.limit.context} label={ext.limit_label?.context} />
+              <LimitCell value={entry.model.limit.output} label={ext.limit_label?.output} />
               <td class="numeric" data-sort={sortNumber(entry.model.cost?.input)}>
                 {costSummary(entry.model.cost?.input, entry.model.cost?.output)}
               </td>

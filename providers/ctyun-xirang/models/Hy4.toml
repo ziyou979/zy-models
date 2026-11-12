@@ -1,0 +1,11 @@
+# Imported from research/ctyun-xirang.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ctxirang.ctyun.cn/maasMarket/market
+# Source: https://www.ctyun.cn/document/11061839/11099156
+schema = 2
+base_model = "tencent/hy4"
+sources = ["https://ctxirang.ctyun.cn/maasMarket/market", "https://www.ctyun.cn/document/11061839/11099156"]
+checked_at = "2026-11-13"
+notes = "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。市场卡片原文：『限时5折促销中，促销期间会对计费用量进行折算，例如实际使用1000token，按500token计费。』"
+
+[capabilities]
+reasoning = { supported = true }

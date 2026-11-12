@@ -1,0 +1,37 @@
+# Imported from research/ppio.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.ppio.com/openai/v1/models
+# Source: https://ppio.com/pricing
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 3, output 9, cache_read 0.15
+schema = 2
+base_model = "tencent/hy4"
+sources = ["https://api.ppio.com/openai/v1/models", "https://ppio.com/pricing"]
+checked_at = "2026-11-13"
+notes = "官方 API 同时给出原价(origin_price) 输入6/输出18/缓存0.3 元/百万，当前价 3/9/0.15（限时/折扣价，未注明截止时间）；支持端点: chat/completions, anthropic, responses"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+context = 1_000_000
+output = 64_000
+
+[cost.text.input]
+price = 0.4487124
+
+[cost.text.input.cache]
+read = 0.02243562
+
+[cost.text.output]
+price = 1.34613719
+
+[cost_cny]
+input = 3
+output = 9
+cache_read = 0.15
+
+[cost_cny.list_price]
+input = 6
+output = 18
+cache_read = 0.3

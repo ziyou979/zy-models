@@ -1,0 +1,20 @@
+# Imported from research/ai360.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.360.com/open/zh/models/360zhinao/360zhinao-pro
+# Source: https://ai.360.com/open/zh/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 5
+schema = 2
+base_model = "360/360zhinao-pro"
+sources = ["https://ai.360.com/open/zh/models/360zhinao/360zhinao-pro", "https://ai.360.com/open/zh/models"]
+checked_at = "2026-11-13"
+notes = "平台列表数据：contextLength 32000、maxCompletionTokens 8192（平台原值，十进制）。上游供应商：360智脑。360 自研；页面称若支持缓存则缓存命中按输入 0.1 倍推导（是否支持缓存未写明）。"
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.output]
+price = 0.747854
+
+[cost_cny]
+input = 2
+output = 5

@@ -1,0 +1,53 @@
+# Imported from research/huawei-maas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://support.huaweicloud.com/model-list-maas/model_list_0001.md
+# Source: https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf
+# Source: https://support.huaweicloud.com/model-call-maas/model-call-005.html
+# Source: https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 4.8, output 17.6, cache_read 1.2
+schema = 2
+base_model = "huawei/openpangu-2.0-pro"
+name_zh = "开源盘古 2.0 Pro"
+sources = ["https://support.huaweicloud.com/model-list-maas/model_list_0001.md", "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf", "https://support.huaweicloud.com/model-call-maas/model-call-005.html", "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"]
+checked_at = "2026-11-13"
+notes = "文档原文：上下文长度512K、最大输入长度500K、最大输出长度128K、最大思维链长度64K（按 1K=1024 换算）。约505B总参/18B激活MoE，昇腾训练。不区分忙闲时；阶梯按单次请求Token数(<32K/≥32K)。默认限流 TPM 1,000,000 / RPM 100。max_tokens 默认 32K。open_weights 依据官方『开源盘古』品牌表述。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, default = { type = "toggle", value = true } }
+
+[cost.text.input]
+price = 0.71793984
+
+[cost.text.input.cache]
+read = 0.17948496
+
+[cost.text.output]
+price = 2.63244606
+
+[cost_cny]
+input = 4.8
+output = 17.6
+cache_read = 1.2
+
+[[cost_cny.tiers]]
+when = "input<32k"
+context_max = 32_000
+input = 3.2
+output = 14.5
+cache_read = 0.8
+
+[[cost_cny.tiers]]
+when = "input>=32k"
+context_min = 32_000
+input = 4.8
+output = 17.6
+cache_read = 1.2
+
+[reasoning_default]
+value = "on"
+source = "https://support.huaweicloud.com/model-call-maas/model-call-005.html"
+
+[limit_label]
+context = "512K"
+input = "500K"
+output = "128K"

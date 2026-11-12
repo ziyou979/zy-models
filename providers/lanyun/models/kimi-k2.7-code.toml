@@ -1,0 +1,30 @@
+# Imported from research/lanyun.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://maas-api.lanyun.net/v1/models
+# Source: https://maas.lanyun.net/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6.5, output 27
+schema = 2
+base_model = "moonshotai/kimi-k2.7-code"
+sources = ["https://maas-api.lanyun.net/v1/models", "https://maas.lanyun.net/"]
+checked_at = "2026-11-13"
+notes = "首页简介：搭载 256K 上下文窗口，强制开启深度思考（与卡片「上下文长度1024k」不一致）；API 返回 max_output_tokens=1048576，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 1_048_576
+
+[cost.text.input]
+price = 0.97221019
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 6.5
+output = 27
+
+[reasoning_default]
+value = "on"
+source = "https://maas.lanyun.net/"

@@ -1,0 +1,12 @@
+# Imported from research/ctyun-xirang.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ctxirang.ctyun.cn/maasMarket/market
+# Source: https://www.ctyun.cn/document/11061839/11099156
+# Source: https://www.ctyun.cn/document/11061839/11092368
+schema = 2
+base_model = "zhipuai/glm-5.1"
+sources = ["https://ctxirang.ctyun.cn/maasMarket/market", "https://www.ctyun.cn/document/11061839/11099156", "https://www.ctyun.cn/document/11061839/11092368"]
+checked_at = "2026-11-13"
+notes = "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。Token Plan 积分兑换表按输入长度分段 [0,32k] / (32k,200k]，推测按量价也分段但公开页未列价。"
+
+[capabilities]
+reasoning = { supported = true }

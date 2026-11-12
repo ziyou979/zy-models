@@ -1,0 +1,36 @@
+# Imported from research/jdcloud-joymaas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://joymaas.jdcloud.com/models/MiniMax-M2.7
+# Source: https://joymaas.jdcloud.com/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2.1, output 8.4, cache_read 0.42
+schema = 2
+base_model = "minimax/MiniMax-M2.7"
+sources = ["https://joymaas.jdcloud.com/models/MiniMax-M2.7", "https://joymaas.jdcloud.com/models"]
+checked_at = "2026-11-13"
+notes = "模型广场详情页原文：上下文200K / 单次最大输入72K / 单次最大输出128K（按1K=1024换算）。公开详情页统一显示 TPM 100,000 / RPM 60。 详情页未列深度思考。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+input = 73_728
+
+[cost.text.input]
+price = 0.31409868
+
+[cost.text.input.cache]
+read = 0.06281974
+
+[cost.text.output]
+price = 1.25639471
+
+[cost_cny]
+input = 2.1
+output = 8.4
+cache_read = 0.42
+cache_write = 2.625
+
+[limit_label]
+context = "200K"
+input = "72K"
+output = "128K"

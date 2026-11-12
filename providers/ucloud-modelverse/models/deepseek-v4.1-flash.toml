@@ -1,0 +1,45 @@
+# Imported from research/ucloud-modelverse.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.modelverse.cn/v1/models
+# Source: https://api.ucloud.cn/?Action=ListUFSquareModelGuest
+# Source: https://astraflow.ucloud.cn/modelverse/prices
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.04
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash"
+sources = ["https://api.modelverse.cn/v1/models", "https://api.ucloud.cn/?Action=ListUFSquareModelGuest", "https://astraflow.ucloud.cn/modelverse/prices"]
+checked_at = "2026-11-13"
+notes = "模型广场长度字段为 K 单位标签：MaxModelLenNew=1000、MaxInputTokens=0、MaxOutputTokens=384（0 表示未填）；另有旧字段 MaxModelLen=131072，与新字段不一致，未采用；模型广场 Capabilities.FunctionCall/StructuredOutput 对全部模型均为 false（疑似未填），tools/structured_output 记 null；协议: ChatCompletions, Responses, Anthropic"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.00598283
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.04
+off_peak = "谷时 12:00-14:00、18:00-次日09:00（北京时间）：输入1/输出4/缓存0.02 元/百万；峰时 09:00-12:00、14:00-18:00（北京时间） 为标准价"
+
+[[cost_cny.tiers]]
+when = "峰时 09:00-12:00、14:00-18:00（北京时间）"
+input = 2
+output = 8
+cache_read = 0.04
+
+[[cost_cny.tiers]]
+when = "谷时 12:00-14:00、18:00-次日09:00（北京时间）"
+input = 1
+output = 4
+cache_read = 0.02
+
+[limit_label]
+context = "1000K"
+output = "384K"

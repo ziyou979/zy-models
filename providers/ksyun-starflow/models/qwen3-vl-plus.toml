@@ -1,0 +1,49 @@
+# Imported from research/ksyun-starflow.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://docs.ksyun.com/documents/45801
+# Source: https://docs.ksyun.com/documents/45797
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 1, output 10, cache_read 0.2
+schema = 2
+base_model = "alibaba/qwen3-vl-plus"
+sources = ["https://docs.ksyun.com/documents/45801", "https://docs.ksyun.com/documents/45797"]
+checked_at = "2026-11-13"
+notes = "命中显式缓存 0.1 元/百万；cache_write 为 5min 写入缓存价"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.1495708
+
+[cost.text.input.cache]
+read = 0.02991416
+
+[cost.text.output]
+price = 1.49570799
+
+[cost_cny]
+input = 1
+output = 10
+cache_read = 0.2
+cache_write = 1.25
+
+[[cost_cny.tiers]]
+when = "输入长度[0,32k)"
+input = 1
+output = 10
+cache_read = 0.2
+cache_write = 1.25
+
+[[cost_cny.tiers]]
+when = "输入长度[32k,128k)"
+input = 1.5
+output = 15
+cache_read = 0.3
+cache_write = 1.875
+
+[[cost_cny.tiers]]
+when = "输入长度[128k,256k)"
+input = 3
+output = 30
+cache_read = 0.6
+cache_write = 3.75

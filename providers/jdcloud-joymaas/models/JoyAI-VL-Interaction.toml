@@ -1,0 +1,29 @@
+# Imported from research/jdcloud-joymaas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://joymaas.jdcloud.com/models/JoyAI-VL-Interaction
+# Source: https://joymaas.jdcloud.com/models
+# Source: https://docs.jdcloud.com/cn/jdaip/maas-billing-rules
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.5, output 2
+schema = 2
+base_model = "jd/joyai-vl-interaction"
+sources = ["https://joymaas.jdcloud.com/models/JoyAI-VL-Interaction", "https://joymaas.jdcloud.com/models", "https://docs.jdcloud.com/cn/jdaip/maas-billing-rules"]
+checked_at = "2026-11-13"
+notes = "模型广场详情页原文：上下文32K / 单次最大输入32K / 单次最大输出4K（按1K=1024换算）。公开详情页统一显示 TPM 100,000 / RPM 60。 京东自研视觉-语言实时交互模型。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.0747854
+
+[cost.text.output]
+price = 0.2991416
+
+[cost_cny]
+input = 0.5
+output = 2
+
+[limit_label]
+context = "32K"
+input = "32K"
+output = "4K"

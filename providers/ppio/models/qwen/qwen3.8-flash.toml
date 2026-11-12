@@ -1,0 +1,29 @@
+# Imported from research/ppio.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.ppio.com/openai/v1/models
+# Source: https://ppio.com/pricing
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.8, output 2.7, cache_read 0.1
+schema = 2
+base_model = "alibaba/qwen3.8-flash"
+sources = ["https://api.ppio.com/openai/v1/models", "https://ppio.com/pricing"]
+checked_at = "2026-11-13"
+notes = "支持端点: chat/completions, anthropic, responses"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[cost.text.input]
+price = 0.11965664
+
+[cost.text.input.cache]
+read = 0.01495708
+
+[cost.text.output]
+price = 0.40384116
+
+[cost_cny]
+input = 0.8
+output = 2.7
+cache_read = 0.1
+cache_write = 1.25

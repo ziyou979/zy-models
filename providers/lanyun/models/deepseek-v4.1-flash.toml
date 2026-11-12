@@ -1,0 +1,27 @@
+# Imported from research/lanyun.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://maas-api.lanyun.net/v1/models
+# Source: https://maas.lanyun.net/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash"
+aliases = ["deepseek-v4.1-flash-1017"]
+sources = ["https://maas-api.lanyun.net/v1/models", "https://maas.lanyun.net/"]
+checked_at = "2026-11-13"
+notes = "首页卡片名 deepseek-v4.1-flash-1017；简介：支持工具调用、结构化 JSON 输出，内置原生多模态视觉能力；API 返回 max_output_tokens=1073152，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 1_073_152
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8

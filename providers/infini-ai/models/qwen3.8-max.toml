@@ -1,0 +1,13 @@
+# Imported from research/infini-ai.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://docs.infini-ai.com/gen-studio/api/text-generation/tutorial-reasoning/qwen.html
+schema = 2
+base_model = "alibaba/qwen3.8-max"
+sources = ["https://docs.infini-ai.com/gen-studio/api/text-generation/tutorial-reasoning/qwen.html"]
+checked_at = "2026-11-13"
+
+[capabilities]
+reasoning = { supported = true }
+
+[reasoning_default]
+value = "on"
+source = "https://docs.infini-ai.com/gen-studio/api/text-generation/tutorial-reasoning/qwen.html"

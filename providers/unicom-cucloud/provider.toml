@@ -1,0 +1,63 @@
+# Imported from research/unicom-cucloud.json by scripts/import-research.ts
+# cn-guiyang2 openai-chat: https://aigw-gzgy2.cucloud.cn:8443/v1 (https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=2357&lang=zh)
+# cn-guiyang2 anthropic: https://aigw-gzgy2.cucloud.cn:8443 (https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7015&lang=zh)
+# cn-wuhan4 openai-chat: https://aigw-hbwh4.cucloud.cn:8443/v1 (https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=2357&lang=zh)
+# cn-jinan5 openai-chat: https://aigw-jnzs5.cucloud.cn:8443/v1 (https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=2357&lang=zh)
+# cn-huhehaote2 openai-chat: https://aigw-nmhhht.cucloud.cn/v1 (https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=6552&lang=zh)
+name = "China Unicom Cloud AISP (Yuanjing)"
+env = ["CUCLOUD_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://aigw-gzgy2.cucloud.cn:8443/v1"
+doc = "https://support.cucloud.cn/document/product/127/591/2357.html"
+name_zh = "联通云 AI服务平台 AISP（星罗算力调度服务 · Token服务，联通元景）"
+region = "cn"
+pricing_page = "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=6518&lang=zh"
+notes = "联通对外有两套入口：①元景大模型 MaaS 平台 maas.ai-yuanjing.com（文档中心与模型广场对境外/自动化访问均返回 WAF『攻击请求被拦截』，元景自研对话模型的公开 model id、上下文与价格均无法核实，故未收录元景自研模型；搜索线索中的 https://maas-api.ai-yuanjing.com/openapi/compatible-mode/v1 未能在官方页面核实，未写入 endpoints）；②联通云『星罗算力调度服务 / AI服务平台 AISP』（控制台 星罗智算>Token服务），本文件数据全部来自后者的公开帮助中心。按量计费单位元/千tokens、每小时出账；公开资费页（2026-04-15）只覆盖 DeepSeek-R1/V3/V3.1、Qwen2.5、Llama3 等老模型，新模型单价需登录控制台查看，故大量 null。新用户每个模型 5 万 tokens 免费额度、主子账号共用、首次使用起 7 天有效（部分模型 100 万）。欠费 24 小时后停服。分云区域部署，各区可用模型不同（2026-08-24 表：贵阳基地二区模型最全）；且存在『底层已切换』现象：贵阳基地二区 glm-5→glm-5.1、kimi-k2.5→kimi-k2.6、Qwen3.5-397B-A17B/Qwen3-235B-A22B→Qwen3.6-27B，调用旧名实际由新模型响应。API 文档的参数表未列 tools/thinking，思考开关参数名未公开（null）。"
+
+[[plans]]
+id = "token-plan-personal"
+name_zh = "Token Plan 个人版"
+base_url = "https://aigw-gzgy2.cucloud.cn:8443/v1"
+anthropic_base_url = "https://aigw-gzgy2.cucloud.cn:8443"
+protocol = "openai-chat"
+models = ["DeepSeek-V4-Flash", "MiniMax-M2.5"]
+quota_note = "额度 Lite 600万 / Pro 1,200万 / Max 1,800万 tokens 每月。原文：『Token Plan 服务不支持退款』『一个联通云账号主体（不区分主子账号）在一个云区域下仅支持订阅一个套餐（不区分Lite、Pro、Max）』『严禁 API 调用：仅限在编程工具（如 Claude Code、OpenClaw 等）中使用，禁止以 API 调用的形式用于自动化脚本、自定义应用程序后端或任何非交互式批量调用场景。将套餐 API Key 用于允许范围之外的调用将被视为违规或滥用，可能会导致订阅被暂停或 API Key 被封禁。』额度耗尽『不会消耗token量包或转为按量计费』；仅一个 API Key；到期冻结。个人版仅支持贵阳基地二区/武汉四区/广州一区。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7080&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7080&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7131&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7132&lang=zh"]
+
+[plans.price_cny_month]
+lite = 15
+pro = 30
+max = 45
+
+[[plans]]
+id = "token-plan-team"
+name_zh = "Token Plan 团队版"
+base_url = "https://aigw-gzgy2.cucloud.cn:8443/v1"
+anthropic_base_url = "https://aigw-gzgy2.cucloud.cn:8443"
+protocol = "openai-chat"
+models = ["DeepSeek-V4-Pro", "DeepSeek-V4-Flash", "MiniMax-M2.5"]
+quota_note = "额度 25,000 / 100,000 / 250,000 credits 每月；Credits 消耗由模型、Token 用量（输入/输出/缓存）、思考模式及工具调用动态决定。官方示例综合单价：DeepSeek-V4-Pro 9.30、DeepSeek-V4-Flash 0.70、MiniMax-M2.5 1.10 元/百万tokens。仅贵阳基地二区；限制条款同个人版；个人版与团队版不可互转。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7080&lang=zh"]
+
+[plans.price_cny_month]
+lite = 198
+pro = 698
+max = 1398
+
+[[plans]]
+id = "coding-plan"
+name_zh = "Coding Plan"
+base_url = "https://aigw-gzgy2.cucloud.cn:8443/v1"
+anthropic_base_url = "https://aigw-gzgy2.cucloud.cn:8443"
+protocol = "openai-chat"
+models = ["aisp-auto-route", "DeepSeek-V4-Flash", "glm-5.1", "glm-5", "Qwen3.6-27B", "kimi-k2.6", "kimi-k2.5", "Qwen3.5-397B-A17B", "Qwen3-235B-A22B", "MiniMax-M2.5"]
+quota_note = "Lite：每5小时1,200次、每周9,000次、每月18,000次请求；Pro：每5小时6,000次、每周45,000次、每月90,000次。『单次提问将按实际“模型调用次数”扣除额度。简单 Agent 任务约消耗 5-10 次，复杂 Agent 任务约 10-30+ 次』。专属 Key 格式 sk-sp-xxxxx。『Coding Plan 服务不支持退款』『一个联通云账号主体（不区分主子账号）仅支持订阅一个套餐』『严禁 API 调用：仅限在编程工具…中使用』。公告：资源紧张时『当您使用的模型触发限流时，系统将自动路由至当前负载更轻的模型』。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7015&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7015&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7014&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7129&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7130&lang=zh"]
+
+[plans.price_cny_month]
+lite = 40
+pro = 200

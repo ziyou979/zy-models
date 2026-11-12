@@ -1,0 +1,31 @@
+# Imported from research/gitee-ai.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://moark.com/serverless-api?model=MiniMax-M3&tab=info
+# Source: https://api.moark.com/v1/models?include_details=true
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 4.2, output 16.8, cache_read 0.84
+schema = 2
+base_model = "minimax/MiniMax-M3"
+sources = ["https://moark.com/serverless-api?model=MiniMax-M3&tab=info", "https://api.moark.com/v1/models?include_details=true"]
+checked_at = "2026-11-13"
+notes = "另有专属算力通道：文本对话(专属部署)（同价）；上下文/最大输出仅以标签显示（tooltip：上下文大小 / 最大生成长度）"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.62819736
+
+[cost.text.input.cache]
+read = 0.12563947
+
+[cost.text.output]
+price = 2.51278943
+
+[cost_cny]
+input = 4.2
+output = 16.8
+cache_read = 0.84
+cache_write = 4.2
+
+[limit_label]
+context = "1M"

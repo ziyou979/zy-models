@@ -1,0 +1,63 @@
+# Imported from research/ctyun-xirang.json by scripts/import-research.ts
+# cn openai-chat: https://ai.ctaigw.cn/v1 (https://www.ctyun.cn/document/11061839/11062312)
+# cn anthropic: https://ai.ctaigw.cn (https://www.ctyun.cn/document/11061839/11099117)
+# intl openai-chat: https://ai.ctaigw.com/{region}/v1 (https://www.ctyun.cn/document/11061839/11062312)
+# cn openai-chat: https://tokenhub-trust-zone.ctaigw.cn/v1 (https://www.ctyun.cn/document/11061839/11099422)
+name = "China Telecom Cloud (CTyun) Xirang TokenHub"
+env = ["CTYUN_APP_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://ai.ctaigw.cn/v1"
+doc = "https://www.ctyun.cn/document/11061839"
+name_zh = "天翼云息壤·星辰TokenHub运营服务平台（原模型推理服务）"
+region = "cn"
+pricing_page = "https://www.ctyun.cn/document/11061839/11062267"
+notes = "可信 Token 专区（AICI-* 模型，TEE 机密推理）仅面向符合条件的央国企客户，需联系客户经理开通。\n\n产品已更名：息壤『模型推理服务』→『星辰TokenHub运营服务平台』（文档亦称 Token服务）；旧『一站式智算服务平台』已于 2026-10-23 下线。开通需天翼云账户实名认证，按量计费需账户余额≥100元；按量后付费、每小时出账；计费单位元/千tokens（含输入/输出/缓存命中，部分模型分段定价）。缓存命中价全天统一，『不参与优惠时段（00:00-08:00）折扣』——说明存在 00:00-08:00 优惠时段，但具体模型与折扣比例仅在登录后模型广场可见。新用户热门模型 50 万 tokens 免费量包、14 天有效。每个模型的上下文、最大输出、单价、RPM/TPM 只在登录后的模型广场详情页展示，公开文档未给出，故本文件大面积 null；model id 取公开模型市场卡片展示名（文档称 model 可用『模型调用名称或模型id』，展示名是否与调用名完全一致未逐一核实）。思考开关：thinking.type=enabled/disabled（默认值文档未写），思维链字段 reasoning_content；结构化输出 response_format json_object；缓存命中可传 prompt_cache_key 提升命中率。2026-11-24 将下线 Qwen3-14B/8B/4B、DeepSeek-R1/V3、Llama3 等旧模型。另有『星辰MaaS平台』（星辰大模型，xirang-openapi.ctyun.cn，签名鉴权，对话大模型 0.003/0.012 元/千tokens）为独立产品，未纳入。"
+
+[[plans]]
+id = "coding-token-plan"
+name_zh = "编程Token Plan（积分版）"
+base_url = "https://ai.ctaigw.cn/coding/v1"
+anthropic_base_url = "https://ai.ctaigw.cn/coding"
+protocol = "openai-chat"
+models = ["DeepSeek-V4-Pro", "DeepSeek-V4-Flash-0731", "GLM-5.2", "GLM-5.1", "Kimi-K2.6", "MiniMax-M3"]
+quota_note = "按积分计量，积分↔Token 兑换按模型不同（如 DeepSeek-V4-Pro 1积分≈输入1111/输出370 Token，minimax-M3 1积分≈输入4762/输出1190 Token）。『仅限在AI 编程工具中使用，不可用于 API 调用的形式用于自动化脚本、自定义应用程序后端或任何非交互式批量调用场景。违规使用可能导致停用或APP Key封禁。』同一主账号同时只能购买使用一个套餐、仅主账号可购；禁止共享；暂不支持自动续订；不支持退订/退款。模型库动态更新、不承诺固定模型。旧版按 Token 计量套餐（2500万/8000万/1.8亿/3.8亿/6.8亿 Token，29–699元/月，模型 DeepSeek-V4-Flash-0731、GLM-5.1、GLM-5.2）仅存量续订。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://www.ctyun.cn/document/11061839/11095143", "https://www.ctyun.cn/document/11061839/11095143", "https://www.ctyun.cn/document/11061839/11092368", "https://www.ctyun.cn/document/11061839/11099049", "https://www.ctyun.cn/products/maas"]
+
+[plans.price_cny_month]
+"3000积分" = 29
+"10000积分" = 89
+"25000积分" = 199
+"50000积分" = 399
+"100000积分" = 699
+
+[[plans]]
+id = "token-plan-enterprise"
+name_zh = "Token Plan 企业版"
+quota_note = "积分：尝鲜 10000 / 标准 60000 / 至尊 150000 积分每月；个人加油包 49元=5000积分（仅子用户、跟随席位当期订阅月）。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://www.ctyun.cn/document/11061839/11092368"]
+
+[plans.price_cny_month]
+"团队尝鲜版" = 98
+"团队标准版" = 498
+"团队至尊版" = 1198
+
+[[plans]]
+id = "token-plan-packs"
+name_zh = "Token Plan（量包，API 可用）"
+base_url = "https://ai.ctaigw.cn/v1"
+protocol = "openai-chat"
+models = ["GLM-5（正式版）", "DeepSeek-V3.2（旗舰版）", "DeepSeek-V4-Flash(预览版)"]
+quota_note = "按模型购买的 Token 量包（输入输出统一抵扣），激活后 1 个月有效；每账号每模型最多同时 12 个；额度耗尽即停服，可开通按量付费无缝切换；购买 7 天内未激活可退。官方原文：『受限于资源紧张，建议大家错峰使用。注：高峰期为每日的 9:00～18:00』。另有 DeepSeek-V4-Flash(预览版) 量包 1000万/3200万/1亿 = 9.9/29.9/89.9 元。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://www.ctyun.cn/document/11061839/11094171", "https://www.ctyun.cn/document/11061839/11094171", "https://www.ctyun.cn/document/11061839/11071205", "https://www.ctyun.cn/act/AI/zhuanxiang"]
+
+[plans.price_cny_month]
+"GLM-5 1500万" = 39.9
+"GLM-5 7000万" = 159.9
+"GLM-5 1.5亿" = 299.9
+"DeepSeek-V3.2 1000万" = 9.9
+"DeepSeek-V3.2 4000万" = 29.9
+"DeepSeek-V3.2 8000万" = 49.9

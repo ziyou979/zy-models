@@ -1,0 +1,28 @@
+# Imported from research/youdao.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.youdao.com/new/token
+# Source: https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 12, output 36, cache_read 1.5
+schema = 2
+base_model = "alibaba/qwen3.8-max"
+sources = ["https://ai.youdao.com/new/token", "https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/"]
+checked_at = "2026-11-13"
+notes = "上下文取平台 maxContextLength=1000000（十进制原值）；最大输出未公开。平台默认限流：总 TPM 10000000 / RPM 50000，单应用 TPM 5000000 / RPM 500。『多模态』标签仅表示支持多模态输入，图像/视频具体范围未写明（此处按图像输入记，推断）。计费项原文：Qwen3.8-Max,输入token=12；Qwen3.8-Max,输出token=36；Qwen3.8-Max,显式缓存创建=15；Qwen3.8-Max,隐式缓存命中（默认）=1.5；Qwen3.8-Max,显式缓存命中=1。隐式缓存命中 1.5、显式缓存命中 1、显式缓存创建 15。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 1.79484959
+
+[cost.text.input.cache]
+read = 0.2243562
+
+[cost.text.output]
+price = 5.38454877
+
+[cost_cny]
+input = 12
+output = 36
+cache_read = 1.5
+cache_write = 15

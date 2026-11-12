@@ -1,0 +1,48 @@
+# Imported from research/huawei-maas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://support.huaweicloud.com/model-list-maas/model_list_0001.md
+# Source: https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf
+# Source: https://support.huaweicloud.com/model-call-maas/model-call-005.html
+# Source: https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.2
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash-1017"
+sources = ["https://support.huaweicloud.com/model-list-maas/model_list_0001.md", "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf", "https://support.huaweicloud.com/model-call-maas/model-call-005.html", "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"]
+checked_at = "2026-11-13"
+notes = "文档原文：上下文长度1M、最大输入长度1M、最大输出长度384K、最大思维链长度96K（按 1K=1024 换算）。reasoning_effort: none=关闭思考, low=增强推理, high/max=深度推理，默认 high。max_tokens 默认 64K。TPM 2,000,000 / RPM 100。图片最多600张。Token Plan 可用。"
+
+[capabilities]
+reasoning = { supported = true, effort = ["none", "low", "high", "max"], default = { type = "effort", value = "high" } }
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.02991416
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.2
+off_peak = "分时计费（北京时间）：时段1 08:00-20:59，时段2 21:00-次日07:59；input/output/cache_read 字段为时段1价"
+
+[[cost_cny.tiers]]
+when = "时段2(21:00-07:59)"
+input = 1
+output = 4
+cache_read = 0.1
+
+[reasoning_default]
+value = "high"
+source = "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
+
+[limit_label]
+context = "1M"
+input = "1M"
+output = "384K"

@@ -1,0 +1,11 @@
+# Imported from research/modelscope.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api-inference.modelscope.cn/v1/models
+# Source: https://modelscope.cn/docs/model-service/API-Inference/intro
+schema = 2
+base_model = "stepfun/step-3.7-flash"
+sources = ["https://api-inference.modelscope.cn/v1/models", "https://modelscope.cn/docs/model-service/API-Inference/intro"]
+checked_at = "2026-11-13"
+notes = "计费：免费 API-Inference，按魔粒扣减（轻量 0.5 / 主流 1 / 旗舰 2 魔粒/次，具体档位在模型页代码范例旁『预计魔粒扣减』显示，公开接口未提供），非人民币计价"
+
+[capabilities]
+reasoning = { supported = true }

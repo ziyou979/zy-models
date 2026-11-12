@@ -1,0 +1,32 @@
+# Imported from research/jdcloud-joymaas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://joymaas.jdcloud.com/models/Qwen3.5-397B-A17B
+# Source: https://joymaas.jdcloud.com/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 1.2, output 7.2
+schema = 2
+base_model = "alibaba/qwen3.5-397b-a17b"
+sources = ["https://joymaas.jdcloud.com/models/Qwen3.5-397B-A17B", "https://joymaas.jdcloud.com/models"]
+checked_at = "2026-11-13"
+notes = "模型广场详情页原文：上下文256K / 单次最大输入192K / 单次最大输出64K（按1K=1024换算）。公开详情页统一显示 TPM 100,000 / RPM 60。 详情页未列深度思考。"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+input = 196_608
+
+[cost.text.input]
+price = 0.17948496
+
+[cost.text.output]
+price = 1.07690975
+
+[cost_cny]
+input = 1.2
+output = 7.2
+
+[limit_label]
+context = "256K"
+input = "192K"
+output = "64K"

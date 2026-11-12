@@ -1,0 +1,32 @@
+# Imported from research/huawei-maas.json by scripts/import-research.ts
+# cn openai-chat: https://api.modelarts-maas.com/openai/v1 (https://support.huaweicloud.com/model-call-maas/model-call-021.html)
+# cn native: https://api.modelarts-maas.com/v2 (https://support.huaweicloud.com/model-call-maas/model-call-019.html)
+# cn anthropic: https://api.modelarts-maas.com/anthropic (https://support.huaweicloud.com/model-call-maas/model-call-022.html)
+# intl openai-chat: https://api-ap-southeast-1.modelarts-maas.com/openai/v1 (https://support.huaweicloud.com/intl/en-us/model-call-maas/model-call-021.html)
+name = "Huawei Cloud MaaS (ModelArts Studio)"
+env = ["MAAS_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://api.modelarts-maas.com/openai/v1"
+doc = "https://support.huaweicloud.com/model-list-maas/model_list_0001.md"
+name_zh = "华为云 MaaS（ModelArts Studio）"
+region = "cn"
+pricing_page = "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf"
+notes = "中国站模型均部署在『西南-贵阳一』，需先在控制台『模型推理>在线推理>预置服务』开通对应模型预置服务后用 API Key 调用。分时计费：北京时间 08:00-20:59 为时段1、21:00-次日07:59 为时段2，仅部分模型支持（GLM-5.2/5.1、Kimi-K2.6、DeepSeek 系列），时段2约为7折或5折；价格『具体以MaaS控制台为准』。上下文缓存自动开启，无需配置。思考开关：V2/OpenAI 接口用 thinking.type(enabled/disabled)，思维链在 reasoning_content；多轮对话中 reasoning_content 回传会被忽略。表 1-3 写所有模型默认开启思维链（GLM-5.3 不支持关闭）。max_tokens 默认：DeepSeek-V4.1 系列 64K，Kimi-K2.6/openPangu-2.0 32K，其他 4K。各模型 TPM/RPM 默认限流见各模型 notes。模型列表页 2026-09 版曾列 deepseek-v4-pro、glm-5、DeepSeek-V3（Anthropic 页残留），当前列表未列，未收录。实名/备案要求：本次未在 MaaS 文档中找到专门说明。"
+
+[[plans]]
+id = "token-plan"
+name_zh = "MaaS Token Plan 个人版"
+base_url = "https://api.modelarts-maas.com/plan/v2"
+anthropic_base_url = "https://api.modelarts-maas.com/plan/anthropic"
+protocol = "openai-chat"
+models = ["glm-5.3", "deepseek-v4.1-flash-1017", "deepseek-v4.1-flash"]
+quota_note = "每订阅月 Tokens：Lite 5000万 / Standard 1.3亿 / Pro 3.8亿 / Max 8.8亿。每日限量发售，售罄当天不可购买；同一用户每月限购一次；仅支持升配不支持降配；有效期按自然月，未用完额度到期作废；Max 用量耗尽后可切换按需付费；不支持退订。仅支持『西南-贵阳一』；企业用户暂不支持购买个人版。『套餐额度仅在AI工具中生效，不可用于API调用。在非AI工具中使用MaaS Token Plan权益对应的专属Base URL和API Key可能会被识别为滥用或违规行为，导致订阅停用或账号封禁。』支持工具：华为云码道(CodeArts)、果办OfficeAce、Claude Code、OpenClaw、OpenCode、Cherry Studio、TRAE、Dify 等。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://support.huaweicloud.com/price-maas/price-maas-0035.html", "https://support.huaweicloud.com/price-maas/price-maas-0035.html", "https://support.huaweicloud.com/Token-plan-maas/tokenplan-maas-0001.html", "https://support.huaweicloud.com/Token-plan-maas/tokenplan-maas-0014.html"]
+
+[plans.price_cny_month]
+lite = 59
+standard = 149
+pro = 399
+max = 799

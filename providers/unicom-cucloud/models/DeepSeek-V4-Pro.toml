@@ -1,0 +1,17 @@
+# Imported from research/unicom-cucloud.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7117&lang=zh
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh
+schema = 2
+base_model = "deepseek/deepseek-v4-pro-0813"
+sources = ["https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7117&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"]
+checked_at = "2026-11-13"
+notes = "『DeepSeek-V4-Pro、DeepSeek-V4-Flash 上下文窗口目前仅支持 200K』（Token Plan 概述原文，此处按 200×1024 换算）。API 文档示例响应含 reasoning_content。Token Plan 示例『综合单价9.30元/百万tokens』（credits 折算参考，非按量价）。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 204_800
+
+[limit_label]
+context = "200K"

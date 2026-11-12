@@ -1,0 +1,30 @@
+# Imported from research/youdao.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.youdao.com/new/token
+# Source: https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6.5, output 27, cache_read 1.1
+schema = 2
+base_model = "moonshotai/kimi-k2.6"
+sources = ["https://ai.youdao.com/new/token", "https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/"]
+checked_at = "2026-11-13"
+notes = "上下文取平台 maxContextLength=262000（十进制原值）；最大输出未公开。平台默认限流：总 TPM 50000000 / RPM 100000，单应用 TPM 5000000 / RPM 500。『多模态』标签仅表示支持多模态输入，图像/视频具体范围未写明（此处按图像输入记，推断）。计费项原文：标准输入Token（未命中缓存）=6.5；标准输出Token=27；缓存命中读Token=1.1。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 262_000
+
+[cost.text.input]
+price = 0.97221019
+
+[cost.text.input.cache]
+read = 0.16452788
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 6.5
+output = 27
+cache_read = 1.1

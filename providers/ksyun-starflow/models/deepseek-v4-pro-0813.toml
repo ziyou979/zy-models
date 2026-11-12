@@ -1,0 +1,30 @@
+# Imported from research/ksyun-starflow.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://docs.ksyun.com/documents/45801
+# Source: https://docs.ksyun.com/documents/45797
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 9, output 27, cache_read 0.3
+schema = 2
+base_model = "deepseek/deepseek-v4-pro-0813"
+sources = ["https://docs.ksyun.com/documents/45801", "https://docs.ksyun.com/documents/45797"]
+checked_at = "2026-11-13"
+notes = "批量推理 输入6/输出12 元/百万"
+
+[capabilities]
+reasoning = { supported = true, toggle = true }
+
+[cost.text.input]
+price = 1.34613719
+
+[cost.text.input.cache]
+read = 0.04487124
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 9
+output = 27
+cache_read = 0.3
+
+[limit_label]
+context = "1M"

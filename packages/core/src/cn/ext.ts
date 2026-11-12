@@ -123,11 +123,18 @@ const CommonModelExt = {
 };
 
 export const LabModelExt = z.object(CommonModelExt).strict();
+// The official doc only gives a label ("1M", "128K"); limit.* holds the number
+// converted with the lab's convention, this keeps the original wording.
+export const LimitLabel = z
+  .object({ context: z.string().min(1).optional(), input: z.string().min(1).optional(), output: z.string().min(1).optional() })
+  .strict();
+
 export const ProviderModelExt = z
   .object({
     ...CommonModelExt,
     cost_cny: CostCny.optional(),
     reasoning_default: ReasoningDefault.optional(),
+    limit_label: LimitLabel.optional(),
   })
   .strict();
 export type ProviderModelExt = z.infer<typeof ProviderModelExt>;
@@ -229,6 +236,7 @@ export function modelExtOutput(ext: ProviderModelExt, canonicalId?: string, raw?
     aliases: ext.aliases ?? lab?.aliases,
     cost_cny: ext.cost_cny,
     reasoning_default: ext.reasoning_default ?? (raw ? upstreamReasoningDefault(raw) : undefined),
+    limit_label: ext.limit_label,
     sources: ext.sources,
     checked_at: ext.checked_at,
     notes: ext.notes,

@@ -1,0 +1,29 @@
+# Imported from research/huawei-maas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://support.huaweicloud.com/model-list-maas/model_list_0001.md
+# Source: https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf
+# Source: https://support.huaweicloud.com/model-call-maas/model-call-005.html
+# Source: https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf
+# 占位: release_date 未公开，占位为核查日 2026-11-13
+# 占位: temperature/top_p/top_k 为默认值 true/true/false，未核实
+schema = 2
+name = "openPangu-2.0-Pro"
+description = "openPangu-2.0-Pro by huawei."
+open_weights = true
+release_date = "2026-11-13"
+name_zh = "开源盘古 2.0 Pro"
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = true }
+temperature = true
+top_p = true
+top_k = false
+
+[limit]
+context = 512_000
+input = 500_000
+output = 128_000

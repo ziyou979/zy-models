@@ -1,0 +1,15 @@
+# Imported from research/infini-ai.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://docs.infini-ai.com/gen-studio/api/text-generation/tutorial-reasoning/deepseek.html
+# Source: https://docs.infini-ai.com/gen-studio/announcements/model-additions/
+# Source: https://docs.infini-ai.com/gen-studio/changelog.html
+schema = 2
+base_model = "deepseek/deepseek-v4-pro-0813"
+sources = ["https://docs.infini-ai.com/gen-studio/api/text-generation/tutorial-reasoning/deepseek.html", "https://docs.infini-ai.com/gen-studio/announcements/model-additions/", "https://docs.infini-ai.com/gen-studio/changelog.html"]
+checked_at = "2026-11-13"
+notes = "上线公告：2026-08-18；自 2026-08-28 起闲时半价：每日北京时间 22:00 至次日 08:00 按忙时价 50% 计费"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, effort = ["low", "high", "max"] }
+
+[cost_cny]
+off_peak = "闲时（北京时间 22:00–次日 08:00）按忙时价格 50% 计费；具体单价需登录查看"

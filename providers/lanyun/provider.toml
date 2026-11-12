@@ -1,0 +1,30 @@
+# Imported from research/lanyun.json by scripts/import-research.ts
+# cn openai-chat: https://maas-api.lanyun.net/v1 (https://archive.lanyun.net/#/maas/快速入门)
+# cn anthropic: https://maas-api.lanyun.net/anthropic (https://archive.lanyun.net/#/maas/文本模型API(Anthropic))
+name = "Lanyun MaaS"
+env = ["LANYUN_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://maas-api.lanyun.net/v1"
+doc = "https://archive.lanyun.net/#/maas/"
+name_zh = "蓝耘元生代 MaaS 大模型服务平台"
+region = "cn"
+pricing_page = "https://maas.lanyun.net/"
+notes = "规格取自官方公开接口 GET https://maas-api.lanyun.net/v1/models（context_size；max_output_tokens 在所有模型上都与 context_size 相同，判为字段复用，未采用）；价格只在大模型服务平台首页模型卡片公开（8 个模型，元/M tokens），完整模型广场需登录。模型调用名存在两种风格：新模型为短名（如 glm-5.3），老模型带 /maas/ 前缀（如 /maas/zhipuai/GLM-5.2）。OpenAI 接口文档原文『本接口暂不支持上下文缓存，此时返回应为 cached_tokens: 0』，未见缓存价；思考开关参数未在文档中列出，仅响应含 reasoning_content。公开文档未给出 RPM/TPM 限流数值。实名认证：平台账号支持个人/企业实名（身份证正反面等），文档称部分功能需实名后使用，MaaS 文档未单独写明调用前必须实名。另有 automodel（AutoModel 智能路由，按实际使用模型计费）未纳入。"
+
+[[plans]]
+id = "coding-plan"
+name_zh = "Coding Plan"
+base_url = "https://maas-api.lanyun.net/v1/chat 或 https://maas-api.lanyun.net/anthropic/v1（按工具要求）"
+protocol = "openai-chat"
+models = ["/maas/jieyue/step-3.5-flash", "GLM-5.1", "MiniMax-M2.5"]
+quota_note = "文档原文：支持月/季/年订阅，整合智谱、minimax、阶跃星辰主流模型；『三大模型通用：支持 GLM-5.1 / MiniMax M-2.5 / Step 3.5 flash（模型迭代将同步升级至最新版本）』。自 2026-04-23 起每日 10:00–18:00 高峰期按 3 倍额度扣除、非高峰期按 2 倍扣除，GLM-4.7-Flash 全程 1 倍；智能路由开启后统一按 1 倍抵扣。『套餐购买完成后，系统将自动生成 Coding Plan 专属 API Key / 专属 API Key 仅适配本套餐额度消耗，与平台通用 API Key 权限、额度相互独立，不可混合使用』；禁止转借/共享/出租/售卖；不支持退款；到期前 1 小时自动续费。套餐名称/月费/额度仅在控制台（需登录）显示。是否禁止在编程工具以外当普通 API 使用：未见明文。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://archive.lanyun.net/#/maas/CodingPlan"]
+
+[[plans]]
+id = "token-plan"
+name_zh = "Token Plan"
+quota_note = "控制台存在 /tokenPlan 页面（需登录），公开文档无说明"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://console.lanyun.net/#/tokenPlan"]

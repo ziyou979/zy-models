@@ -1,0 +1,29 @@
+# Imported from research/ksyun-starflow.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://docs.ksyun.com/documents/45801
+# Source: https://docs.ksyun.com/documents/45797
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6.5, output 27, cache_read 1.1
+schema = 2
+base_model = "moonshotai/kimi-k2.6"
+sources = ["https://docs.ksyun.com/documents/45801", "https://docs.ksyun.com/documents/45797"]
+checked_at = "2026-11-13"
+
+[capabilities]
+reasoning = { supported = true, toggle = true }
+
+[cost.text.input]
+price = 0.97221019
+
+[cost.text.input.cache]
+read = 0.16452788
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 6.5
+output = 27
+cache_read = 1.1
+
+[limit_label]
+context = "262.1k"

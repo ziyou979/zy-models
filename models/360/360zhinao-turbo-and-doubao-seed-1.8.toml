@@ -1,0 +1,26 @@
+# Imported from research/ai360.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.360.com/open/zh/models/360zhinao-turbo-and-doubao-seed-1-8
+# Source: https://ai.360.com/open/zh/models
+# 占位: open_weights 未确认，写 false
+# 占位: tools 未确认，写 false
+# 占位: temperature/top_p/top_k 为默认值 true/true/false，未核实
+schema = 2
+name = "360zhinao-turbo-and-doubao-seed-1-8"
+description = "360zhinao-turbo-and-doubao-seed-1-8 by 360."
+open_weights = false
+release_date = "2026-06-04"
+
+[modalities]
+input = ["text", "image", "video"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = false }
+reasoning = { supported = false }
+temperature = true
+top_p = true
+top_k = false
+
+[limit]
+context = 256_000
+output = 64_000

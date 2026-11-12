@@ -1,0 +1,31 @@
+# Imported from research/ai360.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.360.com/open/zh/models/qwen/qwen3.8-flash
+# Source: https://ai.360.com/open/zh/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.8, output 2.7, cache_read 0.1
+schema = 2
+base_model = "alibaba/qwen3.8-flash"
+sources = ["https://ai.360.com/open/zh/models/qwen/qwen3.8-flash", "https://ai.360.com/open/zh/models"]
+checked_at = "2026-11-13"
+notes = "平台列表数据：contextLength 1000000、maxCompletionTokens 128000（平台原值，十进制）。上游供应商：通义千问、tokenmall-wyls。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+output = 128_000
+
+[cost.text.input]
+price = 0.11965664
+
+[cost.text.input.cache]
+read = 0.01495708
+
+[cost.text.output]
+price = 0.40384116
+
+[cost_cny]
+input = 0.8
+output = 2.7
+cache_read = 0.1
+cache_write = 1.25

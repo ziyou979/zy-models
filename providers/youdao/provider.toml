@@ -1,0 +1,23 @@
+# Imported from research/youdao.json by scripts/import-research.ts
+# cn openai-chat: https://openapi.youdao.com/llmgateway/api/v1 (https://ai.youdao.com/DOCSIRMA/html/token/api/guide/)
+# cn openai-responses: https://openapi.youdao.com/llmgateway/api/v1 (https://tokenplan.youdao.com/docs/ai-tools)
+# cn anthropic: https://openapi.youdao.com/llmgateway/anthropic (https://ai.youdao.com/DOCSIRMA/html/token/api/guide/)
+name = "NetEase Youdao AI Cloud LLM Gateway (TokenPlan)"
+env = ["YOUDAO_LLM_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://openapi.youdao.com/llmgateway/api/v1"
+doc = "https://ai.youdao.com/DOCSIRMA/html/token/api/guide/"
+name_zh = "网易有道智云 大模型 Token 平台 / 有道 TokenPlan"
+region = "cn"
+pricing_page = "https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/"
+notes = "网易有道的对话 API 是第三方模型聚合网关（openapi.youdao.com/llmgateway），共 27 个模型，未提供自研『子曰』对话大模型（子曰仅以开源权重 Confucius 系列及大模型翻译/作文批改等专用 API 形式提供，后者按次或字符计费，不在收录范围）；网易伏羲未见公开对话 API。DeepSeek 系列按分时计费：工作日 09:00–12:00、14:00–18:00 为高峰、价格翻倍（与 DeepSeek 原厂时段不同）。平台『赠送的体验金暂不支持用于大模型服务调用』，需充值。思考开关与工具调用参数在公开文档中未给出（null）。"
+
+[[plans]]
+id = "tokenplan"
+name_zh = "有道 TokenPlan 个人版（订阅折扣）"
+base_url = "https://openapi.youdao.com/llmgateway/api/v1"
+protocol = "openai-chat"
+quota_note = "订阅费 1:1 到账为可用额度（文档举例『Pro 149 元/月到账 149 元额度』），调用按套餐折扣扣费（首页称 deepseek-flash 可享 4.5 折），具体档位与折扣由前端接口动态加载、公开页面未渲染（套餐有 Lite/Pro/Max，见模型列表折扣表表头）。增量充值无有效期；未订阅直接充值按原价。model=\"auto\" 智能路由。限流按『应用+模型』默认 RPM 1000 / TPM 5,000,000、单次应答超时 10 分钟。『新用户首月专享优惠，限量1000名』。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://tokenplan.youdao.com/docs/billing", "https://tokenplan.youdao.com/docs/billing", "https://tokenplan.youdao.com/", "https://tokenplan.youdao.com/docs/models"]

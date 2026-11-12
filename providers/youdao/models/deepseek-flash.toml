@@ -1,0 +1,34 @@
+# Imported from research/youdao.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.youdao.com/new/token
+# Source: https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.04
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash-1017"
+sources = ["https://ai.youdao.com/new/token", "https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/"]
+checked_at = "2026-11-13"
+notes = "上下文取平台 maxContextLength=1000000（十进制原值）；最大输出未公开。平台默认限流：总 TPM 200000000 / RPM 50000，单应用 TPM 10000000 / RPM 5000。『多模态』标签仅表示支持多模态输入，图像/视频具体范围未写明（此处按图像输入记，推断）。计费项原文：标准输入Token（未命中缓存）=1；标准输入Token（命中缓存）=0.02；标准输出Token=4；【高峰】标准输入Token（未命中缓存）=2；【高峰】标准输入Token（命中缓存）=0.04；【高峰】标准输出Token=8。平台描述：『deepseek-flash【v4.1 flash】…具备工具调用、可配置思考强度』。deepseek-v4-flash 与 deepseek-v4-flash-vision-exp『后台已指向deepseek-flash』。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.00598283
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.04
+off_peak = "平台计费配置：工作日 09:00–12:00、14:00–18:00 为高峰（价格翻倍，见 tiers）；字段为常规时段价 （导入时已统一：主字段为标准/高峰价，闲时价见 tiers。）"
+
+[[cost_cny.tiers]]
+when = "高峰：周一至周五 09:00–12:00、14:00–18:00（北京时间）"
+input = 2
+output = 8
+cache_read = 0.04

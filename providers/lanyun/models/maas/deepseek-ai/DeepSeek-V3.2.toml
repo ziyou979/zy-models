@@ -1,0 +1,26 @@
+# Imported from research/lanyun.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://maas-api.lanyun.net/v1/models
+# Source: https://archive.lanyun.net/#/maas/模型列表
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 3
+schema = 2
+base_model = "deepseek/deepseek-v3.2"
+sources = ["https://maas-api.lanyun.net/v1/models", "https://archive.lanyun.net/#/maas/模型列表"]
+checked_at = "2026-11-13"
+notes = "文档模型列表：输入token上限 128K、输出token上限 128K，输入2/输出3 元/百万；API 返回 max_output_tokens=131072，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；API endpoints 字段: completions"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 131_072
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.output]
+price = 0.4487124
+
+[cost_cny]
+input = 2
+output = 3

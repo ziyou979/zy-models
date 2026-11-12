@@ -1,0 +1,428 @@
+{
+ "provider_id": "paratera",
+ "modelsdev_id": null,
+ "name_zh": "并行智算云 MaaS 平台（并行科技）",
+ "name_en": "Paratera AI Cloud MaaS",
+ "doc": "https://ai.paratera.com/document/llm/quickStart",
+ "pricing_page": "https://ai.paratera.com/document/llm/billing/billing",
+ "env": [
+  "PARATERA_API_KEY"
+ ],
+ "endpoints": [
+  {
+   "region": "cn",
+   "protocol": "openai-chat",
+   "base_url": "https://llmapi.paratera.com/v1",
+   "source": "https://ai.paratera.com/document/llm/api/assistance/CherryStudio",
+   "note": "Cherry Studio/Chatbox 文档：文本对话/视觉理解模型基础 url 为 https://llmapi.paratera.com/v1；文档站搜索 Anthropic 无结果，未见 Anthropic 兼容端点"
+  }
+ ],
+ "plans": [
+  {
+   "id": "monthly",
+   "name_zh": "包月预付费",
+   "base_url": null,
+   "protocol": null,
+   "price_cny_month": null,
+   "quota_note": "文档原文仅『包月使用，请联系您的客户经理』，无公开价格/额度/用途限制；未见 Coding Plan",
+   "models": null,
+   "source": "https://ai.paratera.com/document/llm/billing/billing"
+  }
+ ],
+ "models": [
+  {
+   "id": "DeepSeek-V4-Pro-0813",
+   "name": "DeepSeek-V4-Pro-0813",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://ai.paratera.com/document/llm/support/lmsOffline"
+   ],
+   "checked_at": "2026-11-13",
+   "id_verified": false,
+   "notes": "据官方《MaaS平台模型下线记录》建议迁移列出现的名称；平台调用名一般与展示名一致（文档示例 model=DeepSeek-R1、Qwen3-235B-A22B），但模型广场需登录，未能逐一核实调用名、上下文、价格与能力"
+  },
+  {
+   "id": "DeepSeek-V4-Flash-0731",
+   "name": "DeepSeek-V4-Flash-0731",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://ai.paratera.com/document/llm/support/lmsOffline"
+   ],
+   "checked_at": "2026-11-13",
+   "id_verified": false,
+   "notes": "据官方《MaaS平台模型下线记录》建议迁移列出现的名称；平台调用名一般与展示名一致（文档示例 model=DeepSeek-R1、Qwen3-235B-A22B），但模型广场需登录，未能逐一核实调用名、上下文、价格与能力"
+  },
+  {
+   "id": "DeepSeek-V4.1-Flash",
+   "name": "DeepSeek-V4.1-Flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://ai.paratera.com/document/llm/support/lmsOffline"
+   ],
+   "checked_at": "2026-11-13",
+   "id_verified": false,
+   "notes": "据官方《MaaS平台模型下线记录》建议迁移列出现的名称；平台调用名一般与展示名一致（文档示例 model=DeepSeek-R1、Qwen3-235B-A22B），但模型广场需登录，未能逐一核实调用名、上下文、价格与能力"
+  },
+  {
+   "id": "Kimi-K3",
+   "name": "Kimi-K3",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://ai.paratera.com/document/llm/support/lmsOffline"
+   ],
+   "checked_at": "2026-11-13",
+   "id_verified": false,
+   "notes": "据官方《MaaS平台模型下线记录》建议迁移列出现的名称；平台调用名一般与展示名一致（文档示例 model=DeepSeek-R1、Qwen3-235B-A22B），但模型广场需登录，未能逐一核实调用名、上下文、价格与能力"
+  },
+  {
+   "id": "GLM-5.2",
+   "name": "GLM-5.2",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://ai.paratera.com/document/llm/support/lmsOffline",
+    "https://www.paratera.com/news_des/192.html"
+   ],
+   "checked_at": "2026-11-13",
+   "id_verified": false,
+   "notes": "据官方《MaaS平台模型下线记录》建议迁移列出现的名称；平台调用名一般与展示名一致（文档示例 model=DeepSeek-R1、Qwen3-235B-A22B），但模型广场需登录，未能逐一核实调用名、上下文、价格与能力；新闻稿（2026-06-17）称『Solid 1M 上下文』"
+  },
+  {
+   "id": "Qwen3.7-Max",
+   "name": "Qwen3.7-Max",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://ai.paratera.com/document/llm/support/lmsOffline"
+   ],
+   "checked_at": "2026-11-13",
+   "id_verified": false,
+   "notes": "据官方《MaaS平台模型下线记录》建议迁移列出现的名称；平台调用名一般与展示名一致（文档示例 model=DeepSeek-R1、Qwen3-235B-A22B），但模型广场需登录，未能逐一核实调用名、上下文、价格与能力"
+  },
+  {
+   "id": "Qwen3.7-Plus",
+   "name": "Qwen3.7-Plus",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://ai.paratera.com/document/llm/support/lmsOffline"
+   ],
+   "checked_at": "2026-11-13",
+   "id_verified": false,
+   "notes": "据官方《MaaS平台模型下线记录》建议迁移列出现的名称；平台调用名一般与展示名一致（文档示例 model=DeepSeek-R1、Qwen3-235B-A22B），但模型广场需登录，未能逐一核实调用名、上下文、价格与能力"
+  },
+  {
+   "id": "Qwen3.6-Plus",
+   "name": "Qwen3.6-Plus",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://ai.paratera.com/document/llm/support/lmsOffline"
+   ],
+   "checked_at": "2026-11-13",
+   "id_verified": false,
+   "notes": "据官方《MaaS平台模型下线记录》建议迁移列出现的名称；平台调用名一般与展示名一致（文档示例 model=DeepSeek-R1、Qwen3-235B-A22B），但模型广场需登录，未能逐一核实调用名、上下文、价格与能力"
+  }
+ ],
+ "notes": "模型广场（https://ai.paratera.com/#/lms/model，含模型详情、价格、TPM/RPM）需登录；公开文档的价格表（DeepSeek-R1/V3、QwQ、GLM-4、MiniMax-M1 等）为旧一代且大多已在下线记录中标注下线（如 2026-09-27 下线 DeepSeek-V3.2/R1 系列、2026-07-08 下线 Qwen3 系列），不再采用；当前主力模型仅能从下线记录『建议迁移』列与新闻稿（GLM-5.2 2026-06-17、MiniMax M3 2026-06-10、DeepSeek-V4 2026-04 上线）得知，因而本文件 limit/price 全为 null、调用名未核实（id_verified=false）。仅支持流式的旧规则：文档称 Qwen3 系列仅支持 stream=true，并用 enable_thinking 控制推理过程。新用户：所有模型总赠送体验额度 40 元（文档原文），官网另有『新人注册立享200元算力券』。欠费后 API Key 仅能访问免费模型。实名认证为姓名+身份证号+手机号三要素核验（https://ai.paratera.com/document/platform/verification）。MiniMax M3 已上线（新闻稿），调用名未知未列入。"
+}

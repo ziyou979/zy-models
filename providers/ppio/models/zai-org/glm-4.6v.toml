@@ -1,0 +1,41 @@
+# Imported from research/ppio.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.ppio.com/openai/v1/models
+# Source: https://ppio.com/pricing
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 6, cache_read 0.4
+schema = 2
+base_model = "zhipuai/glm-4.6v"
+sources = ["https://api.ppio.com/openai/v1/models", "https://ppio.com/pricing"]
+checked_at = "2026-11-13"
+notes = "is_tiered_billing=true；顶层 input/output 为 API 顶层 pricing 字段（等于最高档），实际按 tiers 计费；支持端点: chat/completions, anthropic"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+context = 131_072
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.05982832
+
+[cost.text.output]
+price = 0.89742479
+
+[cost_cny]
+input = 2
+output = 6
+cache_read = 0.4
+
+[[cost_cny.tiers]]
+when = "input 1~32768 tokens"
+input = 1
+output = 3
+
+[[cost_cny.tiers]]
+when = "input 32768~131072 tokens"
+input = 2
+output = 6

@@ -1,0 +1,31 @@
+# Imported from research/gitee-ai.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://moark.com/serverless-api?model=Step-3.7-Flash&tab=info
+# Source: https://api.moark.com/v1/models?include_details=true
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 1.35, output 8.1, cache_read 0.27
+schema = 2
+base_model = "stepfun/step-3.7-flash"
+sources = ["https://moark.com/serverless-api?model=Step-3.7-Flash&tab=info", "https://api.moark.com/v1/models?include_details=true"]
+checked_at = "2026-11-13"
+notes = "上下文/最大输出仅以标签显示（tooltip：上下文大小 / 最大生成长度）"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.20192058
+
+[cost.text.input.cache]
+read = 0.04038412
+
+[cost.text.output]
+price = 1.21152347
+
+[cost_cny]
+input = 1.35
+output = 8.1
+cache_read = 0.27
+cache_write = 1.35
+
+[limit_label]
+context = "256K"

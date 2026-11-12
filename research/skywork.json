@@ -1,0 +1,129 @@
+{
+  "provider_id": "skywork",
+  "modelsdev_id": null,
+  "name_zh": "昆仑万维 天工 Skywork（SkyClaw API，经 APIFree 提供）",
+  "name_en": "Kunlun Tech Skywork (SkyClaw via APIFree)",
+  "doc": "https://skyworkai.github.io/skyclaw/",
+  "pricing_page": "https://skyworkai.github.io/skyclaw/",
+  "env": [
+    "APIFREE_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "global",
+      "protocol": "openai-chat",
+      "base_url": "https://api.apifree.ai/agent/v1",
+      "source": "https://www.apifree.ai/model/skywork-ai/skyclaw-v1",
+      "note": "APIFree 模型页：Agent chat API『POST /agent/v1/chat/completions』，目前仅支持 skyclaw-v1 / skyclaw-v1-lite"
+    },
+    {
+      "region": "global",
+      "protocol": "openai-chat",
+      "base_url": "https://api.apifree.ai/v1",
+      "source": "https://skyworkai.github.io/skyclaw/",
+      "note": "Skywork 官方 SkyClaw 页示例使用的地址，与 APIFree 模型页（/agent/v1）不一致"
+    }
+  ],
+  "plans": [],
+  "models": [
+    {
+      "id": "skywork-ai/skyclaw-v1",
+      "name": "SkyClaw-v1.0",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "skywork",
+      "open_weights": null,
+      "release_date": "2026-05-19",
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://www.apifree.ai/model/skywork-ai/skyclaw-v1",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.5,
+        "output": 4,
+        "cache_read": 0.2,
+        "cache_write": 1.5,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://skyworkai.github.io/skyclaw/",
+        "https://www.apifree.ai/model/skywork-ai/skyclaw-v1"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "官方页原文『1M token context』，未给精确数值与最大输出；APIFree 推荐 max_tokens 65536。思考开关 chat_template_kwargs.enable_thinking（Python SDK 放 extra_body），APIFree 文档称『Thinking mode is enabled by default』。官方页称『A free trial is now available』（发布时为 2–4 周限时免费），限时期结束日期未公布。"
+    },
+    {
+      "id": "skywork-ai/skyclaw-v1-lite",
+      "name": "SkyClaw-v1.0-lite",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "skywork",
+      "open_weights": null,
+      "release_date": "2026-05-19",
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://www.apifree.ai/model/skywork-ai/skyclaw-v1",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.3,
+        "output": 2,
+        "cache_read": 0.12,
+        "cache_write": 0.9,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://skyworkai.github.io/skyclaw/",
+        "https://www.apifree.ai/model/skywork-ai/skyclaw-v1-lite"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "官方页原文『1M token context』，未给精确数值与最大输出；APIFree 推荐 max_tokens 65536。思考开关 chat_template_kwargs.enable_thinking（Python SDK 放 extra_body），APIFree 文档称『Thinking mode is enabled by default』。官方页称『A free trial is now available』（发布时为 2–4 周限时免费），限时期结束日期未公布。"
+    }
+  ],
+  "notes": "昆仑万维自有的 Skywork API 平台（platform.skyworkmodel.ai）当前『Found 7 models』，只有 DeepSearch（$0.1/次）与 Mureka 音乐系列等，美元计价，无对话 LLM；早期 R1V4-Lite 文档域名 docs.skyworkmodel.ai 本次无法访问。对话/Agent 模型 SkyClaw-v1.0（2026-05 发布，百万上下文 Agent 模型）由 Skywork 官方 GitHub Pages 页面指定在 apifree.ai 调用（APIFree 页面标注『Official』），价格按人民币公布：旗舰 输入0.5/输出4/缓存读0.2/缓存写1.5，lite 0.3/2/0.12/0.9 元/百万tokens。APIFree 与昆仑万维的主体关系未在官方页面写明（媒体称其为昆仑万维聚合平台，未核实）。APIFree 错误以 HTTP 200 + error 对象返回。实名/限速未公开。"
+}

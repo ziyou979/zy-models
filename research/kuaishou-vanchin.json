@@ -1,0 +1,1116 @@
+{
+  "provider_id": "kuaishou-vanchin",
+  "modelsdev_id": null,
+  "name_zh": "快手万擎（StreamLake）",
+  "name_en": "Kuaishou Vanchin (StreamLake)",
+  "doc": "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+  "pricing_page": "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn",
+  "env": [
+    "VANCHIN_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://wanqing.streamlakeapi.com/api/gateway/v1/endpoints",
+      "source": "https://www.streamlake.com/document/WANQING/mmbwl465t71egh812sq",
+      "note": "OpenAI 兼容；model 字段填自建推理接入点 ID（ep-xxx），非模型名"
+    },
+    {
+      "region": "intl",
+      "protocol": "openai-chat",
+      "base_url": "https://vanchin.streamlake.ai/api/gateway/v1/endpoints",
+      "source": "https://github.com/lobehub/lobehub/pull/13651",
+      "note": "海外站点地址仅见于第三方 PR，未在官方文档核实"
+    }
+  ],
+  "plans": [],
+  "models": [
+    {
+      "id": "GLM-5.3",
+      "name": "GLM-5.3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 8,
+        "output": 28,
+        "cache_read": 2,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1024K、最大输入1024K、最大输出128K（按1K=1024换算）。默认限流 RPM 10 / TPM 300000。万擎营销页称『万擎自部署版本目前只支持隐式』缓存。"
+    },
+    {
+      "id": "GLM-5.3-Flash",
+      "name": "GLM-5.3-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.8,
+        "output": 2.8,
+        "cache_read": 0.23,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1024K、最大输入1024K、最大输出128K（按1K=1024换算）。默认限流 RPM 30 / TPM 300000。"
+    },
+    {
+      "id": "GLM-5.2",
+      "name": "GLM-5.2",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 8,
+        "output": 28,
+        "cache_read": 2,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1024K、最大输入1024K、最大输出128K（按1K=1024换算）。默认限流 RPM 10 / TPM 500000。"
+    },
+    {
+      "id": "GLM-5.1",
+      "name": "GLM-5.1",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 204800,
+        "input": null,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 6,
+        "output": 24,
+        "cache_read": 1.3,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "input<32k",
+            "input": 6,
+            "output": 24,
+            "cache_read": 1.3
+          },
+          {
+            "when": "32k<=input<200k",
+            "input": 8,
+            "output": 28,
+            "cache_read": 2
+          }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文200K、最大输入-、最大输出128K（按1K=1024换算）。默认限流 RPM 20 / TPM 500000。"
+    },
+    {
+      "id": "GLM-5",
+      "name": "GLM-5",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 204800,
+        "input": null,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 4,
+        "output": 18,
+        "cache_read": 1,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "input<32k",
+            "input": 4,
+            "output": 18,
+            "cache_read": 1
+          },
+          {
+            "when": "32k<=input<200k",
+            "input": 6,
+            "output": 22,
+            "cache_read": 1.5
+          }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文200K、最大输入-、最大输出128K（按1K=1024换算）。默认限流 RPM 50 / TPM 1000000。"
+    },
+    {
+      "id": "DeepSeek-V4.1-Flash-1017",
+      "name": "DeepSeek-V4.1-Flash-1017",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": true,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.04,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1024K、最大输入1024K、最大输出384K（按1K=1024换算）。默认限流 RPM 60 / TPM 1000000。"
+    },
+    {
+      "id": "DeepSeek-V4.1-Flash",
+      "name": "DeepSeek-V4.1-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.04,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1024K、最大输入1024K、最大输出384K（按1K=1024换算）。默认限流 RPM 10 / TPM 300000。"
+    },
+    {
+      "id": "DeepSeek-V4-Pro-0813",
+      "name": "DeepSeek-V4-Pro-0813",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 9,
+        "output": 27,
+        "cache_read": 0.3,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1024K、最大输入1024K、最大输出128K（按1K=1024换算）。默认限流 RPM 30 / TPM 300000。列表页最大输出写 128K，而模型简介称最大输出 384K，以表格列为准。"
+    },
+    {
+      "id": "DeepSeek-V4-Flash-0731",
+      "name": "DeepSeek-V4-Flash-0731",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": null,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 3,
+        "output": 9,
+        "cache_read": 0.1,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1024K、最大输入-、最大输出384K（按1K=1024换算）。默认限流 RPM 60 / TPM 600000。价格页为输入3/缓存0.1/输出9，而万擎产品首页卡片显示『输入¥1·输出¥2』，两处不一致，此处取文档价格页。"
+    },
+    {
+      "id": "DeepSeek-V4-Flash",
+      "name": "DeepSeek-V4-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": null,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 1,
+        "output": 2,
+        "cache_read": 0.2,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1024K、最大输入-、最大输出384K（按1K=1024换算）。默认限流 RPM 10 / TPM 300000。列表页类型未标深度思考。"
+    },
+    {
+      "id": "DeepSeek-V4-Pro",
+      "name": "DeepSeek-V4-Pro",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": null,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 12,
+        "output": 24,
+        "cache_read": 1,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1024K、最大输入-、最大输出384K（按1K=1024换算）。默认限流 RPM 10 / TPM 300000。预览版；列表页类型未标深度思考。"
+    },
+    {
+      "id": "DeepSeek R1",
+      "name": "DeepSeek R1",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 131072,
+        "input": 98304,
+        "output": 32768
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 4,
+        "output": 16,
+        "cache_read": 1.6,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文128K、最大输入96K、最大输出32K（按1K=1024换算）。默认限流 RPM 5000 / TPM 10000000。批量推理半价（输入2/输出8）。"
+    },
+    {
+      "id": "DeepSeek V3",
+      "name": "DeepSeek V3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 131072,
+        "input": 131072,
+        "output": 16384
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.8,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文128K、最大输入128K、最大输出16K（按1K=1024换算）。默认限流 RPM 5000 / TPM 10000000。价格页上下文列写 64K，与列表页 128K 不一致。批量推理半价。"
+    },
+    {
+      "id": "Kimi-K2.6",
+      "name": "Kimi-K2.6",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": 262144
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 6.5,
+        "output": 27,
+        "cache_read": 1.1,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文256K、最大输入-、最大输出256K（按1K=1024换算）。默认限流 RPM 30 / TPM 300000。列表页模型类型未单列深度思考，但简介称支持思考与非思考模式。"
+    },
+    {
+      "id": "Kimi-K2.7-Code",
+      "name": "Kimi-K2.7-Code",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": 32768
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 6.5,
+        "output": 27,
+        "cache_read": 1.3,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文256K、最大输入-、最大输出32K（按1K=1024换算）。默认限流 RPM 10 / TPM 300000。"
+    },
+    {
+      "id": "MiniMax-M3.1-Flash",
+      "name": "MiniMax-M3.1-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "minimax",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1024000,
+        "input": null,
+        "output": 524288
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 1,
+        "output": 4,
+        "cache_read": 0.1,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1000K、最大输入-、最大输出512K（按1K=1024换算）。默认限流 RPM 30 / TPM 200000。上下文按文档『1000K』换算为 1,024,000。"
+    },
+    {
+      "id": "MiniMax-M2.7",
+      "name": "MiniMax-M2.7",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "minimax",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 204800,
+        "input": null,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2.1,
+        "output": 8.4,
+        "cache_read": 0.42,
+        "cache_write": 2.625,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文200K、最大输入-、最大输出128K（按1K=1024换算）。默认限流 RPM 30 / TPM 300000。"
+    },
+    {
+      "id": "MiniMax-M2.5",
+      "name": "MiniMax-M2.5",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "minimax",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 204800,
+        "input": null,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2.1,
+        "output": 8.4,
+        "cache_read": 0.21,
+        "cache_write": 2.625,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文200K、最大输入-、最大输出128K（按1K=1024换算）。默认限流 RPM 30 / TPM 10000000。"
+    },
+    {
+      "id": "MiMo-V2.6-Pro",
+      "name": "MiMo-V2.6-Pro",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "xiaomi",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1024000,
+        "input": null,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 3,
+        "output": 6,
+        "cache_read": 0.025,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文1000K、最大输入-、最大输出128K（按1K=1024换算）。默认限流 RPM 30 / TPM 300000。价格页列『前缀缓存 0.025』。"
+    },
+    {
+      "id": "Qwen3.6-27B",
+      "name": "Qwen3.6-27B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": 260096,
+        "output": 65536
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 3,
+        "output": 18,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文256K、最大输入254K、最大输出64K（按1K=1024换算）。默认限流 RPM 30 / TPM 100000。列表页能力写图片/视频理解；简介称具备深度思考。"
+    },
+    {
+      "id": "Qwen3.5-397B-A17B",
+      "name": "Qwen3.5-397B-A17B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": 258048,
+        "output": 65536
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 1.2,
+        "output": 7.2,
+        "cache_read": 0.24,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "input<=128k",
+            "input": 1.2,
+            "output": 7.2,
+            "cache_read": 0.24
+          },
+          {
+            "when": "128k<input<=256k",
+            "input": 3,
+            "output": 18,
+            "cache_read": 0.6
+          }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na",
+        "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文256K、最大输入252K、最大输出64K（按1K=1024换算）。默认限流 RPM 30 / TPM 300000。"
+    }
+  ],
+  "notes": "调用方式特殊：除早期 KAT 系列有预置推理接入点外，其他模型需在控制台『在线推理』新建自定义推理接入点，调用时 model 传接入点 ID（如 ep-b0cx22-1111111111111111111），本文件 id 用的是官方模型名，便于对照。思考开关：enable_thinking（默认『根据模型』，Python SDK 放 extra_body）；思维链在 reasoning_content，计入输出 Token。缓存（cached_tokens）默认开启、不可配置。部分模型支持批量推理，价格约为在线 50%。按小时出账，后付费；新用户免费推理额度以资源包发放（按输入价折算抵扣系数）；营销活动『万擎四重礼』（2026-09-07 至 12-31）含每周 95 折券、限时秒杀资源包 6 折起、新户首充翻倍。需注册认证 StreamLake 账号。自研 KAT-Coder 系列（Pro/Air V1–V2.5、Exp-72B、KAT-Dev）在模型列表全部标注【停止服务】/已下线；KwaiKAT Coding Plan 营销页与『KwaiKAT开发工具接入指南』文档页当前均返回『该页面不存在』，推断 Coding Plan 已停售（未见正式公告），故 plans 为空。主体：北京溪流湖科技有限公司。"
+}

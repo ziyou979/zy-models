@@ -1,0 +1,37 @@
+# Imported from research/ppio.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.ppio.com/openai/v1/models
+# Source: https://ppio.com/pricing
+# Source: https://ppio.com/docs/model/llm-thinking-mode.md
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 20, output 100, cache_read 2
+schema = 2
+base_model = "moonshotai/kimi-k3"
+sources = ["https://api.ppio.com/openai/v1/models", "https://ppio.com/pricing", "https://ppio.com/docs/model/llm-thinking-mode.md"]
+checked_at = "2026-11-13"
+notes = "支持端点: chat/completions, anthropic, responses；API 返回 max_output_tokens 与 context_size 相同（原值照录）"
+
+[capabilities]
+reasoning = { supported = true, effort = ["low", "high", "max"], default = { type = "effort", value = "max" } }
+structured_output = true
+
+[limit]
+output = 1_048_576
+
+[cost.text.input]
+price = 2.99141598
+
+[cost.text.input.cache]
+read = 0.2991416
+
+[cost.text.output]
+price = 14.95707991
+
+[cost_cny]
+input = 20
+output = 100
+cache_read = 2
+cache_write = 20
+
+[reasoning_default]
+value = "max"
+source = "https://ppio.com/docs/model/llm-thinking-mode.md"

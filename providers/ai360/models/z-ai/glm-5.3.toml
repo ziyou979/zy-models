@@ -1,0 +1,30 @@
+# Imported from research/ai360.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.360.com/open/zh/models/z-ai/glm-5.3
+# Source: https://ai.360.com/open/zh/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 8, output 28, cache_read 2
+schema = 2
+base_model = "zhipuai/glm-5.3"
+sources = ["https://ai.360.com/open/zh/models/z-ai/glm-5.3", "https://ai.360.com/open/zh/models"]
+checked_at = "2026-11-13"
+notes = "平台列表数据：contextLength 1000000、maxCompletionTokens 128000（平台原值，十进制）。上游供应商：通义千问、智谱、腾讯混元、paratera并行科技、huaweicloud、火山引擎、金山云、nc、tokenmall-zyld、tokenmall-gzsj。缓存写入未单列时按平台规则『缓存写入按输入单价的 1.25 倍；1 小时缓存写入按输入单价的 2 倍』推导（此处 cache_write 留空）。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+output = 128_000
+
+[cost.text.input]
+price = 1.19656639
+
+[cost.text.input.cache]
+read = 0.2991416
+
+[cost.text.output]
+price = 4.18798238
+
+[cost_cny]
+input = 8
+output = 28
+cache_read = 2

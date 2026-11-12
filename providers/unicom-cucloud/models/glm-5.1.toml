@@ -1,0 +1,15 @@
+# Imported from research/unicom-cucloud.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7236&lang=zh
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh
+schema = 2
+base_model = "zhipuai/glm-5.1"
+sources = ["https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7236&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"]
+checked_at = "2026-11-13"
+notes = "文档原文：上下文 200K、最大输出 128K tokens。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit_label]
+context = "200K"
+output = "128K"

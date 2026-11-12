@@ -1,0 +1,804 @@
+{
+  "provider_id": "unicom-cucloud",
+  "modelsdev_id": null,
+  "name_zh": "联通云 AI服务平台 AISP（星罗算力调度服务 · Token服务，联通元景）",
+  "name_en": "China Unicom Cloud AISP (Yuanjing)",
+  "doc": "https://support.cucloud.cn/document/product/127/591/2357.html",
+  "pricing_page": "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=6518&lang=zh",
+  "env": [
+    "CUCLOUD_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn-guiyang2",
+      "protocol": "openai-chat",
+      "base_url": "https://aigw-gzgy2.cucloud.cn:8443/v1",
+      "source": "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=2357&lang=zh",
+      "note": "贵阳基地二区；Authorization 头直接放 API Key（文档示例无 Bearer 前缀）；新模型多仅在该区"
+    },
+    {
+      "region": "cn-guiyang2",
+      "protocol": "anthropic",
+      "base_url": "https://aigw-gzgy2.cucloud.cn:8443",
+      "source": "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7015&lang=zh",
+      "note": "POST /v1/messages"
+    },
+    {
+      "region": "cn-wuhan4",
+      "protocol": "openai-chat",
+      "base_url": "https://aigw-hbwh4.cucloud.cn:8443/v1",
+      "source": "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=2357&lang=zh"
+    },
+    {
+      "region": "cn-jinan5",
+      "protocol": "openai-chat",
+      "base_url": "https://aigw-jnzs5.cucloud.cn:8443/v1",
+      "source": "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=2357&lang=zh"
+    },
+    {
+      "region": "cn-huhehaote2",
+      "protocol": "openai-chat",
+      "base_url": "https://aigw-nmhhht.cucloud.cn/v1",
+      "source": "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=6552&lang=zh"
+    }
+  ],
+  "plans": [
+    {
+      "id": "token-plan-personal",
+      "name_zh": "Token Plan 个人版",
+      "base_url": "https://aigw-gzgy2.cucloud.cn:8443/v1",
+      "protocol": "openai-chat",
+      "anthropic_base_url": "https://aigw-gzgy2.cucloud.cn:8443",
+      "price_cny_month": {
+        "lite": 15,
+        "pro": 30,
+        "max": 45
+      },
+      "quota_note": "额度 Lite 600万 / Pro 1,200万 / Max 1,800万 tokens 每月。原文：『Token Plan 服务不支持退款』『一个联通云账号主体（不区分主子账号）在一个云区域下仅支持订阅一个套餐（不区分Lite、Pro、Max）』『严禁 API 调用：仅限在编程工具（如 Claude Code、OpenClaw 等）中使用，禁止以 API 调用的形式用于自动化脚本、自定义应用程序后端或任何非交互式批量调用场景。将套餐 API Key 用于允许范围之外的调用将被视为违规或滥用，可能会导致订阅被暂停或 API Key 被封禁。』额度耗尽『不会消耗token量包或转为按量计费』；仅一个 API Key；到期冻结。个人版仅支持贵阳基地二区/武汉四区/广州一区。",
+      "models": [
+        "DeepSeek-V4-Flash",
+        "MiniMax-M2.5"
+      ],
+      "source": "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7080&lang=zh",
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7080&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7131&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7132&lang=zh"
+      ]
+    },
+    {
+      "id": "token-plan-team",
+      "name_zh": "Token Plan 团队版",
+      "base_url": "https://aigw-gzgy2.cucloud.cn:8443/v1",
+      "protocol": "openai-chat",
+      "anthropic_base_url": "https://aigw-gzgy2.cucloud.cn:8443",
+      "price_cny_month": {
+        "lite": 198,
+        "pro": 698,
+        "max": 1398
+      },
+      "quota_note": "额度 25,000 / 100,000 / 250,000 credits 每月；Credits 消耗由模型、Token 用量（输入/输出/缓存）、思考模式及工具调用动态决定。官方示例综合单价：DeepSeek-V4-Pro 9.30、DeepSeek-V4-Flash 0.70、MiniMax-M2.5 1.10 元/百万tokens。仅贵阳基地二区；限制条款同个人版；个人版与团队版不可互转。",
+      "models": [
+        "DeepSeek-V4-Pro",
+        "DeepSeek-V4-Flash",
+        "MiniMax-M2.5"
+      ],
+      "source": "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7080&lang=zh"
+    },
+    {
+      "id": "coding-plan",
+      "name_zh": "Coding Plan",
+      "base_url": "https://aigw-gzgy2.cucloud.cn:8443/v1",
+      "protocol": "openai-chat",
+      "anthropic_base_url": "https://aigw-gzgy2.cucloud.cn:8443",
+      "price_cny_month": {
+        "lite": 40,
+        "pro": 200
+      },
+      "quota_note": "Lite：每5小时1,200次、每周9,000次、每月18,000次请求；Pro：每5小时6,000次、每周45,000次、每月90,000次。『单次提问将按实际“模型调用次数”扣除额度。简单 Agent 任务约消耗 5-10 次，复杂 Agent 任务约 10-30+ 次』。专属 Key 格式 sk-sp-xxxxx。『Coding Plan 服务不支持退款』『一个联通云账号主体（不区分主子账号）仅支持订阅一个套餐』『严禁 API 调用：仅限在编程工具…中使用』。公告：资源紧张时『当您使用的模型触发限流时，系统将自动路由至当前负载更轻的模型』。",
+      "models": [
+        "aisp-auto-route",
+        "DeepSeek-V4-Flash",
+        "glm-5.1",
+        "glm-5",
+        "Qwen3.6-27B",
+        "kimi-k2.6",
+        "kimi-k2.5",
+        "Qwen3.5-397B-A17B",
+        "Qwen3-235B-A22B",
+        "MiniMax-M2.5"
+      ],
+      "source": "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7015&lang=zh",
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7015&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7014&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7129&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7130&lang=zh"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "id": "DeepSeek-V4-Pro",
+      "name": "DeepSeek-V4-Pro",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 204800,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7117&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "『DeepSeek-V4-Pro、DeepSeek-V4-Flash 上下文窗口目前仅支持 200K』（Token Plan 概述原文，此处按 200×1024 换算）。API 文档示例响应含 reasoning_content。Token Plan 示例『综合单价9.30元/百万tokens』（credits 折算参考，非按量价）。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "DeepSeek-V4-Flash",
+      "name": "DeepSeek-V4-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 204800,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7118&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "『当前服务资源有限，DeepSeek-V4-Flash 仅供尝鲜体验，上下文窗口目前仅支持 200K。高峰期易触发接口限流或响应慢』。Token Plan 示例综合单价 0.70元/百万tokens。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "DeepSeek-V4-Flash-Latest",
+      "name": "DeepSeek-V4-Flash-Latest",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7677&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "API 文档 model 示例写『控制台展示的模型名称』，此 id 取文档标题。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "DeepSeek-V3.2",
+      "name": "DeepSeek-V3.2",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7065&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档称支持思考与非思考模式下的工具调用。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "DeepSeek-V3.1",
+      "name": "DeepSeek-V3.1",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 4,
+        "output": 12,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=6518&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "产品资费页：输入 0.004 / 输出 0.012 元/千tokens。"
+    },
+    {
+      "id": "DeepSeek-R1",
+      "name": "DeepSeek-R1",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": null,
+        "default": "on",
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 4,
+        "output": 16,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=6518&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "产品资费页：输入 0.004 / 输出 0.016 元/千tokens；另有 Tokens 量包（输入 1000万/6个月 40元 起）。"
+    },
+    {
+      "id": "glm-5.2",
+      "name": "glm-5.2",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7254&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档仅称『百万级超长上下文』，未给精确值。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "glm-5.1",
+      "name": "glm-5.1",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 204800,
+        "input": null,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7236&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文 200K、最大输出 128K tokens。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "kimi-k3",
+      "name": "kimi-k3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1000000,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7453&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文『100万 token』上下文，按十进制记录。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "name": "kimi-k2.7-code",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7420&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档仅称『超长上下文』。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "kimi-k2.6",
+      "name": "kimi-k2.6",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7237&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档称『支持思考与非思考模式』。贵阳基地二区 kimi-k2.5 底层已切换为 kimi-k2.6。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "Qwen3.8-Max",
+      "name": "Qwen3.8-Max",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7684&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档称 2.4万亿参数 MoE、原生视觉理解。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "Qwen3.7-Max",
+      "name": "Qwen3.7-Max",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7235&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "Qwen3.6-Plus",
+      "name": "Qwen3.6-Plus",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": "reasoning_content"
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7231&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "Qwen3.6-27B",
+      "name": "Qwen3.6-27B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7281&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "贵阳基地二区 Qwen3.5-397B-A17B、Qwen3-235B-A22B 底层已切换为 Qwen3.6-27B。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    },
+    {
+      "id": "MiniMax-M2.5",
+      "name": "MiniMax-M2.5",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "minimax",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 202752,
+        "input": null,
+        "output": 16384
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": false,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7017&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh",
+        "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7089&lang=zh"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "上下文/最大输出取自官方 OpenClaw 配置示例（contextWindow 202752、maxTokens 16384、reasoning:false），非模型规格表。Token Plan 示例综合单价 1.10元/百万tokens。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+    }
+  ],
+  "notes": "联通对外有两套入口：①元景大模型 MaaS 平台 maas.ai-yuanjing.com（文档中心与模型广场对境外/自动化访问均返回 WAF『攻击请求被拦截』，元景自研对话模型的公开 model id、上下文与价格均无法核实，故未收录元景自研模型；搜索线索中的 https://maas-api.ai-yuanjing.com/openapi/compatible-mode/v1 未能在官方页面核实，未写入 endpoints）；②联通云『星罗算力调度服务 / AI服务平台 AISP』（控制台 星罗智算>Token服务），本文件数据全部来自后者的公开帮助中心。按量计费单位元/千tokens、每小时出账；公开资费页（2026-04-15）只覆盖 DeepSeek-R1/V3/V3.1、Qwen2.5、Llama3 等老模型，新模型单价需登录控制台查看，故大量 null。新用户每个模型 5 万 tokens 免费额度、主子账号共用、首次使用起 7 天有效（部分模型 100 万）。欠费 24 小时后停服。分云区域部署，各区可用模型不同（2026-08-24 表：贵阳基地二区模型最全）；且存在『底层已切换』现象：贵阳基地二区 glm-5→glm-5.1、kimi-k2.5→kimi-k2.6、Qwen3.5-397B-A17B/Qwen3-235B-A22B→Qwen3.6-27B，调用旧名实际由新模型响应。API 文档的参数表未列 tools/thinking，思考开关参数名未公开（null）。"
+}

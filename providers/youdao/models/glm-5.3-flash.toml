@@ -1,0 +1,27 @@
+# Imported from research/youdao.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.youdao.com/new/token
+# Source: https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.8, output 2.8, cache_read 0.23
+schema = 2
+base_model = "zhipuai/glm-5.3-flash"
+sources = ["https://ai.youdao.com/new/token", "https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/"]
+checked_at = "2026-11-13"
+notes = "上下文取平台 maxContextLength=1000000（十进制原值）；最大输出未公开。平台默认限流：总 TPM 50000000 / RPM 5000，单应用 TPM 5000000 / RPM 5000。『多模态』标签仅表示支持多模态输入，图像/视频具体范围未写明（此处按图像输入记，推断）。计费项原文：输入Token（未命中缓存读写）=0.8；输出Token（未命中缓存读写）=2.8；缓存读Token（命中缓存）=0.23。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.11965664
+
+[cost.text.input.cache]
+read = 0.03440128
+
+[cost.text.output]
+price = 0.41879824
+
+[cost_cny]
+input = 0.8
+output = 2.8
+cache_read = 0.23

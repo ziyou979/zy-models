@@ -1,0 +1,53 @@
+# Imported from research/jdcloud-joymaas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://joymaas.jdcloud.com/models/GLM-5.1
+# Source: https://joymaas.jdcloud.com/models
+# Source: https://docs.jdcloud.com/cn/jdaip/maas-billing-rules
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6, output 24, cache_read 1.3
+schema = 2
+base_model = "zhipuai/glm-5.1"
+sources = ["https://joymaas.jdcloud.com/models/GLM-5.1", "https://joymaas.jdcloud.com/models", "https://docs.jdcloud.com/cn/jdaip/maas-billing-rules"]
+checked_at = "2026-11-13"
+notes = "模型广场详情页原文：上下文200K / 单次最大输入72K / 单次最大输出128K（按1K=1024换算）。公开详情页统一显示 TPM 100,000 / RPM 60。 批量调用半价。分段价取自 JoyBuilder 2.0 价目；模型广场详情页仅显示 0.006/0.024。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, default = { type = "toggle", value = false } }
+structured_output = true
+
+[limit]
+input = 73_728
+
+[cost.text.input]
+price = 0.89742479
+
+[cost.text.input.cache]
+read = 0.19444204
+
+[cost.text.output]
+price = 3.58969918
+
+[cost_cny]
+input = 6
+output = 24
+cache_read = 1.3
+
+[[cost_cny.tiers]]
+when = "input<32k"
+context_max = 32_000
+input = 6
+output = 24
+
+[[cost_cny.tiers]]
+when = "input>32k"
+context_min = 32_000
+input = 8
+output = 28
+
+[reasoning_default]
+value = "off"
+source = "https://docs.jdcloud.com/cn/joymaas/text-API"
+
+[limit_label]
+context = "200K"
+input = "72K"
+output = "128K"

@@ -11,4 +11,3 @@ protocol = "anthropic"
 models = ["MiniMax-M3.1-Flash"]
 quota_note = "三档原价：Go ¥49/月、Explore ¥119/月、Build ¥469/月（价格取自已结束的首月五折活动页所列原价）。用量相对 Go：Explore 3 倍、Build 12 倍；额度按 5 小时窗口与周窗口（7 天，均自首次使用起计时）刷新，图片/视频模型仅受周窗口限制。文本模型三档均为 M3.1 Flash；H3 视频仅 Explore/Build；需使用订阅 Key（与按量计费 Key 相互独立，不能混用）。OpenAI 兼容地址同为 https://api.minimax.cn/v1。M2.5/M2.7 系列套餐请求自 2026-10-19 起统一路由到 M3.1 Flash，旧名称保留为兼容入口；MiniMax-M3.1-Flash-Preview 已下线、旧名由 M3.1-Flash 提供服务。国际站 M Plan 原价 Go $22/月、Explore $55/月、Build $132/月。"
 usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
-sources = ["https://platform.minimaxi.com/docs/m-plan/intro", "https://platform.minimaxi.com/docs/m-plan/usage-rules", "https://platform.minimaxi.com/docs/m-plan/monthly-offer", "https://platform.minimaxi.com/docs/m-plan/other-tools", "https://platform.minimaxi.com/docs/faq/models", "https://platform.minimax.io/docs/m-plan/monthly-offer"]

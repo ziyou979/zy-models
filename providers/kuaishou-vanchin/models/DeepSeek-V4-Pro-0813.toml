@@ -1,0 +1,36 @@
+# Imported from research/kuaishou-vanchin.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na
+# Source: https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 9, output 27, cache_read 0.3
+schema = 2
+base_model = "deepseek/deepseek-v4-pro-0813"
+sources = ["https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na", "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"]
+checked_at = "2026-11-13"
+notes = "文档原文：上下文1024K、最大输入1024K、最大输出128K（按1K=1024换算）。默认限流 RPM 30 / TPM 300000。列表页最大输出写 128K，而模型简介称最大输出 384K，以表格列为准。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+input = 1_048_576
+output = 131_072
+
+[cost.text.input]
+price = 1.34613719
+
+[cost.text.input.cache]
+read = 0.04487124
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 9
+output = 27
+cache_read = 0.3
+
+[limit_label]
+context = "1024K"
+input = "1024K"
+output = "128K"

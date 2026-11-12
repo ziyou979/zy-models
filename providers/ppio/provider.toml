@@ -1,0 +1,28 @@
+# Imported from research/ppio.json by scripts/import-research.ts
+# cn openai-chat: https://api.ppio.com/openai/v1 (https://ppio.com/docs/model/get-start.md)
+# cn openai-responses: https://api.ppio.com/openai/v1 (https://ppio.com/docs/model/llm-thinking-mode.md)
+# cn anthropic: https://api.ppio.com/anthropic (https://ppio.com/docs/model/llm-anthropic-compatibility.md)
+name = "PPIO"
+env = ["PPIO_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://api.ppio.com/openai/v1"
+doc = "https://ppio.com/docs/model/llm.md"
+name_zh = "PPIO 派欧云"
+region = "cn"
+pricing_page = "https://ppio.com/pricing"
+notes = "价格与规格全部来自官方公开接口 GET https://api.ppio.com/openai/v1/models（无需鉴权，pricing.*.price_per_m_decimal 单位为元/百万 token；origin_price 为原价）。实名认证：部分模型要求实名认证后才能使用，部分大语言模型需完成企业认证（https://ppio.com/docs/support/identity-verification.md）；个人认证每个主体最多 3 个账号。限速：按账户等级 T1–T5（依最近 3 个自然月单月最高充值额：<¥50 / ≥¥50 / ≥¥500 / ≥¥3000 / ≥¥10000）分级 RPM/TPM（按每模型计），具体数值表格未在 md 文档中渲染（https://ppio.com/docs/model/llm-rate-limits.md）。思考：未在专页列出的早期模型可用 enable_thinking 参数开关。另有 pprouter/auto、pprouter/fusion（Fusion 融合模型，多模型并行+融合）路由模型未纳入。PPIO 海外品牌为 Novita AI（models.dev 的 novita-ai），国内站与之独立计价。Prompt Cache 为平台自动缓存，无需改请求。"
+
+[[plans]]
+id = "enterprise-token-plan"
+name_zh = "PPIO 企业 Token Plan（Enterprise Basic / Pro / Max）"
+base_url = "https://api.ppio.com/openai"
+protocol = "openai-chat"
+quota_note = "官方图示：Basic ¥1598/月（连续包月）16亿融合Token/月、50 RPM、99% SLA、200 团队席位；Pro ¥4798/月 48亿融合Token/月、100 RPM、99% SLA；Max ¥13998/月 140亿融合Token/月、500 RPM、99.5% SLA、优先队列、专属群+1v1 架构师。『融合 Token』以 DeepSeek V4 Flash 输入 Token 为基准单位（系数 1.000），其他模型按抵扣系数折算；三档基准单价均为 ¥0.95/Mtoken；覆盖 17 款模型（含 DeepSeek V4 Flash 正式版、Kimi K3、GLM-5.2、MiniMax M3）。是否禁止当普通 API 用：官方文档未见限制原文（null）。"
+usage_restriction = "官方文档未写明是否禁止当作普通 API 使用（见来源）。"
+sources = ["https://ppio.com/docs/third-party/qode.md"]
+
+[plans.price_cny_month]
+Basic = 1598
+Pro = 4798
+Max = 13_998

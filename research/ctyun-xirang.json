@@ -1,0 +1,852 @@
+{
+  "provider_id": "ctyun-xirang",
+  "modelsdev_id": null,
+  "name_zh": "天翼云息壤·星辰TokenHub运营服务平台（原模型推理服务）",
+  "name_en": "China Telecom Cloud (CTyun) Xirang TokenHub",
+  "doc": "https://www.ctyun.cn/document/11061839",
+  "pricing_page": "https://www.ctyun.cn/document/11061839/11062267",
+  "env": [
+    "CTYUN_APP_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://ai.ctaigw.cn/v1",
+      "source": "https://www.ctyun.cn/document/11061839/11062312",
+      "note": "Authorization: Bearer <服务组 App Key>；建议带 User-Agent 以免被安全护栏拦截；model 可传调用名称或 32 位 hex 模型ID"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://ai.ctaigw.cn",
+      "source": "https://www.ctyun.cn/document/11061839/11099117",
+      "note": "POST /v1/messages，鉴权头 x-api-key"
+    },
+    {
+      "region": "intl",
+      "protocol": "openai-chat",
+      "base_url": "https://ai.ctaigw.com/{region}/v1",
+      "source": "https://www.ctyun.cn/document/11061839/11062312",
+      "note": "{region}=amer/eu/as；全球区域暂不支持自助开通，需联系客户经理"
+    },
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://tokenhub-trust-zone.ctaigw.cn/v1",
+      "source": "https://www.ctyun.cn/document/11061839/11099422",
+      "note": "可信Token专区（AICI-* 模型），另有 /v1/messages"
+    }
+  ],
+  "plans": [
+    {
+      "id": "coding-token-plan",
+      "name_zh": "编程Token Plan（积分版）",
+      "base_url": "https://ai.ctaigw.cn/coding/v1",
+      "protocol": "openai-chat",
+      "anthropic_base_url": "https://ai.ctaigw.cn/coding",
+      "price_cny_month": {
+        "3000积分": 29,
+        "10000积分": 89,
+        "25000积分": 199,
+        "50000积分": 399,
+        "100000积分": 699
+      },
+      "quota_note": "按积分计量，积分↔Token 兑换按模型不同（如 DeepSeek-V4-Pro 1积分≈输入1111/输出370 Token，minimax-M3 1积分≈输入4762/输出1190 Token）。『仅限在AI 编程工具中使用，不可用于 API 调用的形式用于自动化脚本、自定义应用程序后端或任何非交互式批量调用场景。违规使用可能导致停用或APP Key封禁。』同一主账号同时只能购买使用一个套餐、仅主账号可购；禁止共享；暂不支持自动续订；不支持退订/退款。模型库动态更新、不承诺固定模型。旧版按 Token 计量套餐（2500万/8000万/1.8亿/3.8亿/6.8亿 Token，29–699元/月，模型 DeepSeek-V4-Flash-0731、GLM-5.1、GLM-5.2）仅存量续订。",
+      "models": [
+        "DeepSeek-V4-Pro",
+        "DeepSeek-V4-Flash-0731",
+        "GLM-5.2",
+        "GLM-5.1",
+        "Kimi-K2.6",
+        "MiniMax-M3"
+      ],
+      "source": "https://www.ctyun.cn/document/11061839/11095143",
+      "sources": [
+        "https://www.ctyun.cn/document/11061839/11095143",
+        "https://www.ctyun.cn/document/11061839/11092368",
+        "https://www.ctyun.cn/document/11061839/11099049",
+        "https://www.ctyun.cn/products/maas"
+      ]
+    },
+    {
+      "id": "token-plan-enterprise",
+      "name_zh": "Token Plan 企业版",
+      "base_url": null,
+      "protocol": null,
+      "price_cny_month": {
+        "团队尝鲜版": 98,
+        "团队标准版": 498,
+        "团队至尊版": 1198
+      },
+      "quota_note": "积分：尝鲜 10000 / 标准 60000 / 至尊 150000 积分每月；个人加油包 49元=5000积分（仅子用户、跟随席位当期订阅月）。",
+      "models": null,
+      "source": "https://www.ctyun.cn/document/11061839/11092368"
+    },
+    {
+      "id": "token-plan-packs",
+      "name_zh": "Token Plan（量包，API 可用）",
+      "base_url": "https://ai.ctaigw.cn/v1",
+      "protocol": "openai-chat",
+      "price_cny_month": {
+        "GLM-5 1500万": 39.9,
+        "GLM-5 7000万": 159.9,
+        "GLM-5 1.5亿": 299.9,
+        "DeepSeek-V3.2 1000万": 9.9,
+        "DeepSeek-V3.2 4000万": 29.9,
+        "DeepSeek-V3.2 8000万": 49.9
+      },
+      "quota_note": "按模型购买的 Token 量包（输入输出统一抵扣），激活后 1 个月有效；每账号每模型最多同时 12 个；额度耗尽即停服，可开通按量付费无缝切换；购买 7 天内未激活可退。官方原文：『受限于资源紧张，建议大家错峰使用。注：高峰期为每日的 9:00～18:00』。另有 DeepSeek-V4-Flash(预览版) 量包 1000万/3200万/1亿 = 9.9/29.9/89.9 元。",
+      "models": [
+        "GLM-5（正式版）",
+        "DeepSeek-V3.2（旗舰版）",
+        "DeepSeek-V4-Flash(预览版)"
+      ],
+      "source": "https://www.ctyun.cn/document/11061839/11094171",
+      "sources": [
+        "https://www.ctyun.cn/document/11061839/11094171",
+        "https://www.ctyun.cn/document/11061839/11071205",
+        "https://www.ctyun.cn/act/AI/zhuanxiang"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "id": "TeleChat3-438B-A24B",
+      "name": "TeleChat3-438B-A24B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "telechat",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。中国电信人工智能研究院（TeleAI）自研星辰语义大模型；市场分类『文本生成』，提供方『中国电信人工智能』。"
+    },
+    {
+      "id": "Xing4.0-29B-A4B",
+      "name": "Xing4.0-29B-A4B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "telechat",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。提供方『中国电信人工智能』（自研）。"
+    },
+    {
+      "id": "ctyun-smart-router",
+      "name": "ctyun-smart-router",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "ctyun",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156",
+        "https://www.ctyun.cn/document/11061839/11092368",
+        "https://www.ctyun.cn/document/11061839/11100749"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。天翼云智能路由（非单一模型）；编程 Token Plan 积分兑换：1积分≈输入3704/输出1235 Token。"
+    },
+    {
+      "id": "Hy4",
+      "name": "Hy4",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "tencent-hunyuan",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。市场卡片原文：『限时5折促销中，促销期间会对计费用量进行折算，例如实际使用1000token，按500token计费。』"
+    },
+    {
+      "id": "deepseek-v4.1-flash-1017",
+      "name": "deepseek-v4.1-flash-1017",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。"
+    },
+    {
+      "id": "deepseek-v4.1-flash",
+      "name": "deepseek-v4.1-flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。市场分类为『视觉理解』。"
+    },
+    {
+      "id": "deepseek-v4-pro-0813",
+      "name": "deepseek-v4-pro-0813",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156",
+        "https://www.ctyun.cn/document/11061839/11092368"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。编程 Token Plan 支持 DeepSeek-V4-Pro（1积分≈输入1111/输出370 Token）。"
+    },
+    {
+      "id": "DeepSeek-V4-Flash-0731",
+      "name": "DeepSeek-V4-Flash-0731",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156",
+        "https://www.ctyun.cn/document/11061839/11092368",
+        "https://www.ctyun.cn/document/11061839/11095143"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。卡片标签『通用模型』；编程 Token Plan 支持（1积分≈输入3333/输出1111 Token）；另有 deepseek-v4-flash-0731-new（Anthropic协议标签）。"
+    },
+    {
+      "id": "glm-5.3",
+      "name": "glm-5.3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。卡片标签『Anthropic协议』。"
+    },
+    {
+      "id": "GLM-5.2",
+      "name": "GLM-5.2",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156",
+        "https://www.ctyun.cn/document/11061839/11092368"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。编程 Token Plan 支持（1积分≈输入1250/输出357 Token）。"
+    },
+    {
+      "id": "GLM-5.1",
+      "name": "GLM-5.1",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156",
+        "https://www.ctyun.cn/document/11061839/11092368"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。Token Plan 积分兑换表按输入长度分段 [0,32k] / (32k,200k]，推测按量价也分段但公开页未列价。"
+    },
+    {
+      "id": "kimi-k2.6",
+      "name": "kimi-k2.6",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156",
+        "https://www.ctyun.cn/document/11061839/11092368"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。市场分类『视觉理解』；编程 Token Plan 支持（1积分≈输入1538/输出370 Token）。"
+    },
+    {
+      "id": "MiniMax-M3",
+      "name": "MiniMax-M3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "minimax",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156",
+        "https://www.ctyun.cn/document/11061839/11092368"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。市场分类『视觉理解』；Token Plan 积分兑换按输入 [0,512k]/(512k,1M] 分段。"
+    },
+    {
+      "id": "kimi-k3.1-pro",
+      "name": "kimi-k3.1-pro",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。市场分类『视觉理解』。"
+    },
+    {
+      "id": "qwen3.7-max",
+      "name": "qwen3.7-max",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156",
+        "https://www.ctyun.cn/document/11061839/11099156"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。OpenAI 兼容文档示例使用该 model 名。"
+    },
+    {
+      "id": "AICI-DeepSeek-V4.1-Flash-1017",
+      "name": "AICI-DeepSeek-V4.1-Flash-1017",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 4,
+        "output": 16,
+        "cache_read": 0.08,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "空闲(22:00-08:00)",
+            "input": 2,
+            "output": 8,
+            "cache_read": 0.04
+          }
+        ],
+        "off_peak": "可信Token专区：高峰北京时间 8:00-22:00，其余为空闲；字段为高峰价"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156",
+        "https://www.ctyun.cn/document/11061839/11099422"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。可信Token专区（TEE 机密推理，昇腾910+鲲鹏920）专用模型，仅面向符合条件的央国企客户，需联系客户经理开通；不可用免费额度/量包。文档写作 AICI-Deepseek-V4.1-Flash-1017（大小写不同），以控制台为准。请求地址 https://tokenhub-trust-zone.ctaigw.cn/v1。"
+    },
+    {
+      "id": "AICI-GLM-5.2",
+      "name": "AICI-GLM-5.2",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 16,
+        "output": 56,
+        "cache_read": 4,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://ctxirang.ctyun.cn/maasMarket/market",
+        "https://www.ctyun.cn/document/11061839/11099156",
+        "https://www.ctyun.cn/document/11061839/11099422"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。可信Token专区专用（同上）；不区分峰谷。"
+    }
+  ],
+  "notes": "产品已更名：息壤『模型推理服务』→『星辰TokenHub运营服务平台』（文档亦称 Token服务）；旧『一站式智算服务平台』已于 2026-10-23 下线。开通需天翼云账户实名认证，按量计费需账户余额≥100元；按量后付费、每小时出账；计费单位元/千tokens（含输入/输出/缓存命中，部分模型分段定价）。缓存命中价全天统一，『不参与优惠时段（00:00-08:00）折扣』——说明存在 00:00-08:00 优惠时段，但具体模型与折扣比例仅在登录后模型广场可见。新用户热门模型 50 万 tokens 免费量包、14 天有效。每个模型的上下文、最大输出、单价、RPM/TPM 只在登录后的模型广场详情页展示，公开文档未给出，故本文件大面积 null；model id 取公开模型市场卡片展示名（文档称 model 可用『模型调用名称或模型id』，展示名是否与调用名完全一致未逐一核实）。思考开关：thinking.type=enabled/disabled（默认值文档未写），思维链字段 reasoning_content；结构化输出 response_format json_object；缓存命中可传 prompt_cache_key 提升命中率。2026-11-24 将下线 Qwen3-14B/8B/4B、DeepSeek-R1/V3、Llama3 等旧模型。另有『星辰MaaS平台』（星辰大模型，xirang-openapi.ctyun.cn，签名鉴权，对话大模型 0.003/0.012 元/千tokens）为独立产品，未纳入。"
+}

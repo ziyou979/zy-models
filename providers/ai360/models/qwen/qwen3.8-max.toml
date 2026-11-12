@@ -1,0 +1,30 @@
+# Imported from research/ai360.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.360.com/open/zh/models/qwen/qwen3.8-max
+# Source: https://ai.360.com/open/zh/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 12, output 36, cache_read 1.5
+schema = 2
+base_model = "alibaba/qwen3.8-max"
+sources = ["https://ai.360.com/open/zh/models/qwen/qwen3.8-max", "https://ai.360.com/open/zh/models"]
+checked_at = "2026-11-13"
+notes = "平台列表数据：contextLength 1000000、maxCompletionTokens 128000（平台原值，十进制）。上游供应商：通义千问、tokenmall-wyls。缓存写入未单列时按平台规则『缓存写入按输入单价的 1.25 倍；1 小时缓存写入按输入单价的 2 倍』推导（此处 cache_write 留空）。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+output = 128_000
+
+[cost.text.input]
+price = 1.79484959
+
+[cost.text.input.cache]
+read = 0.2243562
+
+[cost.text.output]
+price = 5.38454877
+
+[cost_cny]
+input = 12
+output = 36
+cache_read = 1.5

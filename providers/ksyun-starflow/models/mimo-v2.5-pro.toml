@@ -1,0 +1,41 @@
+# Imported from research/ksyun-starflow.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://docs.ksyun.com/documents/45801
+# Source: https://docs.ksyun.com/documents/45797
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 7, output 21, cache_read 1.4
+schema = 2
+base_model = "xiaomi/mimo-v2.5-pro"
+sources = ["https://docs.ksyun.com/documents/45801", "https://docs.ksyun.com/documents/45797"]
+checked_at = "2026-11-13"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 1.04699559
+
+[cost.text.input.cache]
+read = 0.20939912
+
+[cost.text.output]
+price = 3.14098678
+
+[cost_cny]
+input = 7
+output = 21
+cache_read = 1.4
+
+[[cost_cny.tiers]]
+when = "输入长度[0,256K)"
+input = 7
+output = 21
+cache_read = 1.4
+
+[[cost_cny.tiers]]
+when = "输入长度[256K,1M)"
+input = 14
+output = 42
+cache_read = 2.8
+
+[limit_label]
+context = "1M"

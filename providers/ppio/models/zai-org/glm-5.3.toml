@@ -1,0 +1,36 @@
+# Imported from research/ppio.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.ppio.com/openai/v1/models
+# Source: https://ppio.com/pricing
+# Source: https://ppio.com/docs/model/llm-thinking-mode.md
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 8, output 28, cache_read 2
+schema = 2
+base_model = "zhipuai/glm-5.3"
+sources = ["https://api.ppio.com/openai/v1/models", "https://ppio.com/pricing", "https://ppio.com/docs/model/llm-thinking-mode.md"]
+checked_at = "2026-11-13"
+notes = "支持端点: chat/completions, anthropic, responses"
+
+[capabilities]
+reasoning = { supported = true, effort = ["low", "high", "max"], default = { type = "effort", value = "max" } }
+structured_output = true
+
+[limit]
+context = 1_048_576
+
+[cost.text.input]
+price = 1.19656639
+
+[cost.text.input.cache]
+read = 0.2991416
+
+[cost.text.output]
+price = 4.18798238
+
+[cost_cny]
+input = 8
+output = 28
+cache_read = 2
+
+[reasoning_default]
+value = "max"
+source = "https://ppio.com/docs/model/llm-thinking-mode.md"

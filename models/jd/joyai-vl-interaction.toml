@@ -1,0 +1,28 @@
+# Imported from research/jdcloud-joymaas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://joymaas.jdcloud.com/models/JoyAI-VL-Interaction
+# Source: https://joymaas.jdcloud.com/models
+# Source: https://docs.jdcloud.com/cn/jdaip/maas-billing-rules
+# 占位: release_date 未公开，占位为核查日 2026-11-13
+# 占位: open_weights 未确认，写 false
+# 占位: temperature/top_p/top_k 为默认值 true/true/false，未核实
+schema = 2
+name = "JoyAI-VL-Interaction"
+description = "JoyAI-VL-Interaction by jd."
+open_weights = false
+release_date = "2026-11-13"
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = true }
+temperature = true
+top_p = true
+top_k = false
+
+[limit]
+context = 32_000
+input = 32_000
+output = 4000

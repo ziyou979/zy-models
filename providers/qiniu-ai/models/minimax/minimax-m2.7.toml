@@ -1,0 +1,26 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://www.qiniu.com/ai/models
+# Source: https://api.qnaigc.com/v1/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2.1, output 8.4
+schema = 2
+base_model = "minimax/MiniMax-M2.7"
+sources = ["https://www.qiniu.com/ai/models", "https://api.qnaigc.com/v1/models"]
+checked_at = "2026-11-13"
+notes = "广场 architecture.reasoning.supported=false 但 features 含「深度思考」，两处不一致；协议: openai-chat, anthropic-messages；官方广场限速 RPM 10000 / TPM 5000000；备案号 Shanghai-MiniMax-202505230046"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+output = 128_000
+
+[cost.text.input]
+price = 0.31409868
+
+[cost.text.output]
+price = 1.25639471
+
+[cost_cny]
+input = 2.1
+output = 8.4

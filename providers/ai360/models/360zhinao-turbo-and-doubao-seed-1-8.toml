@@ -1,0 +1,31 @@
+# Imported from research/ai360.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.360.com/open/zh/models/360zhinao-turbo-and-doubao-seed-1-8
+# Source: https://ai.360.com/open/zh/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 9, output 27, cache_read 0.3
+schema = 2
+base_model = "360/360zhinao-turbo-and-doubao-seed-1.8"
+sources = ["https://ai.360.com/open/zh/models/360zhinao-turbo-and-doubao-seed-1-8", "https://ai.360.com/open/zh/models"]
+checked_at = "2026-11-13"
+notes = "平台列表数据：contextLength 256000、maxCompletionTokens 64000（平台原值，十进制）。上游供应商：360智脑、腾讯混元、火山引擎。360 智脑与豆包组合模型。"
+
+[cost.text.input]
+price = 1.34613719
+
+[cost.text.input.cache]
+read = 0.04487124
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 9
+output = 27
+cache_read = 0.3
+off_peak = "北京时间工作日 09:00–13:00、14:00–19:00 为高峰（字段为高峰价），周六日及其他时段半价"
+
+[[cost_cny.tiers]]
+when = "周六、周日 或 非工作时段"
+input = 4.5
+output = 13.5
+cache_read = 0.15

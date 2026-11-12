@@ -1,0 +1,31 @@
+# Imported from research/kuaishou-vanchin.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na
+# Source: https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 3, output 18
+schema = 2
+base_model = "alibaba/qwen3.6-27b"
+sources = ["https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na", "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"]
+checked_at = "2026-11-13"
+notes = "文档原文：上下文256K、最大输入254K、最大输出64K（按1K=1024换算）。默认限流 RPM 30 / TPM 100000。列表页能力写图片/视频理解；简介称具备深度思考。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+input = 260_096
+
+[cost.text.input]
+price = 0.4487124
+
+[cost.text.output]
+price = 2.69227438
+
+[cost_cny]
+input = 3
+output = 18
+
+[limit_label]
+context = "256K"
+input = "254K"
+output = "64K"

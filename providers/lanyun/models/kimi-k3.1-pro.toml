@@ -1,0 +1,26 @@
+# Imported from research/lanyun.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://maas-api.lanyun.net/v1/models
+# Source: https://maas.lanyun.net/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 13, output 68
+schema = 2
+base_model = "moonshotai/kimi-k3.1-pro"
+sources = ["https://maas-api.lanyun.net/v1/models", "https://maas.lanyun.net/"]
+checked_at = "2026-11-13"
+notes = "API 返回 max_output_tokens=1024000，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 1_024_000
+
+[cost.text.input]
+price = 1.94442039
+
+[cost.text.output]
+price = 10.17081434
+
+[cost_cny]
+input = 13
+output = 68

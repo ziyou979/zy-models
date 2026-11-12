@@ -1,0 +1,32 @@
+# Imported from research/ai360.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.360.com/open/zh/models/360zhinao-turbo-32k-agent
+# Source: https://ai.360.com/open/zh/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8
+schema = 2
+base_model = "360/360zhinao-turbo-32k-agent"
+sources = ["https://ai.360.com/open/zh/models/360zhinao-turbo-32k-agent", "https://ai.360.com/open/zh/models"]
+checked_at = "2026-11-13"
+notes = "平台列表数据：contextLength 116000、maxCompletionTokens 16000（平台原值，十进制）。上游供应商：360智脑、通义千问、火山引擎。360 自研 Agent 场景模型；上游另含通义千问、火山引擎（推测为路由/融合，平台未说明）。"
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+
+[[cost_cny.tiers]]
+when = "input<=256000"
+context_max = 256_000
+input = 2
+output = 8
+
+[[cost_cny.tiers]]
+when = "input>256000"
+context_min = 256_000
+input = 6
+output = 24

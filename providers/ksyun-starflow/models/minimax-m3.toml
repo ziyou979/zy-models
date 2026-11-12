@@ -1,0 +1,42 @@
+# Imported from research/ksyun-starflow.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://docs.ksyun.com/documents/45801
+# Source: https://docs.ksyun.com/documents/45797
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 4.2, output 16.8, cache_read 0.84
+schema = 2
+base_model = "minimax/MiniMax-M3"
+sources = ["https://docs.ksyun.com/documents/45801", "https://docs.ksyun.com/documents/45797"]
+checked_at = "2026-11-13"
+notes = "5min写入缓存原文：支持5min缓存写入，价格免费"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.62819736
+
+[cost.text.input.cache]
+read = 0.12563947
+
+[cost.text.output]
+price = 2.51278943
+
+[cost_cny]
+input = 4.2
+output = 16.8
+cache_read = 0.84
+
+[[cost_cny.tiers]]
+when = "输入长度[0,512K)"
+input = 4.2
+output = 16.8
+cache_read = 0.84
+
+[[cost_cny.tiers]]
+when = "输入长度[512K,1M)"
+input = 8.4
+output = 33.6
+cache_read = 1.68
+
+[limit_label]
+context = "1M"

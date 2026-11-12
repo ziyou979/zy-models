@@ -1,0 +1,32 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://www.qiniu.com/ai/models
+# Source: https://api.qnaigc.com/v1/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.8, output 2.8, cache_read 0.23
+schema = 2
+base_model = "zhipuai/glm-5.3-flash"
+aliases = ["glm-5.3-flash"]
+sources = ["https://www.qiniu.com/ai/models", "https://api.qnaigc.com/v1/models"]
+checked_at = "2026-11-13"
+notes = "协议: openai-chat, anthropic-messages；官方广场限速 RPM 10000 / TPM 5000000；备案号 Beijing-ChatGLM-20230821"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+output = 128_000
+
+[cost.text.input]
+price = 0.11965664
+
+[cost.text.input.cache]
+read = 0.03440128
+
+[cost.text.output]
+price = 0.41879824
+
+[cost_cny]
+input = 0.8
+output = 2.8
+cache_read = 0.23

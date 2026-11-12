@@ -1,0 +1,50 @@
+# Imported from research/kuaishou-vanchin.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na
+# Source: https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 1.2, output 7.2, cache_read 0.24
+schema = 2
+base_model = "alibaba/qwen3.5-397b-a17b"
+sources = ["https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na", "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"]
+checked_at = "2026-11-13"
+notes = "文档原文：上下文256K、最大输入252K、最大输出64K（按1K=1024换算）。默认限流 RPM 30 / TPM 300000。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+input = 258_048
+
+[cost.text.input]
+price = 0.17948496
+
+[cost.text.input.cache]
+read = 0.03589699
+
+[cost.text.output]
+price = 1.07690975
+
+[cost_cny]
+input = 1.2
+output = 7.2
+cache_read = 0.24
+
+[[cost_cny.tiers]]
+when = "input<=128k"
+context_max = 128_000
+input = 1.2
+output = 7.2
+cache_read = 0.24
+
+[[cost_cny.tiers]]
+when = "128k<input<=256k"
+context_min = 128_000
+context_max = 256_000
+input = 3
+output = 18
+cache_read = 0.6
+
+[limit_label]
+context = "256K"
+input = "252K"
+output = "64K"

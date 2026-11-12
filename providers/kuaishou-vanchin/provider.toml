@@ -1,0 +1,13 @@
+# Imported from research/kuaishou-vanchin.json by scripts/import-research.ts
+# cn openai-chat: https://wanqing.streamlakeapi.com/api/gateway/v1/endpoints (https://www.streamlake.com/document/WANQING/mmbwl465t71egh812sq)
+# intl openai-chat: https://vanchin.streamlake.ai/api/gateway/v1/endpoints (https://github.com/lobehub/lobehub/pull/13651)
+name = "Kuaishou Vanchin (StreamLake)"
+env = ["VANCHIN_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://wanqing.streamlakeapi.com/api/gateway/v1/endpoints"
+doc = "https://www.streamlake.com/document/WANQING/mdrax1ixkgpgh1ms1na"
+name_zh = "快手万擎（StreamLake）"
+region = "cn"
+pricing_page = "https://www.streamlake.com/document/WANQING/mdsorb4ejjptsmfyrn"
+notes = "调用方式：除早期 KAT 系列有预置接入点外，需先在控制台「在线推理」创建推理接入点，请求里的 model 传接入点 ID（形如 ep-xxxx），不是下表的模型名；下表模型 ID 为官方模型名，仅供对照。\n\n调用方式特殊：除早期 KAT 系列有预置推理接入点外，其他模型需在控制台『在线推理』新建自定义推理接入点，调用时 model 传接入点 ID（如 ep-b0cx22-1111111111111111111），本文件 id 用的是官方模型名，便于对照。思考开关：enable_thinking（默认『根据模型』，Python SDK 放 extra_body）；思维链在 reasoning_content，计入输出 Token。缓存（cached_tokens）默认开启、不可配置。部分模型支持批量推理，价格约为在线 50%。按小时出账，后付费；新用户免费推理额度以资源包发放（按输入价折算抵扣系数）；营销活动『万擎四重礼』（2026-09-07 至 12-31）含每周 95 折券、限时秒杀资源包 6 折起、新户首充翻倍。需注册认证 StreamLake 账号。自研 KAT-Coder 系列（Pro/Air V1–V2.5、Exp-72B、KAT-Dev）在模型列表全部标注【停止服务】/已下线；KwaiKAT Coding Plan 营销页与『KwaiKAT开发工具接入指南』文档页当前均返回『该页面不存在』，推断 Coding Plan 已停售（未见正式公告），故 plans 为空。主体：北京溪流湖科技有限公司。"

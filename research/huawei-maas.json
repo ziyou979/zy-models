@@ -1,0 +1,812 @@
+{
+  "provider_id": "huawei-maas",
+  "modelsdev_id": null,
+  "name_zh": "华为云 MaaS（ModelArts Studio）",
+  "name_en": "Huawei Cloud MaaS (ModelArts Studio)",
+  "doc": "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+  "pricing_page": "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+  "env": [
+    "MAAS_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://api.modelarts-maas.com/openai/v1",
+      "source": "https://support.huaweicloud.com/model-call-maas/model-call-021.html",
+      "note": "西南-贵阳一；OpenAI 兼容接口"
+    },
+    {
+      "region": "cn",
+      "protocol": "native",
+      "base_url": "https://api.modelarts-maas.com/v2",
+      "source": "https://support.huaweicloud.com/model-call-maas/model-call-019.html",
+      "note": "MaaS 标准 API V2：POST /v2/chat/completions（OpenAI 风格，thinking.type / reasoning_effort）；另有 V1 https://api.modelarts-maas.com/v1"
+    },
+    {
+      "region": "cn",
+      "protocol": "anthropic",
+      "base_url": "https://api.modelarts-maas.com/anthropic",
+      "source": "https://support.huaweicloud.com/model-call-maas/model-call-022.html",
+      "note": "POST /anthropic/v1/messages，鉴权头 x-api-key；支持模型不含 qwen3"
+    },
+    {
+      "region": "intl",
+      "protocol": "openai-chat",
+      "base_url": "https://api-ap-southeast-1.modelarts-maas.com/openai/v1",
+      "source": "https://support.huaweicloud.com/intl/en-us/model-call-maas/model-call-021.html",
+      "note": "华为云国际站 CN-Hong Kong 区域，模型集合不同（GLM-5.3/5.2/5.1、DeepSeek-V4.x-Flash 等）"
+    }
+  ],
+  "plans": [
+    {
+      "id": "token-plan",
+      "name_zh": "MaaS Token Plan 个人版",
+      "base_url": "https://api.modelarts-maas.com/plan/v2",
+      "protocol": "openai-chat",
+      "anthropic_base_url": "https://api.modelarts-maas.com/plan/anthropic",
+      "price_cny_month": {
+        "lite": 59,
+        "standard": 149,
+        "pro": 399,
+        "max": 799
+      },
+      "quota_note": "每订阅月 Tokens：Lite 5000万 / Standard 1.3亿 / Pro 3.8亿 / Max 8.8亿。每日限量发售，售罄当天不可购买；同一用户每月限购一次；仅支持升配不支持降配；有效期按自然月，未用完额度到期作废；Max 用量耗尽后可切换按需付费；不支持退订。仅支持『西南-贵阳一』；企业用户暂不支持购买个人版。『套餐额度仅在AI工具中生效，不可用于API调用。在非AI工具中使用MaaS Token Plan权益对应的专属Base URL和API Key可能会被识别为滥用或违规行为，导致订阅停用或账号封禁。』支持工具：华为云码道(CodeArts)、果办OfficeAce、Claude Code、OpenClaw、OpenCode、Cherry Studio、TRAE、Dify 等。",
+      "models": [
+        "glm-5.3",
+        "deepseek-v4.1-flash-1017",
+        "deepseek-v4.1-flash"
+      ],
+      "source": "https://support.huaweicloud.com/price-maas/price-maas-0035.html",
+      "sources": [
+        "https://support.huaweicloud.com/price-maas/price-maas-0035.html",
+        "https://support.huaweicloud.com/Token-plan-maas/tokenplan-maas-0001.html",
+        "https://support.huaweicloud.com/Token-plan-maas/tokenplan-maas-0014.html"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "id": "openpangu-2.0-pro",
+      "name": "openPangu-2.0-Pro",
+      "name_zh": "开源盘古 2.0 Pro",
+      "aliases": [],
+      "lab": "huawei-pangu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 524288,
+        "input": 512000,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 4.8,
+        "output": 17.6,
+        "cache_read": 1.2,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "input<32k",
+            "input": 3.2,
+            "output": 14.5,
+            "cache_read": 0.8
+          },
+          {
+            "when": "input>=32k",
+            "input": 4.8,
+            "output": 17.6,
+            "cache_read": 1.2
+          }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度512K、最大输入长度500K、最大输出长度128K、最大思维链长度64K（按 1K=1024 换算）。约505B总参/18B激活MoE，昇腾训练。不区分忙闲时；阶梯按单次请求Token数(<32K/≥32K)。默认限流 TPM 1,000,000 / RPM 100。max_tokens 默认 32K。open_weights 依据官方『开源盘古』品牌表述。"
+    },
+    {
+      "id": "openpangu-2.0-flash",
+      "name": "openPangu-2.0-Flash",
+      "name_zh": "开源盘古 2.0 Flash",
+      "aliases": [],
+      "lab": "huawei-pangu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 524288,
+        "input": 512000,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.8,
+        "output": 1.6,
+        "cache_read": 0.2,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf",
+        "https://support.huaweicloud.com/bulletin-maas/bulletin-maas-0001.html"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度512K、最大输入长度500K、最大输出长度128K、最大思维链长度64K（按 1K=1024 换算）。约92B总参/6B激活。平台版本号 20260630。不区分忙闲时。默认限流 TPM 1,000,000 / RPM 100。max_tokens 默认 32K。"
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": false,
+        "effort": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 8,
+        "output": 28,
+        "cache_read": 2,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度1M、最大输入长度1M、最大输出长度128K、最大思维链长度128K（按 1K=1024 换算）。深度思考不可关闭；reasoning_effort: max/high=深度推理, low=增强推理，默认 max（V2 API 参数表）。不区分忙闲时。TPM 2,000,000 / RPM 100。Token Plan 可用。"
+    },
+    {
+      "id": "glm-5.2",
+      "name": "GLM-5.2",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "none",
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "max",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 8,
+        "output": 28,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "时段2(21:00-07:59)",
+            "input": 5.6,
+            "output": 19.6
+          }
+        ],
+        "off_peak": "分时计费（北京时间）：时段1 08:00-20:59，时段2 21:00-次日07:59；input/output/cache_read 字段为时段1价"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf",
+        "https://support.huaweicloud.com/bulletin-maas/bulletin-maas-0001.html"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度1M、最大输入长度1M、最大输出长度128K、最大思维链长度64K（按 1K=1024 换算）。reasoning_effort: max/xhigh=深度推理(xhigh映射max), high/medium/low=增强推理(low/medium映射high), minimal/none=放弃思考；默认 max。价格表缓存命中列为『-』。平台版本号 20260617。"
+    },
+    {
+      "id": "glm-5.2-arkts-spark",
+      "name": "GLM-5.2-ArkTS-SPARK",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 202752,
+        "input": 196608,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "none",
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "max",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 9.6,
+        "output": 33.6,
+        "cache_read": 2.4,
+        "cache_write": null,
+        "tiers": [],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度198K、最大输入长度192K、最大输出长度128K、最大思维链长度128K（按 1K=1024 换算）。基于 GLM-5.2 面向鸿蒙 ArkTS 开发专项增训（华为云独有）。不区分忙闲时。价格表名称写作 GLM-5.2-Arkts-Spark。"
+    },
+    {
+      "id": "glm-5.1",
+      "name": "GLM-5.1",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 202752,
+        "input": 196608,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 6,
+        "output": 24,
+        "cache_read": 1.3,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "input<32k,时段1",
+            "input": 6,
+            "output": 24,
+            "cache_read": 1.3
+          },
+          {
+            "when": "input<32k,时段2",
+            "input": 4.2,
+            "output": 16.8,
+            "cache_read": 0.91
+          },
+          {
+            "when": "input>=32k,时段1",
+            "input": 8,
+            "output": 28,
+            "cache_read": 2
+          },
+          {
+            "when": "input>=32k,时段2",
+            "input": 5.6,
+            "output": 19.6,
+            "cache_read": 1.4
+          }
+        ],
+        "off_peak": "分时计费（北京时间）：时段1 08:00-20:59，时段2 21:00-次日07:59；input/output/cache_read 字段为时段1价"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度198K、最大输入长度192K、最大输出长度128K、最大思维链长度96K（按 1K=1024 换算）"
+    },
+    {
+      "id": "kimi-k2.6",
+      "name": "Kimi-K2.6",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": 262144,
+        "output": 98304
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 6.5,
+        "output": 27,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "时段2(21:00-07:59)",
+            "input": 4.55,
+            "output": 18.9
+          }
+        ],
+        "off_peak": "分时计费（北京时间）：时段1 08:00-20:59，时段2 21:00-次日07:59；input/output/cache_read 字段为时段1价"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf",
+        "https://www.huaweicloud.com/product/modelarts/studio/maas-kimi.html"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度256K、最大输入长度256K、最大输出长度96K、最大思维链长度96K（按 1K=1024 换算）。默认限流 TPM 100,000 / RPM 10。平台版本号 20260421。产品页列『结构化输出』，但 API 文档未明确，structured_output 置 null。"
+    },
+    {
+      "id": "deepseek-v4.1-flash-1017",
+      "name": "DeepSeek-V4.1-Flash-1017",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "none",
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.2,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "时段2(21:00-07:59)",
+            "input": 1,
+            "output": 4,
+            "cache_read": 0.1
+          }
+        ],
+        "off_peak": "分时计费（北京时间）：时段1 08:00-20:59，时段2 21:00-次日07:59；input/output/cache_read 字段为时段1价"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度1M、最大输入长度1M、最大输出长度384K、最大思维链长度96K（按 1K=1024 换算）。reasoning_effort: none=关闭思考, low=增强推理, high/max=深度推理，默认 high。max_tokens 默认 64K。TPM 2,000,000 / RPM 100。图片最多600张。Token Plan 可用。"
+    },
+    {
+      "id": "deepseek-v4.1-flash",
+      "name": "DeepSeek-V4.1-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.2,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "时段2(21:00-07:59)",
+            "input": 1,
+            "output": 4,
+            "cache_read": 0.1
+          }
+        ],
+        "off_peak": "分时计费（北京时间）：时段1 08:00-20:59，时段2 21:00-次日07:59；input/output/cache_read 字段为时段1价"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度1M、最大输入长度1M、最大输出长度384K、最大思维链长度96K（按 1K=1024 换算）。reasoning_effort: low/high/max，默认 high；思考开关用 thinking.type。max_tokens 默认 64K。TPM 1,000,000 / RPM 100。Token Plan 可用。"
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek-V4-Flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 393216
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": [
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 4,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "时段2(21:00-07:59)",
+            "input": 1.4,
+            "output": 2.8
+          }
+        ],
+        "off_peak": "分时计费（北京时间）：时段1 08:00-20:59，时段2 21:00-次日07:59；input/output/cache_read 字段为时段1价"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度1M、最大输入长度1M、最大输出长度384K、最大思维链长度96K（按 1K=1024 换算）。默认限流仅 TPM 60,000 / RPM 15（列在『其他模型』）。价格表标注『支持文本对话及图像理解』，但模型列表未列图像理解，modalities 仅填 text。计费说明曾注明 DeepSeek-V4 系列价格『近期将有所上调』。"
+    },
+    {
+      "id": "qwen3-32b",
+      "name": "Qwen3-32B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 131072,
+        "input": 131072,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 20,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "思考模式",
+            "input": 2,
+            "output": 20
+          },
+          {
+            "when": "非思考模式",
+            "input": 2,
+            "output": 8
+          }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度128K、最大输入长度128K、最大输出长度128K、最大思维链长度128K（按 1K=1024 换算）。模型列表未标 Function Call。TPM 100,000 / RPM 300。output 字段取思考模式价。"
+    },
+    {
+      "id": "qwen3-30b-a3b",
+      "name": "Qwen3-30B-A3B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": true,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 131072,
+        "input": 131072,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": true,
+        "toggle": true,
+        "effort": null,
+        "default": "on",
+        "default_source": "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "field": "reasoning_content"
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.75,
+        "output": 7.5,
+        "cache_read": null,
+        "cache_write": null,
+        "tiers": [
+          {
+            "when": "思考模式",
+            "input": 0.75,
+            "output": 7.5
+          },
+          {
+            "when": "非思考模式",
+            "input": 0.75,
+            "output": 3
+          }
+        ],
+        "off_peak": null
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://support.huaweicloud.com/model-list-maas/model_list_0001.md",
+        "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf",
+        "https://support.huaweicloud.com/model-call-maas/model-call-005.html",
+        "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "文档原文：上下文长度128K、最大输入128K、最大输出128K（按1K=1024换算）。TPM 100,000 / RPM 300。output 字段取思考模式价。"
+    }
+  ],
+  "notes": "中国站模型均部署在『西南-贵阳一』，需先在控制台『模型推理>在线推理>预置服务』开通对应模型预置服务后用 API Key 调用。分时计费：北京时间 08:00-20:59 为时段1、21:00-次日07:59 为时段2，仅部分模型支持（GLM-5.2/5.1、Kimi-K2.6、DeepSeek 系列），时段2约为7折或5折；价格『具体以MaaS控制台为准』。上下文缓存自动开启，无需配置。思考开关：V2/OpenAI 接口用 thinking.type(enabled/disabled)，思维链在 reasoning_content；多轮对话中 reasoning_content 回传会被忽略。表 1-3 写所有模型默认开启思维链（GLM-5.3 不支持关闭）。max_tokens 默认：DeepSeek-V4.1 系列 64K，Kimi-K2.6/openPangu-2.0 32K，其他 4K。各模型 TPM/RPM 默认限流见各模型 notes。模型列表页 2026-09 版曾列 deepseek-v4-pro、glm-5、DeepSeek-V3（Anthropic 页残留），当前列表未列，未收录。实名/备案要求：本次未在 MaaS 文档中找到专门说明。"
+}

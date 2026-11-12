@@ -17,4 +17,4 @@
 
 ## 数值修正候选（研究数据与上游冲突，已在本仓库按研究数据覆盖）
 
-完整列表与换算说明见 `research/IMPORT_REPORT.md` 的「数值冲突」一节（23 项）。提交上游前请逐项复核来源（每个模型 overlay 的 `sources`）。
+完整列表与换算说明见 `research/IMPORT_REPORT.md` 的「数值冲突」一节（27 项）。提交上游前请逐项复核来源（每个模型 overlay 的 `sources`）。

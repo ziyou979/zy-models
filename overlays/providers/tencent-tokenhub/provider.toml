@@ -13,7 +13,6 @@ protocol = "openai-chat"
 models = ["tc-code-latest", "deepseek-v4.1-flash-1017", "deepseek-v4-pro-0813", "deepseek/deepseek-flash", "hy4", "hy4-preview", "minimax-m3", "glm-5.3", "glm-5.3-flash", "kimi-k2.7-code", "kimi-k3", "mimo-v2.6-flash", "glm-5.2", "minimax-m2.7", "deepseek/deepseek-v4-flash", "deepseek/deepseek-v4-pro"]
 quota_note = "四档：Lite 39 元/月 780 积分、Standard 99 元/月 1980 积分、Pro 299 元/月 5980 积分、Max 599 元/月 11980 积分；2026-08-31 17:00 起改为积分抵扣（1 元=20 积分）。Anthropic 基址 https://tokenhub.tencentmaas.com/plan/anthropic，Responses 为 /plan/v3/responses。严禁 API 调用，仅限 AI 工具；不支持退款；与 Hy Token Plan 共用同一 API Key。限时活动：Auto(tc-code-latest) 统一 11 积分/百万 tokens（至 2026-11-30 12:00）、deepseek-v4-pro-0813 7 折与 deepseek-v4.1-flash-1017 4 折（至 2026-11-16 12:00）等。"
 usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
-sources = ["https://cloud.tencent.com/document/product/1823/130060", "https://cloud.tencent.com/document/product/1823/140042"]
 
 [[plans]]
 id = "hy-token-plan"

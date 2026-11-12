@@ -1,0 +1,37 @@
+# Imported from research/ucloud-modelverse.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.modelverse.cn/v1/models
+# Source: https://api.ucloud.cn/?Action=ListUFSquareModelGuest
+# Source: https://astraflow.ucloud.cn/modelverse/prices
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 12, output 36, cache_read 1.5
+schema = 2
+base_model = "alibaba/qwen3.8-max"
+sources = ["https://api.modelverse.cn/v1/models", "https://api.ucloud.cn/?Action=ListUFSquareModelGuest", "https://astraflow.ucloud.cn/modelverse/prices"]
+checked_at = "2026-11-13"
+notes = "模型广场长度字段为 K 单位标签：MaxModelLenNew=1024、MaxInputTokens=991、MaxOutputTokens=131（0 表示未填）；另有旧字段 MaxModelLen=131072，与新字段不一致，未采用；模型广场 Capabilities.FunctionCall/StructuredOutput 对全部模型均为 false（疑似未填），tools/structured_output 记 null；协议: ChatCompletions"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+input = 1_014_784
+
+[cost.text.input]
+price = 1.79484959
+
+[cost.text.input.cache]
+read = 0.2243562
+
+[cost.text.output]
+price = 5.38454877
+
+[cost_cny]
+input = 12
+output = 36
+cache_read = 1.5
+cache_write = 15
+
+[limit_label]
+context = "1024K"
+input = "991K"
+output = "131K"

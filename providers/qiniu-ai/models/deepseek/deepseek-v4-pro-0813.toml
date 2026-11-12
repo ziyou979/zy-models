@@ -1,0 +1,42 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://www.qiniu.com/ai/models
+# Source: https://api.qnaigc.com/v1/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 9, output 27, cache_read 0.3
+schema = 2
+base_model = "deepseek/deepseek-v4-pro-0813"
+aliases = ["deepseek-v4-pro-0813", "deepseek-v4-pro-20260813", "deepseek/deepseek-v4-pro-20260813"]
+sources = ["https://www.qiniu.com/ai/models", "https://api.qnaigc.com/v1/models"]
+checked_at = "2026-11-13"
+notes = "联网搜索 0.005 元/次；协议: openai-chat；官方广场限速 RPM 10000 / TPM 5000000；备案号 Beijing-DeepseekChat-202404280016"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[cost.text.input]
+price = 1.34613719
+
+[cost.text.input.cache]
+read = 0.04487124
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 9
+output = 27
+cache_read = 0.3
+off_peak = "按量计费分高峰/空闲两档：空闲 输入4.5/输出13.5/缓存0.15 元/百万（高峰与空闲具体时段未在模型广场数据中给出）"
+
+[[cost_cny.tiers]]
+when = "高峰"
+input = 9
+output = 27
+cache_read = 0.3
+
+[[cost_cny.tiers]]
+when = "空闲"
+input = 4.5
+output = 13.5
+cache_read = 0.15

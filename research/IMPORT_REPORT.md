@@ -1,28 +1,43 @@
 # 研究数据导入报告
 
-由 `bun scripts/import-research.ts` 生成。研究文件：`ant-ling.json`、`baichuan.json`、`dashscope.json`、`deepseek.json`、`iflytek-spark.json`、`longcat.json`、`minimax.json`、`moonshot.json`、`qianfan.json`、`sensenova.json`、`siliconflow.json`、`stepfun.json`、`tencent-tokenhub.json`、`volcengine.json`、`xiaomi-mimo.json`、`zhipu.json`。
+由 `bun scripts/import-research.ts` 生成。研究文件：`ai360.json`、`ant-ling.json`、`baichuan.json`、`ctyun-xirang.json`、`dashscope.json`、`deepseek.json`、`ecloud-moma.json`、`gitee-ai.json`、`huawei-maas.json`、`iflytek-spark.json`、`infini-ai.json`、`jdcloud-joymaas.json`、`ksyun-starflow.json`、`kuaishou-vanchin.json`、`lanyun.json`、`longcat.json`、`minimax.json`、`modelscope.json`、`moonshot.json`、`paratera.json`、`ppio.json`、`qianfan.json`、`qiniu.json`、`sensenova.json`、`siliconflow.json`、`skywork.json`、`stepfun.json`、`tencent-tokenhub.json`、`ucloud-modelverse.json`、`unicom-cucloud.json`、`volcengine.json`、`xiaomi-mimo.json`、`youdao.json`、`zhipu.json`。
 人民币→美元换算：1 USD = 6.685797 CNY（2026-11-12，https://open.er-api.com/v6/latest/USD），容差 2%。
 
-## 涉及的 provider（16）
+## 涉及的 provider（31）
 
+- ai360 (新建)
 - bailing ← research/ant-ling.json
 - baichuan (新建)
+- ctyun-xirang (新建)
 - alibaba-cn ← research/dashscope.json
 - deepseek ← research/deepseek.json
+- moark ← research/gitee-ai.json
+- huawei-maas (新建)
 - iflytek-spark (新建)
+- infini-ai (新建)
+- jdcloud-joymaas (新建)
+- ksyun-starflow (新建)
+- kuaishou-vanchin (新建)
+- lanyun (新建)
 - longcat ← research/longcat.json
 - minimax-cn ← research/minimax.json
+- modelscope ← research/modelscope.json
 - moonshotai-cn ← research/moonshot.json
+- ppio (新建)
 - qianfan (新建)
+- qiniu-ai ← research/qiniu.json
 - sensenova ← research/sensenova.json
 - siliconflow-cn ← research/siliconflow.json
 - stepfun ← research/stepfun.json
 - tencent-tokenhub ← research/tencent-tokenhub.json
+- ucloud-modelverse (新建)
+- unicom-cucloud (新建)
 - volcengine ← research/volcengine.json
 - xiaomi ← research/xiaomi-mimo.json
+- youdao (新建)
 - zhipuai ← research/zhipu.json
 
-## 数值冲突（以研究数据为准，已写入 overlays/）（23）
+## 数值冲突（以研究数据为准，已写入 overlays/）（27）
 
 - alibaba-cn/qwen3.7-plus limit.output: 64000 → 128000
 - alibaba-cn/qwen3.7-max cost.input (USD): 1.65 → 1.79484959 (¥12 ÷ 6.685797)
@@ -37,6 +52,10 @@
 - alibaba-cn/glm-5.3 cost.output (USD): 3.851 → 4.18798238 (¥28 ÷ 6.685797)
 - alibaba-cn/glm-5.2 cost.input (USD): 1.1 → 1.19656639 (¥8 ÷ 6.685797)
 - alibaba-cn/glm-5.2 cost.output (USD): 3.851 → 4.18798238 (¥28 ÷ 6.685797)
+- moark/deepseek-v4-flash-0731 cost.input (USD): 0.15 → 0.4487124 (¥3 ÷ 6.685797)
+- moark/deepseek-v4-flash-0731 cost.output (USD): 0.3 → 1.34613719 (¥9 ÷ 6.685797)
+- moark/MiniMax-M2.7 cost.input (USD): 0.29 → 0.31409868 (¥2.1 ÷ 6.685797)
+- moark/MiniMax-M2.7 cost.output (USD): 1.2 → 1.25639471 (¥8.4 ÷ 6.685797)
 - tencent-tokenhub/hy4 cost.input (USD): 0.834 → 0.89742479 (¥6 ÷ 6.685797)
 - tencent-tokenhub/hy4 cost.output (USD): 2.501 → 2.69227438 (¥18 ÷ 6.685797)
 - tencent-tokenhub/hy4 cost.cache_read (USD): 0.042 → 0.04487124 (¥0.3 ÷ 6.685797)
@@ -48,13 +67,16 @@
 - volcengine/doubao-seed-character-260628 limit.context: 256000 → 131072
 - volcengine/doubao-seed-character-260628 limit.output: 256000 → 32768
 
-## 补充（上游缺失，研究数据新增）（53）
+## 补充（上游缺失，研究数据新增）（56）
 
 - plan `token-plan-lite` → provider `alibaba-token-plan-cn` (matched api https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1)
 - plan `token-plan-essential` → provider `alibaba-token-plan-cn` (matched api https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1)
 - plan `token-plan-standard` → provider `alibaba-token-plan-cn` (matched api https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1)
 - plan `token-plan-pro` → provider `alibaba-token-plan-cn` (matched api https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1)
 - plan `coding-plan-pro` → provider `alibaba-coding-plan-cn` (matched api https://coding.dashscope.aliyuncs.com/v1)
+- moark/GLM-5.3 cost.cache_read (USD): — → 0.2991416 (¥2 ÷ 6.685797)
+- moark/kimi-k3 cost.cache_read (USD): — → 0.2991416 (¥2 ÷ 6.685797)
+- moark/deepseek-v4-flash-0731 cost.cache_read (USD): — → 0.04487124 (¥0.3 ÷ 6.685797)
 - plan `m-plan` → provider `minimax-cn-coding-plan` (matched api https://api.minimax.cn/anthropic)
 - plan `kimi-code-plus` → provider `kimi-code-plan-cn` (matched api https://api.kimi.com/coding/v1)
 - plan `kimi-code-pro` → provider `kimi-code-plan-cn` (matched api https://api.kimi.com/coding/v1)
@@ -148,12 +170,14 @@
 - zhipuai/glm-5.3-flashx reasoning.effort: upstream ["low","high","max"] vs research ["high","max"]
 - zhipuai/glm-4.7 cost.input: upstream $0.44819 vs research ¥2（研究价格分档，基础价为最低档，未覆盖）
 
-## K/M 换算口径差异（同一标称值，沿用上游写法）（57）
+## K/M 换算口径差异（同一标称值，沿用上游写法）（59）
 
 - alibaba-cn/qwen3.8-max limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - alibaba-cn/qwen3.8-flash limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - alibaba-cn/kimi-k3 limit.context: 上游 1048576 / 研究 1000000（同一标称值，沿用上游）
 - alibaba-cn/glm-5.3 limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
+- moark/GLM-5.3 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- moark/deepseek-v4-flash-0731 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
 - siliconflow-cn/deepseek-ai/DeepSeek-V4-Pro limit.context: 上游 1049000 / 研究 1048576（同一标称值，沿用上游）
 - siliconflow-cn/deepseek-ai/DeepSeek-V4-Flash limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
 - siliconflow-cn/deepseek-ai/DeepSeek-V3.2 limit.context: 上游 164000 / 研究 163840（同一标称值，沿用上游）
@@ -208,8 +232,26 @@
 - zhipuai/glm-4.5-air limit.context: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - zhipuai/glm-4.5-air limit.output: 上游 98304 / 研究 96000（同一标称值，沿用上游）
 
-## 新增 provider 模型文件（66）
+## 新增 provider 模型文件（330）
 
+- ai360/360zhinao/360zhinao-pro → base_model 360/360zhinao-pro
+- ai360/360zhinao-turbo-32k-agent → base_model 360/360zhinao-turbo-32k-agent
+- ai360/360zhinao-turbo-and-doubao-seed-1-8 → base_model 360/360zhinao-turbo-and-doubao-seed-1.8
+- ai360/deepseek/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
+- ai360/deepseek/deepseek-v4-pro → base_model deepseek/deepseek-v4-pro-0813
+- ai360/deepseek/deepseek-v4-flash → base_model deepseek/deepseek-v4.1-flash-1017
+- ai360/z-ai/glm-5.3 → base_model zhipuai/glm-5.3
+- ai360/z-ai/glm-5.3-flash → base_model zhipuai/glm-5.3-flash
+- ai360/z-ai/glm-5.2 → base_model zhipuai/glm-5.2
+- ai360/moonshotai/kimi-k3.1-pro → base_model moonshotai/kimi-k3.1-pro
+- ai360/moonshotai/kimi-k3 → base_model moonshotai/kimi-k3
+- ai360/moonshotai/kimi-k2.7-code → base_model moonshotai/kimi-k2.7-code
+- ai360/qwen/qwen3.8-max → base_model alibaba/qwen3.8-max
+- ai360/qwen/qwen3.8-flash → base_model alibaba/qwen3.8-flash
+- ai360/minimax/MiniMax-M3.1-Flash → base_model minimax/MiniMax-M3.1-Flash
+- ai360/minimax/MiniMax-M3 → base_model minimax/MiniMax-M3
+- ai360/xiaomi/mimo-v2.6-pro → base_model xiaomi/mimo-v2.6-pro
+- ai360/stepfun/step-5-preview → base_model stepfun/step-5-preview
 - bailing/Ling-3.2-flash → base_model inclusionai/ling-3.2-flash
 - bailing/Ling-3.1-flash → base_model inclusionai/ling-3.1-flash
 - bailing/Ling-3.0-flash-VL → base_model inclusionai/ling-3.0-flash-vl
@@ -224,8 +266,49 @@
 - baichuan/Baichuan3-Turbo → base_model baichuan/baichuan3-turbo
 - baichuan/Baichuan3-Turbo-128k → base_model baichuan/baichuan3-turbo-128k
 - baichuan/Baichuan2-Turbo → base_model baichuan/baichuan2-turbo
+- ctyun-xirang/Hy4 → base_model tencent/hy4
+- ctyun-xirang/deepseek-v4.1-flash-1017 → base_model deepseek/deepseek-v4.1-flash-1017
+- ctyun-xirang/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
+- ctyun-xirang/deepseek-v4-pro-0813 → base_model deepseek/deepseek-v4-pro-0813
+- ctyun-xirang/DeepSeek-V4-Flash-0731 → base_model deepseek/deepseek-v4-flash-0731
+- ctyun-xirang/glm-5.3 → base_model zhipuai/glm-5.3
+- ctyun-xirang/GLM-5.2 → base_model zhipuai/glm-5.2
+- ctyun-xirang/GLM-5.1 → base_model zhipuai/glm-5.1
+- ctyun-xirang/kimi-k2.6 → base_model moonshotai/kimi-k2.6
+- ctyun-xirang/MiniMax-M3 → base_model minimax/MiniMax-M3
+- ctyun-xirang/kimi-k3.1-pro → base_model moonshotai/kimi-k3.1-pro
+- ctyun-xirang/qwen3.7-max → base_model alibaba/qwen3.7-max
 - alibaba-cn/qwen4-max-preview → base_model alibaba/qwen4-max-preview
 - alibaba-cn/kimi-k3.1-pro → base_model moonshotai/kimi-k3.1-pro
+- moark/GLM-5.3-Flash → base_model zhipuai/glm-5.3-flash
+- moark/GLM-5.2 → base_model zhipuai/glm-5.2
+- moark/kimi-k3.1-pro → base_model moonshotai/kimi-k3.1-pro
+- moark/Kimi-K2.7-Code → base_model moonshotai/kimi-k2.7-code
+- moark/DeepSeek-V4-Pro-0813 → base_model deepseek/deepseek-v4-pro-0813
+- moark/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
+- moark/DeepSeek-V4.1-Flash-1017 → base_model deepseek/deepseek-v4.1-flash-1017
+- moark/MiniMax-M3 → base_model minimax/MiniMax-M3
+- moark/MiniMax-M3.1-Flash → base_model minimax/MiniMax-M3.1-Flash
+- moark/qwen3.8-max → base_model alibaba/qwen3.8-max
+- moark/qwen3.8-flash → base_model alibaba/qwen3.8-flash
+- moark/Qwen3.7-Plus → base_model alibaba/qwen3.7-plus
+- moark/Qwen3.7-Max → base_model alibaba/qwen3.7-max
+- moark/Step-3.7-Flash → base_model stepfun/step-3.7-flash
+- moark/MiMo-V2.5-Pro → base_model xiaomi/mimo-v2.5-pro
+- moark/hy4 → base_model tencent/hy4
+- moark/ERNIE-5.0-Thinking → base_model baidu/ernie-5.0-thinking
+- huawei-maas/openpangu-2.0-pro → base_model huawei/openpangu-2.0-pro
+- huawei-maas/openpangu-2.0-flash → base_model huawei/openpangu-2.0-flash
+- huawei-maas/glm-5.3 → base_model zhipuai/glm-5.3
+- huawei-maas/glm-5.2 → base_model zhipuai/glm-5.2
+- huawei-maas/glm-5.2-arkts-spark → base_model zhipuai/glm-5.2-arkts-spark
+- huawei-maas/glm-5.1 → base_model zhipuai/glm-5.1
+- huawei-maas/kimi-k2.6 → base_model moonshotai/kimi-k2.6
+- huawei-maas/deepseek-v4.1-flash-1017 → base_model deepseek/deepseek-v4.1-flash-1017
+- huawei-maas/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
+- huawei-maas/deepseek-v4-flash → base_model deepseek/deepseek-v4.1-flash-1017
+- huawei-maas/qwen3-32b → base_model alibaba/qwen3-32b
+- huawei-maas/qwen3-30b-a3b → base_model alibaba/qwen3-30b-a3b
 - iflytek-spark/spark-x2.6 → base_model iflytek/spark-x2.6
 - iflytek-spark/spark-x2.6-4b → base_model iflytek/spark-x2.6-4b
 - iflytek-spark/spark-x2.6-preview → base_model iflytek/spark-x2.6-preview
@@ -233,7 +316,139 @@
 - iflytek-spark/spark-x2.5-1.7b → base_model iflytek/spark-x2.5-1.7b
 - iflytek-spark/spark-x2.5-4b → base_model iflytek/spark-x2.5-4b
 - iflytek-spark/spark-x → base_model iflytek/spark-x
+- infini-ai/glm-5.3 → base_model zhipuai/glm-5.3
+- infini-ai/glm-5.3-flash → base_model zhipuai/glm-5.3-flash
+- infini-ai/glm-5.2 → base_model zhipuai/glm-5.2
+- infini-ai/glm-5.1 → base_model zhipuai/glm-5.1
+- infini-ai/kimi-k3 → base_model moonshotai/kimi-k3
+- infini-ai/kimi-k2.7-code → base_model moonshotai/kimi-k2.7-code
+- infini-ai/kimi-k2.6 → base_model moonshotai/kimi-k2.6
+- infini-ai/deepseek-v4-pro → base_model deepseek/deepseek-v4-pro-0813
+- infini-ai/deepseek-v4-pro-0813 → base_model deepseek/deepseek-v4-pro-0813
+- infini-ai/deepseek-v4-flash-0731 → base_model deepseek/deepseek-v4-flash-0731
+- infini-ai/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
+- infini-ai/deepseek-v4.1-flash-1017 → base_model deepseek/deepseek-v4.1-flash-1017
+- infini-ai/minimax-m3 → base_model minimax/MiniMax-M3
+- infini-ai/minimax-m2.7 → base_model minimax/MiniMax-M2.7
+- infini-ai/qwen3.8-max → base_model alibaba/qwen3.8-max
+- infini-ai/qwen3.6-27b → base_model alibaba/qwen3.6-27b
+- infini-ai/qwen3.6-35b-a3b → base_model alibaba/qwen3.6-35b-a3b
+- infini-ai/mimo-v2.6-pro → base_model xiaomi/mimo-v2.6-pro
+- jdcloud-joymaas/JoyAI-VL-Interaction → base_model jd/joyai-vl-interaction
+- jdcloud-joymaas/medcode-v1 → base_model jd/medcode-v1
+- jdcloud-joymaas/kimi-k3.1-pro → base_model moonshotai/kimi-k3.1-pro
+- jdcloud-joymaas/kimi-k3 → base_model moonshotai/kimi-k3
+- jdcloud-joymaas/DeepSeek-V4-Pro-0813 → base_model deepseek/deepseek-v4-pro-0813
+- jdcloud-joymaas/DeepSeek-V4.1-Flash-1017 → base_model deepseek/deepseek-v4.1-flash-1017
+- jdcloud-joymaas/DeepSeek-V4-Flash-0731 → base_model deepseek/deepseek-v4-flash-0731
+- jdcloud-joymaas/GLM-5.3 → base_model zhipuai/glm-5.3
+- jdcloud-joymaas/GLM-5.2 → base_model zhipuai/glm-5.2
+- jdcloud-joymaas/GLM-5.1 → base_model zhipuai/glm-5.1
+- jdcloud-joymaas/GLM-5 → base_model zhipuai/glm-5
+- jdcloud-joymaas/MiniMax-M3 → base_model minimax/MiniMax-M3
+- jdcloud-joymaas/MiniMax-M2.7 → base_model minimax/MiniMax-M2.7
+- jdcloud-joymaas/Kimi-K2.6 → base_model moonshotai/kimi-k2.6
+- jdcloud-joymaas/Qwen3.5-397B-A17B → base_model alibaba/qwen3.5-397b-a17b
+- jdcloud-joymaas/Qwen3.6-35B-A3B → base_model alibaba/qwen3.6-35b-a3b
+- jdcloud-joymaas/DeepSeek-V3.2 → base_model deepseek/deepseek-v3.2
+- ksyun-starflow/deepseek-v4-pro-0813 → base_model deepseek/deepseek-v4-pro-0813
+- ksyun-starflow/deepseek-v4-flash → base_model deepseek/deepseek-v4.1-flash-1017
+- ksyun-starflow/deepseek-v3.2 → base_model deepseek/deepseek-v3.2
+- ksyun-starflow/glm-5.3 → base_model zhipuai/glm-5.3
+- ksyun-starflow/glm-5.2 → base_model zhipuai/glm-5.2
+- ksyun-starflow/glm-5.1 → base_model zhipuai/glm-5.1
+- ksyun-starflow/glm-5-turbo → base_model zhipuai/glm-5-turbo
+- ksyun-starflow/glm-4.7 → base_model zhipuai/glm-4.7
+- ksyun-starflow/kimi-k3 → base_model moonshotai/kimi-k3
+- ksyun-starflow/kimi-k2.7-code → base_model moonshotai/kimi-k2.7-code
+- ksyun-starflow/kimi-k2.6 → base_model moonshotai/kimi-k2.6
+- ksyun-starflow/kimi-k2.5 → base_model moonshotai/kimi-k2.5
+- ksyun-starflow/minimax-m3 → base_model minimax/MiniMax-M3
+- ksyun-starflow/minimax-m2.7 → base_model minimax/MiniMax-M2.7
+- ksyun-starflow/mimo-v2.5-pro → base_model xiaomi/mimo-v2.5-pro
+- ksyun-starflow/qwen3.8-max → base_model alibaba/qwen3.8-max
+- ksyun-starflow/qwen3.7-max → base_model alibaba/qwen3.7-max
+- ksyun-starflow/qwen3.7-plus → base_model alibaba/qwen3.7-plus
+- ksyun-starflow/qwen3.7-flash → base_model alibaba/qwen3.7-flash
+- ksyun-starflow/qwen3-vl-plus → base_model alibaba/qwen3-vl-plus
+- kuaishou-vanchin/GLM-5.3 → base_model zhipuai/glm-5.3
+- kuaishou-vanchin/GLM-5.3-Flash → base_model zhipuai/glm-5.3-flash
+- kuaishou-vanchin/GLM-5.2 → base_model zhipuai/glm-5.2
+- kuaishou-vanchin/GLM-5.1 → base_model zhipuai/glm-5.1
+- kuaishou-vanchin/GLM-5 → base_model zhipuai/glm-5
+- kuaishou-vanchin/DeepSeek-V4.1-Flash-1017 → base_model deepseek/deepseek-v4.1-flash-1017
+- kuaishou-vanchin/DeepSeek-V4.1-Flash → base_model deepseek/deepseek-v4.1-flash
+- kuaishou-vanchin/DeepSeek-V4-Pro-0813 → base_model deepseek/deepseek-v4-pro-0813
+- kuaishou-vanchin/DeepSeek-V4-Flash-0731 → base_model deepseek/deepseek-v4-flash-0731
+- kuaishou-vanchin/DeepSeek-V4-Flash → base_model deepseek/deepseek-v4.1-flash-1017
+- kuaishou-vanchin/DeepSeek-V4-Pro → base_model deepseek/deepseek-v4-pro-0813
+- kuaishou-vanchin/DeepSeek-R1 → base_model deepseek/deepseek-r1
+- kuaishou-vanchin/DeepSeek-V3 → base_model deepseek/deepseek-v3
+- kuaishou-vanchin/Kimi-K2.6 → base_model moonshotai/kimi-k2.6
+- kuaishou-vanchin/Kimi-K2.7-Code → base_model moonshotai/kimi-k2.7-code
+- kuaishou-vanchin/MiniMax-M3.1-Flash → base_model minimax/MiniMax-M3.1-Flash
+- kuaishou-vanchin/MiniMax-M2.7 → base_model minimax/MiniMax-M2.7
+- kuaishou-vanchin/MiniMax-M2.5 → base_model minimax/MiniMax-M2.5
+- kuaishou-vanchin/MiMo-V2.6-Pro → base_model xiaomi/mimo-v2.6-pro
+- kuaishou-vanchin/Qwen3.6-27B → base_model alibaba/qwen3.6-27b
+- kuaishou-vanchin/Qwen3.5-397B-A17B → base_model alibaba/qwen3.5-397b-a17b
+- lanyun/kimi-k3.1-pro → base_model moonshotai/kimi-k3.1-pro
+- lanyun/kimi-k3 → base_model moonshotai/kimi-k3
+- lanyun/kimi-k2.7-code → base_model moonshotai/kimi-k2.7-code
+- lanyun/kimi-k2.6 → base_model moonshotai/kimi-k2.6
+- lanyun/glm-5.3 → base_model zhipuai/glm-5.3
+- lanyun/glm-5.3-flash → base_model zhipuai/glm-5.3-flash
+- lanyun//maas/zhipuai/GLM-5.2 → base_model zhipuai/glm-5.2
+- lanyun//maas/zhipuai/GLM-5.1 → base_model zhipuai/glm-5.1
+- lanyun/glm-5 → base_model zhipuai/glm-5
+- lanyun/minimax-m3 → base_model minimax/MiniMax-M3
+- lanyun/minimax-m2.7 → base_model minimax/MiniMax-M2.7
+- lanyun//maas/minimax/MiniMax-M2.5 → base_model minimax/MiniMax-M2.5
+- lanyun/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
+- lanyun/deepseek-v4-pro → base_model deepseek/deepseek-v4-pro-0813
+- lanyun/deepseek-v4-flash → base_model deepseek/deepseek-v4.1-flash-1017
+- lanyun//maas/deepseek-ai/DeepSeek-V3.2 → base_model deepseek/deepseek-v3.2
+- lanyun/qwen3.8-max → base_model alibaba/qwen3.8-max
+- lanyun/qwen3.7-max → base_model alibaba/qwen3.7-max
+- lanyun/qwen3.7-plus → base_model alibaba/qwen3.7-plus
+- lanyun/qwen3.6-flash → base_model alibaba/qwen3.6-flash
 - longcat/LongCat-2.5 → base_model meituan/longcat-2.5
+- modelscope/deepseek-ai/DeepSeek-V4-Pro-0813 → base_model deepseek/deepseek-v4-pro-0813
+- modelscope/deepseek-ai/DeepSeek-V4-Pro → base_model deepseek/deepseek-v4-pro-0813
+- modelscope/deepseek-ai/DeepSeek-V4-Flash-0731 → base_model deepseek/deepseek-v4-flash-0731
+- modelscope/deepseek-ai/DeepSeek-V4.1-Flash → base_model deepseek/deepseek-v4.1-flash
+- modelscope/deepseek-ai/DeepSeek-V4.1-Flash-1017 → base_model deepseek/deepseek-v4.1-flash-1017
+- modelscope/ZhipuAI/GLM-5.2 → base_model zhipuai/glm-5.2
+- modelscope/ZhipuAI/GLM-4.7-Flash → base_model zhipuai/glm-4.7-flash
+- modelscope/moonshotai/Kimi-K3.1-Pro → base_model moonshotai/kimi-k3.1-pro
+- modelscope/MiniMax/MiniMax-M3 → base_model minimax/MiniMax-M3
+- modelscope/Qwen/Qwen3.8-27B → base_model alibaba/qwen3.8-27b
+- modelscope/Qwen/Qwen3.8-Flash-Next → base_model alibaba/qwen3.8-flash-next
+- modelscope/Qwen/Qwen3.5-397B-A17B → base_model alibaba/qwen3.5-397b-a17b
+- modelscope/Qwen/Qwen3.5-122B-A10B → base_model alibaba/qwen3.5-122b-a10b
+- modelscope/Qwen/Qwen3.5-35B-A3B → base_model alibaba/qwen3.5-35b-a3b
+- modelscope/stepfun-ai/Step-3.7-Flash → base_model stepfun/step-3.7-flash
+- modelscope/stepfun-ai/Step-5-Preview → base_model stepfun/step-5-preview
+- ppio/deepseek/deepseek-v4-pro-0813 → base_model deepseek/deepseek-v4-pro-0813
+- ppio/deepseek/deepseek-v4-flash-0731 → base_model deepseek/deepseek-v4-flash-0731
+- ppio/deepseek/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
+- ppio/zai-org/glm-5.3 → base_model zhipuai/glm-5.3
+- ppio/zai-org/glm-5.3-flash → base_model zhipuai/glm-5.3-flash
+- ppio/zai-org/glm-5.2 → base_model zhipuai/glm-5.2
+- ppio/moonshotai/kimi-k3 → base_model moonshotai/kimi-k3
+- ppio/moonshotai/kimi-k3.1-pro → base_model moonshotai/kimi-k3.1-pro
+- ppio/moonshotai/kimi-k2.7-code → base_model moonshotai/kimi-k2.7-code
+- ppio/moonshotai/kimi-k2.6 → base_model moonshotai/kimi-k2.6
+- ppio/minimax/minimax-m3 → base_model minimax/MiniMax-M3
+- ppio/minimax/minimax-m3.1-flash → base_model minimax/MiniMax-M3.1-Flash
+- ppio/minimax/minimax-m2.7 → base_model minimax/MiniMax-M2.7
+- ppio/qwen/qwen3.8-max → base_model alibaba/qwen3.8-max
+- ppio/qwen/qwen3.8-flash → base_model alibaba/qwen3.8-flash
+- ppio/qwen/qwen3.7-plus → base_model alibaba/qwen3.7-plus
+- ppio/tencent/hy4 → base_model tencent/hy4
+- ppio/xiaomimimo/mimo-v2.6-pro → base_model xiaomi/mimo-v2.6-pro
+- ppio/stepfun/step-5-preview → base_model stepfun/step-5-preview
+- ppio/zai-org/glm-4.6v → base_model zhipuai/glm-4.6v
 - qianfan/ernie-5.5-flash-preview → base_model baidu/ernie-5.5-flash-preview
 - qianfan/ernie-light-dt-1.0 → base_model baidu/ernie-light-dt-1.0
 - qianfan/ernie-5.1 → base_model baidu/ernie-5.1
@@ -247,6 +462,26 @@
 - qianfan/glm-5.1 → base_model zhipuai/glm-5.1
 - qianfan/kimi-k2.6 → base_model moonshotai/kimi-k2.6
 - qianfan/qwen3.5-397b-a17b → base_model alibaba/qwen3.5-397b-a17b
+- qiniu-ai/deepseek/deepseek-v4-pro-0813 → base_model deepseek/deepseek-v4-pro-0813
+- qiniu-ai/deepseek/deepseek-v4-flash-20260731 → base_model deepseek/deepseek-v4-flash-0731
+- qiniu-ai/deepseek/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
+- qiniu-ai/z-ai/glm-5.3 → base_model zhipuai/glm-5.3
+- qiniu-ai/z-ai/glm-5.3-flash → base_model zhipuai/glm-5.3-flash
+- qiniu-ai/z-ai/glm-5.2 → base_model zhipuai/glm-5.2
+- qiniu-ai/moonshotai/kimi-k3 → base_model moonshotai/kimi-k3
+- qiniu-ai/moonshotai/kimi-k3.1-pro → base_model moonshotai/kimi-k3.1-pro
+- qiniu-ai/moonshotai/kimi-k2.7-code → base_model moonshotai/kimi-k2.7-code
+- qiniu-ai/minimax/minimax-m3 → base_model minimax/MiniMax-M3
+- qiniu-ai/minimax/minimax-m3.1-flash → base_model minimax/MiniMax-M3.1-Flash
+- qiniu-ai/minimax/minimax-m2.7 → base_model minimax/MiniMax-M2.7
+- qiniu-ai/qwen/qwen3.8-max → base_model alibaba/qwen3.8-max
+- qiniu-ai/qwen/qwen3.8-flash-next → base_model alibaba/qwen3.8-flash
+- qiniu-ai/qwen/qwen3.7-plus → base_model alibaba/qwen3.7-plus
+- qiniu-ai/bytedance/doubao-seed-2-1-pro → base_model bytedance-seed/seed-2.1-pro
+- qiniu-ai/tencent/hy4 → base_model tencent/hy4
+- qiniu-ai/xiaomi/mimo-v2.6-pro → base_model xiaomi/mimo-v2.6-pro
+- qiniu-ai/sensenova/sensenova-6.8-flash → base_model sensetime/sensenova-6.8-flash
+- qiniu-ai/stepfun/step-3.7-flash → base_model stepfun/step-3.7-flash
 - sensenova/sensenova-6.8-flash → base_model sensetime/sensenova-6.8-flash
 - sensenova/deepseek-flash → base_model deepseek/deepseek-v4.1-flash-1017
 - sensenova/glm-5.3 → base_model zhipuai/glm-5.3
@@ -271,14 +506,70 @@
 - tencent-tokenhub/minimax-m3 → base_model minimax/MiniMax-M3
 - tencent-tokenhub/mimo-v2.6-pro → base_model xiaomi/mimo-v2.6-pro
 - tencent-tokenhub/step-5-preview → base_model stepfun/step-5-preview
+- ucloud-modelverse/deepseek-v4-pro-0813 → base_model deepseek/deepseek-v4-pro-0813
+- ucloud-modelverse/deepseek-v4-flash-0731 → base_model deepseek/deepseek-v4-flash-0731
+- ucloud-modelverse/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
+- ucloud-modelverse/deepseek-v4.1-flash-1017 → base_model deepseek/deepseek-v4.1-flash-1017
+- ucloud-modelverse/glm-5.3 → base_model zhipuai/glm-5.3
+- ucloud-modelverse/glm-5.3-flash → base_model zhipuai/glm-5.3-flash
+- ucloud-modelverse/glm-5.2 → base_model zhipuai/glm-5.2
+- ucloud-modelverse/kimi-k3 → base_model moonshotai/kimi-k3
+- ucloud-modelverse/kimi-k3.1-pro → base_model moonshotai/kimi-k3.1-pro
+- ucloud-modelverse/kimi-k2.7-code → base_model moonshotai/kimi-k2.7-code
+- ucloud-modelverse/MiniMax-M3 → base_model minimax/MiniMax-M3
+- ucloud-modelverse/minimax-m3.1-flash → base_model minimax/MiniMax-M3.1-Flash
+- ucloud-modelverse/MiniMax-M2.7 → base_model minimax/MiniMax-M2.7
+- ucloud-modelverse/qwen3.8-max → base_model alibaba/qwen3.8-max
+- ucloud-modelverse/qwen3.7-max → base_model alibaba/qwen3.7-max
+- ucloud-modelverse/qwen3.7-plus → base_model alibaba/qwen3.7-plus
+- ucloud-modelverse/qwen3.7-flash → base_model alibaba/qwen3.7-flash
+- ucloud-modelverse/hy4 → base_model tencent/hy4
+- ucloud-modelverse/mimo-v2.6-pro → base_model xiaomi/mimo-v2.6-pro
+- ucloud-modelverse/doubao-seed-2-1-pro-260628 → base_model bytedance-seed/seed-2.1-pro
+- unicom-cucloud/DeepSeek-V4-Pro → base_model deepseek/deepseek-v4-pro-0813
+- unicom-cucloud/DeepSeek-V4-Flash → base_model deepseek/deepseek-v4.1-flash-1017
+- unicom-cucloud/DeepSeek-V3.2 → base_model deepseek/deepseek-v3.2
+- unicom-cucloud/DeepSeek-V3.1 → base_model deepseek/deepseek-v3.1
+- unicom-cucloud/DeepSeek-R1 → base_model deepseek/deepseek-r1
+- unicom-cucloud/glm-5.2 → base_model zhipuai/glm-5.2
+- unicom-cucloud/glm-5.1 → base_model zhipuai/glm-5.1
+- unicom-cucloud/kimi-k3 → base_model moonshotai/kimi-k3
+- unicom-cucloud/kimi-k2.7-code → base_model moonshotai/kimi-k2.7-code
+- unicom-cucloud/kimi-k2.6 → base_model moonshotai/kimi-k2.6
+- unicom-cucloud/Qwen3.8-Max → base_model alibaba/qwen3.8-max
+- unicom-cucloud/Qwen3.7-Max → base_model alibaba/qwen3.7-max
+- unicom-cucloud/Qwen3.6-Plus → base_model alibaba/qwen3.6-plus
+- unicom-cucloud/Qwen3.6-27B → base_model alibaba/qwen3.6-27b
+- unicom-cucloud/MiniMax-M2.5 → base_model minimax/MiniMax-M2.5
 - volcengine/doubao-seed-2-1-lite-260915 → base_model bytedance-seed/seed-2.1-lite
 - volcengine/doubao-seed-translation-250915 → base_model bytedance-seed/seed-translation
 - volcengine/kimi-k3-1-pro-261024 → base_model moonshotai/kimi-k3.1-pro
 - volcengine/deepseek-v4-1-flash-261017 → base_model deepseek/deepseek-v4.1-flash
 - volcengine/deepseek-v4-1-flash-economy-261017 → base_model deepseek/deepseek-v4.1-flash
+- youdao/deepseek-flash → base_model deepseek/deepseek-v4.1-flash-1017
+- youdao/deepseek-v4-pro → base_model deepseek/deepseek-v4-pro-0813
+- youdao/glm-5.3 → base_model zhipuai/glm-5.3
+- youdao/glm-5.3-flash → base_model zhipuai/glm-5.3-flash
+- youdao/glm-5.2 → base_model zhipuai/glm-5.2
+- youdao/glm-5.1 → base_model zhipuai/glm-5.1
+- youdao/kimi-k3.1-pro → base_model moonshotai/kimi-k3.1-pro
+- youdao/kimi-k3 → base_model moonshotai/kimi-k3
+- youdao/kimi-k2.7-code → base_model moonshotai/kimi-k2.7-code
+- youdao/kimi-k2.6 → base_model moonshotai/kimi-k2.6
+- youdao/qwen3.8-max → base_model alibaba/qwen3.8-max
+- youdao/qwen3.8-flash → base_model alibaba/qwen3.8-flash
+- youdao/qwen3.7-max → base_model alibaba/qwen3.7-max
+- youdao/qwen3.7-plus → base_model alibaba/qwen3.7-plus
+- youdao/minimax-m3 → base_model minimax/MiniMax-M3
+- youdao/minimax-m3.1-flash → base_model minimax/MiniMax-M3.1-Flash
+- youdao/mimo-v2.5-pro → base_model xiaomi/mimo-v2.5-pro
+- youdao/hy4 → base_model tencent/hy4
 
-## 新增 lab 模型文件（27）
+## 新增 lab 模型文件（36）
 
+- 360/360zhinao-pro（open_weights 未确认，写 false；tools 未确认，写 false）
+- 360/360zhinao-turbo-32k-agent（open_weights 未确认，写 false；tools 未确认，写 false）
+- 360/360zhinao-turbo-and-doubao-seed-1.8（open_weights 未确认，写 false；tools 未确认，写 false）
 - inclusionai/ling-3.2-flash（limit.output 未公开，按上游惯例取 context；open_weights 未确认，写 false）
 - baichuan/baichuan-m3-plus（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
 - baichuan/baichuan-m3（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
@@ -291,6 +582,10 @@
 - baichuan/baichuan3-turbo-128k（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
 - baichuan/baichuan2-turbo（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
 - alibaba/qwen4-max-preview（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
+- baidu/ernie-5.0-thinking（limit.output 未公开，按上游惯例取 context；release_date 未公开，占位为核查日 2026-11-13；open_weights 未确认，写 false）
+- huawei/openpangu-2.0-pro（release_date 未公开，占位为核查日 2026-11-13）
+- huawei/openpangu-2.0-flash（release_date 未公开，占位为核查日 2026-11-13）
+- zhipuai/glm-5.2-arkts-spark（release_date 未公开，占位为核查日 2026-11-13；open_weights 未确认，写 false）
 - iflytek/spark-x2.6（limit.output 未公开，按上游惯例取 context；open_weights 未确认，写 false）
 - iflytek/spark-x2.6-4b（limit.output 未公开，按上游惯例取 context；open_weights 未确认，写 false）
 - iflytek/spark-x2.6-preview（limit.output 未公开，按上游惯例取 context；open_weights 未确认，写 false）
@@ -298,24 +593,177 @@
 - iflytek/spark-x2.5-1.7b（limit.output 未公开，按上游惯例取 context；open_weights 未确认，写 false）
 - iflytek/spark-x2.5-4b（limit.output 未公开，按上游惯例取 context；open_weights 未确认，写 false）
 - iflytek/spark-x（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
+- jd/joyai-vl-interaction（release_date 未公开，占位为核查日 2026-11-13；open_weights 未确认，写 false）
+- jd/medcode-v1（release_date 未公开，占位为核查日 2026-11-13；open_weights 未确认，写 false）
 - baidu/ernie-5.5-flash-preview（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
 - baidu/ernie-light-dt-1.0（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
 - baidu/ernie-5.1（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
-- sensetime/sensenova-6.8-flash（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
+- sensetime/sensenova-6.8-flash（open_weights 未确认，写 false）
 - stepfun/step-1o-turbo-vision（limit.output 未公开，按上游惯例取 context；release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
 - tencent/hunyuan-role-latest（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
 - bytedance-seed/seed-2.1-lite（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
 - bytedance-seed/seed-translation（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
 
-## 占位与跳过（1）
+## 占位与跳过（18）
 
 - bailing/Ling-3.0-tiny: 跳过（无 context，无法生成 lab 文件）
+- ctyun-xirang/TeleChat3-438B-A24B: 跳过（无 context，无法生成 lab 文件）
+- ctyun-xirang/Xing4.0-29B-A4B: 跳过（无 context，无法生成 lab 文件）
+- ctyun-xirang/ctyun-smart-router: 跳过（无 context，无法生成 lab 文件）
+- ctyun-xirang/AICI-DeepSeek-V4.1-Flash-1017: 跳过（无 context，无法生成 lab 文件）
+- ctyun-xirang/AICI-GLM-5.2: 跳过（无 context，无法生成 lab 文件）
+- infini-ai/xing4.1-preview: 跳过（无 context，无法生成 lab 文件）
+- jdcloud-joymaas/JoyAI-LLM-Flash: 跳过（无 context，无法生成 lab 文件）
+- jdcloud-joymaas/JoyAI-LLM-1.3T: 跳过（无 context，无法生成 lab 文件）
+- kuaishou-vanchin/DeepSeek R1: 模型 ID 含空格，文件名改为 DeepSeek-R1
+- kuaishou-vanchin/DeepSeek V3: 模型 ID 含空格，文件名改为 DeepSeek-V3
+- modelscope/Shanghai_AI_Laboratory/Intern-S2-Preview: 跳过（无 context，无法生成 lab 文件）
+- modelscope/meituan-longcat/LongCat-Flash-Lite: 跳过（无 context，无法生成 lab 文件）
+- modelscope/nex-agi/Nex-N2.5-Pro: 跳过（无 context，无法生成 lab 文件）
+- modelscope/OpenGVLab/InternVL3_5-241B-A28B: 跳过（无 context，无法生成 lab 文件）
+- skywork/skywork-ai/skyclaw-v1: 跳过（无 context，无法生成 lab 文件）
+- skywork/skywork-ai/skyclaw-v1-lite: 跳过（无 context，无法生成 lab 文件）
+- unicom-cucloud/DeepSeek-V4-Flash-Latest: 跳过（无 context，无法生成 lab 文件）
 
-## 占位 logo（平台名首字，非官方商标）（4）
+## 占位 logo（平台名首字，非官方商标）（16）
 
+- ai360（360智脑开放平台）
 - baichuan（百川智能开放平台）
+- ctyun-xirang（天翼云息壤·星辰TokenHub运营服务平台（原模型推理服务））
+- huawei-maas（华为云 MaaS（ModelArts Studio））
 - iflytek-spark（讯飞星火 / 讯飞星辰 MaaS）
+- infini-ai（无问芯穹 GenStudio 大模型服务平台）
+- jdcloud-joymaas（京东云 JoyMaaS / JoyBuilder 模型开发平台2.0）
+- ksyun-starflow（金山云星流模型服务（星流平台 模型API服务））
+- kuaishou-vanchin（快手万擎（StreamLake））
+- lanyun（蓝耘元生代 MaaS 大模型服务平台）
+- ppio（PPIO 派欧云）
 - qianfan（百度智能云千帆（百度千帆·大模型服务及Agent开发平台））
+- ucloud-modelverse（优刻得 UModelVerse 模型服务平台（AstraFlow））
+- unicom-cucloud（联通云 AI服务平台 AISP（星罗算力调度服务 · Token服务，联通元景））
+- youdao（网易有道智云 大模型 Token 平台 / 有道 TokenPlan）
 - alibaba-token-plan-cn（百炼 Token Plan 个人版）
 
-overlay 文件数：118
+## 标签换算（官方只给出 1M / 128K 这类标签，按厂商惯例换算；原标签存于 limit_label）（112）
+
+- moark/GLM-5.3: limit.context 「1M」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- moark/GLM-5.3-Flash: limit.context 「1M」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- moark/GLM-5.2: limit.context 「1M」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- moark/kimi-k3: limit.context 「1M」→ 1048576（标签换算，按 moonshotai 惯例 1024 进制）
+- moark/kimi-k3.1-pro: limit.context 「1M」→ 1048576（标签换算，按 moonshotai 惯例 1024 进制）
+- moark/Kimi-K2.7-Code: limit.context 「256K」→ 262144（标签换算，按 moonshotai 惯例 1024 进制）
+- moark/DeepSeek-V4-Pro-0813: limit.context 「1M」→ 1048576（标签换算，按 deepseek 惯例 1024 进制）
+- moark/deepseek-v4-flash-0731: limit.context 「1M」→ 1048576（标签换算，按 deepseek 惯例 1024 进制）
+- moark/deepseek-v4.1-flash: limit.context 「1M」→ 1048576（标签换算，按 deepseek 惯例 1024 进制）
+- moark/DeepSeek-V4.1-Flash-1017: limit.context 「1M」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- moark/MiniMax-M3: limit.context 「1M」→ 1048576（标签换算，按 minimax 惯例 1024 进制）
+- moark/MiniMax-M3.1-Flash: limit.context 「1M」→ 1048576（标签换算，按 minimax 惯例 1024 进制）
+- moark/MiniMax-M2.7: limit.context 「200K」→ 204800（标签换算，按 minimax 惯例 1024 进制）
+- moark/qwen3.8-max: limit.context 「1M」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 alibaba 惯例 1024 进制）
+- moark/qwen3.8-flash: limit.context 「1M」→ 1048576（标签换算，按 alibaba 惯例 1024 进制）
+- moark/Qwen3.7-Plus: limit.context 「1M」→ 1048576（标签换算，按 alibaba 惯例 1024 进制）
+- moark/Qwen3.7-Max: limit.context 「1M」→ 1048576（标签换算，按 alibaba 惯例 1024 进制）
+- moark/Step-3.7-Flash: limit.context 「256K」→ 256000（标签换算，按 stepfun 惯例 1000 进制）
+- moark/hy4: limit.context 「1024k」→ 1048576（标签换算，按 tencent 惯例 1024 进制）
+- moark/ERNIE-5.0-Thinking: limit.context 「128K」→ 128000（标签换算，按 baidu 惯例 1000 进制）
+- huawei-maas/openpangu-2.0-pro: limit.context 「512K」→ 512000，limit.input 「500K」→ 500000，limit.output 「128K」→ 128000（标签换算，按 huawei 惯例 1000 进制）
+- huawei-maas/openpangu-2.0-flash: limit.context 「512K」→ 512000，limit.input 「500K」→ 500000，limit.output 「128K」→ 128000（标签换算，按 huawei 惯例 1000 进制）
+- huawei-maas/glm-5.3: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- huawei-maas/glm-5.2: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- huawei-maas/glm-5.2-arkts-spark: limit.context 「198K」→ 202752，limit.input 「192K」→ 196608，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- huawei-maas/glm-5.1: limit.context 「198K」→ 202752，limit.input 「192K」→ 196608，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- huawei-maas/kimi-k2.6: limit.context 「256K」→ 262144，limit.input 「256K」→ 262144，limit.output 「96K」→ 98304（标签换算，按 moonshotai 惯例 1024 进制）
+- huawei-maas/deepseek-v4.1-flash-1017: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- huawei-maas/deepseek-v4.1-flash: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- huawei-maas/deepseek-v4-flash: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- huawei-maas/qwen3-32b: limit.context 「128K」→ 131072，limit.input 「128K」→ 131072，limit.output 「128K」→ 131072（标签换算，按 alibaba 惯例 1024 进制）
+- huawei-maas/qwen3-30b-a3b: limit.context 「128K」→ 131072，limit.input 「128K」→ 131072，limit.output 「128K」→ 131072（标签换算，按 alibaba 惯例 1024 进制）
+- jdcloud-joymaas/JoyAI-VL-Interaction: limit.context 「32K」→ 32000，limit.input 「32K」→ 32000，limit.output 「4K」→ 4000（标签换算，按 jd 惯例 1000 进制）
+- jdcloud-joymaas/medcode-v1: limit.context 「128K」→ 128000，limit.input 「128K」→ 128000，limit.output 「8K」→ 8000（标签换算，按 jd 惯例 1000 进制）
+- jdcloud-joymaas/kimi-k3.1-pro: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「1M」→ 1048576（标签换算，按 moonshotai 惯例 1024 进制）
+- jdcloud-joymaas/kimi-k3: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「1M」→ 1048576（标签换算，按 moonshotai 惯例 1024 进制）
+- jdcloud-joymaas/DeepSeek-V4-Pro-0813: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- jdcloud-joymaas/DeepSeek-V4.1-Flash-1017: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- jdcloud-joymaas/DeepSeek-V4-Flash-0731: limit.context 「1M」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- jdcloud-joymaas/GLM-5.3: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- jdcloud-joymaas/GLM-5.2: limit.context 「1M」→ 1048576，limit.input 「872K」→ 892928，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- jdcloud-joymaas/GLM-5.1: limit.context 「200K」→ 204800，limit.input 「72K」→ 73728，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- jdcloud-joymaas/GLM-5: limit.context 「200K」→ 204800，limit.input 「72K」→ 73728，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- jdcloud-joymaas/MiniMax-M3: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 minimax 惯例 1024 进制）
+- jdcloud-joymaas/MiniMax-M2.7: limit.context 「200K」→ 204800，limit.input 「72K」→ 73728，limit.output 「128K」→ 131072（标签换算，按 minimax 惯例 1024 进制）
+- jdcloud-joymaas/Kimi-K2.6: limit.context 「256K」→ 262144，limit.input 「224K」→ 229376，limit.output 「32K」→ 32768（标签换算，按 moonshotai 惯例 1024 进制）
+- jdcloud-joymaas/Qwen3.5-397B-A17B: limit.context 「256K」→ 262144，limit.input 「192K」→ 196608，limit.output 「64K」→ 65536（标签换算，按 alibaba 惯例 1024 进制）
+- jdcloud-joymaas/Qwen3.6-35B-A3B: limit.context 「256K」→ 262144，limit.input 「192K」→ 196608，limit.output 「64K」→ 65536（标签换算，按 alibaba 惯例 1024 进制）
+- jdcloud-joymaas/DeepSeek-V3.2: limit.context 「128K」→ 131072，limit.input 「120K」→ 122880，limit.output 「8K」→ 8192（标签换算，按 deepseek 惯例 1024 进制）
+- ksyun-starflow/deepseek-v4-pro-0813: limit.context 「1M」→ 1048576（标签换算，按 deepseek 惯例 1024 进制）
+- ksyun-starflow/deepseek-v4-flash: limit.context 「1M」→ 1048576（标签换算，按 deepseek 惯例 1024 进制）
+- ksyun-starflow/deepseek-v3.2: limit.context 「128k」→ 131072（标签换算，按 deepseek 惯例 1024 进制）
+- ksyun-starflow/glm-5.3: limit.context 「1M」→ 1048576（标签换算，按 zhipuai 惯例 1024 进制）
+- ksyun-starflow/glm-5.2: limit.context 「1M」→ 1048576（标签换算，按 zhipuai 惯例 1024 进制）
+- ksyun-starflow/glm-5.1: limit.context 「200k」→ 204800（标签换算，按 zhipuai 惯例 1024 进制）
+- ksyun-starflow/glm-5-turbo: limit.context 「200K」→ 204800（标签换算，按 zhipuai 惯例 1024 进制）
+- ksyun-starflow/glm-4.7: limit.context 「200k」→ 204800（标签换算，按 zhipuai 惯例 1024 进制）
+- ksyun-starflow/kimi-k3: limit.context 「1M」→ 1048576（标签换算，按 moonshotai 惯例 1024 进制）
+- ksyun-starflow/kimi-k2.7-code: limit.context 「256k」→ 262144（标签换算，按 moonshotai 惯例 1024 进制）
+- ksyun-starflow/kimi-k2.6: limit.context 「262.1k」→ 268390（标签换算，按 moonshotai 惯例 1024 进制）
+- ksyun-starflow/kimi-k2.5: limit.context 「256k」→ 262144（标签换算，按 moonshotai 惯例 1024 进制）
+- ksyun-starflow/minimax-m3: limit.context 「1M」→ 1048576（标签换算，按 minimax 惯例 1024 进制）
+- ksyun-starflow/minimax-m2.7: limit.context 「200k」→ 204800（标签换算，按 minimax 惯例 1024 进制）
+- ksyun-starflow/mimo-v2.5-pro: limit.context 「1M」→ 1048576（标签换算，按 xiaomi 惯例 1024 进制）
+- ksyun-starflow/qwen3.8-max: limit.context 「1M」→ 1048576（标签换算，按 alibaba 惯例 1024 进制）
+- ksyun-starflow/qwen3.7-max: limit.context 「1M」→ 1048576（标签换算，按 alibaba 惯例 1024 进制）
+- ksyun-starflow/qwen3.7-plus: limit.context 「1M」→ 1048576（标签换算，按 alibaba 惯例 1024 进制）
+- ksyun-starflow/qwen3.7-flash: limit.context 「1M」→ 1048576（标签换算，按 alibaba 惯例 1024 进制）
+- kuaishou-vanchin/GLM-5.3: limit.context 「1024K」→ 1048576，limit.input 「1024K」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- kuaishou-vanchin/GLM-5.3-Flash: limit.context 「1024K」→ 1048576，limit.input 「1024K」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- kuaishou-vanchin/GLM-5.2: limit.context 「1024K」→ 1048576，limit.input 「1024K」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- kuaishou-vanchin/GLM-5.1: limit.context 「200K」→ 204800，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- kuaishou-vanchin/GLM-5: limit.context 「200K」→ 204800，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- kuaishou-vanchin/DeepSeek-V4.1-Flash-1017: limit.context 「1024K」→ 1048576，limit.input 「1024K」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- kuaishou-vanchin/DeepSeek-V4.1-Flash: limit.context 「1024K」→ 1048576，limit.input 「1024K」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- kuaishou-vanchin/DeepSeek-V4-Pro-0813: limit.context 「1024K」→ 1048576，limit.input 「1024K」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 deepseek 惯例 1024 进制）
+- kuaishou-vanchin/DeepSeek-V4-Flash-0731: limit.context 「1024K」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- kuaishou-vanchin/DeepSeek-V4-Flash: limit.context 「1024K」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- kuaishou-vanchin/DeepSeek-V4-Pro: limit.context 「1024K」→ 1048576，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- kuaishou-vanchin/DeepSeek-R1: limit.context 「128K」→ 131072，limit.input 「96K」→ 98304，limit.output 「32K」→ 32768（标签换算，按 deepseek 惯例 1024 进制）
+- kuaishou-vanchin/DeepSeek-V3: limit.context 「128K」→ 131072，limit.input 「128K」→ 131072，limit.output 「16K」→ 16384（标签换算，按 deepseek 惯例 1024 进制）
+- kuaishou-vanchin/Kimi-K2.6: limit.context 「256K」→ 262144，limit.output 「256K」→ 262144（标签换算，按 moonshotai 惯例 1024 进制）
+- kuaishou-vanchin/Kimi-K2.7-Code: limit.context 「256K」→ 262144，limit.output 「32K」→ 32768（标签换算，按 moonshotai 惯例 1024 进制）
+- kuaishou-vanchin/MiniMax-M3.1-Flash: limit.context 「1000K」→ 1024000，limit.output 「512K」→ 524288（标签换算，按 minimax 惯例 1024 进制）
+- kuaishou-vanchin/MiniMax-M2.7: limit.context 「200K」→ 204800，limit.output 「128K」→ 131072（标签换算，按 minimax 惯例 1024 进制）
+- kuaishou-vanchin/MiniMax-M2.5: limit.context 「200K」→ 204800，limit.output 「128K」→ 131072（标签换算，按 minimax 惯例 1024 进制）
+- kuaishou-vanchin/MiMo-V2.6-Pro: limit.context 「1000K」→ 1024000，limit.output 「128K」→ 131072（标签换算，按 xiaomi 惯例 1024 进制）
+- kuaishou-vanchin/Qwen3.6-27B: limit.context 「256K」→ 262144，limit.input 「254K」→ 260096，limit.output 「64K」→ 65536（标签换算，按 alibaba 惯例 1024 进制）
+- kuaishou-vanchin/Qwen3.5-397B-A17B: limit.context 「256K」→ 262144，limit.input 「252K」→ 258048，limit.output 「64K」→ 65536（标签换算，按 alibaba 惯例 1024 进制）
+- ucloud-modelverse/deepseek-v4-pro-0813: limit.context 「1000K」→ 1024000，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- ucloud-modelverse/deepseek-v4-flash-0731: limit.context 「1000K」→ 1024000，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- ucloud-modelverse/deepseek-v4.1-flash: limit.context 「1000K」→ 1024000，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- ucloud-modelverse/deepseek-v4.1-flash-1017: limit.context 「1000K」→ 1024000，limit.output 「384K」→ 393216（标签换算，按 deepseek 惯例 1024 进制）
+- ucloud-modelverse/glm-5.3: limit.context 「1000K」→ 1024000，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- ucloud-modelverse/glm-5.3-flash: limit.context 「1000K」→ 1024000，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- ucloud-modelverse/glm-5.2: limit.context 「1000K」→ 1024000，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+- ucloud-modelverse/kimi-k3: limit.context 「1000K」→ 1024000，limit.output 「1000K」→ 1024000（标签换算，按 moonshotai 惯例 1024 进制）
+- ucloud-modelverse/kimi-k3.1-pro: limit.context 「1000K」→ 1024000，limit.output 「1000K」→ 1024000（标签换算，按 moonshotai 惯例 1024 进制）
+- ucloud-modelverse/kimi-k2.7-code: limit.context 「256K」→ 262144，limit.output 「32K」→ 32768（标签换算，按 moonshotai 惯例 1024 进制）
+- ucloud-modelverse/MiniMax-M3: limit.context 「1000K」→ 1024000（标签换算，按 minimax 惯例 1024 进制）
+- ucloud-modelverse/minimax-m3.1-flash: limit.context 「1000K」→ 1024000（标签换算，按 minimax 惯例 1024 进制）
+- ucloud-modelverse/MiniMax-M2.7: limit.context 「200K」→ 204800，limit.output 「128K」→ 131072（标签换算，按 minimax 惯例 1024 进制）
+- ucloud-modelverse/qwen3.8-max: limit.context 「1024K」→ 1048576，limit.input 「991K」→ 1014784，limit.output 「131K」→ 134144（标签换算，按 alibaba 惯例 1024 进制）
+- ucloud-modelverse/qwen3.7-max: limit.context 「1000K」→ 1024000，limit.input 「991K」→ 1014784，limit.output 「64K」→ 65536（标签换算，按 alibaba 惯例 1024 进制）
+- ucloud-modelverse/qwen3.7-plus: limit.context 「1000K」→ 1024000，limit.input 「991K」→ 1014784，limit.output 「64K」→ 65536（标签换算，按 alibaba 惯例 1024 进制）
+- ucloud-modelverse/qwen3.7-flash: limit.context 「1000K」→ 1024000（标签换算，按 alibaba 惯例 1024 进制）
+- ucloud-modelverse/hy4: limit.context 「1024K」→ 1048576，limit.input 「960K」→ 983040，limit.output 「64K」→ 65536（标签换算，按 tencent 惯例 1024 进制）
+- ucloud-modelverse/mimo-v2.6-pro: limit.context 「1000K」→ 1024000，limit.output 「128K」→ 131072（标签换算，按 xiaomi 惯例 1024 进制）
+- ucloud-modelverse/doubao-seed-2-1-pro-260628: limit.context 「256K」→ 256000，limit.input 「256K」→ 256000，limit.output 「256K」→ 256000（标签换算，按 bytedance-seed 惯例 1000 进制）
+- unicom-cucloud/DeepSeek-V4-Pro: limit.context 「200K」→ 204800（标签换算，按 deepseek 惯例 1024 进制）
+- unicom-cucloud/DeepSeek-V4-Flash: limit.context 「200K」→ 204800（标签换算，按 deepseek 惯例 1024 进制）
+- unicom-cucloud/glm-5.1: limit.context 「200K」→ 204800，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
+
+## 未导入（4）
+
+- research/ecloud-moma.json: 移动云 MoMA：只有模型 id，其余字段（上下文、价格、能力）全为 null，整份暂不导入
+- research/paratera.json: 8 个模型 id_verified=false，未导入（DeepSeek-V4-Pro-0813、DeepSeek-V4-Flash-0731、DeepSeek-V4.1-Flash、Kimi-K3、GLM-5.2、Qwen3.7-Max、Qwen3.7-Plus、Qwen3.6-Plus）
+- research/paratera.json: 无可导入模型，平台 paratera 暂不建立
+- skywork: 所有模型均因缺上下文且无对应 lab 模型而跳过，平台暂不建立
+
+overlay 文件数：123

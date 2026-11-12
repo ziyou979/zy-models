@@ -1,0 +1,16 @@
+# Imported from research/infini-ai.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://docs.infini-ai.com/gen-studio/api/text-generation/tutorial-reasoning/deepseek.html
+# Source: https://docs.infini-ai.com/gen-studio/announcements/model-retirements/
+# Source: https://docs.infini-ai.com/gen-studio/changelog.html
+schema = 2
+base_model = "deepseek/deepseek-v4-flash-0731"
+status = "deprecated"
+sources = ["https://docs.infini-ai.com/gen-studio/api/text-generation/tutorial-reasoning/deepseek.html", "https://docs.infini-ai.com/gen-studio/announcements/model-retirements/", "https://docs.infini-ai.com/gen-studio/changelog.html"]
+checked_at = "2026-11-13"
+notes = "下架公告（2026-11-04）：停止服务 2026-11-20 12:00；闲时半价规则同 deepseek-v4-pro-0813"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, effort = ["low", "high", "max"] }
+
+[cost_cny]
+off_peak = "闲时（北京时间 22:00–次日 08:00）按忙时价格 50% 计费"

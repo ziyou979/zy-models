@@ -1,0 +1,39 @@
+# Imported from research/ai360.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.360.com/open/zh/models/minimax/MiniMax-M3
+# Source: https://ai.360.com/open/zh/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2.1, output 8.4
+schema = 2
+base_model = "minimax/MiniMax-M3"
+sources = ["https://ai.360.com/open/zh/models/minimax/MiniMax-M3", "https://ai.360.com/open/zh/models"]
+checked_at = "2026-11-13"
+notes = "平台列表数据：contextLength 512000、maxCompletionTokens 128000（平台原值，十进制）。上游供应商：MiniMax、tokenmall-cdtx。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 512_000
+output = 128_000
+
+[cost.text.input]
+price = 0.31409868
+
+[cost.text.output]
+price = 1.25639471
+
+[cost_cny]
+input = 2.1
+output = 8.4
+
+[[cost_cny.tiers]]
+when = "input<=512000"
+context_max = 512_000
+input = 2.1
+output = 8.4
+
+[[cost_cny.tiers]]
+when = "input>512000"
+context_min = 512_000
+input = 4.2
+output = 16.8

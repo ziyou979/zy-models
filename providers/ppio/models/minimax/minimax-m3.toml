@@ -1,0 +1,49 @@
+# Imported from research/ppio.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.ppio.com/openai/v1/models
+# Source: https://ppio.com/pricing
+# Source: https://ppio.com/docs/model/llm-thinking-mode.md
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 4.2, output 16.8, cache_read 0.84
+schema = 2
+base_model = "minimax/MiniMax-M3"
+sources = ["https://api.ppio.com/openai/v1/models", "https://ppio.com/pricing", "https://ppio.com/docs/model/llm-thinking-mode.md"]
+checked_at = "2026-11-13"
+notes = "is_tiered_billing=true；顶层 input/output 为 API 顶层 pricing 字段（等于最高档），实际按 tiers 计费；支持端点: chat/completions, anthropic"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, default = { type = "toggle", value = true } }
+structured_output = true
+
+[limit]
+context = 1_000_000
+output = 131_072
+
+[cost.text.input]
+price = 0.62819736
+
+[cost.text.input.cache]
+read = 0.12563947
+
+[cost.text.output]
+price = 2.51278943
+
+[cost_cny]
+input = 4.2
+output = 16.8
+cache_read = 0.84
+
+[[cost_cny.tiers]]
+when = "input 1~524288 tokens"
+input = 2.1
+output = 8.4
+cache_read = 0.42
+
+[[cost_cny.tiers]]
+when = "input 524288~1000000 tokens"
+input = 4.2
+output = 16.8
+cache_read = 0.84
+
+[reasoning_default]
+value = "on"
+source = "https://ppio.com/docs/model/llm-thinking-mode.md"

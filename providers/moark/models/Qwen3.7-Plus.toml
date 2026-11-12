@@ -1,0 +1,45 @@
+# Imported from research/gitee-ai.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://moark.com/serverless-api?model=Qwen3.7-Plus&tab=info
+# Source: https://api.moark.com/v1/models?include_details=true
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.2
+schema = 2
+base_model = "alibaba/qwen3.7-plus"
+sources = ["https://moark.com/serverless-api?model=Qwen3.7-Plus&tab=info", "https://api.moark.com/v1/models?include_details=true"]
+checked_at = "2026-11-13"
+notes = "另有专属算力通道：文本对话(专属算力)（同价）；上下文/最大输出仅以标签显示（tooltip：上下文大小 / 最大生成长度）"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.02991416
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.2
+cache_write = 2.5
+
+[[cost_cny.tiers]]
+when = "0K ≤ 输入 ≤ 256K"
+input = 2
+output = 8
+cache_read = 0.2
+cache_write = 2.5
+
+[[cost_cny.tiers]]
+when = "输入 > 256K"
+input = 6
+output = 24
+cache_read = 0.6
+cache_write = 7.5
+
+[limit_label]
+context = "1M"

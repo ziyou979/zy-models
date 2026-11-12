@@ -1,0 +1,41 @@
+# Imported from research/jdcloud-joymaas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://joymaas.jdcloud.com/models/DeepSeek-V3.2
+# Source: https://joymaas.jdcloud.com/models
+# Source: https://docs.jdcloud.com/cn/jdaip/thinking
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 3, cache_read 0.2
+schema = 2
+base_model = "deepseek/deepseek-v3.2"
+sources = ["https://joymaas.jdcloud.com/models/DeepSeek-V3.2", "https://joymaas.jdcloud.com/models", "https://docs.jdcloud.com/cn/jdaip/thinking"]
+checked_at = "2026-11-13"
+notes = "模型广场详情页原文：上下文128K / 单次最大输入120K / 单次最大输出8K（按1K=1024换算）。公开详情页统一显示 TPM 100,000 / RPM 60。 模型广场列表标注『闲时』价；忙时价未展示。thinking.type enabled/disabled，『默认关闭思考』。批量调用半价。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, default = { type = "toggle", value = false } }
+
+[limit]
+input = 122_880
+output = 8192
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.02991416
+
+[cost.text.output]
+price = 0.4487124
+
+[cost_cny]
+input = 2
+output = 3
+cache_read = 0.2
+
+[reasoning_default]
+value = "off"
+source = "https://docs.jdcloud.com/cn/joymaas/text-API"
+
+[limit_label]
+context = "128K"
+input = "120K"
+output = "8K"

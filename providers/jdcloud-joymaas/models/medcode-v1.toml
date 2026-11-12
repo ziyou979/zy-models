@@ -1,0 +1,32 @@
+# Imported from research/jdcloud-joymaas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://joymaas.jdcloud.com/models/medcode-v1
+# Source: https://joymaas.jdcloud.com/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 3, output 27, cache_read 0.6
+schema = 2
+base_model = "jd/medcode-v1"
+sources = ["https://joymaas.jdcloud.com/models/medcode-v1", "https://joymaas.jdcloud.com/models"]
+checked_at = "2026-11-13"
+notes = "模型广场详情页原文：上下文128K / 单次最大输入128K / 单次最大输出8K（按1K=1024换算）。公开详情页统一显示 TPM 100,000 / RPM 60。 京东（京东健康）医疗代码类模型，模型广场标注供应商京东。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.4487124
+
+[cost.text.input.cache]
+read = 0.08974248
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 3
+output = 27
+cache_read = 0.6
+
+[limit_label]
+context = "128K"
+input = "128K"
+output = "8K"

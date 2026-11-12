@@ -10,6 +10,7 @@
 //   model:    name_zh, aliases, cost_cny, reasoning_default, sources, checked_at, notes
 
 import { Fragment } from "hono/jsx";
+import { formatNumber, sortNumber } from "./shared.js";
 
 export const SITE = {
   name: "zy-models",
@@ -87,7 +88,14 @@ export interface ReasoningDefault {
   source?: string;
 }
 
+export interface LimitLabel {
+  context?: string;
+  input?: string;
+  output?: string;
+}
+
 export interface CnModelExt {
+  limit_label?: LimitLabel;
   name_zh?: string;
   aliases?: string[];
   cost_cny?: CostCny;
@@ -576,5 +584,26 @@ export function HomeStats(props: {
         </div>
       ))}
     </dl>
+  );
+}
+
+// ---------------------------------------------------------------- limits
+
+/**
+ * 上下文 / 输出 cell. When the platform only published a label ("1M", "128K"),
+ * show that label; the converted number is in the tooltip and drives sorting.
+ */
+export function LimitCell(props: { value?: number; label?: string }) {
+  if (props.label) {
+    return (
+      <td class="numeric limit-label" data-sort={sortNumber(props.value)}>
+        <span title={`官方只给出「${props.label}」，按厂商惯例换算为 ${formatNumber(props.value)}`}>{props.label}</span>
+      </td>
+    );
+  }
+  return (
+    <td class="numeric" data-sort={sortNumber(props.value)}>
+      {formatNumber(props.value)}
+    </td>
   );
 }

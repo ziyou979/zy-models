@@ -36,6 +36,12 @@ tbody tr:not(.empty-row):hover > * {
   background-color: var(--cn-row-hover);
 }
 
+td.limit-label span {
+  text-decoration: underline dotted var(--color-text-tertiary);
+  text-underline-offset: 0.1875rem;
+  cursor: help;
+}
+
 /* ---------------------------------------------------------------- home stats */
 .cn-stats {
   display: flex;

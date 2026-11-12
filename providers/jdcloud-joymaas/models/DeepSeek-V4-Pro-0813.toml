@@ -1,0 +1,48 @@
+# Imported from research/jdcloud-joymaas.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://joymaas.jdcloud.com/models/DeepSeek-V4-Pro-0813
+# Source: https://joymaas.jdcloud.com/models
+# Source: https://docs.jdcloud.com/cn/joymaas/price
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 9, output 27, cache_read 0.3
+schema = 2
+base_model = "deepseek/deepseek-v4-pro-0813"
+sources = ["https://joymaas.jdcloud.com/models/DeepSeek-V4-Pro-0813", "https://joymaas.jdcloud.com/models", "https://docs.jdcloud.com/cn/joymaas/price"]
+checked_at = "2026-11-13"
+notes = "模型广场详情页原文：上下文1M / 单次最大输入1M / 单次最大输出384K（按1K=1024换算）。公开详情页统一显示 TPM 100,000 / RPM 60。 『DeepSeek全系列模型按闲忙时区分输入和输出 token单价』。模型广场列表默认展示闲时价。TokenPlan 中模型 ID 写作小写 deepseek-v4-pro-0813。"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, default = { type = "toggle", value = false } }
+structured_output = true
+
+[limit]
+input = 1_048_576
+
+[cost.text.input]
+price = 1.34613719
+
+[cost.text.input.cache]
+read = 0.04487124
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 9
+output = 27
+cache_read = 0.3
+off_peak = "闲时(22:00-08:00)半价；input/output 字段为忙时(08:00-22:00)价"
+
+[[cost_cny.tiers]]
+when = "闲时 22:00-08:00"
+input = 4.5
+output = 13.5
+cache_read = 0.15
+
+[reasoning_default]
+value = "off"
+source = "https://docs.jdcloud.com/cn/joymaas/text-API"
+
+[limit_label]
+context = "1M"
+input = "1M"
+output = "384K"

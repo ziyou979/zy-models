@@ -1,0 +1,32 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://www.qiniu.com/ai/models
+# Source: https://api.qnaigc.com/v1/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6, output 18, cache_read 0.3
+schema = 2
+base_model = "tencent/hy4"
+sources = ["https://www.qiniu.com/ai/models", "https://api.qnaigc.com/v1/models"]
+checked_at = "2026-11-13"
+notes = "协议: openai-chat, anthropic-messages；官方广场限速 RPM 10000 / TPM 5000000；备案号 Guangdong-TencentHunyuan-20230901"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+context = 1_000_000
+output = 64_000
+
+[cost.text.input]
+price = 0.89742479
+
+[cost.text.input.cache]
+read = 0.04487124
+
+[cost.text.output]
+price = 2.69227438
+
+[cost_cny]
+input = 6
+output = 18
+cache_read = 0.3

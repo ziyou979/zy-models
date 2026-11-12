@@ -1,0 +1,15 @@
+# Imported from research/ksyun-starflow.json by scripts/import-research.ts
+# cn openai-chat: https://kspmas.ksyun.com/v1 (https://docs.ksyun.com/documents/45802)
+# cn anthropic: https://kspmas.ksyun.com/ (https://docs.ksyun.com/documents/45830)
+# cn openai-responses: https://kspmas.ksyun.com/v1 (https://docs.ksyun.com/documents/45943)
+# cn gemini: https://kspmas.ksyun.com (https://docs.ksyun.com/documents/45836)
+name = "Kingsoft Cloud StarFlow MAS"
+env = ["KSC_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://kspmas.ksyun.com/v1"
+doc = "https://docs.ksyun.com/products/275"
+name_zh = "金山云星流模型服务（星流平台 模型API服务）"
+region = "cn"
+pricing_page = "https://docs.ksyun.com/documents/45801"
+notes = "价格取自官方文档《模型API服务计费说明》表格（2026-10-24 更新，元/百万 Token，含未命中/命中缓存、显式缓存、5min 写入缓存、批量推理价与阶梯档）；阶梯区间左闭右开，K=1,000、M=1,000,000，『该请求的所有输入 token 均按匹配到的阶梯单价结算，而非分段累计』（https://docs.ksyun.com/documents/46005）。上下文长度官方仅以标签给出（如 1M、200k、262.1k），limit 记 null，原文见 limit_label；最大输出未公开。开通服务后每个文本模型及视觉理解模型赠 100 万 Tokens 免费额度；需在控制台逐个『开通模型』后才能调用；子账户需 AICPFullAccess 或 AICPMASFullAccess 权限。限流按主账号×模型计（RPM/TPM，所有 API Key/项目共享），如 deepseek-v4-pro/flash 1,000 RPM/150,000 TPM、glm-5.1 500/1,000,000、kimi-k2.6 1,000/400,000、minimax-m2.7 1,000/1,000,000，新模型（glm-5.3、kimi-k3、qwen3.8-max 等）限流表未列（https://docs.ksyun.com/documents/45799）。平台对输入输出另做敏感词拦截。联网搜索 30 元/千次、网页解析 15 元/千次。思考开关：deepseek 系列/glm-4.x/kimi-k2.5 用 thinking.type，gpt-oss 用 reasoning_effort（默认 medium），qwen3-vl-flash 用 enable_thinking，均也支持 chat_template_kwargs.thinking（https://docs.ksyun.com/documents/45820），新模型参数未列。产品页另称有 GLM-5.3 系列 Flash 版、MiMo-V2.6 系列、Qwen3.8 系列、MiniMax-3 系列，但价格表仅列出本文件中的版本。未发现编程套餐/Coding Plan；实名认证要求未在模型服务文档中见到原文。"

@@ -1,0 +1,26 @@
+# Imported from research/ai360.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.360.com/open/zh/models/360zhinao/360zhinao-pro
+# Source: https://ai.360.com/open/zh/models
+# 占位: open_weights 未确认，写 false
+# 占位: tools 未确认，写 false
+# 占位: temperature/top_p/top_k 为默认值 true/true/false，未核实
+schema = 2
+name = "360zhinao/360zhinao-pro"
+description = "360zhinao/360zhinao-pro by 360."
+open_weights = false
+release_date = "2026-08-05"
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = false }
+reasoning = { supported = false }
+temperature = true
+top_p = true
+top_k = false
+
+[limit]
+context = 32_000
+output = 8192

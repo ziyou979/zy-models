@@ -1,0 +1,1304 @@
+{
+ "provider_id": "ksyun-starflow",
+ "modelsdev_id": null,
+ "name_zh": "金山云星流模型服务（星流平台 模型API服务）",
+ "name_en": "Kingsoft Cloud StarFlow MAS",
+ "doc": "https://docs.ksyun.com/products/275",
+ "pricing_page": "https://docs.ksyun.com/documents/45801",
+ "env": [
+  "KSC_API_KEY"
+ ],
+ "endpoints": [
+  {
+   "region": "cn",
+   "protocol": "openai-chat",
+   "base_url": "https://kspmas.ksyun.com/v1",
+   "source": "https://docs.ksyun.com/documents/45802"
+  },
+  {
+   "region": "cn",
+   "protocol": "anthropic",
+   "base_url": "https://kspmas.ksyun.com/",
+   "source": "https://docs.ksyun.com/documents/45830",
+   "note": "Claude Code 文档：ANTHROPIC_BASE_URL=https://kspmas.ksyun.com/"
+  },
+  {
+   "region": "cn",
+   "protocol": "openai-responses",
+   "base_url": "https://kspmas.ksyun.com/v1",
+   "source": "https://docs.ksyun.com/documents/45943",
+   "note": "Codex 文档：需使用支持 Responses 协议的星流模型（具体模型清单未公开列出）"
+  },
+  {
+   "region": "cn",
+   "protocol": "gemini",
+   "base_url": "https://kspmas.ksyun.com",
+   "source": "https://docs.ksyun.com/documents/45836",
+   "note": "OpenCode 文档列出 Gemini 协议（@ai-sdk/google）配置方式，适用模型未列"
+  }
+ ],
+ "plans": [],
+ "models": [
+  {
+   "id": "deepseek-v4-pro-0813",
+   "name": "deepseek-v4-pro-0813",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": true,
+    "effort": null,
+    "default": null,
+    "default_source": "https://www.ksyun.com/nv/product/KSP",
+    "field": null,
+    "note": "产品页原文：DeepSeek-V4系列支持思考/非思考模式切换；参数未在深度思考文档列出"
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 9,
+    "output": 27,
+    "cache_read": 0.3,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "DeepSeek-V4-Pro具备百万字上下文，Agent表现显著提升，世界知识与代码能力较强，综合性能比肩主流闭源模型。",
+   "notes": "批量推理 输入6/输出12 元/百万"
+  },
+  {
+   "id": "deepseek-v4-flash",
+   "name": "deepseek-v4-flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": true,
+    "effort": null,
+    "default": null,
+    "default_source": "https://www.ksyun.com/nv/product/KSP",
+    "field": null,
+    "note": "产品页原文：DeepSeek-V4系列支持思考/非思考模式切换；参数未在深度思考文档列出"
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 3,
+    "output": 9,
+    "cache_read": 0.1,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "DeepSeek-V4-Flash拥有百万字超长上下文，在 Agent 能力、世界知识和推理性能上均比较优异。兼顾高效与低成本，适用于高并发与实时场景，提供更快、更经济的API服务。"
+  },
+  {
+   "id": "deepseek-v3.2",
+   "name": "deepseek-v3.2",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": true,
+    "effort": null,
+    "default": "off",
+    "default_source": "https://docs.ksyun.com/documents/45820",
+    "field": "reasoning_content",
+    "note": "thinking.type=enabled|disabled，默认 disabled"
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 3,
+    "cache_read": 0.2,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797",
+    "https://docs.ksyun.com/documents/45820"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "128k",
+    "output": null
+   },
+   "description_zh": "作为迈向新一代架构的中间步骤，deepseek-v3.2-exp 在 v3.1-terminus 的基础上引入了 DeepSeek Sparse Attention（一种稀疏注意力机制），针对长文本的训练和推理效率进行了探索性的优化和验证。",
+   "notes": "批量推理 输入1/输出1.5 元/百万"
+  },
+  {
+   "id": "glm-5.3",
+   "name": "glm-5.3",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 8,
+    "output": 28,
+    "cache_read": 2,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "GLM-5.3是MoE架构旗舰模型，支持100万Token上下文，通过后训练优化实现性能跨越式提升。"
+  },
+  {
+   "id": "glm-5.2",
+   "name": "glm-5.2",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 8,
+    "output": 28,
+    "cache_read": 2,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "GLM-5.2 是面向长任务时代的模型。支持真正可用的 1M 上下文，可承载项目级工程上下文，长程任务执行更稳定、工程规范遵循更可靠，一次任务即可完成从需求到多端部署的完整开发链路。",
+   "notes": "批量推理 输入4/输出14 元/百万"
+  },
+  {
+   "id": "glm-5.1",
+   "name": "glm-5.1",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6,
+    "output": 24,
+    "cache_read": 1.3,
+    "cache_write": 7.5,
+    "tiers": [
+     {
+      "when": "输入长度[0, 32k]",
+      "input": 6,
+      "output": 24,
+      "cache_read": 1.3,
+      "cache_write": 7.5,
+      "batch_input": 3,
+      "batch_output": 12,
+      "explicit_cache_read": null
+     },
+     {
+      "when": "输入长度[32k, 200k]",
+      "input": 8,
+      "output": 28,
+      "cache_read": 2,
+      "cache_write": 10,
+      "batch_input": 4,
+      "batch_output": 14,
+      "explicit_cache_read": null
+     }
+    ],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "200k",
+    "output": null
+   },
+   "description_zh": "GLM-5.1 是一个面向长程任务（Long Horizon Task）设计的模型。能够在一次任务中独立、持续地工作长达8小时，期间自主规划、执行、自我进化，最终交付完整的工程级成果。",
+   "notes": "批量推理 输入3/输出12 元/百万；cache_write 为 5min 写入缓存价"
+  },
+  {
+   "id": "glm-5-turbo",
+   "name": "glm-5-turbo",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 5,
+    "output": 22,
+    "cache_read": 1.2,
+    "cache_write": null,
+    "tiers": [
+     {
+      "when": "输入长度[0,32K)",
+      "input": 5,
+      "output": 22,
+      "cache_read": 1.2,
+      "cache_write": null,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": null
+     },
+     {
+      "when": "输入长度[32K,200K)",
+      "input": 7,
+      "output": 26,
+      "cache_read": 1.8,
+      "cache_write": null,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": null
+     }
+    ],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "200K",
+    "output": null
+   },
+   "description_zh": "GLM-5-Turbo 是面向 OpenClaw 龙虾场景深度优化的基座模型。 其从训练阶段就针对龙虾任务的核心需求进行专项优化，增强如工具调用、指令遵循、定时与持续性任务、长链路执行等核心能力，使其在复杂、动态、长链路的任务中也真正具备可执行性。"
+  },
+  {
+   "id": "glm-4.7",
+   "name": "glm-4.7",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": true,
+    "effort": null,
+    "default": "on",
+    "default_source": "https://docs.ksyun.com/documents/45820",
+    "field": "reasoning_content",
+    "note": "thinking.type=enabled|disabled，默认 enabled；也可用 chat_template_kwargs.thinking 开关"
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 8,
+    "cache_read": 0.4,
+    "cache_write": null,
+    "tiers": [
+     {
+      "when": "输入长度[0, 32k]，输出长度[0, 0.2k]",
+      "input": 2,
+      "output": 8,
+      "cache_read": 0.4,
+      "cache_write": null,
+      "batch_input": 1,
+      "batch_output": 4,
+      "explicit_cache_read": null
+     },
+     {
+      "when": "输入长度[0, 32k]，输出长度[0.2k+]",
+      "input": 3,
+      "output": 14,
+      "cache_read": 0.6,
+      "cache_write": null,
+      "batch_input": 1.5,
+      "batch_output": 7,
+      "explicit_cache_read": null
+     },
+     {
+      "when": "输入长度[32k, 200k]",
+      "input": 4,
+      "output": 16,
+      "cache_read": 0.8,
+      "cache_write": null,
+      "batch_input": 2,
+      "batch_output": 8,
+      "explicit_cache_read": null
+     }
+    ],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797",
+    "https://docs.ksyun.com/documents/45820"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "200k",
+    "output": null
+   },
+   "description_zh": "GLM-4.7 面向 Agentic Coding 场景强化了编码能力、长程任务规划与工具协同，并在多个公开基准的当期榜单中取得开源模型中的良好表现。",
+   "notes": "批量推理 输入1/输出4 元/百万；价格表上下文 200k，模型简介表写 128k，两处不一致"
+  },
+  {
+   "id": "kimi-k3",
+   "name": "kimi-k3",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 20,
+    "output": 100,
+    "cache_read": 2,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "Kimi K3 是 Kimi 的旗舰模型，面向长程编程与端到端知识工作，1M token 上下文，综合智能达到较好水平"
+  },
+  {
+   "id": "kimi-k2.7-code",
+   "name": "kimi-k2.7-code",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": false,
+    "effort": null,
+    "default": "on",
+    "default_source": "https://docs.ksyun.com/documents/45797",
+    "field": null,
+    "note": "官方简介原文：仅支持思考模式"
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6.5,
+    "output": 27,
+    "cache_read": 1.3,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "256k",
+    "output": null
+   },
+   "description_zh": "Kimi K2.7 Code 是Kimi一款专注Coding的模型，在长上下文中更可靠地遵循指令，能以更高的成功率完成编程任务。同时支持文本、图片与视频输入，仅支持思考模式，对话与Agent任务。"
+  },
+  {
+   "id": "kimi-k2.6",
+   "name": "kimi-k2.6",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": true,
+    "effort": null,
+    "default": null,
+    "default_source": "https://docs.ksyun.com/documents/45797",
+    "field": null,
+    "note": "官方简介原文：支持思考与非思考模式"
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6.5,
+    "output": 27,
+    "cache_read": 1.1,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "262.1k",
+    "output": null
+   },
+   "description_zh": "Kimi K2.6的通用Agent、代码、视觉理解等综合能力相比前代得到全面提升。同时支持文本、图片与视频输入，思考与非思考模式，对话与 Agent 任务。"
+  },
+  {
+   "id": "kimi-k2.5",
+   "name": "kimi-k2.5",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": true,
+    "effort": null,
+    "default": "on",
+    "default_source": "https://docs.ksyun.com/documents/45820",
+    "field": "reasoning_content",
+    "note": "thinking.type=enabled|disabled，默认 enabled"
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 21,
+    "cache_read": 0.7,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797",
+    "https://docs.ksyun.com/documents/45820"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "256k",
+    "output": null
+   },
+   "description_zh": "Kimi K2.5在 Agent、代码、视觉理解及一系列通用智能任务上取得开源 SoTA 表现。同时具备原生的多模态架构设计，同时支持视觉与文本输入、思考与非思考模式、对话与 Agent 任务。"
+  },
+  {
+   "id": "minimax-m3",
+   "name": "minimax-m3",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4.2,
+    "output": 16.8,
+    "cache_read": 0.84,
+    "cache_write": null,
+    "tiers": [
+     {
+      "when": "输入长度[0,512K)",
+      "input": 4.2,
+      "output": 16.8,
+      "cache_read": 0.84,
+      "cache_write": null,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": null
+     },
+     {
+      "when": "输入长度[512K,1M)",
+      "input": 8.4,
+      "output": 33.6,
+      "cache_read": 1.68,
+      "cache_write": null,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": null
+     }
+    ],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "MiniMax新一代长上下文大语言模型，面向复杂推理、代码生成和 Agent 工作流等场景优化，在长文档理解、多轮任务执行和企业级智能应用中具备较好的速度与成本优势。",
+   "notes": "5min写入缓存原文：支持5min缓存写入，价格免费"
+  },
+  {
+   "id": "minimax-m2.7",
+   "name": "minimax-m2.7",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2.1,
+    "output": 8.4,
+    "cache_read": 0.42,
+    "cache_write": 2.625,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "200k",
+    "output": null
+   },
+   "description_zh": "M2.7是M2系列深度参与自身进化的模型，能够构建复杂Agent框架并通过Agent Teams、复杂Skills和动态工具搜索完成高度精细的生产力任务。",
+   "notes": "cache_write 为 5min 写入缓存价"
+  },
+  {
+   "id": "mimo-v2.5-pro",
+   "name": "mimo-v2.5-pro",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "xiaomi",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 7,
+    "output": 21,
+    "cache_read": 1.4,
+    "cache_write": null,
+    "tiers": [
+     {
+      "when": "输入长度[0,256K)",
+      "input": 7,
+      "output": 21,
+      "cache_read": 1.4,
+      "cache_write": null,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": null
+     },
+     {
+      "when": "输入长度[256K,1M)",
+      "input": 14,
+      "output": 42,
+      "cache_read": 2.8,
+      "cache_write": null,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": null
+     }
+    ],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "MiMo-V2.5-Pro具备智能体与复杂任务处理能力，支持长程多轮工具调用，指令理解与逻辑一致性显著提升，可胜任高复杂度专业应用场景。"
+  },
+  {
+   "id": "qwen3.8-max",
+   "name": "qwen3.8-max",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 12,
+    "output": 36,
+    "cache_read": 1.5,
+    "cache_write": 15,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "2.4万亿参数MoE旗舰，编程与办公能力全面跃升，可自主编程十数天交付完整项目。胜任法律、金融、设计等数百种专业任务，一次对话端到端交付生产级成果。原生视觉理解贯穿规划、执行与验证全流程，支持超长文档与长视频的深度语义解析。长程任务中自主规划与闭环迭代，持续进化。",
+   "notes": "命中显式缓存 1 元/百万；cache_write 为 5min 写入缓存价"
+  },
+  {
+   "id": "qwen3.7-max",
+   "name": "qwen3.7-max",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 12,
+    "output": 36,
+    "cache_read": 2.4,
+    "cache_write": 15,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "阿里云推出的面向智能体（Agent）时代的万亿级参数旗舰模型，专注于纯文本推理能力，其核心优势在于能自主完成编程、办公自动化等涉及上千次工具调用的超长周期复杂任务",
+   "notes": "命中显式缓存 1.2 元/百万；cache_write 为 5min 写入缓存价"
+  },
+  {
+   "id": "qwen3.7-plus",
+   "name": "qwen3.7-plus",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 8,
+    "cache_read": 0.4,
+    "cache_write": 2.5,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "文本能力的基础上全面升级了视觉-语言能力，同时保持了在编码、工具使用和生产力工作流方面的完整智能体能力。",
+   "notes": "命中显式缓存 0.2 元/百万；cache_write 为 5min 写入缓存价"
+  },
+  {
+   "id": "qwen3.7-flash",
+   "name": "qwen3.7-flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.2,
+    "output": 0.8,
+    "cache_read": 0.04,
+    "cache_write": 0.25,
+    "tiers": [
+     {
+      "when": "输入长度(0,32K]",
+      "input": 0.2,
+      "output": 0.8,
+      "cache_read": 0.04,
+      "cache_write": 0.25,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": 0.02
+     },
+     {
+      "when": "输入长度(32K,256K]",
+      "input": 0.6,
+      "output": 2.4,
+      "cache_read": 0.12,
+      "cache_write": 0.75,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": 0.06
+     },
+     {
+      "when": "输入长度(256K,1M]",
+      "input": 1.2,
+      "output": 4.8,
+      "cache_read": 0.24,
+      "cache_write": 1.5,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": 0.12
+     }
+    ],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1M",
+    "output": null
+   },
+   "description_zh": "Qwen3.7‑Flash是阿里低延迟高并发多模态大模型，具备百万级长上下文，擅长 Agent 与批量业务调用。",
+   "notes": "命中显式缓存 0.02 元/百万；cache_write 为 5min 写入缓存价"
+  },
+  {
+   "id": "qwen3-vl-plus",
+   "name": "qwen3-vl-plus",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": null,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1,
+    "output": 10,
+    "cache_read": 0.2,
+    "cache_write": 1.25,
+    "tiers": [
+     {
+      "when": "输入长度[0,32k)",
+      "input": 1,
+      "output": 10,
+      "cache_read": 0.2,
+      "cache_write": 1.25,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": 0.1
+     },
+     {
+      "when": "输入长度[32k,128k)",
+      "input": 1.5,
+      "output": 15,
+      "cache_read": 0.3,
+      "cache_write": 1.875,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": 0.15
+     },
+     {
+      "when": "输入长度[128k,256k)",
+      "input": 3,
+      "output": 30,
+      "cache_read": 0.6,
+      "cache_write": 3.75,
+      "batch_input": null,
+      "batch_output": null,
+      "explicit_cache_read": 0.3
+     }
+    ],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://docs.ksyun.com/documents/45801",
+    "https://docs.ksyun.com/documents/45797"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": null,
+    "output": null
+   },
+   "description_zh": null,
+   "notes": "命中显式缓存 0.1 元/百万；cache_write 为 5min 写入缓存价"
+  }
+ ],
+ "notes": "价格取自官方文档《模型API服务计费说明》表格（2026-10-24 更新，元/百万 Token，含未命中/命中缓存、显式缓存、5min 写入缓存、批量推理价与阶梯档）；阶梯区间左闭右开，K=1,000、M=1,000,000，『该请求的所有输入 token 均按匹配到的阶梯单价结算，而非分段累计』（https://docs.ksyun.com/documents/46005）。上下文长度官方仅以标签给出（如 1M、200k、262.1k），limit 记 null，原文见 limit_label；最大输出未公开。开通服务后每个文本模型及视觉理解模型赠 100 万 Tokens 免费额度；需在控制台逐个『开通模型』后才能调用；子账户需 AICPFullAccess 或 AICPMASFullAccess 权限。限流按主账号×模型计（RPM/TPM，所有 API Key/项目共享），如 deepseek-v4-pro/flash 1,000 RPM/150,000 TPM、glm-5.1 500/1,000,000、kimi-k2.6 1,000/400,000、minimax-m2.7 1,000/1,000,000，新模型（glm-5.3、kimi-k3、qwen3.8-max 等）限流表未列（https://docs.ksyun.com/documents/45799）。平台对输入输出另做敏感词拦截。联网搜索 30 元/千次、网页解析 15 元/千次。思考开关：deepseek 系列/glm-4.x/kimi-k2.5 用 thinking.type，gpt-oss 用 reasoning_effort（默认 medium），qwen3-vl-flash 用 enable_thinking，均也支持 chat_template_kwargs.thinking（https://docs.ksyun.com/documents/45820），新模型参数未列。产品页另称有 GLM-5.3 系列 Flash 版、MiMo-V2.6 系列、Qwen3.8 系列、MiniMax-3 系列，但价格表仅列出本文件中的版本。未发现编程套餐/Coding Plan；实名认证要求未在模型服务文档中见到原文。"
+}

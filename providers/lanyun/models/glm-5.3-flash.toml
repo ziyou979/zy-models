@@ -1,0 +1,26 @@
+# Imported from research/lanyun.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://maas-api.lanyun.net/v1/models
+# Source: https://maas.lanyun.net/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.8, output 2.8
+schema = 2
+base_model = "zhipuai/glm-5.3-flash"
+sources = ["https://maas-api.lanyun.net/v1/models", "https://maas.lanyun.net/"]
+checked_at = "2026-11-13"
+notes = "API 返回 max_output_tokens=1073152，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 1_073_152
+
+[cost.text.input]
+price = 0.11965664
+
+[cost.text.output]
+price = 0.41879824
+
+[cost_cny]
+input = 0.8
+output = 2.8

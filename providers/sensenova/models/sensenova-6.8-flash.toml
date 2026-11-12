@@ -13,6 +13,10 @@ notes = "文档写『支持 1 M 上下文窗口』；max_tokens 默认 64K，范
 reasoning = { supported = true, effort = ["minimal", "low", "medium", "high", "xhigh", "max"], default = { type = "effort", value = "high" } }
 structured_output = true
 
+[limit]
+context = 1_000_000
+output = 128_000
+
 [reasoning_default]
 value = "high"
 source = "https://platform.sensenova.cn/docs"

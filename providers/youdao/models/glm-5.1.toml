@@ -1,0 +1,41 @@
+# Imported from research/youdao.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.youdao.com/new/token
+# Source: https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6, output 24, cache_read 1.3
+schema = 2
+base_model = "zhipuai/glm-5.1"
+sources = ["https://ai.youdao.com/new/token", "https://ai.youdao.com/DOCSIRMA/html/token/price/modelprice/"]
+checked_at = "2026-11-13"
+notes = "上下文取平台 maxContextLength=200000（十进制原值）；最大输出未公开。平台默认限流：总 TPM 10000000 / RPM 5000，单应用 TPM 5000000 / RPM 5000。计费项原文：输入Token（未命中缓存读写，且输入≤32K）=6；输出Token（未命中缓存读写，且输入≤32K）=24；缓存读Token（命中缓存且输入≤32K）=1.3；输入Token（未命中缓存读写，且输入>32K）=8；输出Token（未命中缓存读写，且输入>32K）=28；缓存读Token（命中缓存且输入>32K）=2。官网卡片标注『即将下线！』。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.89742479
+
+[cost.text.input.cache]
+read = 0.19444204
+
+[cost.text.output]
+price = 3.58969918
+
+[cost_cny]
+input = 6
+output = 24
+cache_read = 1.3
+
+[[cost_cny.tiers]]
+when = "input<=32K"
+context_max = 32_000
+input = 6
+output = 24
+cache_read = 1.3
+
+[[cost_cny.tiers]]
+when = "input>32K"
+context_min = 32_000
+input = 8
+output = 28
+cache_read = 2

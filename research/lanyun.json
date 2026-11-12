@@ -1,0 +1,1071 @@
+{
+ "provider_id": "lanyun",
+ "modelsdev_id": null,
+ "name_zh": "蓝耘元生代 MaaS 大模型服务平台",
+ "name_en": "Lanyun MaaS",
+ "doc": "https://archive.lanyun.net/#/maas/",
+ "pricing_page": "https://maas.lanyun.net/",
+ "env": [
+  "LANYUN_API_KEY"
+ ],
+ "endpoints": [
+  {
+   "region": "cn",
+   "protocol": "openai-chat",
+   "base_url": "https://maas-api.lanyun.net/v1",
+   "source": "https://archive.lanyun.net/#/maas/快速入门"
+  },
+  {
+   "region": "cn",
+   "protocol": "anthropic",
+   "base_url": "https://maas-api.lanyun.net/anthropic",
+   "source": "https://archive.lanyun.net/#/maas/文本模型API(Anthropic)",
+   "note": "Messages 端点 https://maas-api.lanyun.net/anthropic/v1/messages；Claude Code 配置 ANTHROPIC_BASE_URL=https://maas-api.lanyun.net/anthropic"
+  }
+ ],
+ "plans": [
+  {
+   "id": "coding-plan",
+   "name_zh": "Coding Plan",
+   "base_url": "https://maas-api.lanyun.net/v1/chat 或 https://maas-api.lanyun.net/anthropic/v1（按工具要求）",
+   "protocol": "openai-chat|anthropic",
+   "price_cny_month": null,
+   "quota_note": "文档原文：支持月/季/年订阅，整合智谱、minimax、阶跃星辰主流模型；『三大模型通用：支持 GLM-5.1 / MiniMax M-2.5 / Step 3.5 flash（模型迭代将同步升级至最新版本）』。自 2026-04-23 起每日 10:00–18:00 高峰期按 3 倍额度扣除、非高峰期按 2 倍扣除，GLM-4.7-Flash 全程 1 倍；智能路由开启后统一按 1 倍抵扣。『套餐购买完成后，系统将自动生成 Coding Plan 专属 API Key / 专属 API Key 仅适配本套餐额度消耗，与平台通用 API Key 权限、额度相互独立，不可混合使用』；禁止转借/共享/出租/售卖；不支持退款；到期前 1 小时自动续费。套餐名称/月费/额度仅在控制台（需登录）显示。是否禁止在编程工具以外当普通 API 使用：未见明文。",
+   "models": [
+    "/maas/jieyue/step-3.5-flash",
+    "GLM-5.1",
+    "MiniMax-M2.5"
+   ],
+   "models_note": "仅 step-3.5-flash 给出完整调用名，其余为文档中的展示名",
+   "source": "https://archive.lanyun.net/#/maas/CodingPlan"
+  },
+  {
+   "id": "token-plan",
+   "name_zh": "Token Plan",
+   "base_url": null,
+   "protocol": null,
+   "price_cny_month": null,
+   "quota_note": "控制台存在 /tokenPlan 页面（需登录），公开文档无说明",
+   "models": null,
+   "source": "https://console.lanyun.net/#/tokenPlan"
+  }
+ ],
+ "models": [
+  {
+   "id": "kimi-k3.1-pro",
+   "name": "kimi-k3.1-pro",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1024000,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 13,
+    "output": 68,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models",
+    "https://maas.lanyun.net/"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1000k"
+   },
+   "notes": "API 返回 max_output_tokens=1024000，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+  },
+  {
+   "id": "kimi-k3",
+   "name": "Kimi-K3",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1024000,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 20,
+    "output": 100,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models",
+    "https://maas.lanyun.net/"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1000k"
+   },
+   "notes": "API 返回 max_output_tokens=1024000，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+  },
+  {
+   "id": "kimi-k2.7-code",
+   "name": "kimi-k2.7-code",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1048576,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": false,
+    "effort": null,
+    "default": "on",
+    "default_source": "https://maas.lanyun.net/",
+    "field": null,
+    "note": "首页简介原文：强制开启深度思考"
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6.5,
+    "output": 27,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models",
+    "https://maas.lanyun.net/"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1024k"
+   },
+   "notes": "首页简介：搭载 256K 上下文窗口，强制开启深度思考（与卡片「上下文长度1024k」不一致）；API 返回 max_output_tokens=1048576，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+  },
+  {
+   "id": "kimi-k2.6",
+   "name": "kimi-k2.6",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=262144，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  },
+  {
+   "id": "glm-5.3",
+   "name": "glm-5.3",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1024000,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": "https://maas.lanyun.net/",
+    "field": null,
+    "note": "首页简介：内置多档推理强度可调（档位未列）"
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 8,
+    "output": 28,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models",
+    "https://maas.lanyun.net/"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1000k"
+   },
+   "notes": "首页简介：最大输出可达 128K 令牌，内置多档推理强度可调，支持工具调用流式输出；API 返回 max_output_tokens=1024000，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+  },
+  {
+   "id": "glm-5.3-flash",
+   "name": "glm-5.3-flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1073152,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.8,
+    "output": 2.8,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models",
+    "https://maas.lanyun.net/"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1048k"
+   },
+   "notes": "API 返回 max_output_tokens=1073152，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+  },
+  {
+   "id": "/maas/zhipuai/GLM-5.2",
+   "name": "GLM-5.2",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1048576,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=1048576，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  },
+  {
+   "id": "/maas/zhipuai/GLM-5.1",
+   "name": "GLM-5.1",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 202752,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=202752，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  },
+  {
+   "id": "glm-5",
+   "name": "glm-5",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 204800,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=204800，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  },
+  {
+   "id": "minimax-m3",
+   "name": "minimax-m3",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1048576,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=1048576，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  },
+  {
+   "id": "minimax-m2.7",
+   "name": "minimax-m2.7",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 209920,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2.1,
+    "output": 8.4,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models",
+    "https://maas.lanyun.net/"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "205k"
+   },
+   "notes": "API 返回 max_output_tokens=209920，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+  },
+  {
+   "id": "/maas/minimax/MiniMax-M2.5",
+   "name": "MiniMax-M2.5",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 196608,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2.1,
+    "output": 8.4,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models",
+    "https://maas.lanyun.net/"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "192k"
+   },
+   "notes": "API 返回 max_output_tokens=196608，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；API endpoints 字段: completions"
+  },
+  {
+   "id": "deepseek-v4.1-flash",
+   "name": "deepseek-v4.1-flash-1017",
+   "name_zh": null,
+   "aliases": [
+    "deepseek-v4.1-flash-1017"
+   ],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1073152,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 8,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models",
+    "https://maas.lanyun.net/"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "1048k"
+   },
+   "notes": "首页卡片名 deepseek-v4.1-flash-1017；简介：支持工具调用、结构化 JSON 输出，内置原生多模态视觉能力；API 返回 max_output_tokens=1073152，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）"
+  },
+  {
+   "id": "deepseek-v4-pro",
+   "name": "deepseek-v4-pro",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1048576,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=1048576，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  },
+  {
+   "id": "deepseek-v4-flash",
+   "name": "deepseek-v4-flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1048576,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=1048576，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  },
+  {
+   "id": "/maas/deepseek-ai/DeepSeek-V3.2",
+   "name": "DeepSeek-V3.2",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 131072,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 3,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models",
+    "https://archive.lanyun.net/#/maas/模型列表"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": {
+    "context": "128k"
+   },
+   "notes": "文档模型列表：输入token上限 128K、输出token上限 128K，输入2/输出3 元/百万；API 返回 max_output_tokens=131072，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；API endpoints 字段: completions"
+  },
+  {
+   "id": "qwen3.8-max",
+   "name": "qwen3.8-max",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1024000,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=1024000，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  },
+  {
+   "id": "qwen3.7-max",
+   "name": "Qwen3.7-Max",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1048576,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=1048576，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  },
+  {
+   "id": "qwen3.7-plus",
+   "name": "Qwen3.7-Plus",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1048576,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=1048576，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  },
+  {
+   "id": "qwen3.6-flash",
+   "name": "Qwen3.6-Flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1048576,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": null,
+    "output": null,
+    "cache_read": null,
+    "cache_write": null,
+    "tiers": [],
+    "off_peak": null
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://maas-api.lanyun.net/v1/models"
+   ],
+   "checked_at": "2026-11-13",
+   "limit_label": null,
+   "notes": "API 返回 max_output_tokens=1048576，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+  }
+ ],
+ "notes": "规格取自官方公开接口 GET https://maas-api.lanyun.net/v1/models（context_size；max_output_tokens 在所有模型上都与 context_size 相同，判为字段复用，未采用）；价格只在大模型服务平台首页模型卡片公开（8 个模型，元/M tokens），完整模型广场需登录。模型调用名存在两种风格：新模型为短名（如 glm-5.3），老模型带 /maas/ 前缀（如 /maas/zhipuai/GLM-5.2）。OpenAI 接口文档原文『本接口暂不支持上下文缓存，此时返回应为 cached_tokens: 0』，未见缓存价；思考开关参数未在文档中列出，仅响应含 reasoning_content。公开文档未给出 RPM/TPM 限流数值。实名认证：平台账号支持个人/企业实名（身份证正反面等），文档称部分功能需实名后使用，MaaS 文档未单独写明调用前必须实名。另有 automodel（AutoModel 智能路由，按实际使用模型计费）未纳入。"
+}

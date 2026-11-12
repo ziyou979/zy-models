@@ -1,0 +1,53 @@
+# Imported from research/ksyun-starflow.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://docs.ksyun.com/documents/45801
+# Source: https://docs.ksyun.com/documents/45797
+# Source: https://docs.ksyun.com/documents/45820
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.4
+schema = 2
+base_model = "zhipuai/glm-4.7"
+sources = ["https://docs.ksyun.com/documents/45801", "https://docs.ksyun.com/documents/45797", "https://docs.ksyun.com/documents/45820"]
+checked_at = "2026-11-13"
+notes = "批量推理 输入1/输出4 元/百万；价格表上下文 200k，模型简介表写 128k，两处不一致"
+
+[capabilities]
+reasoning = { supported = true, toggle = true, default = { type = "toggle", value = true } }
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.05982832
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.4
+
+[[cost_cny.tiers]]
+when = "输入长度[0, 32k]，输出长度[0, 0.2k]"
+input = 2
+output = 8
+cache_read = 0.4
+
+[[cost_cny.tiers]]
+when = "输入长度[0, 32k]，输出长度[0.2k+]"
+input = 3
+output = 14
+cache_read = 0.6
+
+[[cost_cny.tiers]]
+when = "输入长度[32k, 200k]"
+input = 4
+output = 16
+cache_read = 0.8
+
+[reasoning_default]
+value = "on"
+source = "https://docs.ksyun.com/documents/45820"
+
+[limit_label]
+context = "200k"

@@ -1,0 +1,31 @@
+# Imported from research/ppio.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.ppio.com/openai/v1/models
+# Source: https://ppio.com/pricing
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 1, output 4, cache_read 0.1
+schema = 2
+base_model = "minimax/MiniMax-M3.1-Flash"
+sources = ["https://api.ppio.com/openai/v1/models", "https://ppio.com/pricing"]
+checked_at = "2026-11-13"
+notes = "支持端点: chat/completions, anthropic, responses"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+output = 524_288
+
+[cost.text.input]
+price = 0.1495708
+
+[cost.text.input.cache]
+read = 0.01495708
+
+[cost.text.output]
+price = 0.5982832
+
+[cost_cny]
+input = 1
+output = 4
+cache_read = 0.1

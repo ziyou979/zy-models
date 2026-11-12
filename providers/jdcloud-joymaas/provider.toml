@@ -1,0 +1,42 @@
+# Imported from research/jdcloud-joymaas.json by scripts/import-research.ts
+# cn openai-chat: https://modelservice.jdcloud.com/v1 (https://docs.jdcloud.com/cn/joymaas/Chat%20API)
+# cn openai-responses: https://modelservice.jdcloud.com/v1 (https://docs.jdcloud.com/cn/joymaas/text-API)
+# cn anthropic: https://modelservice.jdcloud.com/anthropic (https://docs.jdcloud.com/cn/joymaas/Messages%20API)
+name = "JD Cloud JoyMaaS (JoyBuilder)"
+env = ["JDCLOUD_MAAS_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://modelservice.jdcloud.com/v1"
+doc = "https://docs.jdcloud.com/cn/joymaas/model"
+name_zh = "京东云 JoyMaaS / JoyBuilder 模型开发平台2.0"
+region = "cn"
+pricing_page = "https://joymaas.jdcloud.com/models"
+notes = "京东云有两套入口共用网关 modelservice.jdcloud.com：新的 JoyMaaS（joymaas.jdcloud.com，模型广场公开定价）与 JoyBuilder 模型开发平台2.0（价目表单位元/千token）。价格按元/千Tokens 展示，本文件已×1000。『DeepSeek全系列模型按闲忙时区分输入和输出 token单价』；Batch 调用输入输出均为实时价 50%，Batch 与缓存折扣不能叠加；思考 token 计入输出。思考：混合模型 thinking.type enabled/disabled，『默认关闭』；R1 系列始终开启；Messages 接口 GLM 可用 budget_tokens。不同 API Key 开通的模型权限不同。模型 ID 大小写/前缀不统一（如 GLM-5.2 与 jd/glm-5.2、DeepSeek-V4-Pro-0813 与 deepseek-v4-pro-0813），以控制台为准。自研模型：JoyAI-LLM-Flash、JoyAI-LLM-1.3T、JoyAI-VL-Interaction、medcode-v1（文档中未再出现『言犀』品牌，JoyBuilder 1.0 文档 URL 路径仍为 yanxi-cap）。"
+
+[[plans]]
+id = "token-plan"
+name_zh = "TokenPlan 个人版"
+base_url = "https://modelservice.jdcloud.com/tokenPlan/openai/v1"
+anthropic_base_url = "https://modelservice.jdcloud.com/tokenPlan/anthropic"
+protocol = "openai-chat"
+models = ["maas-token-latest", "GLM-5.1", "GLM-5.2", "Kimi-K2.6", "MiniMax-M3", "DeepSeek-V4-Flash-Preview", "DeepSeek-V4-Pro-Preview", "DeepSeek-V4-Flash-0731", "deepseek-v4-pro-0813"]
+quota_note = "按 Credits 计量：月额度 Lite 17,250 / Standard 49,750 / Pro 149,750 / Max 249,750；周窗口=月额度30%，5小时滑动窗口=月额度10%，任一窗口耗尽返回 429（木桶效应）。Credits 消耗=(输入token×输入系数+输出token×输出系数)/10000，输入系数按单次请求输入总量分 0–32K/32–64K/64K+ 三档（如 GLM-5.1/5.2: 2/4/8，输出 4；DeepSeek-V4-Flash-0731: 0.6/1.2/2.4，输出 1.8）。每席位 60 RPM。『同时只能持有一个生效订阅』『个人版每日限量发售，售完即止，次日 0 点重置』；未用 Credits 不结转；不支持缓存命中；续费固定 1 个月；到期 7 天保留期。智能路由别名 maas-token-latest。按量 Key 与 TokenPlan Key 不通用。企业版按席位 207/597/1797/2997 元/月/席（白名单邀请制，最多 50 席）。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://docs.jdcloud.com/cn/jdaip/pricing", "https://docs.jdcloud.com/cn/jdaip/pricing", "https://docs.jdcloud.com/cn/jdaip/limits-and-faq", "https://docs.jdcloud.com/cn/jdaip/credits", "https://docs.jdcloud.com/cn/jdaip/tokenplan-overview", "https://docs.jdcloud.com/cn/jdaip/tokenplan-quickstart"]
+
+[plans.price_cny_month]
+lite = 69
+standard = 199
+pro = 599
+max = 999
+
+[[plans]]
+id = "coding-plan"
+name_zh = "Coding Plan（已停售）"
+base_url = "https://modelservice.jdcloud.com/coding/openai/v1"
+anthropic_base_url = "https://modelservice.jdcloud.com/coding/anthropic"
+protocol = "openai-chat"
+models = ["DeepSeek-V3.2", "GLM-5", "GLM-4.7", "MiniMax-M2.5", "Kimi-K2.5", "Kimi-K2-Turbo", "Qwen3-Coder"]
+quota_note = "『自 2026 年 7 月 29 日起，codingPlan 将停止新购、续费及升级等销售操作。已购套餐在有效期内可继续正常使用，推荐使用 TokenPlan 作为后续替代方案。』『本次调整为长期性调整』。存量套餐模型：DeepSeek-V3.2、GLM-5、GLM-4.7、MiniMax-M2.5、Kimi-K2.5、Kimi-K2-Turbo、Qwen3-Coder；需专属 API Key。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://docs.jdcloud.com/cn/jdaip/codingplan-notice", "https://docs.jdcloud.com/cn/jdaip/codingplan-notice", "https://docs.jdcloud.com/cn/jdaip/Quickstart"]

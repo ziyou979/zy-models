@@ -1,0 +1,43 @@
+# Imported from research/ucloud-modelverse.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.modelverse.cn/v1/models
+# Source: https://api.ucloud.cn/?Action=ListUFSquareModelGuest
+# Source: https://astraflow.ucloud.cn/modelverse/prices
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 4.2, output 16.8, cache_read 0.84
+schema = 2
+base_model = "minimax/MiniMax-M3"
+sources = ["https://api.modelverse.cn/v1/models", "https://api.ucloud.cn/?Action=ListUFSquareModelGuest", "https://astraflow.ucloud.cn/modelverse/prices"]
+checked_at = "2026-11-13"
+notes = "模型广场长度字段为 K 单位标签：MaxModelLenNew=1000、MaxInputTokens=0、MaxOutputTokens=0（0 表示未填）；另有旧字段 MaxModelLen=131072，与新字段不一致，未采用；模型广场 Capabilities.FunctionCall/StructuredOutput 对全部模型均为 false（疑似未填），tools/structured_output 记 null；协议: ChatCompletions, Responses, Anthropic"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.62819736
+
+[cost.text.input.cache]
+read = 0.12563947
+
+[cost.text.output]
+price = 2.51278943
+
+[cost_cny]
+input = 4.2
+output = 16.8
+cache_read = 0.84
+
+[[cost_cny.tiers]]
+when = "输入长度(0, 512K]"
+input = 4.2
+output = 16.8
+cache_read = 0.84
+
+[[cost_cny.tiers]]
+when = "输入长度(512K, 1M]"
+input = 8.4
+output = 33.6
+cache_read = 1.68
+
+[limit_label]
+context = "1000K"

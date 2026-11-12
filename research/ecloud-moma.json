@@ -1,0 +1,785 @@
+{
+  "provider_id": "ecloud-moma",
+  "modelsdev_id": null,
+  "name_zh": "移动云 MoMA 移动模型服务平台（含九天）",
+  "name_en": "China Mobile Cloud MoMA",
+  "doc": "https://ecloud.10086.cn/portal/product/MaaS",
+  "pricing_page": null,
+  "env": [
+    "MOMA_API_KEY"
+  ],
+  "endpoints": [
+    {
+      "region": "cn",
+      "protocol": "openai-chat",
+      "base_url": "https://moma.cmecloud.cn/v1",
+      "source": "https://moma.cmecloud.cn/v1/models",
+      "note": "该地址的 /v1/models 可公开访问并返回 176 个模型 id；其余接口需 Bearer API Key（未鉴权调用返回『Request denied by Apikey Extract check』）。官方文档未能访问，协议细节未核实"
+    }
+  ],
+  "plans": [],
+  "models": [
+    {
+      "id": "jiutian-236b-256k-chat",
+      "name": "jiutian-236b-256k-chat",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "jiutian",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。中国移动九天自研；名称含『256k』，上下文标签仅见于 id。"
+    },
+    {
+      "id": "jiutian-35b-256k-chat",
+      "name": "jiutian-35b-256k-chat",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "jiutian",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。九天自研；名称含『256k』。"
+    },
+    {
+      "id": "jiutian-ict-35b-256k",
+      "name": "jiutian-ict-35b-256k",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "jiutian",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。九天 ICT（通信行业）模型。"
+    },
+    {
+      "id": "JIUTIAN-75B-32K",
+      "name": "JIUTIAN-75B-32K",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "jiutian",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。九天；名称含『32K』。"
+    },
+    {
+      "id": "jiutian-vl-chat-image",
+      "name": "jiutian-vl-chat-image",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "jiutian",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。九天视觉理解；模态按 id 推断。"
+    },
+    {
+      "id": "deepseek-v4.1-flash-1017",
+      "name": "deepseek-v4.1-flash-1017",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "deepseek-v4.1-flash",
+      "name": "deepseek-v4.1-flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "qwen/deepseek-v4-pro",
+      "name": "qwen/deepseek-v4-pro",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。前缀为渠道/供应方（此处为 qwen 渠道）；另有 gzdj/、szdx/、szym/、szsjb/ 等前缀版本。"
+    },
+    {
+      "id": "deepseek-v3.2",
+      "name": "deepseek-v3.2",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "zhipu/glm-5.3",
+      "name": "zhipu/glm-5.3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。另有无前缀 glm-5.3 与 hncm/glm-5.3。"
+    },
+    {
+      "id": "zhipu/glm-5.3-flash",
+      "name": "zhipu/glm-5.3-flash",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "zhipu/glm-5.2",
+      "name": "zhipu/glm-5.2",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "kimi/kimi-k3.1-pro",
+      "name": "kimi/kimi-k3.1-pro",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "kimi/kimi-k3",
+      "name": "kimi/kimi-k3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "kimi/kimi-k2.7-code",
+      "name": "kimi/kimi-k2.7-code",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "moonshot",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "minimax/minimax-m3",
+      "name": "minimax/minimax-m3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "minimax",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "qwen/qwen3.8-max",
+      "name": "qwen/qwen3.8-max",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "qwen/qwen3.7-max",
+      "name": "qwen/qwen3.7-max",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    },
+    {
+      "id": "tencentcloud/hy3",
+      "name": "tencentcloud/hy3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "tencent",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": null,
+      "price_usd_intl": null,
+      "sources": [
+        "https://moma.cmecloud.cn/v1/models"
+      ],
+      "checked_at": "2026-11-13",
+      "notes": "仅从 MoMA 公开 /v1/models 接口（无需鉴权）确认该 model id 存在；上下文、价格、能力均因官网 ecloud.10086.cn 对境外访问不可达而未能核实。"
+    }
+  ],
+  "notes": "2026-05-08 移动云大会发布，号称 300+ 模型（含中国移动自研九天）。官网 ecloud.10086.cn 及帮助中心从本次研究环境（境外 IP / 自动化浏览器）均不可达（ERR_EMPTY_RESPONSE、cmecloud.cn 503），Wayback 无存档，因此价格、上下文、思考/工具能力、Coding Plan / Token Plan、实名与限速全部为 null——这是访问限制导致，不代表平台无此数据。唯一可核实的官方数据是 API 网关 moma.cmecloud.cn/v1/models 的公开模型列表（176 个 id，含 embedding/TTS/视频等）。国内特有现象：大量模型 id 带省公司/渠道前缀（bjcm 北京移动、jscm 江苏移动、hacm 河南移动、cqcm 重庆移动、fjcm、gscm、hncm、nmcm、zjcm、jxcm、hlcm、hecm、ahcm、sycl 等，以及 zhipu/、kimi/、qwen/、minimax/、tencentcloud/ 原厂渠道前缀，aitc-/aicc- 等），推断为同一模型由不同省公司算力或不同上游渠道提供（推断，未见官方说明）。另有国际版 MoMA Global（mcloud.cmi.chinamobile.com，美元计价），未收录。"
+}

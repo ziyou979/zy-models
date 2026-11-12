@@ -1,0 +1,17 @@
+# Imported from research/unicom-cucloud.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7118&lang=zh
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash-1017"
+sources = ["https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7118&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"]
+checked_at = "2026-11-13"
+notes = "『当前服务资源有限，DeepSeek-V4-Flash 仅供尝鲜体验，上下文窗口目前仅支持 200K。高峰期易触发接口限流或响应慢』。Token Plan 示例综合单价 0.70元/百万tokens。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 204_800
+
+[limit_label]
+context = "200K"

@@ -71,6 +71,9 @@ const LAB_DIR: Record<string, string> = {
   doubao: "bytedance-seed",
   ernie: "baidu",
   ant: "inclusionai",
+  "tencent-hunyuan": "tencent",
+  hunyuan: "tencent",
+  "huawei-pangu": "huawei",
   "ant-ling": "inclusionai",
 };
 // The lab's own API host in this repo: a hosted copy of one of its model ids
@@ -89,6 +92,14 @@ const LAB_NAME: Record<string, string> = {
 // Plans: every coding/token plan forbids use as a general-purpose API.
 const PLAN_USAGE_RESTRICTION =
   "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。";
+
+// Newer research files state general_api_allowed (true / false / null = not stated);
+// the blanket restriction only applies when the file says false or predates the key.
+function planRestriction(plan: Json) {
+  if (!("general_api_allowed" in plan) || plan.general_api_allowed === false) return PLAN_USAGE_RESTRICTION;
+  if (plan.general_api_allowed === true) return "官方文档允许按普通 API 方式调用（见来源）。";
+  return "官方文档未写明是否禁止当作普通 API 使用（见来源）。";
+}
 
 // Regions of upstream providers the research files don't cover (by their
 // official API host). Research data wins where both exist.
@@ -132,6 +143,51 @@ function labels(v: number) {
   return out;
 }
 const sameLabel = (a: number, b: number) => [...labels(a)].some((l) => labels(b).has(l));
+
+// Only a label is published (research limit_label, e.g. "1M", "128K", "1000k"):
+// convert it with the lab's convention in models/<lab>/ (majority of files is
+// 1024- or 1000-based), and keep the label itself as limit_label for the site.
+const labBaseCache = new Map<string, 1000 | 1024>();
+function labBase(labDir: string): 1000 | 1024 {
+  if (labBaseCache.has(labDir)) return labBaseCache.get(labDir)!;
+  let k1000 = 0, k1024 = 0;
+  const dir = path.join(ROOT, "models", labDir);
+  if (existsSync(dir)) {
+    for (const f of readdirSync(dir).filter((f) => f.endsWith(".toml"))) {
+      const lim = readToml(path.join(dir, f)).limit ?? {};
+      for (const v of [lim.context, lim.output]) {
+        if (!isNum(v)) continue;
+        if (v % 1024 === 0 && v % 1000 !== 0) k1024++;
+        else if (v % 1000 === 0 && v % 1024 !== 0) k1000++;
+      }
+    }
+  }
+  const base = k1024 > k1000 ? 1024 : 1000;
+  labBaseCache.set(labDir, base);
+  return base;
+}
+function labelValue(label: unknown, labDir: string): number | undefined {
+  const m = /^\s*([\d.]+)\s*([kKmM])?\s*$/.exec(String(label ?? ""));
+  if (!m) return undefined;
+  const base = labBase(labDir);
+  const unit = !m[2] ? 1 : m[2].toLowerCase() === "k" ? base : base * base;
+  return Math.round(Number(m[1]) * unit);
+}
+/** Research limits with label-only values filled in; `labels` = which keys came from a label. */
+function resolveLimits(m: Json, labDir: string) {
+  const limit: Json = { ...(m.limit ?? {}) };
+  const labels: Json = {};
+  for (const k of ["context", "input", "output"]) {
+    if (isNum(limit[k])) continue;
+    const label = m.limit_label?.[k];
+    const v = labelValue(label, labDir);
+    if (v !== undefined) {
+      limit[k] = v;
+      labels[k] = String(label).trim();
+    }
+  }
+  return { limit, labels: Object.keys(labels).length ? labels : undefined };
+}
 
 // Price normalisation (models.dev cost semantics): the main fields hold the
 // standard (peak / regular) price. Some research files put the off-peak price
@@ -256,6 +312,16 @@ function placeholderLogo(nameZh: string | undefined, nameEn: string | undefined,
   ].join("\n");
 }
 
+// A plan price given as a bare list ([1598, 4798, 13998]) becomes { tier: price },
+// with tier names from the plan name's "（Basic / Pro / Max）" when the counts match.
+function planPrice(value: unknown, name: string | undefined) {
+  if (!Array.isArray(value)) return value;
+  const inner = /[（(]([^（）()]*)[）)]\s*$/.exec(name ?? "")?.[1] ?? "";
+  let tiers = inner.split("/").map((t) => t.trim().split(/\s+/).pop()!).filter(Boolean);
+  if (tiers.length !== value.length) tiers = value.map((_, i) => `档${i + 1}`);
+  return Object.fromEntries(value.map((v, i) => [tiers[i], v]));
+}
+
 // ---------------------------------------------------------------- research → ext
 function tierBounds(when: string) {
   const n = (s: string) => {
@@ -277,7 +343,7 @@ function costCny(p: Json | null | undefined) {
   if (!p) return undefined;
   return stripNulls({
     input: p.input, output: p.output, cache_read: p.cache_read, cache_write: p.cache_write,
-    cache_write_1h: p.cache_write_1h, list_price: p.list_price, discount_note: p.discount_note,
+    cache_write_1h: p.cache_write_1h, list_price: p.list_price ?? p.original, discount_note: p.discount_note,
     tiers: (p.tiers ?? []).map((t: Json) => ({ when: t.when, ...tierBounds(String(t.when)), input: t.input, output: t.output, cache_read: t.cache_read, cache_write: t.cache_write })),
     off_peak: p.off_peak,
     note: p.note,
@@ -338,6 +404,8 @@ const report = {
   placeholders: [] as string[],
   unitKept: [] as string[],
   logos: [] as string[],
+  labelLimits: [] as string[],
+  notImported: [] as string[],
   providers: [] as string[],
   newModels: [] as string[],
   newLabModels: [] as string[],
@@ -392,10 +460,69 @@ function findBaseModel(labDir: string, ids: string[]) {
   return findLabModel(labDir, candidates);
 }
 
+// Research files that are not ready to import (reason recorded in the report).
+const SKIP_FILES: Record<string, string> = {
+  "ecloud-moma.json": "移动云 MoMA：只有模型 id，其余字段（上下文、价格、能力）全为 null",
+};
+
+// Research files whose K/M labels were converted to numbers with 1K = 1024 by the
+// researcher (the original wording is in each model's notes). For those values the
+// label is recovered and handled like limit_label: converted with the lab's
+// convention, label kept for display. A value whose label does not appear in the
+// notes and that has no conversion marker is a documented number and stays as is.
+const LABEL_CONVERTED_FILES = new Set([
+  "huawei-maas.json", "ctyun-xirang.json", "unicom-cucloud.json", "jdcloud-joymaas.json",
+  "kuaishou-vanchin.json", "ai360.json", "skywork.json", "youdao.json",
+]);
+const MARKER_1024 = /1\s*K\s*=\s*1024|[×x*]\s*1024|1024\s*换算/i;
+function recoverLabels(m: Json): Json {
+  const notes = String(m.notes ?? "");
+  const marker = MARKER_1024.test(notes);
+  const limit: Json = { ...(m.limit ?? {}) };
+  const label: Json = { ...(m.limit_label ?? {}) };
+  for (const k of ["context", "input", "output"]) {
+    const v = limit[k];
+    if (!isNum(v) || v % 1024 !== 0 || label[k]) continue;
+    const kLabel = `${v / 1024}K`;
+    const mLabel = v % 1048576 === 0 ? `${v / 1048576}M` : undefined;
+    const has = (l?: string) => !!l && new RegExp(`(^|[^\\d.])${l.replace(".", "\\.")}(?![\\w])`, "i").test(notes);
+    const found = has(mLabel) ? mLabel : has(kLabel) ? kLabel : undefined;
+    if (!found && !(marker && v % 1000 !== 0)) continue;
+    label[k] = found ?? kLabel;
+    limit[k] = null;
+  }
+  return { ...m, limit, limit_label: Object.keys(label).length ? label : m.limit_label };
+}
+
+// Platform facts the research states in prose that the site should lead with.
+const PROVIDER_NOTE_PREFIX: Record<string, string> = {
+  "kuaishou-vanchin":
+    "调用方式：除早期 KAT 系列有预置接入点外，需先在控制台「在线推理」创建推理接入点，请求里的 model 传接入点 ID（形如 ep-xxxx），不是下表的模型名；下表模型 ID 为官方模型名，仅供对照。",
+  "ctyun-xirang":
+    "可信 Token 专区（AICI-* 模型，TEE 机密推理）仅面向符合条件的央国企客户，需联系客户经理开通。",
+  modelscope:
+    "计费说明：魔搭 API-Inference 按「魔粒」（平台积分）计费，不以人民币标价，因此本库不列人民币价（cost_cny 留空）。",
+};
+
 // ---------------------------------------------------------------- import
 const files = readdirSync(RESEARCH_DIR).filter((f) => f.endsWith(".json")).sort();
 for (const file of files) {
   const r = JSON.parse(readFileSync(path.join(RESEARCH_DIR, file), "utf8")) as Json;
+  if (SKIP_FILES[file]) {
+    report.notImported.push(`research/${file}: ${SKIP_FILES[file]}，整份暂不导入`);
+    continue;
+  }
+  // Models whose API id the research could not confirm (id_verified = false) are
+  // not imported; a platform left with none is skipped entirely.
+  const unverified = (r.models ?? []).filter((m: Json) => m.id_verified === false);
+  if (unverified.length) {
+    report.notImported.push(`research/${file}: ${unverified.length} 个模型 id_verified=false，未导入（${unverified.map((m: Json) => m.id).join("、")}）`);
+    r.models = (r.models ?? []).filter((m: Json) => m.id_verified !== false);
+  }
+  if ((r.models ?? []).length === 0) {
+    report.notImported.push(`research/${file}: 无可导入模型，平台 ${r.provider_id} 暂不建立`);
+    continue;
+  }
   const pid: string =
     r.modelsdev_id && providerExists(r.modelsdev_id) ? r.modelsdev_id : providerExists(r.provider_id) ? r.provider_id : r.provider_id;
   const isNew = !providerExists(pid);
@@ -417,10 +544,13 @@ for (const file of files) {
   for (const plan of r.plans ?? []) {
     const entry = stripNulls({
       id: plan.id, name_zh: plan.name_zh, name: plan.name,
-      price_cny_month: plan.price_cny_month, price_cny_quarter: plan.price_cny_quarter, price_cny_year: plan.price_cny_year,
+      price_cny_month: planPrice(plan.price_cny_month, plan.name_zh), price_cny_quarter: planPrice(plan.price_cny_quarter, plan.name_zh), price_cny_year: planPrice(plan.price_cny_year, plan.name_zh),
       base_url: plan.base_url, anthropic_base_url: plan.anthropic_base_url, other_base_urls: plan.other_clusters ?? plan.other_base_urls,
-      protocol: plan.protocol, models: plan.models, quota_note: plan.quota_note,
-      usage_restriction: plan.usage_restriction ?? PLAN_USAGE_RESTRICTION, sources: urls(plan.source ?? plan.sources),
+      // "openai-chat|anthropic" → the first protocol; the base_url speaks it.
+      protocol: typeof plan.protocol === "string" ? plan.protocol.split(/[|,/]/)[0].trim() : plan.protocol,
+      models: plan.models,
+      quota_note: [plan.quota_note, plan.models_note && !plan.models?.length ? `包含模型：${plan.models_note}` : undefined].filter(Boolean).join("；") || undefined,
+      usage_restriction: plan.usage_restriction ?? planRestriction(plan), sources: urls([plan.source, plan.source2, ...(plan.sources ?? [])].filter(Boolean)),
     });
     let target: string | undefined;
     if (plan.base_url) {
@@ -439,7 +569,8 @@ for (const file of files) {
     } else ownPlans.push(entry);
   }
 
-  const pExt = stripNulls({ name_zh: r.name_zh, region, pricing_page: r.pricing_page, plans: ownPlans, notes: r.notes });
+  const notes = [PROVIDER_NOTE_PREFIX[pid], r.notes].filter(Boolean).join("\n\n") || undefined;
+  const pExt = stripNulls({ name_zh: r.name_zh, region, pricing_page: r.pricing_page, plans: ownPlans, notes });
   if (isNew) {
     // New provider: provider.toml + logo.
     const chat = endpoints.find((e) => e.protocol === "openai-chat" && e.region === region) ?? endpoints.find((e) => e.protocol === "openai-chat");
@@ -461,9 +592,25 @@ for (const file of files) {
 
   // Models.
   const existing = upstreamModelFiles(pid);
-  for (const m0 of r.models ?? []) {
-    const m = { ...m0, price_cny: normalizePrice(m0.price_cny) };
-    const ext = { ...modelExt(m, pid), ...(MODEL_HINTS[pid]?.[m.id] ?? {}) };
+  for (const mRaw of r.models ?? []) {
+    let m0 = LABEL_CONVERTED_FILES.has(file) ? recoverLabels(mRaw) : mRaw;
+    if (/\s/.test(m0.id)) {
+      // A display name rather than an API id (快手万擎 calls go to ep-xxx endpoints): no spaces in file ids.
+      const id = m0.id.trim().replace(/\s+/g, "-");
+      report.placeholders.push(`${pid}/${m0.id}: 模型 ID 含空格，文件名改为 ${id}`);
+      m0 = { ...m0, id };
+    }
+    const resolved = resolveLimits(m0, LAB_DIR[m0.lab] ?? m0.lab ?? pid);
+    const m = { ...m0, limit: resolved.limit, price_cny: normalizePrice(m0.price_cny) };
+    const ext: Json = { ...modelExt(m, pid), ...(MODEL_HINTS[pid]?.[m.id] ?? {}) };
+    if (resolved.labels) {
+      ext.limit_label = resolved.labels;
+      report.labelLimits.push(
+        `${pid}/${m.id}: ` +
+          Object.entries(resolved.labels).map(([k, label]) => `limit.${k} 「${label}」→ ${m.limit[k]}`).join("，") +
+          `（标签换算，按 ${LAB_DIR[m0.lab] ?? m0.lab ?? pid} 惯例 ${labBase(LAB_DIR[m0.lab] ?? m0.lab ?? pid)} 进制）`,
+      );
+    }
     const hit = [m.id, ...(m.aliases ?? []).map(cleanAlias)].map((a: string) => existing.get(a.toLowerCase())).find(Boolean);
 
     if (hit) {
@@ -587,6 +734,8 @@ for (const file of files) {
       const want = m.limit?.[k];
       const have = labToml.limit?.[k];
       if (!isNum(want) || want === have) continue;
+      // A label-only value that names the lab file's number ("1M" vs 1048576) adds nothing.
+      if (resolved.labels?.[k] && isNum(have) && sameLabel(have, want)) continue;
       limit[k] = want; // the platform's own documented number, verbatim
     }
     let reasoning: Json | undefined;
@@ -597,6 +746,9 @@ for (const file of files) {
       const def = r0.default ? upstreamDefault(String(r0.default), reasoning) : undefined;
       if (def) reasoning.default = def;
     } else if (r0.supported === false && labToml.capabilities?.reasoning?.supported) reasoning = { supported: false };
+    // Unknown on this platform: keep the lab's "supports reasoning" with no control
+    // options stated (v1 needs reasoning_options whenever reasoning is true).
+    else if (labToml.capabilities?.reasoning?.supported) reasoning = { supported: true };
     const p = m.price_cny;
     const cost =
       p && isNum(p.input) && isNum(p.output)
@@ -666,6 +818,16 @@ for (const [rel, o] of modelOverlay) {
   report.overlays++;
 }
 
+// New providers left without any model file (every model skipped) are not created.
+for (const pid of new Set(generated.filter((f) => /^providers\/[^/]+\/provider\.toml$/.test(f)).map((f) => f.split("/")[1]))) {
+  if (existsSync(path.join(ROOT, "providers", pid, "models"))) continue;
+  await fs.rm(path.join(ROOT, "providers", pid), { recursive: true, force: true });
+  for (let i = generated.length - 1; i >= 0; i--) if (generated[i].startsWith(`providers/${pid}/`)) generated.splice(i, 1);
+  report.providers.splice(report.providers.indexOf(`${pid} (新建)`), 1);
+  report.logos = report.logos.filter((l) => !l.startsWith(`${pid}（`));
+  report.notImported.push(`${pid}: 所有模型均因缺上下文且无对应 lab 模型而跳过，平台暂不建立`);
+}
+
 await Bun.write(MANIFEST, JSON.stringify(generated.sort(), null, 2) + "\n");
 
 // ---------------------------------------------------------------- report
@@ -685,6 +847,8 @@ const md = [
   section("新增 lab 模型文件", report.newLabModels),
   section("占位与跳过", report.placeholders),
   section("占位 logo（平台名首字，非官方商标）", report.logos),
+  section("标签换算（官方只给出 1M / 128K 这类标签，按厂商惯例换算；原标签存于 limit_label）", report.labelLimits),
+  section("未导入", report.notImported),
   `overlay 文件数：${report.overlays}`,
   ``,
 ].join("\n");

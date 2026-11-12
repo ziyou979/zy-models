@@ -1,0 +1,14 @@
+# Imported from research/ai360.json by scripts/import-research.ts
+# cn openai-chat: https://api.360.cn/v1 (https://ai.360.com/docs/413291990e0)
+# cn anthropic: https://api.360.cn (https://ai.360.com/docs/417283364e0)
+# cn openai-responses: https://api.360.cn/v1 (https://ai.360.com/docs/437061603e0)
+name = "360 AI Open Platform (Zhinao)"
+env = ["ZHINAO_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://api.360.cn/v1"
+doc = "https://ai.360.com/docs/quick-start"
+name_zh = "360智脑开放平台"
+region = "cn"
+pricing_page = "https://ai.360.com/open/zh/models"
+notes = "360 智脑开放平台已转型为 OpenRouter 式聚合平台：模型广场共 100 个模型，model 名采用『厂商/模型』写法，每个模型列出多家上游供应商（含百度文心、通义千问、腾讯混元、火山引擎、华为云、金山云、七牛云、并行科技、贵州移动及若干 tokenmall-* 渠道），平台『智能调度』在上游间路由。早期 360gpt2-pro / 360gpt-turbo 等已不在当前模型列表中；自研模型仅剩 360zhinao-pro、360zhinao-turbo-32k-agent 及若干业务专用/组合模型（如 360zhinao-turbo-llm-geo 标注『业务内部专用模型』）。平台列表的 reasoning 字段全部为 none、supportedParameters 多数只列 temperature/top_p/top_k，无法据此判断思考与工具调用能力，相关字段记 null；文档未给出思考开关参数。速率限制按 RPM/TPM 令牌桶，TPM 消耗按『输入 token + max_tokens』预扣，分模型阈值在登录后『调用限制』页。部分模型有峰谷/周末折扣（见各模型 off_peak）。新用户实名后免费额度仅见第三方说法，官方页面未核实。"

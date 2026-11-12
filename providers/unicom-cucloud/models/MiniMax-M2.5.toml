@@ -1,0 +1,16 @@
+# Imported from research/unicom-cucloud.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7017&lang=zh
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7089&lang=zh
+schema = 2
+base_model = "minimax/MiniMax-M2.5"
+sources = ["https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7017&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7089&lang=zh"]
+checked_at = "2026-11-13"
+notes = "上下文/最大输出取自官方 OpenClaw 配置示例（contextWindow 202752、maxTokens 16384、reasoning:false），非模型规格表。Token Plan 示例综合单价 1.10元/百万tokens。按量单价未在公开文档列出（控制台『价格文档』需登录）。"
+
+[capabilities]
+reasoning = { supported = false }
+
+[limit]
+context = 202_752
+output = 16_384

@@ -1,0 +1,31 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://www.qiniu.com/ai/models
+# Source: https://api.qnaigc.com/v1/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 12, output 36, cache_read 1.5
+schema = 2
+base_model = "alibaba/qwen3.8-max"
+sources = ["https://www.qiniu.com/ai/models", "https://api.qnaigc.com/v1/models"]
+checked_at = "2026-11-13"
+notes = "显式缓存命中 1 元/百万；广场 architecture.reasoning.supported=false 但 features 含「深度思考」，两处不一致；协议: openai-chat, anthropic-messages；官方广场限速 RPM 10000 / TPM 5000000；备案号 ZheJiang-TongYiQianWen-20230901"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+output = 128_000
+
+[cost.text.input]
+price = 1.79484959
+
+[cost.text.input.cache]
+read = 0.2243562
+
+[cost.text.output]
+price = 5.38454877
+
+[cost_cny]
+input = 12
+output = 36
+cache_read = 1.5
+cache_write = 15

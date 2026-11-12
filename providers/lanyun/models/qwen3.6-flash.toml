@@ -1,0 +1,13 @@
+# Imported from research/lanyun.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://maas-api.lanyun.net/v1/models
+schema = 2
+base_model = "alibaba/qwen3.6-flash"
+sources = ["https://maas-api.lanyun.net/v1/models"]
+checked_at = "2026-11-13"
+notes = "API 返回 max_output_tokens=1048576，与 context_size 相同（全平台所有模型均如此，判为同一字段复用，limit.output 未采用记 null）；价格仅在登录后的模型广场展示（公开页未列），记 null"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 1_048_576

@@ -1,0 +1,32 @@
+# Imported from research/ai360.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ai.360.com/open/zh/models/moonshotai/kimi-k3.1-pro
+# Source: https://ai.360.com/open/zh/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 13, output 68, cache_read 1.3
+schema = 2
+base_model = "moonshotai/kimi-k3.1-pro"
+sources = ["https://ai.360.com/open/zh/models/moonshotai/kimi-k3.1-pro", "https://ai.360.com/open/zh/models"]
+checked_at = "2026-11-13"
+notes = "平台列表数据：contextLength 1000000、maxCompletionTokens 1000000（平台原值，十进制）。上游供应商：月之暗面、金山云、tokenmall-cdtx、tokenmall-wyls。缓存写入 5 分钟 13、1 小时 26 元/百万。另有 kimi-k3.1-pro-highspeed（26/136）。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[limit]
+context = 1_000_000
+output = 1_000_000
+
+[cost.text.input]
+price = 1.94442039
+
+[cost.text.input.cache]
+read = 0.19444204
+
+[cost.text.output]
+price = 10.17081434
+
+[cost_cny]
+input = 13
+output = 68
+cache_read = 1.3
+cache_write = 13

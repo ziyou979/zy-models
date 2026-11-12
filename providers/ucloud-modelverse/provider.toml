@@ -1,0 +1,16 @@
+# Imported from research/ucloud-modelverse.json by scripts/import-research.ts
+# cn openai-chat: https://api.modelverse.cn/v1 (https://astraflow.ucloud.cn/docs/modelverse/api_doc/common/certificate)
+# cn openai-responses: https://api.modelverse.cn/v1 (https://www.compshare.cn/docs/modelverse/models/quick-start)
+# cn anthropic: https://api.modelverse.cn (https://astraflow.ucloud.cn/docs/modelverse/api_doc/text_api/claude_compatible)
+# cn gemini: https://api.modelverse.cn (https://www.compshare.cn/docs/modelverse/models/quick-start)
+# intl openai-chat: https://api.umodelverse.ai/v1 (https://astraflow.ucloud.cn/docs/modelverse/api_doc/common/certificate)
+name = "UCloud UModelVerse"
+env = ["MODELVERSE_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://api.modelverse.cn/v1"
+doc = "https://astraflow.ucloud.cn/docs/modelverse"
+name_zh = "优刻得 UModelVerse 模型服务平台（AstraFlow）"
+region = "cn"
+pricing_page = "https://astraflow.ucloud.cn/modelverse/prices"
+notes = "价格取自官方公开接口 GET https://api.modelverse.cn/v1/models（每模型 pricing 数组，单位 元/百万 Token）；能力与长度标签取自 UCloud 官方 API Action=ListUFSquareModelGuest（模型广场访客接口，无需签名）。上下文/最大输出在广场仅以 K 为单位的整数给出（如 1000、128），按规则视为标签不换算，limit 记 null，原文见 limit_label。DeepSeek V4 系列按北京时间峰谷计价（峰时 09:00-12:00、14:00-18:00，谷时 12:00-14:00、18:00-次日09:00，谷时约半价）。思考开关文档仅覆盖旧模型：DeepSeek V3.1 用 thinking.type、V3.2 用 chat_template_kwargs.thinking，豆包 thinking.type=enabled|disabled|auto（https://astraflow.ucloud.cn/docs/modelverse/api_doc/text_api/deepseek 、/doubao），新模型未见专门说明。部分模型有 -sg 等指定地域 Model ID（独立计价）。2026-07-03 起不再向新用户赠送免费 token，存量免费额度清空（https://astraflow.ucloud.cn/docs/modelverse/price）。注册需 UCloud 账号实名认证（快速上手文档『前提条件 需要注册成为UCloud用户，并完成实名认证』，https://astraflow.ucloud.cn/docs/modelverse/guide/briefguide）。产品现以 AstraFlow 品牌展示（astraflow.ucloud.cn）。未发现编程套餐/Coding Plan。另有 auto（Auto Router）与 Fusion 混合推理模型未纳入。"

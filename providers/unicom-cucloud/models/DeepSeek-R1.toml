@@ -1,0 +1,26 @@
+# Imported from research/unicom-cucloud.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=6518&lang=zh
+# Source: https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 4, output 16
+schema = 2
+base_model = "deepseek/deepseek-r1"
+sources = ["https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=6518&lang=zh", "https://support.cucloud.cn/document/127/591/2357.html?id=2357&arcid=7023&lang=zh"]
+checked_at = "2026-11-13"
+notes = "产品资费页：输入 0.004 / 输出 0.016 元/千tokens；另有 Tokens 量包（输入 1000万/6个月 40元 起）。"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.5982832
+
+[cost.text.output]
+price = 2.39313279
+
+[cost_cny]
+input = 4
+output = 16
+
+[reasoning_default]
+value = "on"

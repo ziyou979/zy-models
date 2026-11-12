@@ -1,0 +1,28 @@
+# Imported from research/gitee-ai.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://moark.com/serverless-api?model=MiMo-V2.5-Pro&tab=info
+# Source: https://api.moark.com/v1/models?include_details=true
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 7, output 21, cache_read 1.4
+schema = 2
+base_model = "xiaomi/mimo-v2.5-pro"
+sources = ["https://moark.com/serverless-api?model=MiMo-V2.5-Pro&tab=info", "https://api.moark.com/v1/models?include_details=true"]
+checked_at = "2026-11-13"
+notes = "详情页未显示上下文标签；模型介绍原文『支持高达 1M 标记的上下文长度』；上下文/最大输出仅以标签显示（tooltip：上下文大小 / 最大生成长度）"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 1.04699559
+
+[cost.text.input.cache]
+read = 0.20939912
+
+[cost.text.output]
+price = 3.14098678
+
+[cost_cny]
+input = 7
+output = 21
+cache_read = 1.4
+cache_write = 7

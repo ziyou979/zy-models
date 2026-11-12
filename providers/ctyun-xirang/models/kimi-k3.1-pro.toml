@@ -1,0 +1,11 @@
+# Imported from research/ctyun-xirang.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://ctxirang.ctyun.cn/maasMarket/market
+# Source: https://www.ctyun.cn/document/11061839/11099156
+schema = 2
+base_model = "moonshotai/kimi-k3.1-pro"
+sources = ["https://ctxirang.ctyun.cn/maasMarket/market", "https://www.ctyun.cn/document/11061839/11099156"]
+checked_at = "2026-11-13"
+notes = "模型广场详情页（上下文/价格/RPM/TPM）需登录，公开页面未展示，相关字段为 null。市场分类『视觉理解』。"
+
+[capabilities]
+reasoning = { supported = true }

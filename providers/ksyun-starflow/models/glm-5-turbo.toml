@@ -1,0 +1,41 @@
+# Imported from research/ksyun-starflow.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://docs.ksyun.com/documents/45801
+# Source: https://docs.ksyun.com/documents/45797
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 5, output 22, cache_read 1.2
+schema = 2
+base_model = "zhipuai/glm-5-turbo"
+sources = ["https://docs.ksyun.com/documents/45801", "https://docs.ksyun.com/documents/45797"]
+checked_at = "2026-11-13"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.747854
+
+[cost.text.input.cache]
+read = 0.17948496
+
+[cost.text.output]
+price = 3.29055758
+
+[cost_cny]
+input = 5
+output = 22
+cache_read = 1.2
+
+[[cost_cny.tiers]]
+when = "输入长度[0,32K)"
+input = 5
+output = 22
+cache_read = 1.2
+
+[[cost_cny.tiers]]
+when = "输入长度[32K,200K)"
+input = 7
+output = 26
+cache_read = 1.8
+
+[limit_label]
+context = "200K"

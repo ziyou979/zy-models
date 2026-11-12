@@ -1,0 +1,32 @@
+# Imported from research/ucloud-modelverse.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://api.modelverse.cn/v1/models
+# Source: https://api.ucloud.cn/?Action=ListUFSquareModelGuest
+# Source: https://astraflow.ucloud.cn/modelverse/prices
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.8, output 2.8, cache_read 0.23
+schema = 2
+base_model = "zhipuai/glm-5.3-flash"
+sources = ["https://api.modelverse.cn/v1/models", "https://api.ucloud.cn/?Action=ListUFSquareModelGuest", "https://astraflow.ucloud.cn/modelverse/prices"]
+checked_at = "2026-11-13"
+notes = "模型广场长度字段为 K 单位标签：MaxModelLenNew=1000、MaxInputTokens=0、MaxOutputTokens=128（0 表示未填）；另有旧字段 MaxModelLen=131072，与新字段不一致，未采用；模型广场 Capabilities.FunctionCall/StructuredOutput 对全部模型均为 false（疑似未填），tools/structured_output 记 null；协议: ChatCompletions, Responses, Anthropic"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.11965664
+
+[cost.text.input.cache]
+read = 0.03440128
+
+[cost.text.output]
+price = 0.41879824
+
+[cost_cny]
+input = 0.8
+output = 2.8
+cache_read = 0.23
+
+[limit_label]
+context = "1000K"
+output = "128K"

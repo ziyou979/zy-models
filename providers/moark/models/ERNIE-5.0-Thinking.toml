@@ -1,0 +1,26 @@
+# Imported from research/gitee-ai.json by scripts/import-research.ts (checked 2026-11-13)
+# Source: https://moark.com/serverless-api?model=ERNIE-5.0-Thinking&tab=info
+# Source: https://api.moark.com/v1/models?include_details=true
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 4, output 16
+schema = 2
+base_model = "baidu/ernie-5.0-thinking"
+sources = ["https://moark.com/serverless-api?model=ERNIE-5.0-Thinking&tab=info", "https://api.moark.com/v1/models?include_details=true"]
+checked_at = "2026-11-13"
+notes = "详情页另显示一个 64K 标签，未标明是否为最大输出；上下文/最大输出仅以标签显示（tooltip：上下文大小 / 最大生成长度）"
+
+[capabilities]
+reasoning = { supported = true }
+
+[cost.text.input]
+price = 0.5982832
+
+[cost.text.output]
+price = 2.39313279
+
+[cost_cny]
+input = 4
+output = 16
+
+[limit_label]
+context = "128K"

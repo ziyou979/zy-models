@@ -1,0 +1,23 @@
+# Imported from research/infini-ai.json by scripts/import-research.ts
+# cn openai-chat: https://cloud.infini-ai.com/maas/v1 (https://docs.infini-ai.com/shared/gen-studio/coding-tools/gs-use-claude-code.html)
+# cn anthropic: https://cloud.infini-ai.com/maas (https://docs.infini-ai.com/shared/gen-studio/coding-tools/gs-use-claude-code.html)
+# cn native: https://cloud.infini-ai.com/maas/{model}/{chiptype}/chat/completions (https://docs.infini-ai.com/gen-studio/api/text-generation/tutorial-mxn.html)
+name = "Infinigence AI GenStudio"
+env = ["INFINI_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://cloud.infini-ai.com/maas/v1"
+doc = "https://docs.infini-ai.com/gen-studio/"
+name_zh = "无问芯穹 GenStudio 大模型服务平台"
+region = "cn"
+pricing_page = "https://docs.infini-ai.com/gen-studio/api/usage-and-billing/billing.html"
+notes = "模型广场与服务列表（含上下文长度、最大输出、单价、Claude 兼容/函数调用标签、支持芯片）均需登录，公开文档也明确价格只在服务列表/模型卡片展示，故本文件 limit 与 price_cny 基本为 null；模型 ID 与思考参数均取自公开 Reasoning 教程（2026-11 版）与上线/下架公告。计费：自 2026-03-30 起预置 LLM API 一律按 Token 后付费（体验中心网页端免费），每自然小时出账；2026-06-01 起部分模型支持被动缓存，命中部分优惠价计费。服务等级限频：基础服务 RPM 12 / RPD 300 / TPM 12,000（租户内所有 Key 共享），高级服务 RPM 1,200 / RPD 不限 / TPM 1,200,000（可自助升级，升级后不可降级），企业服务可定制；不排队，超限直接 429。嵌入与重排序 API 免费。视觉输入仅接受 BASE64（不支持 URL），单文件 5MB，单图/视频最多读取 16384 token。产品支持多种国产芯片推理（M×N）。未发现编程套餐/Coding Plan。实名认证要求未在公开文档中找到原文。"
+
+[[plans]]
+id = "concurrency-slots"
+name_zh = "LLM 包并发服务"
+base_url = "https://cloud.infini-ai.com/maas/v1"
+protocol = "openai-chat"
+quota_note = "按模型购买并发槽位、按槽位月度订阅费；超出时可选直接拒绝（429 concurrency exceeded）或回退按量计费；仅适用于高并发专属模型 ID（如 pro-deepseek-r1）；需联系商务申购，价格未公开。非编程套餐。"
+usage_restriction = "订阅套餐额度仅限在官方支持的编程工具 / Agent 中交互使用，禁止当作普通 API（自建应用、批量或程序化调用）使用；违规可能被限流或封禁。具体条款见 sources。"
+sources = ["https://docs.infini-ai.com/gen-studio/api/usage-and-billing/billing.html"]
