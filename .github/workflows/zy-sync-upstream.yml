@@ -46,8 +46,13 @@ jobs:
             echo "conflict=false" >> "$GITHUB_OUTPUT"
           else
             git diff --name-only --diff-filter=U > /tmp/conflicts.txt
-            echo "conflict=true" >> "$GITHUB_OUTPUT"
-            git merge --abort
+            # add/add on files our importer generated: take upstream, move our data to overlays/.
+            if bash scripts/sync-resolve-generated.sh; then
+              echo "conflict=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "conflict=true" >> "$GITHUB_OUTPUT"
+              git merge --abort
+            fi
           fi
           echo "changed=true" >> "$GITHUB_OUTPUT"
       - name: Report conflicts
@@ -62,7 +67,9 @@ jobs:
           gh label create upstream-sync-conflict --color B60205 2>/dev/null || true
           if [ -n "$num" ]; then gh issue comment "$num" --body-file /tmp/body.md
           else gh issue create --title "上游同步冲突" --label upstream-sync-conflict --body-file /tmp/body.md; fi
-          exit 1
+          # The issue is the alert; don't also fail the run (a failed run emails every day).
+          echo "::warning::Upstream merge has conflicts; reported in the upstream-sync-conflict issue."
+          cat /tmp/body.md >> "$GITHUB_STEP_SUMMARY"
       - name: Validate and build
         if: steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'false'
         run: |
@@ -78,6 +85,12 @@ jobs:
           body="自动合并上游 anomalyco/models.dev@${upstream_sha}，\`bun validate\` 与 \`bun run build\` 已通过。
 
           合并后请检查：上游是否更新了我们 overlays/ 覆盖过的模型（必要时重新运行 \`bun scripts/import-research.ts\` 刷新冲突报告），以及 docs/upstream-fixes.md 中的条目是否已被上游修正。"
+          if [ -s /tmp/auto-resolved.txt ]; then
+            body="${body}
+
+          自动解决的 add/add 冲突（取上游文件；我们的数据已由 import-research 写入 overlays/，数值差异见 research/IMPORT_REPORT.md）：
+          $(sed 's/^/- `/; s/$/`/' /tmp/auto-resolved.txt)"
+          fi
           if gh pr view "$BRANCH" --json state -q .state 2>/dev/null | grep -q OPEN; then
             gh pr edit "$BRANCH" --body "$body"
           else
