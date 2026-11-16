@@ -1,20 +1,29 @@
-# Imported from research/sensenova.json by scripts/import-research.ts (checked 2026-11-12)
-# Source: https://platform.sensenova.cn/docs
-# Source: https://www.sensenova.cn/token-plan
+# Sources (accessed 2026-08-28):
+# https://platform.sensenova.cn/docs
+# GET /v1/models: context 1048576, max output 65536, fp8, text+image -> text,
+# supported features tools+json_mode+reasoning; pricing all zero (public beta
+# free on TokenPlan).
+# Reasoning: reasoning_effort documented enum none|low|high|max (default
+# high). A reasoning side channel is returned as message.reasoning, which is
+# not a schema-supported interleaved field, so no interleaved is authored.
 schema = 2
-base_model = "deepseek/deepseek-v4.1-flash-1017"
-status = "beta"
-sources = ["https://platform.sensenova.cn/docs", "https://www.sensenova.cn/token-plan"]
-checked_at = "2026-11-12"
-notes = "商汤平台上 model id 为 deepseek-flash（DeepSeek V4.1 Flash 1017 版）。max_tokens 默认 131072，范围 [1,393216]。视频输入仅 Chat Completions 支持。Chat 接口 reasoning_effort=none 可关思考，Messages 接口不能关。minimal→low，medium/xhigh→high 兼容映射。仅隐式缓存。"
+base_model = "deepseek/deepseek-v4.1-flash"
+description = "DeepSeek V4.1 Flash is a high-performance conversational model by DeepSeek, supporting thinking/non-thinking modes, 1M context window, and tool calling."
 
 [capabilities]
-reasoning = { supported = true, effort = ["none", "low", "high", "max"], default = { type = "effort", value = "high" } }
+reasoning = { supported = true, effort = ["none", "low", "high", "max"] }
 structured_output = true
 
 [limit]
-output = 393_216
+context = 1_048_576
+output = 65_536
 
-[reasoning_default]
-value = "high"
-source = "https://platform.sensenova.cn/docs"
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_content" }
+
+[cost.text.input]
+price = 0
+cache = { read = 0 }
+
+[cost.text.output]
+price = 0

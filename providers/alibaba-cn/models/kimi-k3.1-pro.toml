@@ -16,6 +16,7 @@ structured_output = true
 
 [limit]
 context = 1_000_000
+output = 1_000_000
 
 [cost.text.input]
 price = 1.94442039

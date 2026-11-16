@@ -14,7 +14,7 @@ notes = "模型广场长度字段为 K 单位标签：MaxModelLenNew=1024、MaxI
 reasoning = { supported = true }
 
 [limit]
-input = 1_014_784
+input = 991_000
 
 [cost.text.input]
 price = 1.79484959

@@ -12,6 +12,7 @@ reasoning = { supported = true }
 
 [limit]
 context = 204_800
+output = 204_800
 
 [limit_label]
 context = "200K"

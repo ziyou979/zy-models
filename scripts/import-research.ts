@@ -209,6 +209,13 @@ function normalizePrice(p: Json | null | undefined) {
   }
   const list = listTiers.filter((t) => isNum(t.input)).sort((a, b) => b.input - a.input)[0];
   if (list) out.list_price = { input: list.input, output: list.output, cache_read: list.cache_read, cache_write: list.cache_write };
+  // 原价 only written in discount_note, e.g. "当前 2.8 折；原价 ¥0.5 / ¥1.5 / ¥0.1" or
+  // "原价 输入 ¥2 / 输出 ¥6 / 缓存 ¥0.4" (order: input / output / cache_read).
+  const noteList = String(p.discount_note ?? "").match(/原价\s*((?:(?:输入|输出|缓存)?\s*¥\s*[\d.]+\s*\/?\s*){2,3})/);
+  if (!out.list_price && noteList) {
+    const [input, output, cache_read] = [...noteList[1].matchAll(/¥\s*([\d.]+)/g)].map((x) => Number(x[1]));
+    out.list_price = stripNulls({ input, output, cache_read });
+  }
   if (swapped) out.off_peak = [p.off_peak, "（导入时已统一：主字段为标准/高峰价，闲时价见 tiers。）"].filter(Boolean).join(" ");
   return out;
 }
@@ -217,6 +224,8 @@ function normalizePrice(p: Json | null | undefined) {
 const USD_NATIVE = new Set(["deepseek", "xiaomi"]);
 const EFFORTS = ["none", "minimal", "low", "medium", "high", "xhigh", "max"];
 const isNum = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v);
+// models.dev `cost` holds the standard price: the 原价 when the CNY main fields are a limited-time price.
+const stdPrice = (p: Json | null | undefined, k: string) => (isNum(p?.list_price?.[k]) ? p!.list_price[k] : p?.[k]);
 const urlRe = /^https?:\/\/\S+$/;
 const urls = (v: unknown): string[] =>
   (Array.isArray(v) ? v : typeof v === "string" ? v.split(/\s*[;；,，]\s*|\s+/) : [])
@@ -627,6 +636,12 @@ for (const file of files) {
           report.unitKept.push(`${pid}/${hit} limit.${k}: 上游 ${have} / 研究 ${want}（同一标称值，沿用上游）`);
           continue;
         }
+        // Input limit stated as the same nominal value as the context ("1M" / "1M"): it adds nothing,
+        // and the research K/M spelling would exceed upstream's context.
+        if (k === "input" && have === undefined && want === m.limit?.context && overlay.limit?.context === undefined) {
+          report.unitKept.push(`${pid}/${hit} limit.input: 研究 ${want} 与 context 同一标称值，不单独写入`);
+          continue;
+        }
         if (have !== want) {
           (overlay.limit ??= {})[k] = want;
           (have === undefined ? report.additions : report.conflicts).push(`${pid}/${hit} limit.${k}: ${have ?? "—"} → ${want}`);
@@ -647,9 +662,9 @@ for (const file of files) {
           report.differences.push(`${pid}/${hit} cost.input: upstream $${base.cost.input} vs research ¥${p.input}（${banded ? "研究价格分档，基础价为最低档" : "上游为官方美元价"}，未覆盖）`);
       } else if (p && base && !isFree) {
         const pairs: [string, number | undefined, number | undefined, string[]][] = [
-          ["input", p.input, base.cost?.input, ["text", "input", "price"]],
-          ["output", p.output, base.cost?.output, ["text", "output", "price"]],
-          ["cache_read", p.cache_read, base.cost?.cache_read, ["text", "input", "cache", "read"]],
+          ["input", stdPrice(p, "input"), base.cost?.input, ["text", "input", "price"]],
+          ["output", stdPrice(p, "output"), base.cost?.output, ["text", "output", "price"]],
+          ["cache_read", stdPrice(p, "cache_read"), base.cost?.cache_read, ["text", "input", "cache", "read"]],
         ];
         for (const [label, cny, have, at] of pairs) {
           if (!isNum(cny)) continue;
@@ -738,6 +753,26 @@ for (const file of files) {
       if (resolved.labels?.[k] && isNum(have) && sameLabel(have, want)) continue;
       limit[k] = want; // the platform's own documented number, verbatim
     }
+    // Keep input/output within the context the merged file ends up with (upstream validate checks this after
+    // the base_model merge). A verbatim number in the other K/M convention than the lab's context ("1M" written
+    // 1048576 over a 1_000_000 context) is the same nominal value: use the context's spelling. A number that is
+    // still larger (the platform serves a shorter context than the lab's output) is capped at the context.
+    const ctx = isNum(limit.context) ? limit.context : labToml.limit?.context;
+    for (const k of ["input", "output"]) {
+      const v = isNum(limit[k]) ? limit[k] : labToml.limit?.[k];
+      if (!isNum(ctx) || !isNum(v) || v <= ctx) continue;
+      let fixed = v;
+      if (sameLabel(v, ctx)) fixed = ctx;
+      else if (v % 1024 === 0 && ctx % 1024 !== 0 && ctx % 1000 === 0) fixed = (v / 1024) * 1000;
+      if (fixed > ctx) {
+        fixed = ctx;
+        report.placeholders.push(`${pid}/${m.id}: limit.${k} ${v} 大于 context ${ctx}，按 context 截断`);
+      } else {
+        report.unitKept.push(`${pid}/${m.id} limit.${k}: 研究 ${v} → ${fixed}（与 context ${ctx} 统一 K/M 写法）`);
+      }
+      if (fixed === labToml.limit?.[k]) delete limit[k];
+      else limit[k] = fixed;
+    }
     let reasoning: Json | undefined;
     if (r0.supported === true) {
       const effort = (r0.effort ?? []).filter((e: string) => EFFORTS.includes(e));
@@ -751,8 +786,8 @@ for (const file of files) {
     else if (labToml.capabilities?.reasoning?.supported) reasoning = { supported: true };
     const p = m.price_cny;
     const cost =
-      p && isNum(p.input) && isNum(p.output)
-        ? { text: { input: stripNulls({ price: usd(p.input), cache: isNum(p.cache_read) ? { read: usd(p.cache_read) } : undefined }), output: { price: usd(p.output) } } }
+      p && isNum(stdPrice(p, "input")) && isNum(stdPrice(p, "output"))
+        ? { text: { input: stripNulls({ price: usd(stdPrice(p, "input")), cache: isNum(stdPrice(p, "cache_read")) ? { read: usd(stdPrice(p, "cache_read")) } : undefined }), output: { price: usd(stdPrice(p, "output")) } } }
         : undefined;
     const body = stripNulls({
       schema: 2,
@@ -763,7 +798,7 @@ for (const file of files) {
       cost,
       ...ext,
     });
-    const costHeader = cost ? [`Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate ${rate} CNY/USD, ${rateDate}, ${RATE_SOURCE}).`, `CNY: input ${p.input}, output ${p.output}${isNum(p.cache_read) ? `, cache_read ${p.cache_read}` : ""}`] : [];
+    const costHeader = cost ? [`Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate ${rate} CNY/USD, ${rateDate}, ${RATE_SOURCE}).`, `CNY: input ${p.input}, output ${p.output}${isNum(p.cache_read) ? `, cache_read ${p.cache_read}` : ""}`, ...(p.list_price ? [`USD uses the CNY list price (原价): ${JSON.stringify(p.list_price)}`] : [])] : [];
     await writeFile(`providers/${pid}/models/${m.id}.toml`, toToml(body, [...header, ...costHeader], ["capabilities.reasoning"]));
     report.newModels.push(`${pid}/${m.id} → base_model ${baseModel}`);
   }

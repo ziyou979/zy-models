@@ -14,6 +14,9 @@ notes = "联网搜索 0.004 元/次；max_tokens 与 context_length 相同（原
 reasoning = { supported = true, toggle = true }
 structured_output = true
 
+[limit]
+context = 256_000
+
 [cost.text.input]
 price = 0.89742479
 
