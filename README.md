@@ -97,6 +97,7 @@ overlays/                     对上游文件的覆盖：overlays/<与上游相�
 overlays/removed.json         本库移除的上游过时模型（下架 / 改名）
 research/                     国内平台调研数据（*.json，格式见 research/FORMAT.md）与导入报告
 scripts/import-research.ts    research → TOML 导入脚本（可重复运行）
+scripts/cn-sync.ts            国内平台官方公开数据 → research/*.json 的每日同步（无需 API key，见 docs/cn-sync.md）
 scripts/build-dist.ts         生成 dist/
 docs/upstream-fixes.md        上游过时数据修正清单（方便给 models.dev 提 PR）
 README.upstream.md            上游原版 README
@@ -111,6 +112,7 @@ bun install
 bun validate                      # 上游校验 + 扩展字段校验 + overlay 校验
 bun run build                     # 生成 dist/
 bun scripts/import-research.ts    # 重新导入 research/*.json（可加 --rate 6.685797 --rate-date 2026-11-12 固定汇率）
+bun cn:sync <平台> --dry-run       # 从国内平台官方公开数据同步 research（ppio / qiniu / siliconflow / zhipu / volcengine）
 ```
 
 导入规则：已有上游 provider 按 id 合并；数值冲突（上下文、输出上限、价格）以研究数据为准，写进 overlay 并列入 `research/IMPORT_REPORT.md`；非数值差异只报告不覆盖；套餐优先挂到上游已有的套餐型 provider（如 `alibaba-token-plan-cn`、`kimi-code-plan-cn`、`zhipuai-coding-plan`）；`null` 字段不写。
@@ -121,6 +123,7 @@ bun scripts/import-research.ts    # 重新导入 research/*.json（可加 --rate
 | --- | --- | --- |
 | `zy-build.yml` | push / PR 到 main | `bun validate` + `bun run build`，并把 `dist/` 强推到 `dist` 分支 |
 | `zy-sync-upstream.yml` | 每天 09:30（北京时间） | 合并 `anomalyco/models.dev@dev`，校验构建通过后开 / 更新 PR；有冲突时开 issue |
+| `zy-sync-cn.yml` | 每天 10:00（北京时间） | `bun cn:sync` 逐个平台同步官方公开数据 → 导入 → 校验构建，按平台开 / 更新 draft PR（分支 `cn-sync/<平台>`）；冲突与需人工处理的模型按平台开 issue（见 `docs/cn-sync.md`） |
 | `zy-publish.yml` | 推送 `v*` tag | 构建并以 tag 版本号发布 npm（需要仓库 secret `NPM_TOKEN`），然后请求 npmmirror 立即同步 |
 
 上游自带的工作流都限定 `github.repository == 'anomalyco/models.dev'`，在本仓库会自动跳过。
