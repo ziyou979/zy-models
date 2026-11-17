@@ -1,44 +1,34 @@
-# Imported from research/huawei-maas.json by scripts/import-research.ts (checked 2026-11-13)
-# Source: https://support.huaweicloud.com/model-list-maas/model_list_0001.md
-# Source: https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf
-# Source: https://support.huaweicloud.com/model-call-maas/model-call-005.html
-# Source: https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf
-# Source: https://support.huaweicloud.com/bulletin-maas/bulletin-maas-0001.html
-# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
-# CNY: input 8, output 28
+# Sources (accessed 2026-11-09):
+# - Pricing (CNY per MTok): https://support.huaweicloud.com/price-maas/price-maas-0002.html (updated 2026-11-06)
+# - OpenAI-compatible API: https://support.huaweicloud.com/model-call-maas/model-call-021.html
+# - Live probe 2026-11-09 on api.modelarts-maas.com: GET /v1/models 200; chat baseline/stream 200;
+#   thinking.type=disabled removes reasoning_content (reasoning_tokens 0);
+#   reasoning_effort=low accepted with reasoning_content present
+# CNY->USD rate: 6.67, 2026-11-09 (market range USD/CNY 6.6648-6.6755 that day)
+# List price: CNY 8/-/28 (input/output per MTok, peak 08:00-20:59 Beijing; no cache-hit discount published)
+# Off-peak 21:00-07:59 Beijing (13:00-23:59 UTC): CNY 5.6/19.6
+# Toggle: thinking.type = enabled|disabled (probed on this host)
+# Effort: reasoning_effort = high|max per native GLM-5.2 docs (low|medium map to high); exact-id live
+# 2026-11-09: low/high/max all accepted (baseline 200), repeated 3-trial reasoning-token means:
+# low ~394, high ~467, max ~704 — noisy overlap, no consistent distinct low; low dropped to match native
+# tool_choice "auto" per Huawei docs tool-calling example; other values untested on this host
 schema = 2
 base_model = "zhipuai/glm-5.2"
-sources = ["https://support.huaweicloud.com/model-list-maas/model_list_0001.md", "https://support.huaweicloud.com/price-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E8%AE%A1%E8%B4%B9%E8%AF%B4%E6%98%8E-pdf.pdf", "https://support.huaweicloud.com/model-call-maas/model-call-005.html", "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf", "https://support.huaweicloud.com/bulletin-maas/bulletin-maas-0001.html"]
-checked_at = "2026-11-13"
-notes = "文档原文：上下文长度1M、最大输入长度1M、最大输出长度128K、最大思维链长度64K（按 1K=1024 换算）。reasoning_effort: max/xhigh=深度推理(xhigh映射max), high/medium/low=增强推理(low/medium映射high), minimal/none=放弃思考；默认 max。价格表缓存命中列为『-』。平台版本号 20260617。"
 
 [capabilities]
-reasoning = { supported = true, effort = ["none", "minimal", "low", "medium", "high", "xhigh", "max"], default = { type = "effort", value = "max" } }
+tools = { supported = true, choice = ["auto"] }
+reasoning = { supported = true, toggle = true, effort = ["high", "max"] }
 
-[limit]
-input = 1_048_576
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_content" }
 
 [cost.text.input]
-price = 1.19656639
+price = 1.1994
 
 [cost.text.output]
-price = 4.18798238
+price = 4.1979
 
-[cost_cny]
-input = 8
-output = 28
-off_peak = "分时计费（北京时间）：时段1 08:00-20:59，时段2 21:00-次日07:59；input/output/cache_read 字段为时段1价"
-
-[[cost_cny.tiers]]
-when = "时段2(21:00-07:59)"
-input = 5.6
-output = 19.6
-
-[reasoning_default]
-value = "max"
-source = "https://support.huaweicloud.com/model-call-maas/MaaS%E6%A8%A1%E5%9E%8B%E5%8D%B3%E6%9C%8D%E5%8A%A1%20%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-pdf.pdf"
-
-[limit_label]
-context = "1M"
-input = "1M"
-output = "128K"
+# Off-peak 21:00-07:59 Beijing = 13:00-23:59 UTC (CNY 5.6/19.6)
+[[cost.multipliers]]
+when = { utc_hours = { gte = "13:00" } }
+factor = 0.7

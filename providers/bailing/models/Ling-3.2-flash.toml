@@ -1,22 +1,23 @@
-# Imported from research/ant-ling.json by scripts/import-research.ts (checked 2026-11-12)
-# Source: https://developer.ant-ling.com/zh-CN/docs/models/ling/
-# Source: https://developer.ant-ling.com/zh-CN/docs/api-reference/chat/openai/
-# Source: https://developer.ant-ling.com/zh-CN/docs/models/price/
-# Source: https://developer.ant-ling.com/zh-CN/docs/getting-started/changelog/
-# Source: https://developer.ant-ling.com/zh-CN/docs/tutorials/multimodal-understanding/
+# Sources (developer.ant-ling.com, accessed 2026-11-08):
+# - API: POST /v1/chat/completions and Anthropic-compatible POST /anthropic/v1/messages.
+#   Request surface: temperature [0,1], top_p, tools, response_format (json_object /
+#   json_schema per the structured-outputs tutorial), enable_search; no top_k, no
+#   documented output cap (the Anthropic API defaults max_tokens to 32000).
+# - Thinking (3.2 series): thinking.type = enabled|disabled, default enabled.
+# - No cost: free for the first two weeks after the 2026-11-05 launch and no list price
+#   published yet (https://developer.ant-ling.com/zh-CN/docs/models/price/); no cache
+#   claim either (the pricing page is the only cache evidence on this platform, and it
+#   lists cache reads for the priced Ling models only).
 schema = 2
 base_model = "inclusionai/ling-3.2-flash"
-sources = ["https://developer.ant-ling.com/zh-CN/docs/models/ling/", "https://developer.ant-ling.com/zh-CN/docs/api-reference/chat/openai/", "https://developer.ant-ling.com/zh-CN/docs/models/price/", "https://developer.ant-ling.com/zh-CN/docs/getting-started/changelog/", "https://developer.ant-ling.com/zh-CN/docs/tutorials/multimodal-understanding/"]
-checked_at = "2026-11-12"
-notes = "560B 总参 / 25B 激活，原生多模态。图片 JPEG/PNG、仅 Base64、单张 ≤32MiB、≤40 张；视频 MP4/MOV/WMV、≤30s、Base64 ≤32MiB。Anthropic 协议同样支持图片+视频。官方未确认开源。"
 
 [capabilities]
 reasoning = { supported = true, toggle = true, default = { type = "toggle", value = true } }
 structured_output = true
+top_k = false
 
-[cost_cny]
-discount_note = "上线前 2 周限时免费；正式价格未在官方定价表列出"
+[api.chat-completions]
 
-[reasoning_default]
-value = "on"
-source = "https://developer.ant-ling.com/zh-CN/docs/api-reference/chat/openai/"
+[api.messages]
+base_url = "https://api.ant-ling.com/anthropic/v1"
+sdk = { aisdk = "@ai-sdk/anthropic", opencodeai = "@opencode/ai/providers/anthropic-compatible" }

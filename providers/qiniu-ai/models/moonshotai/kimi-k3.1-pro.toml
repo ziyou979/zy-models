@@ -14,9 +14,6 @@ notes = "1h 缓存创建 26 元/百万（cache_write 为默认缓存创建价）
 reasoning = { supported = true }
 structured_output = true
 
-[limit]
-output = 1_048_576
-
 [cost.text.input]
 price = 1.94442039
 

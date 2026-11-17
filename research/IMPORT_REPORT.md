@@ -12,7 +12,7 @@
 - alibaba-cn ← research/dashscope.json
 - deepseek ← research/deepseek.json
 - moark ← research/gitee-ai.json
-- huawei-maas (新建)
+- huawei-maas ← research/huawei-maas.json
 - iflytek-spark (新建)
 - infini-ai (新建)
 - jdcloud-joymaas (新建)
@@ -56,18 +56,18 @@
 - moark/deepseek-v4-flash-0731 cost.output (USD): 0.3 → 1.34613719 (¥9 ÷ 6.685797)
 - moark/MiniMax-M2.7 cost.input (USD): 0.29 → 0.31409868 (¥2.1 ÷ 6.685797)
 - moark/MiniMax-M2.7 cost.output (USD): 1.2 → 1.25639471 (¥8.4 ÷ 6.685797)
+- huawei-maas/glm-5.1 limit.context: 200000 → 202752
+- sensenova/deepseek-flash limit.output: 65536 → 393216
 - tencent-tokenhub/hy4 cost.input (USD): 0.834 → 0.89742479 (¥6 ÷ 6.685797)
 - tencent-tokenhub/hy4 cost.output (USD): 2.501 → 2.69227438 (¥18 ÷ 6.685797)
 - tencent-tokenhub/hy4 cost.cache_read (USD): 0.042 → 0.04487124 (¥0.3 ÷ 6.685797)
 - tencent-tokenhub/hy4-preview cost.input (USD): 0.834 → 0.89742479 (¥6 ÷ 6.685797)
 - tencent-tokenhub/hy4-preview cost.output (USD): 2.501 → 2.69227438 (¥18 ÷ 6.685797)
 - tencent-tokenhub/hy4-preview cost.cache_read (USD): 0.042 → 0.04487124 (¥0.3 ÷ 6.685797)
-- volcengine/doubao-seed-evolving limit.context: 256000 → 1048576
-- volcengine/doubao-seed-2-1-pro-260628 limit.context: 256000 → 1048576
 - volcengine/doubao-seed-character-260628 limit.context: 256000 → 131072
 - volcengine/doubao-seed-character-260628 limit.output: 256000 → 32768
 
-## 补充（上游缺失，研究数据新增）（56）
+## 补充（上游缺失，研究数据新增）（66）
 
 - plan `token-plan-lite` → provider `alibaba-token-plan-cn` (matched api https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1)
 - plan `token-plan-essential` → provider `alibaba-token-plan-cn` (matched api https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1)
@@ -77,12 +77,27 @@
 - moark/GLM-5.3 cost.cache_read (USD): — → 0.2991416 (¥2 ÷ 6.685797)
 - moark/kimi-k3 cost.cache_read (USD): — → 0.2991416 (¥2 ÷ 6.685797)
 - moark/deepseek-v4-flash-0731 cost.cache_read (USD): — → 0.04487124 (¥0.3 ÷ 6.685797)
+- huawei-maas/openpangu-2.0-pro limit.input: — → 512000
+- huawei-maas/openpangu-2.0-pro reasoning.default: — → {"type":"toggle","value":true}
+- huawei-maas/openpangu-2.0-flash limit.input: — → 512000
+- huawei-maas/openpangu-2.0-flash reasoning.default: — → {"type":"toggle","value":true}
+- huawei-maas/glm-5.3 reasoning.default: — → {"type":"effort","value":"max"}
+- huawei-maas/glm-5.2 reasoning.default: — → {"type":"effort","value":"max"}
+- huawei-maas/glm-5.1 limit.input: — → 196608
+- huawei-maas/glm-5.1 reasoning.default: — → {"type":"toggle","value":true}
+- huawei-maas/deepseek-v4.1-flash-1017 reasoning.default: — → {"type":"effort","value":"high"}
+- huawei-maas/deepseek-v4.1-flash reasoning.default: — → {"type":"effort","value":"high"}
+- huawei-maas/deepseek-v4-flash reasoning.default: — → {"type":"effort","value":"high"}
 - plan `m-plan` → provider `minimax-cn-coding-plan` (matched api https://api.minimax.cn/anthropic)
 - plan `kimi-code-plus` → provider `kimi-code-plan-cn` (matched api https://api.kimi.com/coding/v1)
 - plan `kimi-code-pro` → provider `kimi-code-plan-cn` (matched api https://api.kimi.com/coding/v1)
 - plan `kimi-code-max` → provider `kimi-code-plan-cn` (matched api https://api.kimi.com/coding/v1)
 - plan `kimi-code-ultra` → provider `kimi-code-plan-cn` (matched api https://api.kimi.com/coding/v1)
 - sensenova/sensenova-6.8-flash-lite reasoning.default: — → {"type":"effort","value":"high"}
+- sensenova/deepseek-flash reasoning.default: — → {"type":"effort","value":"high"}
+- siliconflow-cn/deepseek-ai/DeepSeek-V4.1-Flash cost.input (USD): — → 0.2991416 (¥2 ÷ 6.685797)
+- siliconflow-cn/deepseek-ai/DeepSeek-V4.1-Flash cost.output (USD): — → 1.19656639 (¥8 ÷ 6.685797)
+- siliconflow-cn/deepseek-ai/DeepSeek-V4.1-Flash cost.cache_read (USD): — → 0.00598283 (¥0.04 ÷ 6.685797)
 - siliconflow-cn/deepseek-ai/DeepSeek-V4-Pro reasoning.default: — → {"type":"effort","value":"high"}
 - siliconflow-cn/deepseek-ai/DeepSeek-V4-Flash reasoning.default: — → {"type":"effort","value":"high"}
 - siliconflow-cn/zai-org/GLM-5.2 reasoning.default: — → {"type":"effort","value":"high"}
@@ -91,17 +106,16 @@
 - plan `step-plan` → provider `stepfun-step-plan` (matched api https://api.stepfun.com/step_plan/v1)
 - stepfun/step-5-preview reasoning.default: — → {"type":"effort","value":"medium"}
 - stepfun/step-3.7-flash reasoning.default: — → {"type":"effort","value":"medium"}
+- plan `token-plan` → provider `tencent-token-plan` (matched api https://tokenhub.tencentmaas.com/plan/v3)
+- plan `hy-token-plan` → provider `tencent-token-plan` (matched api https://tokenhub.tencentmaas.com/plan/v3)
 - plan `coding-plan` → provider `tencent-coding-plan` (matched api https://api.lkeap.cloud.tencent.com/coding/v3)
 - tencent-tokenhub/hy4 reasoning.default: — → {"type":"effort","value":"high"}
 - tencent-tokenhub/hy4-preview limit.input: — → 983040
 - tencent-tokenhub/hy4-preview reasoning.default: — → {"type":"effort","value":"high"}
 - tencent-tokenhub/hy3 reasoning.default: — → {"type":"effort","value":"high"}
 - plan `coding-plan` → provider `volcengine-coding-plan` (matched api https://ark.cn-beijing.volces.com/api/coding/v3)
-- volcengine/doubao-seed-evolving limit.input: — → 1048576
 - volcengine/doubao-seed-evolving reasoning.default: — → {"type":"effort","value":"high"}
-- volcengine/doubao-seed-2-1-pro-260628 limit.input: — → 1048576
 - volcengine/doubao-seed-2-1-pro-260628 reasoning.default: — → {"type":"effort","value":"high"}
-- volcengine/doubao-seed-2-1-turbo-260628 limit.input: — → 262144
 - volcengine/doubao-seed-2-1-turbo-260628 reasoning.default: — → {"type":"effort","value":"high"}
 - volcengine/doubao-seed-2-0-pro-260215 limit.input: — → 229376
 - volcengine/doubao-seed-2-0-pro-260215 reasoning.default: — → {"type":"effort","value":"medium"}
@@ -112,13 +126,9 @@
 - volcengine/doubao-seed-2-0-code-preview-260215 limit.input: — → 229376
 - volcengine/doubao-seed-2-0-code-preview-260215 reasoning.default: — → {"type":"effort","value":"medium"}
 - volcengine/doubao-seed-character-260628 limit.input: — → 98304
-- volcengine/glm-5-3-flash-260828 limit.input: — → 1048576
 - volcengine/glm-5-3-flash-260828 reasoning.default: — → {"type":"effort","value":"max"}
-- volcengine/glm-5-2-260617 limit.input: — → 1048576
 - volcengine/glm-5-2-260617 reasoning.default: — → {"type":"effort","value":"high"}
-- volcengine/deepseek-v4-pro-ga-260813 limit.input: — → 1048576
 - volcengine/deepseek-v4-pro-ga-260813 reasoning.default: — → {"type":"effort","value":"high"}
-- volcengine/deepseek-v4-flash-ga-260731 limit.input: — → 1048576
 - volcengine/deepseek-v4-flash-ga-260731 reasoning.default: — → {"type":"effort","value":"high"}
 - plan `token-plan` → provider `xiaomi-token-plan-cn` (matched api https://token-plan-cn.xiaomimimo.com/v1)
 - plan `glm-coding-lite` → provider `zhipuai-coding-plan` (matched api https://open.bigmodel.cn/api/coding/paas/v4)
@@ -126,8 +136,10 @@
 - plan `glm-coding-max` → provider `zhipuai-coding-plan` (matched api https://open.bigmodel.cn/api/coding/paas/v4)
 - plan `glm-coding-intl` → provider `zai-coding-plan` (matched api https://api.z.ai/api/coding/paas/v4)
 
-## 非数值差异（仅报告，未覆盖）（41）
+## 非数值差异（仅报告，未覆盖）（48）
 
+- bailing/Ling-3.0-flash-VL release_date: upstream 2026-09-10 vs research 2026-09-04
+- bailing/Ling-3.0-tiny open_weights: upstream true vs research false
 - alibaba-cn/qwen3.8-max reasoning.default: upstream {"type":"effort","value":"xhigh"} vs research "on"（类型不同，未覆盖上游字段；reasoning_default 扩展字段按研究写入）
 - alibaba-cn/qwen3.8-flash reasoning.default: upstream {"type":"effort","value":"xhigh"} vs research "on"（类型不同，未覆盖上游字段；reasoning_default 扩展字段按研究写入）
 - alibaba-cn/qwen3.7-plus cost.input: upstream $0.276 vs research ¥2（研究价格分档，基础价为最低档，未覆盖）
@@ -138,6 +150,11 @@
 - alibaba-cn/glm-5.2 reasoning.default: upstream {"type":"effort","value":"high"} vs research "on"（类型不同，未覆盖上游字段；reasoning_default 扩展字段按研究写入）
 - deepseek/deepseek-flash cost.input: upstream $0.15 vs research ¥2（上游为官方美元价，未覆盖）
 - deepseek/deepseek-v4-pro cost.input: upstream $0.66 vs research ¥9（上游为官方美元价，未覆盖）
+- huawei-maas/openpangu-2.0-pro cost.input: upstream $0.47976 vs research ¥4.8（研究价格分档，基础价为最低档，未覆盖）
+- huawei-maas/glm-5.2 reasoning.effort: upstream ["high","max"] vs research ["none","minimal","low","medium","high","xhigh","max"]
+- huawei-maas/glm-5.1 cost.input: upstream $0.89955 vs research ¥8（研究价格分档，基础价为最低档，未覆盖）
+- huawei-maas/deepseek-v4.1-flash-1017 reasoning.effort: upstream ["low","high","max"] vs research ["none","low","high","max"]
+- huawei-maas/deepseek-v4-flash reasoning.effort: upstream ["low","high","max"] vs research ["high","max"]
 - sensenova/sensenova-6.8-flash-lite reasoning.effort: upstream ["none","low","medium","high"] vs research ["low","medium","high","max"]
 - sensenova/kimi-k3 reasoning.effort: upstream ["low","high","max"] vs research ["low","medium","high","max"]
 - siliconflow-cn/deepseek-ai/DeepSeek-V4-Flash reasoning.effort: upstream ["high","max"] vs research ["low","high","max"]
@@ -170,14 +187,43 @@
 - zhipuai/glm-5.3-flashx reasoning.effort: upstream ["low","high","max"] vs research ["high","max"]
 - zhipuai/glm-4.7 cost.input: upstream $0.44819 vs research ¥2（研究价格分档，基础价为最低档，未覆盖）
 
-## K/M 换算口径差异（同一标称值，沿用上游写法）（59）
+## K/M 换算口径差异（同一标称值，沿用上游写法）（105）
 
+- bailing/Ling-3.0-flash-VL limit.context: 上游 262144 / 研究 256000（同一标称值，沿用上游）
+- bailing/Ling-3.0-flash limit.context: 上游 262144 / 研究 256000（同一标称值，沿用上游）
 - alibaba-cn/qwen3.8-max limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - alibaba-cn/qwen3.8-flash limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
+- alibaba-cn/kimi-k3.1-pro limit.output: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
 - alibaba-cn/kimi-k3 limit.context: 上游 1048576 / 研究 1000000（同一标称值，沿用上游）
 - alibaba-cn/glm-5.3 limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - moark/GLM-5.3 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
 - moark/deepseek-v4-flash-0731 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- huawei-maas/glm-5.3 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- huawei-maas/glm-5.3 limit.input: 研究 1048576 与 context 同一标称值，不单独写入
+- huawei-maas/glm-5.2 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- huawei-maas/glm-5.2 limit.input: 研究 1048576 与 context 同一标称值，不单独写入
+- huawei-maas/deepseek-v4.1-flash-1017 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- huawei-maas/deepseek-v4.1-flash-1017 limit.input: 研究 1048576 与 context 同一标称值，不单独写入
+- huawei-maas/deepseek-v4.1-flash-1017 limit.output: 上游 384000 / 研究 393216（同一标称值，沿用上游）
+- huawei-maas/deepseek-v4.1-flash limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- huawei-maas/deepseek-v4.1-flash limit.input: 研究 1048576 与 context 同一标称值，不单独写入
+- huawei-maas/deepseek-v4.1-flash limit.output: 上游 384000 / 研究 393216（同一标称值，沿用上游）
+- huawei-maas/deepseek-v4-flash limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- huawei-maas/deepseek-v4-flash limit.input: 研究 1048576 与 context 同一标称值，不单独写入
+- huawei-maas/deepseek-v4-flash limit.output: 上游 384000 / 研究 393216（同一标称值，沿用上游）
+- jdcloud-joymaas/DeepSeek-V4-Pro-0813 limit.input: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- jdcloud-joymaas/DeepSeek-V4.1-Flash-1017 limit.input: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- jdcloud-joymaas/GLM-5.3 limit.input: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- kuaishou-vanchin/GLM-5.3 limit.input: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- kuaishou-vanchin/GLM-5.3-Flash limit.input: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- kuaishou-vanchin/GLM-5.2 limit.input: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- kuaishou-vanchin/DeepSeek-V4.1-Flash-1017 limit.input: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- kuaishou-vanchin/DeepSeek-V4.1-Flash limit.input: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- kuaishou-vanchin/DeepSeek-V4-Pro-0813 limit.input: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- lanyun/kimi-k3.1-pro limit.output: 研究 1048576 → 1024000（与 context 1024000 统一 K/M 写法）
+- lanyun/kimi-k3 limit.output: 研究 1048576 → 1024000（与 context 1024000 统一 K/M 写法）
+- sensenova/deepseek-flash limit.context: 上游 1048576 / 研究 1000000（同一标称值，沿用上游）
+- siliconflow-cn/deepseek-ai/DeepSeek-V4.1-Flash limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
 - siliconflow-cn/deepseek-ai/DeepSeek-V4-Pro limit.context: 上游 1049000 / 研究 1048576（同一标称值，沿用上游）
 - siliconflow-cn/deepseek-ai/DeepSeek-V4-Flash limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
 - siliconflow-cn/deepseek-ai/DeepSeek-V3.2 limit.context: 上游 164000 / 研究 163840（同一标称值，沿用上游）
@@ -196,19 +242,32 @@
 - tencent-tokenhub/hy3 limit.context: 上游 256000 / 研究 262144（同一标称值，沿用上游）
 - tencent-tokenhub/hy3 limit.input: 上游 192000 / 研究 196608（同一标称值，沿用上游）
 - tencent-tokenhub/hy3 limit.output: 上游 128000 / 研究 131072（同一标称值，沿用上游）
+- ucloud-modelverse/qwen3.8-max limit.input: 研究 1014784 → 991000（与 context 1000000 统一 K/M 写法）
+- ucloud-modelverse/qwen3.7-max limit.input: 研究 1014784 → 991000（与 context 1000000 统一 K/M 写法）
+- ucloud-modelverse/qwen3.7-plus limit.input: 研究 1014784 → 991000（与 context 1000000 统一 K/M 写法）
+- unicom-cucloud/kimi-k3 limit.output: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- volcengine/doubao-seed-evolving limit.context: 上游 1024000 / 研究 1048576（同一标称值，沿用上游）
+- volcengine/doubao-seed-evolving limit.input: 研究 1048576 与 context 同一标称值，不单独写入
 - volcengine/doubao-seed-evolving limit.output: 上游 256000 / 研究 262144（同一标称值，沿用上游）
+- volcengine/doubao-seed-2-1-pro-260628 limit.context: 上游 1024000 / 研究 1048576（同一标称值，沿用上游）
+- volcengine/doubao-seed-2-1-pro-260628 limit.input: 研究 1048576 与 context 同一标称值，不单独写入
 - volcengine/doubao-seed-2-1-pro-260628 limit.output: 上游 256000 / 研究 262144（同一标称值，沿用上游）
 - volcengine/doubao-seed-2-1-turbo-260628 limit.context: 上游 256000 / 研究 262144（同一标称值，沿用上游）
+- volcengine/doubao-seed-2-1-turbo-260628 limit.input: 研究 262144 与 context 同一标称值，不单独写入
 - volcengine/doubao-seed-2-1-turbo-260628 limit.output: 上游 256000 / 研究 262144（同一标称值，沿用上游）
 - volcengine/doubao-seed-2-0-pro-260215 limit.context: 上游 256000 / 研究 262144（同一标称值，沿用上游）
 - volcengine/doubao-seed-2-0-pro-260215 limit.output: 上游 128000 / 研究 131072（同一标称值，沿用上游）
 - volcengine/doubao-seed-2-0-lite-260428 limit.context: 上游 256000 / 研究 262144（同一标称值，沿用上游）
 - volcengine/doubao-seed-2-0-mini-260428 limit.context: 上游 256000 / 研究 262144（同一标称值，沿用上游）
 - volcengine/glm-5-3-flash-260828 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- volcengine/glm-5-3-flash-260828 limit.input: 研究 1048576 与 context 同一标称值，不单独写入
 - volcengine/glm-5-2-260617 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- volcengine/glm-5-2-260617 limit.input: 研究 1048576 与 context 同一标称值，不单独写入
 - volcengine/deepseek-v4-pro-ga-260813 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- volcengine/deepseek-v4-pro-ga-260813 limit.input: 研究 1048576 与 context 同一标称值，不单独写入
 - volcengine/deepseek-v4-pro-ga-260813 limit.output: 上游 384000 / 研究 393216（同一标称值，沿用上游）
 - volcengine/deepseek-v4-flash-ga-260731 limit.context: 上游 1000000 / 研究 1048576（同一标称值，沿用上游）
+- volcengine/deepseek-v4-flash-ga-260731 limit.input: 研究 1048576 与 context 同一标称值，不单独写入
 - volcengine/deepseek-v4-flash-ga-260731 limit.output: 上游 384000 / 研究 393216（同一标称值，沿用上游）
 - xiaomi/mimo-v2.6-pro limit.context: 上游 1048576 / 研究 1000000（同一标称值，沿用上游）
 - xiaomi/mimo-v2.6-pro limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
@@ -216,6 +275,10 @@
 - xiaomi/mimo-v2.6-flash limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - xiaomi/mimo-v2.6-pro-ultraspeed limit.context: 上游 1048576 / 研究 1000000（同一标称值，沿用上游）
 - xiaomi/mimo-v2.6-pro-ultraspeed limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
+- youdao/kimi-k3.1-pro limit.output: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- youdao/kimi-k3 limit.output: 研究 1048576 → 1000000（与 context 1000000 统一 K/M 写法）
+- youdao/kimi-k2.7-code limit.output: 研究 262144 → 262000（与 context 262000 统一 K/M 写法）
+- youdao/kimi-k2.6 limit.output: 研究 262144 → 262000（与 context 262000 统一 K/M 写法）
 - zhipuai/glm-5.3 limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - zhipuai/glm-5.3-flash limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - zhipuai/glm-5.3-flashx limit.output: 上游 131072 / 研究 128000（同一标称值，沿用上游）
@@ -232,7 +295,7 @@
 - zhipuai/glm-4.5-air limit.context: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - zhipuai/glm-4.5-air limit.output: 上游 98304 / 研究 96000（同一标称值，沿用上游）
 
-## 新增 provider 模型文件（330）
+## 新增 provider 模型文件（316）
 
 - ai360/360zhinao/360zhinao-pro → base_model 360/360zhinao-pro
 - ai360/360zhinao-turbo-32k-agent → base_model 360/360zhinao-turbo-32k-agent
@@ -252,10 +315,6 @@
 - ai360/minimax/MiniMax-M3 → base_model minimax/MiniMax-M3
 - ai360/xiaomi/mimo-v2.6-pro → base_model xiaomi/mimo-v2.6-pro
 - ai360/stepfun/step-5-preview → base_model stepfun/step-5-preview
-- bailing/Ling-3.2-flash → base_model inclusionai/ling-3.2-flash
-- bailing/Ling-3.1-flash → base_model inclusionai/ling-3.1-flash
-- bailing/Ling-3.0-flash-VL → base_model inclusionai/ling-3.0-flash-vl
-- bailing/Ling-3.0-flash → base_model inclusionai/ling-3.0-flash
 - baichuan/Baichuan-M3-Plus → base_model baichuan/baichuan-m3-plus
 - baichuan/Baichuan-M3 → base_model baichuan/baichuan-m3
 - baichuan/Baichuan-M2-Plus → base_model baichuan/baichuan-m2-plus
@@ -297,16 +356,8 @@
 - moark/MiMo-V2.5-Pro → base_model xiaomi/mimo-v2.5-pro
 - moark/hy4 → base_model tencent/hy4
 - moark/ERNIE-5.0-Thinking → base_model baidu/ernie-5.0-thinking
-- huawei-maas/openpangu-2.0-pro → base_model huawei/openpangu-2.0-pro
-- huawei-maas/openpangu-2.0-flash → base_model huawei/openpangu-2.0-flash
-- huawei-maas/glm-5.3 → base_model zhipuai/glm-5.3
-- huawei-maas/glm-5.2 → base_model zhipuai/glm-5.2
 - huawei-maas/glm-5.2-arkts-spark → base_model zhipuai/glm-5.2-arkts-spark
-- huawei-maas/glm-5.1 → base_model zhipuai/glm-5.1
 - huawei-maas/kimi-k2.6 → base_model moonshotai/kimi-k2.6
-- huawei-maas/deepseek-v4.1-flash-1017 → base_model deepseek/deepseek-v4.1-flash-1017
-- huawei-maas/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
-- huawei-maas/deepseek-v4-flash → base_model deepseek/deepseek-v4.1-flash-1017
 - huawei-maas/qwen3-32b → base_model alibaba/qwen3-32b
 - huawei-maas/qwen3-30b-a3b → base_model alibaba/qwen3-30b-a3b
 - iflytek-spark/spark-x2.6 → base_model iflytek/spark-x2.6
@@ -483,9 +534,7 @@
 - qiniu-ai/sensenova/sensenova-6.8-flash → base_model sensetime/sensenova-6.8-flash
 - qiniu-ai/stepfun/step-3.7-flash → base_model stepfun/step-3.7-flash
 - sensenova/sensenova-6.8-flash → base_model sensetime/sensenova-6.8-flash
-- sensenova/deepseek-flash → base_model deepseek/deepseek-v4.1-flash-1017
 - sensenova/glm-5.3 → base_model zhipuai/glm-5.3
-- siliconflow-cn/deepseek-ai/DeepSeek-V4.1-Flash → base_model deepseek/deepseek-v4.1-flash
 - siliconflow-cn/moonshotai/Kimi-K2.7-Code → base_model moonshotai/kimi-k2.7-code
 - siliconflow-cn/tencent/Hy4-preview → base_model tencent/hy4-preview
 - siliconflow-cn/meituan-longcat/LongCat-2.0 → base_model meituan/longcat-2.0
@@ -565,12 +614,11 @@
 - youdao/mimo-v2.5-pro → base_model xiaomi/mimo-v2.5-pro
 - youdao/hy4 → base_model tencent/hy4
 
-## 新增 lab 模型文件（36）
+## 新增 lab 模型文件（31）
 
 - 360/360zhinao-pro（open_weights 未确认，写 false；tools 未确认，写 false）
 - 360/360zhinao-turbo-32k-agent（open_weights 未确认，写 false；tools 未确认，写 false）
 - 360/360zhinao-turbo-and-doubao-seed-1.8（open_weights 未确认，写 false；tools 未确认，写 false）
-- inclusionai/ling-3.2-flash（limit.output 未公开，按上游惯例取 context；open_weights 未确认，写 false）
 - baichuan/baichuan-m3-plus（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
 - baichuan/baichuan-m3（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
 - baichuan/baichuan-m2-plus（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
@@ -581,10 +629,7 @@
 - baichuan/baichuan3-turbo（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
 - baichuan/baichuan3-turbo-128k（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
 - baichuan/baichuan2-turbo（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
-- alibaba/qwen4-max-preview（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
 - baidu/ernie-5.0-thinking（limit.output 未公开，按上游惯例取 context；release_date 未公开，占位为核查日 2026-11-13；open_weights 未确认，写 false）
-- huawei/openpangu-2.0-pro（release_date 未公开，占位为核查日 2026-11-13）
-- huawei/openpangu-2.0-flash（release_date 未公开，占位为核查日 2026-11-13）
 - zhipuai/glm-5.2-arkts-spark（release_date 未公开，占位为核查日 2026-11-13；open_weights 未确认，写 false）
 - iflytek/spark-x2.6（limit.output 未公开，按上游惯例取 context；open_weights 未确认，写 false）
 - iflytek/spark-x2.6-4b（limit.output 未公开，按上游惯例取 context；open_weights 未确认，写 false）
@@ -601,12 +646,10 @@
 - sensetime/sensenova-6.8-flash（open_weights 未确认，写 false）
 - stepfun/step-1o-turbo-vision（limit.output 未公开，按上游惯例取 context；release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
 - tencent/hunyuan-role-latest（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
-- bytedance-seed/seed-2.1-lite（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false）
 - bytedance-seed/seed-translation（release_date 未公开，占位为核查日 2026-11-12；open_weights 未确认，写 false；tools 未确认，写 false）
 
-## 占位与跳过（18）
+## 占位与跳过（19）
 
-- bailing/Ling-3.0-tiny: 跳过（无 context，无法生成 lab 文件）
 - ctyun-xirang/TeleChat3-438B-A24B: 跳过（无 context，无法生成 lab 文件）
 - ctyun-xirang/Xing4.0-29B-A4B: 跳过（无 context，无法生成 lab 文件）
 - ctyun-xirang/ctyun-smart-router: 跳过（无 context，无法生成 lab 文件）
@@ -623,14 +666,15 @@
 - modelscope/OpenGVLab/InternVL3_5-241B-A28B: 跳过（无 context，无法生成 lab 文件）
 - skywork/skywork-ai/skyclaw-v1: 跳过（无 context，无法生成 lab 文件）
 - skywork/skywork-ai/skyclaw-v1-lite: 跳过（无 context，无法生成 lab 文件）
+- unicom-cucloud/DeepSeek-V4-Pro: limit.output 384000 大于 context 204800，按 context 截断
+- unicom-cucloud/DeepSeek-V4-Flash: limit.output 384000 大于 context 204800，按 context 截断
 - unicom-cucloud/DeepSeek-V4-Flash-Latest: 跳过（无 context，无法生成 lab 文件）
 
-## 占位 logo（平台名首字，非官方商标）（16）
+## 占位 logo（平台名首字，非官方商标）（15）
 
 - ai360（360智脑开放平台）
 - baichuan（百川智能开放平台）
 - ctyun-xirang（天翼云息壤·星辰TokenHub运营服务平台（原模型推理服务））
-- huawei-maas（华为云 MaaS（ModelArts Studio））
 - iflytek-spark（讯飞星火 / 讯飞星辰 MaaS）
 - infini-ai（无问芯穹 GenStudio 大模型服务平台）
 - jdcloud-joymaas（京东云 JoyMaaS / JoyBuilder 模型开发平台2.0）
@@ -666,8 +710,8 @@
 - moark/Step-3.7-Flash: limit.context 「256K」→ 256000（标签换算，按 stepfun 惯例 1000 进制）
 - moark/hy4: limit.context 「1024k」→ 1048576（标签换算，按 tencent 惯例 1024 进制）
 - moark/ERNIE-5.0-Thinking: limit.context 「128K」→ 128000（标签换算，按 baidu 惯例 1000 进制）
-- huawei-maas/openpangu-2.0-pro: limit.context 「512K」→ 512000，limit.input 「500K」→ 500000，limit.output 「128K」→ 128000（标签换算，按 huawei 惯例 1000 进制）
-- huawei-maas/openpangu-2.0-flash: limit.context 「512K」→ 512000，limit.input 「500K」→ 500000，limit.output 「128K」→ 128000（标签换算，按 huawei 惯例 1000 进制）
+- huawei-maas/openpangu-2.0-pro: limit.context 「512K」→ 524288，limit.input 「500K」→ 512000，limit.output 「128K」→ 131072（标签换算，按 huawei 惯例 1024 进制）
+- huawei-maas/openpangu-2.0-flash: limit.context 「512K」→ 524288，limit.input 「500K」→ 512000，limit.output 「128K」→ 131072（标签换算，按 huawei 惯例 1024 进制）
 - huawei-maas/glm-5.3: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
 - huawei-maas/glm-5.2: limit.context 「1M」→ 1048576，limit.input 「1M」→ 1048576，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
 - huawei-maas/glm-5.2-arkts-spark: limit.context 「198K」→ 202752，limit.input 「192K」→ 196608，limit.output 「128K」→ 131072（标签换算，按 zhipuai 惯例 1024 进制）
@@ -766,4 +810,4 @@
 - research/paratera.json: 无可导入模型，平台 paratera 暂不建立
 - skywork: 所有模型均因缺上下文且无对应 lab 模型而跳过，平台暂不建立
 
-overlay 文件数：123
+overlay 文件数：139

@@ -14,7 +14,7 @@ reasoning = { supported = true, toggle = true, default = { type = "toggle", valu
 structured_output = true
 
 [limit]
-input = 1_048_576
+input = 1_000_000
 
 [cost.text.input]
 price = 1.19656639

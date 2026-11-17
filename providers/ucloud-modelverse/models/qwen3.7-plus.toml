@@ -14,7 +14,7 @@ notes = "cache_write 为 5 分钟显式缓存写入价；模型广场长度字�
 reasoning = { supported = true }
 
 [limit]
-input = 1_014_784
+input = 991_000
 
 [cost.text.input]
 price = 0.2991416

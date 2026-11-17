@@ -9,11 +9,8 @@
 
 ## 已下架 / ID 变更的模型（本仓库已移除）
 
-- `providers/bailing/models/Ling-1T.toml`：Ling-1T 已于 2026-06-15 下架（research/ant-ling.json notes）。来源：https://developer.ant-ling.com/zh-CN/docs/models/ling/
-- `providers/bailing/models/Ring-1T.toml`：Ring-1T 已于 2026-06-15 下架；Ring 系列并入 Ling 混合推理（research/ant-ling.json notes）。来源：https://developer.ant-ling.com/zh-CN/docs/models/ling/
 - `providers/longcat/models/LongCat-2.0.toml`：LongCat 按量价目表已不再列出 LongCat-2.0，按量仅支持 LongCat-2.5（research/longcat.json notes）。来源：https://longcat.chat/platform/docs/zh/pricing/longcat-2.5
 - `providers/longcat/models/LongCat-2.5-Preview.toml`：LongCat-2.5-Preview 不在官方按量价目表（仅 LongCat-2.5）。来源：https://longcat.chat/platform/docs/zh/pricing/longcat-2.5
-- `providers/sensenova/models/deepseek-v4.1-flash.toml`：商汤平台该模型的官方 ID 现为 deepseek-flash；替代：providers/sensenova/models/deepseek-flash.toml（研究导入新建）。来源：https://platform.sensenova.cn/docs
 
 ## 数值修正候选（研究数据与上游冲突，已在本仓库按研究数据覆盖）
 

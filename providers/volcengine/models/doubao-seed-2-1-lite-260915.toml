@@ -15,6 +15,11 @@ notes = "在线推理（低延迟）1.6/5.4（缓存 0.32）；低优/批量 0.4
 reasoning = { supported = true, toggle = true, effort = ["minimal", "low", "medium", "high"], default = { type = "effort", value = "high" } }
 structured_output = true
 
+[limit]
+context = 1_048_576
+input = 1_048_576
+output = 262_144
+
 [cost.text.input]
 price = 0.11965664
 
