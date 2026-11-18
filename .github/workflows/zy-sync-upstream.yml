@@ -66,7 +66,7 @@ jobs:
           num=$(gh issue list --label upstream-sync-conflict --state open --json number -q '.[0].number' || true)
           gh label create upstream-sync-conflict --color B60205 2>/dev/null || true
           if [ -n "$num" ]; then gh issue comment "$num" --body-file /tmp/body.md
-          else gh issue create --title "上游同步冲突" --label upstream-sync-conflict --body-file /tmp/body.md; fi
+          else gh issue create --title "上游同步冲突" --label upstream-sync-conflict --body-file /tmp/body.md || gh issue create --title "上游同步冲突" --body-file /tmp/body.md || echo "::warning::could not open the conflict issue"; fi
           # The issue is the alert; don't also fail the run (a failed run emails every day).
           echo "::warning::Upstream merge has conflicts; reported in the upstream-sync-conflict issue."
           cat /tmp/body.md >> "$GITHUB_STEP_SUMMARY"
