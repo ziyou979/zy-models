@@ -3119,7 +3119,7 @@ test("OpenRouter tool_choice sets every documented tool choice and keeps other t
   const choice = ["auto", "none", "required", "tool"];
 
   expect(toolsSet(["tools", "tool_choice"])(undefined)).toEqual({ supported: true, choice });
-  expect(toolsSet(["tools", "tool_choice"])({ supported: true, updates: true })).toEqual({ supported: true, updates: true, choice });
+  expect(toolsSet(["tools", "tool_choice"])({ supported: true, updates: ["add", "remove", "replace"] })).toEqual({ supported: true, updates: ["add", "remove", "replace"], choice });
   expect(toolsSet(["tools"])({ supported: true, choice })).toEqual({ supported: true });
   expect(toolsSet(["tools"])(undefined)).toBeUndefined();
   expect(toolsSet(["tool_choice"])({ supported: false })).toEqual({ supported: false });
@@ -5021,6 +5021,41 @@ test("factors mapped LLM Gateway entries against the root model metadata", () =>
   });
 });
 
+test("applies the LLM Gateway discount to every token price", () => {
+  const pricing = {
+    prompt: "1.5e-6",
+    completion: "7.5e-6",
+    input_cache_read: "0.15e-6",
+    input_cache_write: "0.16667e-6",
+    internal_reasoning: "3e-6",
+    web_search: "0.014",
+    discount: "0.5000",
+  };
+  const model = buildLLMGatewayModel(llmGatewayModel({ pricing }), undefined);
+  expect(model?.cost).toEqual({
+    input: 0.75,
+    output: 3.75,
+    reasoning: 1.5,
+    cache_read: 0.075,
+    cache_write: 0.083335,
+  });
+
+  const mapped = buildLLMGatewayMappedModel(llmGatewayMappedModel({ pricing }), undefined);
+  expect(mapped?.cost).toMatchObject({ input: 0.75, output: 3.75, cache_read: 0.075 });
+});
+
+test("treats the LLM Gateway discount as a fraction off, not a multiplier", () => {
+  const price = (discount?: string) => buildLLMGatewayModel(llmGatewayModel({
+    pricing: { prompt: "10e-6", completion: "50e-6", discount },
+  }), undefined)?.cost;
+
+  expect(price("0.2000")).toMatchObject({ input: 8, output: 40 });
+  expect(price("0.05")).toMatchObject({ input: 9.5, output: 47.5 });
+  expect(price("0")).toMatchObject({ input: 10, output: 50 });
+  expect(price(undefined)).toMatchObject({ input: 10, output: 50 });
+  expect(price("not-a-number")).toMatchObject({ input: 10, output: 50 });
+});
+
 test("applies deployment capability flags on mapped factored entries", () => {
   const model = buildLLMGatewayMappedModel(llmGatewayMappedModel({
     providers: [{ providerId: "anthropic", vision: false, tools: false, reasoning: false }],
@@ -6649,7 +6684,7 @@ test("Vercel tool_choice sets every documented tool choice for tool-calling mode
   const choice = ["auto", "none", "required", "tool"];
 
   expect(toolsSet(["tool-use"], ["tools", "tool_choice"])(undefined)).toEqual({ supported: true, choice });
-  expect(toolsSet(["tool-use"], ["tools", "tool_choice"])({ supported: true, updates: true })).toEqual({ supported: true, updates: true, choice });
+  expect(toolsSet(["tool-use"], ["tools", "tool_choice"])({ supported: true, updates: ["add", "remove", "replace"] })).toEqual({ supported: true, updates: ["add", "remove", "replace"], choice });
   expect(toolsSet(["tool-use"], ["tools"])({ supported: true, choice })).toEqual({ supported: true });
   // The file's tool_call wins over the catalog tag, as in the v1 fields.
   expect(toolsSet(["tool-use"], ["tools", "tool_choice"], { tool_call: false })({ supported: false })).toEqual({ supported: false });
@@ -7900,7 +7935,7 @@ test("v2 patches switch tool_call and reasoning between the lab's value and an o
     expect(doc.capabilities).toEqual({ effort_updates: false });
 
     // An explicit value equal to the lab's, with v2-only data, is left alone.
-    await write(["tools = { supported = true, updates = false }"]);
+    await write(["tools = { supported = true, updates = [] }"]);
     expect(await syncProvider(provider)).toMatchObject({ updated: 0, unchanged: 1 });
 
     // Reasoning switches the same way.
@@ -7908,7 +7943,7 @@ test("v2 patches switch tool_call and reasoning between the lab's value and an o
     expect(await syncProvider(provider)).toMatchObject({ updated: 1 });
     doc = Bun.TOML.parse(await readFile(file, "utf8")) as Record<string, any>;
     expect(doc.capabilities.reasoning).toEqual({ supported: true });
-    expect(doc.capabilities.tools).toEqual({ supported: true, updates: false });
+    expect(doc.capabilities.tools).toEqual({ supported: true, updates: [] });
   } finally {
     await rm(root, { recursive: true, force: true });
   }
@@ -8126,7 +8161,7 @@ test("lists Responses and Messages after the first API for OpenRouter text-only 
   expect(Object.keys(once)).toEqual(["chat-completions", "responses", "messages"]);
   expect(withTextApis(once)).toEqual(once);
   // Per-API capabilities on the extra tables survive a sync.
-  const flagged = { ...once, messages: { ...extra.messages, capabilities: { tools: { updates: true } } } };
+  const flagged = { ...once, messages: { ...extra.messages, capabilities: { tools: { updates: ["add", "remove", "replace"] } } } };
   expect(withTextApis(flagged)).toEqual(flagged);
 
   // Models that also output images or audio stay on their own APIs.
@@ -8601,7 +8636,7 @@ test("Kilo sync keeps v2-only data and leaves model facts to the lab in v2 files
     last_updated: "2025-02-01",
     modalities: { input: ["text", "image/jpeg", "image/png", "image/gif", "image/webp"], output: ["text"] },
     capabilities: {
-      tools: { supported: true, updates: false },
+      tools: { supported: true, updates: [] },
       reasoning: { supported: true, effort: ["low", "high", "max"] },
       structured_output: true,
       effort_updates: false,
@@ -8624,7 +8659,7 @@ test("Kilo sync keeps v2-only data and leaves model facts to the lab in v2 files
   const next = patchModelV2(doc, existing, after) as Record<string, any>;
   expect(next.modalities).toEqual(doc.modalities);
   expect(next.capabilities).toMatchObject({
-    tools: { supported: true, updates: false },
+    tools: { supported: true, updates: [] },
     effort_updates: false,
     cache: { implicit: true },
   });
@@ -8677,7 +8712,7 @@ test("Ofox sync takes context tiers and audio prices from the catalog and keeps 
     schema: 2,
     base_model: "openai/gpt-5.5",
     capabilities: {
-      tools: { supported: true, updates: false },
+      tools: { supported: true, updates: [] },
       structured_output: true,
       effort_updates: false,
       cache: { implicit: true },
@@ -8882,4 +8917,14 @@ test("OpenRouter media models resolve to their lab files", () => {
   expect(resolveMediaBaseModel("cohere/embed-5-pro")).toBe("cohere/embed-v5.0-pro");
   expect(resolveMediaBaseModel("cohere/rerank-5-fast")).toBe("cohere/rerank-v5.0-fast");
   expect(resolveMediaBaseModel("cohere/rerank-5-pro")).toBe("cohere/rerank-v5.0-pro");
+});
+
+test("Tinfoil's auto effort is left out of the published levels", () => {
+  const [model] = tinfoil.parseModels({
+    object: "list",
+    data: [tinfoilModel({ id: "inkling-2-small", supported_efforts: ["none", "low", "auto", "high"] as never })],
+  });
+  expect(model?.supported_efforts).toEqual(["none", "low", "high"]);
+  const built = buildTinfoilModel(model!, { ...existingTinfoilGLM, reasoning: true });
+  expect(built.reasoning_options).toContainEqual({ type: "effort", values: ["none", "low", "high"] });
 });
