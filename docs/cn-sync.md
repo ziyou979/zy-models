@@ -24,7 +24,7 @@
 4. **从不删除**。本地有、官方源没列出的模型只在报告里列出。
 5. 自相矛盾的官方数据（如最大输出 > 上下文）不同步该字段并在报告中提示；能力类布尔值只取"支持"（七牛、硅基流动的部分 `false` 不可靠）。
 
-## 已实现的平台（5 个，均无需 key）
+## 已实现的平台（6 个，均无需 key）
 
 | 平台 | 数据源 | 同步字段 | 新模型 | 稳定性 |
 | --- | --- | --- | --- | --- |
@@ -33,6 +33,7 @@
 | 硅基流动 `siliconflow` | `https://www.siliconflow.cn/pricing`（`pricingApiItems`）+ `https://www.siliconflow.cn/models`（`data`），均为 RSC 内嵌数据 | 对话模型列表、context、工具调用、视觉输入、人民币价格（北京时间分时计价） | 自动创建 | 中：RSC 载荷随前端发版可能变化，解析不到会整平台失败而不是写错 |
 | 智谱 BigModel `zhipu` | `https://docs.bigmodel.cn/cn/guide/start/pricing.md`（官方价格页的 markdown） | 按 token 计费的 GLM 模型列表、人民币价格（输入/输出/缓存命中）、按输入/输出长度分档 | 自动创建（多数旧模型缺 lab 文件，进 issue） | 高：Mintlify 官方 .md |
 | 火山方舟 `volcengine` | `https://docs.volcengine.com/docs/zh/ark/model-pricing.md`（官方「模型价格」文档 markdown，即 https://www.volcengine.com/docs/82379/1544106） | 「在线推理（常规）」人民币价格（输入/输出/缓存命中，分档/高峰空闲） | 不创建：价格表只有短名，按名称对应已有的带日期 Model ID，对不上的进 issue | 高：官方文档接口 |
+| DeepSeek `deepseek` | `https://api-docs.deepseek.com/zh-cn/quick_start/pricing.md`（官方「模型 & 价格」页的 markdown） | 「模型细节」表每列一个 API 模型：模型版本名、旧模型名（脚注）、上下文与最大输出（官方 1024 进制）、图像理解、Tool Calls、Json Output、是否支持思考、人民币价格（高峰时段写主字段，空闲时段写 tiers，含缓存命中/未命中）与峰谷时段说明 | 自动创建（表头即 API 模型名） | 高：官方文档 .md；表格是转置的（一列一个模型），模型少于 2 个时整平台失败 |
 
 每个平台都设了最少模型数（`minModels`），页面结构变化导致解析数量骤减时整平台失败，不会把错误数据写进去。
 
@@ -40,7 +41,6 @@
 
 | 平台 | 无 key 能拿到什么 | 未实现原因 |
 | --- | --- | --- |
-| DeepSeek | 官方价格页 https://api-docs.deepseek.com/zh-cn/quick_start/pricing 的 HTML 表格（2 个模型：上下文、输出、能力、高峰/空闲价） | 可做，模型只有 2 个、research 已手工维护，优先级低；`/models` 需 key |
 | MiniMax | https://platform.minimaxi.com/docs/guides/pricing.md （Mintlify markdown，语言模型价格表，含原价/折扣与 >512k 分档） | 可做，表格是 tab+折扣删除线混排，语言模型只有 2 个；`/v1/models` 需 key |
 | Moonshot/Kimi | https://platform.kimi.com/docs/pricing/chat 的 HTML 内编译后的 MDX（`rows:[[…]]`） | .md 版表格是空的（前端渲染），只能解析编译后的 JS，脆弱；`/v1/models` 需 key |
 | 阿里云百炼 | https://help.aliyun.com/zh/model-studio/model-pricing.md （约 700KB，markdown 里嵌 HTML 表格，含 API 模型名） | 可做但表格结构复杂（多级合并单元格、地域/阶梯混排），需单独开发；模型列表接口需 key |

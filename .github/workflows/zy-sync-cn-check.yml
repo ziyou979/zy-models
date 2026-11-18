@@ -1,0 +1,45 @@
+# zy-models: dry run of the CN platform sync on pull requests that touch it.
+# Runs the same pipeline as zy-sync-cn.yml (fetch every platform's official
+# public data on a GitHub runner → research → import → validate → build) with
+# CN_SYNC_DRY=1: nothing is pushed, no PR or issue is opened. A platform whose
+# source can't be fetched or parsed from GitHub's runners fails this check.
+name: zy-models CN sync check
+
+on:
+  pull_request:
+    paths:
+      - "packages/core/src/cn/**"
+      - "packages/core/test/cn-sync.test.ts"
+      - "scripts/cn-sync*"
+      - "scripts/import-research.ts"
+      - ".github/workflows/zy-sync-cn*.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - name: Unit tests
+        run: bun test packages/core/test/cn-sync.test.ts
+      - name: Sync every platform (dry run)
+        env:
+          CN_SYNC_DRY: "1"
+        run: bash scripts/cn-sync-publish.sh
+      - name: Reports
+        if: always()
+        run: |
+          for f in .sync/cn-*.json; do
+            [ -f "$f" ] || continue
+            jq -r '"\(.id): \(.remoteCount) models, \(.added|length) added, \(.adopted|length) adopted, \(.filled|length) filled, \(.conflicts|length) conflicts, \(.missing|length) manual, \(.absent|length) absent"' "$f"
+          done

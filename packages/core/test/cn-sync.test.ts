@@ -8,6 +8,7 @@ import { sfPrice } from "../src/cn/sync/providers/siliconflow.js";
 import { volcengine, volcKey, volcRows } from "../src/cn/sync/providers/volcengine.js";
 import { zhipu, zhipuRows } from "../src/cn/sync/providers/zhipu.js";
 import { ppio } from "../src/cn/sync/providers/ppio.js";
+import { deepseek, deepseekSize, OFF_PEAK_WHEN } from "../src/cn/sync/providers/deepseek.js";
 
 test("K/M labels compare in either convention", () => {
   expect(sameLabel(1_000_000, 1_048_576)).toBe(true);
@@ -125,4 +126,57 @@ test("ppio: skips routers, test deployments and lane variants; list price only w
   expect(same.tools).toBe(true);
   const discounted = ppio.translateModel({ ...base, id: "tencent/hy4", pricing: { prompt: price("3", "6"), completion: price("9", "18") } })!;
   expect(discounted.price_cny!.list_price).toEqual({ input: 6, output: 18 });
+});
+
+const DEEPSEEK = `# 模型 & 价格
+
+## 模型细节
+
+| 模型 | 模型 | 模型 | deepseek-flash(1) | deepseek-v4-pro |
+| --- | --- | --- | --- | --- |
+| 模型版本 | 模型版本 | 模型版本 | DeepSeek-V4.1-Flash-1017 | DeepSeek-V4-Pro-0813 |
+| 思考模式 | 思考模式 | 思考模式 | 支持非思考与思考模式（默认） / 切换方式详见[思考模式](https://x/thinking_mode.md) | 支持非思考与思考模式（默认） |
+| 上下文长度 | 上下文长度 | 上下文长度 | 1M | 1M |
+| 输出长度 | 输出长度 | 输出长度 | 最大 384K | 最大 384K |
+| 功能 | [Json Output](https://x/json_mode.md) | [Json Output](https://x/json_mode.md) | 支持 | 支持 |
+| 功能 | [Tool Calls](https://x/tool_calls.md) | [Tool Calls](https://x/tool_calls.md) | 支持 | 支持 |
+| 功能 | [FIM 补全（Beta）](https://x/fim.md) | [FIM 补全（Beta）](https://x/fim.md) | 仅非思考模式支持 | 仅非思考模式支持 |
+| 功能 | [图像理解](https://x/vision.md) | [图像理解](https://x/vision.md) | 支持 | 不支持 |
+| 价格(2) | 百万tokens输入 / （缓存命中） | 空闲时段 | 0.02元 | 0.15元 |
+| 价格(2) | 百万tokens输入 / （缓存命中） | 高峰时段 | 0.04元 | 0.30元 |
+| 价格(2) | 百万tokens输入 / （缓存未命中） | 空闲时段 | 1元 | 4.5元 |
+| 价格(2) | 百万tokens输入 / （缓存未命中） | 高峰时段 | 2元 | 9.0元 |
+| 价格(2) | 百万tokens输出 | 空闲时段 | 4元 | 13.5元 |
+| 价格(2) | 百万tokens输出 | 高峰时段 | 8元 | 27.0元 |
+| 并发限制(3) | 并发限制(3) | 并发限制(3) | 2500 | 500 |
+
+(1) 模型名请使用 \`deepseek-flash\`。旧模型名 \`deepseek-v4-flash\`、\`deepseek-v4-flash-vision-exp\` 仍可调用，但对应模型已下线。
+
+(2) 空闲时段价格为高峰时段价格的一半。北京时间周一至周五 9:00 - 12:00、14:00 - 18:00 为高峰时段。
+
+## Search 与 Fetch API 价格
+
+| 项目 | 计费单位 | 价格 |
+| --- | --- | --- |
+| Search API（文字） | 每 1,000 次成功请求 | 5元 |
+`;
+
+test("deepseek: transposed 模型细节 table, peak price main, off-peak tier, footnote aliases", () => {
+  expect(deepseekSize("1M")).toBe(1_048_576);
+  expect(deepseekSize("最大 384K")).toBe(393_216);
+  const models = deepseek.parseModels(DEEPSEEK).map((c) => deepseek.translateModel(c)!);
+  expect(models.map((m) => m.id)).toEqual(["deepseek-flash", "deepseek-v4-pro"]);
+  const [flash, pro] = models;
+  expect(flash!.name).toBe("DeepSeek-V4.1-Flash-1017");
+  expect(flash!.aliases).toEqual(["deepseek-v4-flash", "deepseek-v4-flash-vision-exp"]);
+  expect(pro!.aliases).toBeUndefined();
+  expect(flash!.limit).toEqual({ context: 1_048_576, output: 393_216 });
+  expect(flash!.modalities?.input).toEqual(["text", "image"]);
+  expect(pro!.modalities?.input).toEqual(["text"]);
+  expect(pro!.tools).toBe(true);
+  expect(pro!.structured_output).toBe(true);
+  expect(pro!.reasoning?.supported).toBe(true);
+  expect(pro!.price_cny).toMatchObject({ input: 9, output: 27, cache_read: 0.3 });
+  expect(pro!.price_cny!.tiers).toEqual([{ when: OFF_PEAK_WHEN, input: 4.5, output: 13.5, cache_read: 0.15 }]);
+  expect(pro!.price_cny!.off_peak).toMatch(/^空闲时段价格为高峰时段价格的一半/);
 });

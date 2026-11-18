@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       provider:
-        description: "只同步这个平台（ppio / qiniu / siliconflow / zhipu / volcengine），留空为全部"
+        description: "只同步这个平台（ppio / qiniu / siliconflow / zhipu / volcengine / deepseek），留空为全部"
         required: false
         default: ""
 

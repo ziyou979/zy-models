@@ -112,7 +112,7 @@ bun install
 bun validate                      # 上游校验 + 扩展字段校验 + overlay 校验
 bun run build                     # 生成 dist/
 bun scripts/import-research.ts    # 重新导入 research/*.json（可加 --rate 6.685797 --rate-date 2026-11-12 固定汇率）
-bun cn:sync <平台> --dry-run       # 从国内平台官方公开数据同步 research（ppio / qiniu / siliconflow / zhipu / volcengine）
+bun cn:sync <平台> --dry-run       # 从国内平台官方公开数据同步 research（ppio / qiniu / siliconflow / zhipu / volcengine / deepseek）
 ```
 
 导入规则：已有上游 provider 按 id 合并；数值冲突（上下文、输出上限、价格）以研究数据为准，写进 overlay 并列入 `research/IMPORT_REPORT.md`；非数值差异只报告不覆盖；套餐优先挂到上游已有的套餐型 provider（如 `alibaba-token-plan-cn`、`kimi-code-plan-cn`、`zhipuai-coding-plan`）；`null` 字段不写。

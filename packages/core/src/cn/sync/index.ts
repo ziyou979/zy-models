@@ -24,6 +24,7 @@ import { catalogModelIDs, labFromID, strictBaseModel } from "./labs.js";
 import { todayCST } from "./parse.js";
 import { numOf, readResearch, serializeResearch, val } from "./research.js";
 import type { CnPrice, CnRemoteModel, CnSyncProvider } from "./types.js";
+import { deepseek } from "./providers/deepseek.js";
 import { ppio } from "./providers/ppio.js";
 import { qiniu } from "./providers/qiniu.js";
 import { siliconflow } from "./providers/siliconflow.js";
@@ -36,6 +37,7 @@ export const cnProviders: Record<string, CnSyncProvider<any>> = {
   siliconflow,
   zhipu,
   volcengine,
+  deepseek,
 };
 
 export interface FieldChange {
