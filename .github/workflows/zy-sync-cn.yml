@@ -1,0 +1,46 @@
+# zy-models: once a day, sync Chinese platforms' official public model data
+# (no API keys) into research/*.json, regenerate the catalog, and open or
+# update one draft PR per platform (branch cn-sync/<platform>). Conflicts with
+# existing officially-sourced values and models that can't be created
+# automatically go into one issue per platform. Never pushes main or merges.
+# See docs/cn-sync.md. Needs repo setting: Settings → Actions → General →
+# "Allow GitHub Actions to create and approve pull requests" (same as zy-sync-upstream).
+name: zy-models sync CN platforms
+
+on:
+  schedule:
+    - cron: "0 2 * * *" # 10:00 Asia/Shanghai
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: "只同步这个平台（ppio / qiniu / siliconflow / zhipu / volcengine / deepseek），留空为全部"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency: zy-sync-cn
+
+jobs:
+  sync:
+    if: github.repository == 'ziyou979/zy-models'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - name: Unit tests
+        run: bun test packages/core/test/cn-sync.test.ts
+      - name: Sync and publish
+        run: bash scripts/cn-sync-publish.sh "${{ inputs.provider }}"

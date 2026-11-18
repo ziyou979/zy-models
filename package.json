@@ -56,6 +56,7 @@
   "scripts": {
     "build": "bun scripts/build-dist.ts",
     "import:research": "bun scripts/import-research.ts",
+    "cn:sync": "bun scripts/cn-sync.ts",
     "test": "bun test",
     "validate": "bun ./packages/core/script/validate.ts",
     "v1:check": "bun ./packages/core/script/v1-check.ts",
