@@ -17,7 +17,7 @@
 部署（不用上游的 SST / PostHog / Lake 上报）：
 
 ```bash
-(cd packages/web && ./script/build.ts)   # 生成 packages/web/dist（静态页 + 搜索索引 + JSON）
+(cd packages/web && ./script/cn-build.ts)   # 生成 packages/web/dist（静态页 + 搜索索引 + JSON）
 bun x wrangler deploy                    # 读取 wrangler.toml：Worker 名 zy-models，assets = packages/web/dist
 ```
 

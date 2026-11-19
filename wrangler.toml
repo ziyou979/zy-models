@@ -1,5 +1,5 @@
 # zy-models: deploy the site to Cloudflare Workers with wrangler (instead of
-# upstream's SST config). Build first: (cd packages/web && ./script/build.ts)
+# upstream's SST config). Build first: (cd packages/web && ./script/cn-build.ts)
 name = "zy-models"
 main = "packages/function/src/zy-worker.ts"
 compatibility_date = "2025-06-01"
