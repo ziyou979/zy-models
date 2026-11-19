@@ -6,7 +6,6 @@
 # Source: https://cloud.baidu.com/doc/qianfan-docs/s/6m8r1x5hz
 # Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
 # CNY: input 1, output 4, cache_read 0.1
-# USD uses the CNY list price (原价): {"input":2,"output":8,"cache_read":0.2}
 schema = 2
 base_model = "baidu/ernie-5.5-flash-preview"
 status = "beta"
@@ -19,13 +18,13 @@ reasoning = { supported = true }
 structured_output = true
 
 [cost.text.input]
-price = 0.2991416
+price = 0.1495708
 
 [cost.text.input.cache]
-read = 0.02991416
+read = 0.01495708
 
 [cost.text.output]
-price = 1.19656639
+price = 0.5982832
 
 [cost_cny]
 input = 1

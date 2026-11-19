@@ -32,9 +32,12 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      # Scheduled runs use main. A manual run on another branch (testing a fix)
+      # checks out that branch and is forced into a dry run: nothing is pushed,
+      # no PR or issue is touched (CN_SYNC_DRY below).
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.ref_name == 'main' && 'main' || github.ref }}
           fetch-depth: 1
       - uses: oven-sh/setup-bun@v2
         with:
@@ -43,4 +46,6 @@ jobs:
       - name: Unit tests
         run: bun test packages/core/test/cn-sync.test.ts
       - name: Sync and publish
+        env:
+          CN_SYNC_DRY: ${{ github.ref_name != 'main' && '1' || '' }}
         run: bash scripts/cn-sync-publish.sh "${{ inputs.provider }}"
