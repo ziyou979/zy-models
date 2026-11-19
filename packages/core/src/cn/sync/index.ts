@@ -1,4 +1,4 @@
-// zy-models CN sync runner (`bun cn:sync`).
+// zy-models CN sync runner (`bun scripts/cn-sync.ts`).
 //
 // Same shape as upstream's `bun models:sync` (packages/core/src/sync/index.ts):
 // provider modules in ./providers, `--list-providers` for the workflow matrix,
@@ -361,7 +361,7 @@ const fmt = (v: unknown) => (typeof v === "string" ? v : JSON.stringify(v));
 
 export function renderReport(r: CnSyncResult) {
   const lines = [
-    `由 \`bun cn:sync ${r.id}\` 自动生成：从 ${r.name} 的官方公开数据同步到 \`research/${r.researchFile}\`，再由 \`scripts/import-research.ts\` 重新生成 overlays/ 与 provider 模型文件。`,
+    `由 \`bun scripts/cn-sync.ts ${r.id}\` 自动生成：从 ${r.name} 的官方公开数据同步到 \`research/${r.researchFile}\`，再由 \`scripts/import-research.ts\` 重新生成 overlays/ 与 provider 模型文件。`,
     "",
     "**数据源（无需 API key）**",
     ...r.sources.map((s) => `- ${s}`),
@@ -397,7 +397,7 @@ function conflictLines(r: CnSyncResult) {
 export function renderIssue(r: CnSyncResult) {
   if (r.conflicts.length === 0 && r.missing.length === 0) return "";
   const lines = [
-    `\`bun cn:sync ${r.id}\` 每日从 ${r.name} 官方公开数据同步时，以下内容不能自动处理（本 issue 每次运行会刷新）。`,
+    `\`bun scripts/cn-sync.ts ${r.id}\` 每日从 ${r.name} 官方公开数据同步时，以下内容不能自动处理（本 issue 每次运行会刷新）。`,
     "",
     `数据源：${r.sources.join("、")}`,
   ];

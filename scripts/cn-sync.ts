@@ -2,9 +2,9 @@
 // zy-models: sync research/<platform>.json from Chinese platforms' official
 // public catalogs (no API key). See docs/cn-sync.md.
 //
-//   bun cn:sync --list-providers      # workflow matrix, same shape as `bun models:sync --list-providers`
-//   bun cn:sync <provider> [--dry-run]
-//   bun cn:sync all [--dry-run]
+//   bun scripts/cn-sync.ts --list-providers      # workflow matrix, same shape as `bun models:sync --list-providers`
+//   bun scripts/cn-sync.ts <provider> [--dry-run]
+//   bun scripts/cn-sync.ts all [--dry-run]
 //
 // After a run that changed research/, regenerate the catalog with
 //   bun scripts/import-research.ts --rate <last rate> --rate-date <date>

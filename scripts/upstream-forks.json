@@ -1,0 +1,17 @@
+{
+  "packages/web/src/cn-render.tsx": {
+    "upstream": "packages/web/src/render.tsx",
+    "ported_from_blob": "61bb19883b70ba5f4d548fcaa8f94d651c524546",
+    "ported_from_commit": "7b22cc903b46d459e83ec6420d702426f34f813c"
+  },
+  "packages/web/script/cn-build.ts": {
+    "upstream": "packages/web/script/build.ts",
+    "ported_from_blob": "646a2f4b9f162b0946d9037ff83457c23b2d38fe",
+    "ported_from_commit": "7b22cc903b46d459e83ec6420d702426f34f813c"
+  },
+  "packages/web/cn-index.html": {
+    "upstream": "packages/web/index.html",
+    "ported_from_blob": "fb5df2e6c1d0f375dfedd2ba9fa7d3111acda5e6",
+    "ported_from_commit": "7b22cc903b46d459e83ec6420d702426f34f813c"
+  }
+}

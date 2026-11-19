@@ -43,8 +43,8 @@ await fs.rm(OVERLAYS, { recursive: true, force: true });
 const generated: string[] = [];
 
 // Baseline = upstream data only (imported after cleanup, so no overlays).
-const { generateCatalog } = await import("../packages/core/src/index.ts");
-const baseline = (await generateCatalog(ROOT)) as { providers: Json; models: Json };
+const { generateCatalogCn } = await import("../packages/core/src/cn/catalog.ts");
+const baseline = (await generateCatalogCn(ROOT)) as { providers: Json; models: Json };
 
 // ---------------------------------------------------------------- exchange rate
 let rate = Number(arg("rate"));

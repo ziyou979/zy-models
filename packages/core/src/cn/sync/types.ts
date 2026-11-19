@@ -49,7 +49,7 @@ export interface CnRemoteModel {
 }
 
 export interface CnSyncProvider<Source> {
-  /** Sync target id (`bun cn:sync <id>`). */
+  /** Sync target id (`bun scripts/cn-sync.ts <id>`). */
   id: string;
   name: string;
   /** research/<file> this platform's data lives in. */

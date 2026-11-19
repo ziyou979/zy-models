@@ -1,0 +1,8 @@
+# zy-models: merge strategy for the daily upstream merge.
+# Upstream-owned generated files that this fork never edits: on a conflict,
+# take upstream's version (the sync workflow then runs `bun install` and
+# regenerates our own derived data). The "zy-upstream" driver is defined by
+# .github/workflows/zy-sync-upstream.yml; where it is not configured (local
+# clones, GitHub's merge button) git falls back to a normal text merge.
+bun.lock merge=zy-upstream
+models.json merge=zy-upstream

@@ -1,0 +1,4 @@
+# zy-models: overlays + extension keys for upstream code, without editing it
+# (see packages/core/src/cn/register.ts). Only for `bun run`: upstream's own
+# tests keep reading the raw files, as they do upstream.
+preload = ["./packages/core/src/cn/register.ts"]

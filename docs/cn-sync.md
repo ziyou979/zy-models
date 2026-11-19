@@ -1,6 +1,6 @@
 # 国内平台官方数据同步（cn-sync）
 
-每天从国内平台**无需 API key** 的官方公开数据（公开 JSON 接口、官方价格页/模型广场内嵌数据、官方文档 markdown）同步模型列表、规格与人民币价格。命令 `bun cn:sync`，工作流 `.github/workflows/zy-sync-cn.yml`。
+每天从国内平台**无需 API key** 的官方公开数据（公开 JSON 接口、官方价格页/模型广场内嵌数据、官方文档 markdown）同步模型列表、规格与人民币价格。命令 `bun scripts/cn-sync.ts`，工作流 `.github/workflows/zy-sync-cn.yml`。
 
 ## 和上游 `bun models:sync` 的关系
 
@@ -9,7 +9,7 @@
 | 上游 models.dev | 本仓库 cn-sync |
 | --- | --- |
 | `packages/core/src/sync/providers/*.ts`，`SyncProvider`：`fetchModels` / `parseModels` / `translateModel` | `packages/core/src/cn/sync/providers/*.ts`，`CnSyncProvider`：同名三个方法，另加 `researchFile`、`createNew`、`minModels`、`resolveLocalID` |
-| `bun models:sync --list-providers` 输出 `{include:[{provider,name}]}` | `bun cn:sync --list-providers` 同格式 |
+| `bun models:sync --list-providers` 输出 `{include:[{provider,name}]}` | `bun scripts/cn-sync.ts --list-providers` 同格式 |
 | `--dry-run`、`.sync/model-sync-report.md` | `--dry-run`、`.sync/cn-<p>-report.md`（PR 描述）、`.sync/cn-<p>-issue.md`（issue 正文） |
 | 工作流逐个 provider 从干净的 dev 开始，各出一个 patch、各开一个 PR，失败的不影响其他 | `scripts/cn-sync-publish.sh` 同样逐个平台从干净的 main 开始，分支 `cn-sync/<p>`，各开/更新一个 draft PR |
 | `skipCreates` 的新模型开 `[missing-model]` issue | 无法自动创建的新模型、与官方来源冲突的字段，每个平台汇总到一个 `[cn-sync]` issue，每次运行刷新，清空后自动关闭 |
@@ -65,11 +65,11 @@
 ## 本地使用
 
 ```bash
-bun cn:sync --list-providers
-bun cn:sync ppio --dry-run          # 只看报告，不写文件
-bun cn:sync all                     # 写 research/*.json
+bun scripts/cn-sync.ts --list-providers
+bun scripts/cn-sync.ts ppio --dry-run          # 只看报告，不写文件
+bun scripts/cn-sync.ts all                     # 写 research/*.json
 bun scripts/import-research.ts --rate 6.685797 --rate-date 2026-11-12   # 用 research/IMPORT_REPORT.md 里的上次汇率
-bun validate && bun run build
+bun validate && bun scripts/build-dist.ts
 CN_SYNC_DRY=1 bash scripts/cn-sync-publish.sh ppio   # 走一遍工作流，不推送、不开 PR/issue（会 reset 工作区，先提交改动）
 ```
 
@@ -77,4 +77,4 @@ CN_SYNC_DRY=1 bash scripts/cn-sync-publish.sh ppio   # 走一遍工作流，不�
 
 1. 写 `packages/core/src/cn/sync/providers/<p>.ts`，导出 `CnSyncProvider`（zod 校验来源数据；价格换算成元/百万 tokens；只输出来源明确给出的字段）。
 2. 加进 `packages/core/src/cn/sync/index.ts` 的 `cnProviders`，工作流会自动带上（与上游 matrix 机制一样）。
-3. 在 `packages/core/test/cn-sync.test.ts` 加解析用例，`bun cn:sync <p> --dry-run` 看第一份报告。
+3. 在 `packages/core/test/cn-sync.test.ts` 加解析用例，`bun scripts/cn-sync.ts <p> --dry-run` 看第一份报告。

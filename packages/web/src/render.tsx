@@ -20,33 +20,6 @@ import {
   sortNumber,
   weightsText,
 } from "./shared.js";
-// zy-models: Chinese-platform extension UI (see cn.tsx)
-import {
-  CnFilter,
-  CnHeaders,
-  HomeStats,
-  LimitCell,
-  cnFirst,
-  CnyCell,
-  CN_COLUMNS,
-  ProviderCnSections,
-  ReasoningDefaultCell,
-  SITE,
-  SITE_METADATA,
-  T,
-  ZhName,
-  canonicalCn,
-  isCnProvider,
-  modelExt,
-  modelFacts,
-  providerDisplayName,
-  providerExt,
-  providerFacts,
-  regionText,
-  zhWord,
-} from "./cn.js";
-import { CnHelpDialog } from "./cn-help.js";
-import { PLANS_METADATA, PlansPage } from "./cn-plans.js";
 
 const root = path.join(import.meta.dir, "..", "..", "..");
 const Catalog = await generateCatalog(root);
@@ -61,7 +34,7 @@ const LabLogoSvgs = new Map<string, string>();
 type CatalogModel = ModelMetadata;
 type CatalogProvider = Provider;
 type CatalogProviderModel = Model;
-type ActiveSection = "models" | "providers" | "labs" | "plans"; // zy-models: + plans
+type ActiveSection = "models" | "providers" | "labs";
 
 interface PageMetadata {
   title: string;
@@ -123,7 +96,11 @@ interface SearchIndexItem {
   updated?: string;
 }
 
-const DEFAULT_PAGE_METADATA: PageMetadata = SITE_METADATA; // zy-models
+const DEFAULT_PAGE_METADATA: PageMetadata = {
+  title: "Models.dev - An open-source database of AI models",
+  description:
+    "Models.dev is a comprehensive open-source database of AI model specifications, pricing, and features.",
+};
 
 const ModelEntries = buildModelEntries();
 const ProviderModelEntries = buildProviderModelEntries(ModelEntries);
@@ -411,23 +388,6 @@ function buildPages() {
     renderPage("providers", <ProvidersPage providers={providerList} />),
   );
   addPage("/labs", renderPage("labs", <LabsPage labs={LabEntries} />));
-  // zy-models: 编程套餐对比
-  addPage(
-    "/plans",
-    renderPage(
-      "plans",
-      <PlansPage
-        providers={Providers}
-        modelName={(providerId, modelId) => {
-          const entry = ProviderModelEntries.find((e) => e.providerId === providerId && e.modelId === modelId);
-          return entry ? modelExt(entry.model).name_zh ?? displayModelName(entry) : modelId;
-        }}
-        providerLink={(providerId) => <ProviderLink providerId={providerId} provider={Providers[providerId]!} />}
-        copy={(value) => <CopyButton value={value} label={`复制 ${value}`} />}
-      />,
-      PLANS_METADATA,
-    ),
-  );
 
   for (const model of modelList) {
     addPage(
@@ -469,7 +429,7 @@ function renderPage(
         <main class="page-scroll">{content}</main>
         <MobileMenu active={active} />
         <SearchDialog />
-        <CnHelpDialog />
+        <HelpDialog />
       </Fragment>,
     ),
     metadata,
@@ -479,7 +439,7 @@ function renderPage(
 function modelPageMetadata(model: ModelEntry): PageMetadata {
   const metadata = model.metadata;
   const providerCount = model.providers.length;
-  const title = `${metadata.name} pricing, providers, and specs | zy-models`;
+  const title = `${metadata.name} pricing, providers, and specs | Models.dev`;
   const context = metadata.limit?.context
     ? `${formatNumber(metadata.limit.context)} token context`
     : undefined;
@@ -517,7 +477,7 @@ function providerPageMetadata(
   provider: CatalogProvider,
   models: ProviderModelEntry[],
 ): PageMetadata {
-  const title = `${provider.name} models, pricing, and API docs | zy-models`;
+  const title = `${provider.name} models, pricing, and API docs | Models.dev`;
   const labs = new Set<string>();
   for (const entry of models) {
     if (entry.canonical?.labName) labs.add(entry.canonical.labName);
@@ -531,7 +491,7 @@ function providerPageMetadata(
         : undefined;
   const description = compactMetadataDescription(
     [
-      `Browse ${plural(models.length, `${provider.name} model`)} on zy-models.`,
+      `Browse ${plural(models.length, `${provider.name} model`)} on Models.dev.`,
       factSentence([
         labSummary,
         `pricing`,
@@ -549,7 +509,7 @@ function providerPageMetadata(
 }
 
 function labPageMetadata(lab: LabEntry): PageMetadata {
-  const title = `${lab.name} models, providers, and specs | zy-models`;
+  const title = `${lab.name} models, providers, and specs | Models.dev`;
   const description = compactMetadataDescription(
     [
       lab.description,
@@ -617,34 +577,31 @@ function Header(props: { active: ActiveSection }) {
     <header>
       <div class="left">
         <a class="brand" href="/">
-          <h1>{SITE.name}</h1>
+          <h1>Models.dev</h1>
         </a>
         <span class="slash"></span>
-        <p>{SITE.tagline}</p>
+        <p>An open-source database of AI models</p>
       </div>
       <div class="right">
         <nav class="top-nav" aria-label="Primary">
           <a class={props.active === "models" ? "active" : ""} href="/models">
-            {T.models}
+            Models
           </a>
           <a
             class={props.active === "providers" ? "active" : ""}
             href="/providers"
           >
-            {T.providers}
+            Providers
           </a>
           <a class={props.active === "labs" ? "active" : ""} href="/labs">
-            {T.labs}
-          </a>
-          <a class={props.active === "plans" ? "active" : ""} href="/plans">
-            编程套餐
+            Labs
           </a>
         </nav>
         <a
           class="github"
           target="_blank"
           rel="noopener noreferrer"
-          href={SITE.repo}
+          href="https://github.com/sst/models.dev"
           aria-label="GitHub"
         >
           <svg
@@ -684,12 +641,12 @@ function Header(props: { active: ActiveSection }) {
                 <circle cx="11" cy="11" r="8"></circle>
                 <path d="m21 21-4.35-4.35"></path>
               </svg>
-              <span>{T.search}</span>
+              <span>Search</span>
             </span>
             <span class="search-shortcut">Ctrl K</span>
           </button>
         </div>
-        <button id="help">{T.help}</button>
+        <button id="help">How to use</button>
         <button
           type="button"
           id="mobile-menu-trigger"
@@ -724,50 +681,39 @@ function HomePage(props: {
   providers: Array<[string, CatalogProvider]>;
   labs: LabEntry[];
 }) {
-  return (
-    <Fragment>
-      <HomeStats providers={Providers} models={props.models} />
-      <CnFilter defaultOn hint="只显示国内平台在售的模型；人民币价取国内平台最低价，点击或悬停价格查看阶梯/峰谷" />
-      <ModelTable models={props.models} title={T.canonical} hideHeading />
-    </Fragment>
-  );
+  return <ModelTable models={props.models} title="Canonical Models" hideHeading />;
 }
 
 function ProvidersPage(props: { providers: Array<[string, CatalogProvider]> }) {
-  const providers = cnFirst(props.providers); // zy-models: 国内平台置顶
   return (
-      <Fragment>
-      <CnFilter />
       <TableSection
-        title={T.providers}
+        title="Providers"
         count={props.providers.length}
-        columns={6}
+        columns={5}
         hideHeading
       >
         <table data-enhanced-table>
-          <caption class="sr-only">{T.providers}</caption>
+          <caption class="sr-only">Providers</caption>
           <thead>
             <tr>
-              <SortableTh>{T.provider}</SortableTh>
-              <SortableTh sort="ascending">区域</SortableTh>
-              <SortableTh type="number">{T.models}</SortableTh>
-              <SortableTh>{T.package}</SortableTh>
-              <SortableTh>{T.api}</SortableTh>
-              <SortableTh>{T.docs}</SortableTh>
+              <SortableTh sort="ascending">Provider</SortableTh>
+              <SortableTh type="number">Models</SortableTh>
+              <SortableTh>Package</SortableTh>
+              <SortableTh>API</SortableTh>
+              <SortableTh>Docs</SortableTh>
             </tr>
           </thead>
           <tbody>
-            {providers.map(([providerId, provider]) => {
+            {props.providers.map(([providerId, provider]) => {
               const models = ProviderModelEntries.filter(
                 (entry) => entry.providerId === providerId,
               );
 
               return (
-                <tr data-cn={isCnProvider(provider) ? "1" : "0"} data-search={`${provider.name} ${providerExt(provider).name_zh ?? ""} ${providerId} ${provider.npm} ${provider.api ?? ""}`}>
-                  <th scope="row" data-sort={providerDisplayName(provider)}>
+                <tr data-search={`${provider.name} ${providerId} ${provider.npm} ${provider.api ?? ""}`}>
+                  <th scope="row" data-sort={provider.name}>
                     <ProviderLink providerId={providerId} provider={provider} />
                   </th>
-                  <td data-sort={providerExt(provider).region ?? ""}>{providerExt(provider).region ? regionText(providerExt(provider).region) : "-"}</td>
                   <td class="numeric" data-sort={String(models.length)}>{models.length}</td>
                   <td class="mono">{provider.npm}</td>
                   <td class="mono" data-sort={provider.api ?? ""}>
@@ -779,32 +725,31 @@ function ProvidersPage(props: { providers: Array<[string, CatalogProvider]> }) {
                   </td>
                   <td data-sort={provider.doc}>
                     <a href={provider.doc} target="_blank" rel="noopener noreferrer">
-                      {T.docs}
+                      Docs
                     </a>
                   </td>
                 </tr>
               );
             })}
-            <EmptyRow columns={6} />
+            <EmptyRow columns={5} />
           </tbody>
         </table>
       </TableSection>
-      </Fragment>
   );
 }
 
 function LabsPage(props: { labs: LabEntry[] }) {
   return (
-      <TableSection title={T.labs} count={props.labs.length} columns={5} hideHeading>
+      <TableSection title="Labs" count={props.labs.length} columns={5} hideHeading>
         <table data-enhanced-table>
-          <caption class="sr-only">{T.labs}</caption>
+          <caption class="sr-only">Labs</caption>
           <thead>
             <tr>
-              <SortableTh sort="ascending">{T.lab}</SortableTh>
-              <SortableTh>{T.description}</SortableTh>
-              <SortableTh type="number">{T.models}</SortableTh>
-              <SortableTh type="number">{T.providers}</SortableTh>
-              <SortableTh>{T.updated}</SortableTh>
+              <SortableTh sort="ascending">Lab</SortableTh>
+              <SortableTh>Description</SortableTh>
+              <SortableTh type="number">Models</SortableTh>
+              <SortableTh type="number">Providers</SortableTh>
+              <SortableTh>Last Updated</SortableTh>
             </tr>
           </thead>
           <tbody>
@@ -830,40 +775,37 @@ function LabsPage(props: { labs: LabEntry[] }) {
 function ModelPage(props: { model: ModelEntry }) {
   const { model } = props;
   const metadata = model.metadata;
-  const cn = canonicalCn(metadata, model.providers); // zy-models
 
   return (
     <Fragment>
       <DetailHeader
         eyebrow={
           <Fragment>
-            <a href="/models">{T.models}</a>
+            <a href="/models">Models</a>
             <span>/</span>
             <a href={labHref(model.labId)}>{model.labName}</a>
           </Fragment>
         }
-        title={cn.nameZh ?? metadata.name}
+        title={metadata.name}
         description={metadata.description}
         code={model.id}
         copyValue={model.id}
       />
       <Facts
         items={[
-          ["英文名", metadata.name],
-          [T.lab, <LabLink labId={model.labId} labName={model.labName} />],
-          [T.family, metadata.family ?? "-"],
-          [T.providers, model.providers.length],
-          [T.context, formatNumber(metadata.limit?.context)],
-          [T.outputLimit, formatNumber(metadata.limit?.output)],
-          [T.knowledge, knowledgeText(metadata.knowledge)],
-          [T.release, metadata.release_date ?? "-"],
-          [T.updated, metadata.last_updated ?? "-"],
-          [T.weights, <WeightsValue metadata={metadata} />],
-          [T.input, <FactModalities modalities={metadata.modalities?.input} />],
-          [T.outputTypes, <FactModalities modalities={metadata.modalities?.output} />],
-          ...modelFacts(cn),
+          ["Lab", <LabLink labId={model.labId} labName={model.labName} />],
+          ["Family", metadata.family ?? "-"],
+          ["Providers", model.providers.length],
+          ["Context", formatNumber(metadata.limit?.context)],
+          ["Output limit", formatNumber(metadata.limit?.output)],
+          ["Knowledge", knowledgeText(metadata.knowledge)],
+          ["Release", metadata.release_date ?? "-"],
+          ["Updated", metadata.last_updated ?? "-"],
+          ["Weights", <WeightsValue metadata={metadata} />],
+          ["Input", <FactModalities modalities={metadata.modalities?.input} />],
+          ["Output types", <FactModalities modalities={metadata.modalities?.output} />],
           [
-            T.capabilities,
+            "Capabilities",
             capabilitySummary([
               ["tools", metadata.tool_call],
               ["reasoning", metadata.reasoning],
@@ -873,12 +815,11 @@ function ModelPage(props: { model: ModelEntry }) {
           ],
         ]}
       />
-      <CnFilter />
       <TableSection
         id="providers"
-        title={T.providers}
+        title="Providers"
         count={model.providers.length}
-        columns={10 + CN_COLUMNS}
+        columns={10}
       >
         <ProviderModelsTable models={model.providers} mode="model" />
       </TableSection>
@@ -894,32 +835,25 @@ function ProviderPage(props: {
   return (
     <Fragment>
       <DetailHeader
-        eyebrow={<a href="/providers">{T.providers}</a>}
-        title={providerDisplayName(props.provider)}
-        description={providerExt(props.provider).name_zh && providerExt(props.provider).name_zh !== props.provider.name ? props.provider.name : undefined}
+        eyebrow={<a href="/providers">Providers</a>}
+        title={props.provider.name}
         code={props.providerId}
         copyValue={props.providerId}
       />
       <Facts
         items={[
-          [T.models, props.models.length],
-          ...providerFacts(props.provider),
-          [T.package, <span class="mono">{props.provider.npm}</span>],
-          [T.api, <span class="mono">{props.provider.api ?? "-"}</span>],
+          ["Models", props.models.length],
+          ["Package", <span class="mono">{props.provider.npm}</span>],
+          ["API", <span class="mono">{props.provider.api ?? "-"}</span>],
           [
-            T.docs,
+            "Docs",
             <a href={props.provider.doc} target="_blank" rel="noopener noreferrer">
-              官方文档
+              Provider docs
             </a>,
           ],
         ]}
       />
-      <ProviderCnSections
-        provider={props.provider}
-        modelNames={new Map(props.models.map((entry) => [entry.modelId, displayModelName(entry)]))}
-        copy={(value) => <CopyButton value={value} label={`复制 ${value}`} />}
-      />
-      <TableSection title={T.models} count={props.models.length} columns={9 + CN_COLUMNS}>
+      <TableSection title="Models" count={props.models.length} columns={9}>
         <ProviderModelsTable models={props.models} mode="provider" showLab={false} />
       </TableSection>
     </Fragment>
@@ -930,7 +864,7 @@ function LabPage(props: { lab: LabEntry }) {
   return (
     <Fragment>
       <DetailHeader
-        eyebrow={<a href="/labs">{T.labs}</a>}
+        eyebrow={<a href="/labs">Labs</a>}
         title={props.lab.name}
         description={props.lab.description}
         code={props.lab.id}
@@ -938,12 +872,12 @@ function LabPage(props: { lab: LabEntry }) {
       />
       <Facts
         items={[
-          [T.models, props.lab.models.length],
-          [T.providers, props.lab.providerCount],
-          [T.updated, props.lab.lastUpdated ?? "-"],
+          ["Models", props.lab.models.length],
+          ["Providers", props.lab.providerCount],
+          ["Updated", props.lab.lastUpdated ?? "-"],
         ]}
       />
-      <ModelTable models={props.lab.models} title={T.models} showLab={false} />
+      <ModelTable models={props.lab.models} title="Models" showLab={false} />
     </Fragment>
   );
 }
@@ -1024,7 +958,7 @@ function ModelTable(props: {
   showLab?: boolean;
 }) {
   const showLab = props.showLab ?? true;
-  const columns = (showLab ? 14 : 13) + CN_COLUMNS;
+  const columns = showLab ? 14 : 13;
 
   return (
     <TableSection
@@ -1037,36 +971,33 @@ function ModelTable(props: {
         <caption class="sr-only">{props.title}</caption>
         <thead>
           <tr>
-            <SortableTh>{T.model}</SortableTh>
-            {showLab && <SortableTh>{T.lab}</SortableTh>}
-            <SortableTh type="number">{T.providers}</SortableTh>
-            <SortableTh type="number">{T.context}</SortableTh>
-            <SortableTh type="number">{T.output}</SortableTh>
-            <CnHeaders th={(label, type) => <SortableTh type={type}>{label}</SortableTh>} />
-            <SortableTh>{T.input}</SortableTh>
-            <SortableTh>{T.reasoning}</SortableTh>
-            <SortableTh>{T.toolCall}</SortableTh>
-            <SortableTh>{T.structured}</SortableTh>
-            <SortableTh>{T.temperature}</SortableTh>
-            <SortableTh>{T.weights}</SortableTh>
-            <SortableTh type="number">{T.price}</SortableTh>
-            <SortableTh>{T.release}</SortableTh>
-            <SortableTh sort="descending">{T.updated}</SortableTh>
+            <SortableTh>Model</SortableTh>
+            {showLab && <SortableTh>Lab</SortableTh>}
+            <SortableTh type="number">Providers</SortableTh>
+            <SortableTh type="number">Context</SortableTh>
+            <SortableTh type="number">Output</SortableTh>
+            <SortableTh>Input</SortableTh>
+            <SortableTh>Reasoning</SortableTh>
+            <SortableTh>Tool Call</SortableTh>
+            <SortableTh>Structured</SortableTh>
+            <SortableTh>Temperature</SortableTh>
+            <SortableTh>Weights</SortableTh>
+            <SortableTh type="number">Price</SortableTh>
+            <SortableTh>Release</SortableTh>
+            <SortableTh sort="descending">Updated</SortableTh>
           </tr>
         </thead>
         <tbody>
           {props.models.map((model) => {
             const metadata = model.metadata;
-            const cn = canonicalCn(metadata, model.providers); // zy-models
 
             return (
               <tr
-                data-cn={cn.cn ? "1" : "0"}
-                data-search={`${metadata.name} ${cn.nameZh ?? ""} ${metadata.description} ${model.id} ${model.labName} ${metadata.family ?? ""} ${weightsText(metadata.open_weights)} ${booleanText(metadata.reasoning)} ${booleanText(metadata.tool_call)} ${booleanText(metadata.structured_output)} ${booleanText(metadata.temperature)}`}
+                data-search={`${metadata.name} ${metadata.description} ${model.id} ${model.labName} ${metadata.family ?? ""} ${weightsText(metadata.open_weights)} ${booleanText(metadata.reasoning)} ${booleanText(metadata.tool_call)} ${booleanText(metadata.structured_output)} ${booleanText(metadata.temperature)}`}
               >
-                <th scope="row" data-sort={cn.nameZh ?? metadata.name}>
-                  <a class="primary-link" href={modelHref(model.id)} title={metadata.name}>
-                    <ZhName name={metadata.name} nameZh={cn.nameZh} />
+                <th scope="row" data-sort={metadata.name}>
+                  <a class="primary-link" href={modelHref(model.id)}>
+                    {metadata.name}
                   </a>
                   <span class="subtle mono">{model.id}</span>
                 </th>
@@ -1086,8 +1017,6 @@ function ModelTable(props: {
                 <td class="numeric" data-sort={sortNumber(metadata.limit?.output)}>
                   {formatNumber(metadata.limit?.output)}
                 </td>
-                <CnyCell cost={cn.cost} via={cn.costProvider} />
-                <ReasoningDefaultCell value={cn.reasoningDefault} />
                 <td
                   data-sort={(metadata.modalities?.input ?? []).join(" ")}
                   dangerouslySetInnerHTML={{
@@ -1095,16 +1024,16 @@ function ModelTable(props: {
                   }}
                 />
                 <td data-sort={booleanText(metadata.reasoning)}>
-                  {zhWord(booleanText(metadata.reasoning))}
+                  {booleanText(metadata.reasoning)}
                 </td>
                 <td data-sort={booleanText(metadata.tool_call)}>
-                  {zhWord(booleanText(metadata.tool_call))}
+                  {booleanText(metadata.tool_call)}
                 </td>
                 <td data-sort={booleanText(metadata.structured_output)}>
-                  {zhWord(booleanText(metadata.structured_output))}
+                  {booleanText(metadata.structured_output)}
                 </td>
                 <td data-sort={booleanText(metadata.temperature)}>
-                  {zhWord(booleanText(metadata.temperature))}
+                  {booleanText(metadata.temperature)}
                 </td>
                 <td data-sort={weightsText(metadata.open_weights)}>
                   <WeightsValue metadata={metadata} />
@@ -1134,28 +1063,27 @@ function ProviderModelsTable(props: {
   showLab?: boolean;
 }) {
   const showLab = props.showLab ?? props.mode === "model";
-  const columns = (showLab ? 10 : 9) + CN_COLUMNS;
+  const columns = showLab ? 10 : 9;
 
   return (
     <table data-enhanced-table>
-      <caption class="sr-only">{props.mode === "model" ? T.providers : T.models}</caption>
+      <caption class="sr-only">{props.mode === "model" ? "Providers" : "Models"}</caption>
       <thead>
         <tr>
           {props.mode === "model" ? (
-            <SortableTh sort="ascending">{T.provider}</SortableTh>
+            <SortableTh sort="ascending">Provider</SortableTh>
           ) : (
-            <SortableTh sort="ascending">{T.model}</SortableTh>
+            <SortableTh sort="ascending">Model</SortableTh>
           )}
-          {showLab && <SortableTh>{T.lab}</SortableTh>}
-          <SortableTh>{T.modelId}</SortableTh>
-          <SortableTh type="number">{T.context}</SortableTh>
-          <SortableTh type="number">{T.output}</SortableTh>
-          <SortableTh type="number">{T.price}</SortableTh>
-          <CnHeaders th={(label, type) => <SortableTh type={type}>{label}</SortableTh>} />
-          <SortableTh>{T.reasoning}</SortableTh>
-          <SortableTh>{T.toolCall}</SortableTh>
-          <SortableTh>{T.structured}</SortableTh>
-          <SortableTh>{T.temperature}</SortableTh>
+          {showLab && <SortableTh>Lab</SortableTh>}
+          <SortableTh>Model ID</SortableTh>
+          <SortableTh type="number">Context</SortableTh>
+          <SortableTh type="number">Output</SortableTh>
+          <SortableTh type="number">Price</SortableTh>
+          <SortableTh>Reasoning</SortableTh>
+          <SortableTh>Tool Call</SortableTh>
+          <SortableTh>Structured</SortableTh>
+          <SortableTh>Temperature</SortableTh>
         </tr>
       </thead>
       <tbody>
@@ -1166,30 +1094,27 @@ function ProviderModelsTable(props: {
             ? { id: canonical.labId, name: canonical.labName }
             : undefined;
 
-          const ext = modelExt(entry.model); // zy-models
-
           return (
             <tr
-              data-cn={isCnProvider(entry.provider) ? "1" : "0"}
-              data-search={`${displayName} ${ext.name_zh ?? ""} ${entry.model.description} ${entry.modelId} ${entry.provider.name} ${entry.providerId} ${lab?.name ?? ""} ${entry.model.family ?? ""} ${booleanText(entry.model.reasoning)} ${booleanText(entry.model.tool_call)} ${booleanText(entry.model.structured_output)} ${booleanText(entry.model.temperature)}`}
+              data-search={`${displayName} ${entry.model.description} ${entry.modelId} ${entry.provider.name} ${entry.providerId} ${lab?.name ?? ""} ${entry.model.family ?? ""} ${booleanText(entry.model.reasoning)} ${booleanText(entry.model.tool_call)} ${booleanText(entry.model.structured_output)} ${booleanText(entry.model.temperature)}`}
             >
               {props.mode === "model" ? (
-                <th scope="row" data-sort={providerDisplayName(entry.provider)}>
+                <th scope="row" data-sort={entry.provider.name}>
                   <ProviderLink providerId={entry.providerId} provider={entry.provider} />
                 </th>
               ) : (
-                <th scope="row" data-sort={ext.name_zh ?? displayName}>
+                <th scope="row" data-sort={displayName}>
                   {canonical ? (
-                    <a class="primary-link" href={modelHref(canonical.id)} title={displayName}>
-                      <ZhName name={displayName} nameZh={ext.name_zh} />
+                    <a class="primary-link" href={modelHref(canonical.id)}>
+                      {displayName}
                     </a>
                   ) : (
-                    <span title={displayName}><ZhName name={displayName} nameZh={ext.name_zh} /></span>
+                    <span>{displayName}</span>
                   )}
                   {canonical ? (
                     <span class="subtle mono">{canonical.id}</span>
                   ) : (
-                    <span class="subtle">{T.providerSpecific}</span>
+                    <span class="subtle">Provider-specific</span>
                   )}
                 </th>
               )}
@@ -1204,24 +1129,26 @@ function ProviderModelsTable(props: {
                   copyValue={`${entry.providerId}/${entry.modelId}`}
                 />
               </td>
-              <LimitCell value={entry.model.limit.context} label={ext.limit_label?.context} />
-              <LimitCell value={entry.model.limit.output} label={ext.limit_label?.output} />
+              <td class="numeric" data-sort={sortNumber(entry.model.limit.context)}>
+                {formatNumber(entry.model.limit.context)}
+              </td>
+              <td class="numeric" data-sort={sortNumber(entry.model.limit.output)}>
+                {formatNumber(entry.model.limit.output)}
+              </td>
               <td class="numeric" data-sort={sortNumber(entry.model.cost?.input)}>
                 {costSummary(entry.model.cost?.input, entry.model.cost?.output)}
               </td>
-              <CnyCell cost={ext.cost_cny} />
-              <ReasoningDefaultCell value={ext.reasoning_default ?? (entry.canonical ? modelExt(entry.canonical.metadata).reasoning_default : undefined)} />
               <td data-sort={booleanText(entry.model.reasoning)}>
-                {zhWord(booleanText(entry.model.reasoning))}
+                {booleanText(entry.model.reasoning)}
               </td>
               <td data-sort={booleanText(entry.model.tool_call)}>
-                {zhWord(booleanText(entry.model.tool_call))}
+                {booleanText(entry.model.tool_call)}
               </td>
               <td data-sort={booleanText(entry.model.structured_output)}>
-                {zhWord(booleanText(entry.model.structured_output))}
+                {booleanText(entry.model.structured_output)}
               </td>
               <td data-sort={booleanText(entry.model.temperature)}>
-                {zhWord(booleanText(entry.model.temperature))}
+                {booleanText(entry.model.temperature)}
               </td>
             </tr>
           );
@@ -1248,12 +1175,12 @@ function WeightsValue(props: { metadata: CatalogModel }) {
   if (label === "Open" && href) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer">
-        {zhWord(label)}
+        {label}
       </a>
     );
   }
 
-  return <span>{zhWord(label)}</span>;
+  return <span>{label}</span>;
 }
 
 function weightHref(metadata: CatalogModel) {
@@ -1280,7 +1207,7 @@ function TableSection(props: {
         </div>
       )}
       <div class="table-wrap">{props.children}</div>
-      <p class="empty-message">{T.emptyRows}</p>
+      <p class="empty-message">No rows match the current search.</p>
     </section>
   );
 }
@@ -1313,7 +1240,7 @@ function SortableTh(props: {
 function EmptyRow(props: { columns: number }) {
   return (
     <tr class="empty-row">
-      <td colspan={props.columns}>{T.emptyRows}</td>
+      <td colspan={props.columns}>No rows match the current search.</td>
     </tr>
   );
 }
@@ -1328,7 +1255,7 @@ function ProviderLink(props: {
         class="provider-logo"
         dangerouslySetInnerHTML={{ __html: providerLogoSvg(props.providerId) }}
       />
-      <span>{providerDisplayName(props.provider)}</span>
+      <span>{props.provider.name}</span>
     </a>
   );
 }
@@ -1388,7 +1315,7 @@ function CopyButton(props: { value: string; label: string }) {
   );
 }
 
-function MobileMenu(props: { active: ActiveSection }) {
+function MobileMenu(props: { active: "models" | "providers" | "labs" }) {
   return (
     <dialog
       id="mobile-menu"
@@ -1396,7 +1323,7 @@ function MobileMenu(props: { active: ActiveSection }) {
       aria-labelledby="mobile-menu-title"
     >
       <div class="header">
-        <h2 id="mobile-menu-title">菜单</h2>
+        <h2 id="mobile-menu-title">Menu</h2>
         <button type="button" id="mobile-menu-close" aria-label="Close menu">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <line
@@ -1422,32 +1349,29 @@ function MobileMenu(props: { active: ActiveSection }) {
       </div>
       <nav class="mobile-menu-list" aria-label="Mobile">
         <a class={props.active === "models" ? "active" : ""} href="/models">
-          {T.models}
+          Models
         </a>
         <a
           class={props.active === "providers" ? "active" : ""}
           href="/providers"
         >
-          {T.providers}
+          Providers
         </a>
         <a class={props.active === "labs" ? "active" : ""} href="/labs">
-          {T.labs}
-        </a>
-        <a class={props.active === "plans" ? "active" : ""} href="/plans">
-          编程套餐
+          Labs
         </a>
         <button type="button" id="mobile-search-trigger">
-          {T.search}
+          Search
         </button>
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href={SITE.repo}
+          href="https://github.com/sst/models.dev"
         >
           GitHub
         </a>
         <button type="button" id="mobile-help-trigger">
-          {T.help}
+          How to use
         </button>
       </nav>
     </dialog>
@@ -1481,7 +1405,7 @@ function SearchDialog() {
         <input
           id="search-input"
           type="text"
-          placeholder="搜索模型、平台、厂商"
+          placeholder="Search models, providers, and labs"
           autocomplete="off"
           spellcheck="false"
           role="combobox"
@@ -1492,11 +1416,11 @@ function SearchDialog() {
         <span class="search-escape">Esc</span>
       </div>
       <h2 id="search-modal-title" class="sr-only">
-        {T.search}
+        Search
       </h2>
       <div id="search-count" class="search-count"></div>
       <div id="search-results" class="search-results" role="listbox"></div>
-      <p id="search-empty" class="search-empty">没有匹配结果。</p>
+      <p id="search-empty" class="search-empty">No matching results.</p>
     </dialog>
   );
 }

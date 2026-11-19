@@ -24,15 +24,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
       - run: bun install
       - name: Validate
-        run: bun validate > /tmp/validate.json
+        run: bun scripts/zy-validate.ts > /tmp/validate.json
+      - name: Upstream files unchanged
+        # Every upstream file except LICENSE must be byte-for-byte upstream, so the
+        # daily upstream merge can't conflict on our edits (docs/upstream-sync.md).
+        run: |
+          git fetch -q --no-tags https://github.com/anomalyco/models.dev.git dev
+          base=$(git merge-base HEAD FETCH_HEAD)
+          changed=$(git diff --name-only --diff-filter=M "$base" HEAD | grep -v -x -e LICENSE || true)
+          if [ -n "$changed" ]; then
+            echo "::error::These upstream files were edited in place; move the change into overlays/ or a cn*/zy* file:"; echo "$changed"; exit 1
+          fi
+      - name: Test
+        # Our tests + the upstream worker test. Upstream's data-dependent core tests
+        # assert upstream's own catalog and already fail on this fork's data.
+        run: bun test packages/function packages/core/test/cn-register.test.ts packages/core/test/cn-sync.test.ts
       - name: Build dist
-        run: bun run build
+        run: bun scripts/build-dist.ts
+      - name: Build site
+        working-directory: packages/web
+        run: ./script/cn-build.ts
       - name: Size check
         run: ls -la dist dist/v2
       - name: Publish dist branch
@@ -43,7 +60,7 @@ jobs:
           git init -q -b dist
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          cp ../LICENSE ../README.md . 2>/dev/null || true
+          cp ../LICENSE . && cp ../.github/README.md README.md
           git add -A
           git commit -q -m "dist: build of ${GITHUB_SHA}"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" dist:dist

@@ -12,6 +12,11 @@
 //    over that upstream file at load time (tables merge, arrays/values replace).
 //    This is how we add Chinese data to upstream providers without editing
 //    upstream files, so the daily upstream merge never conflicts on them.
+//
+// No upstream source file is edited for this: ./register.ts installs a Bun
+// loader plugin (preloaded via bunfig.toml) that applies overlays and strips
+// the extension keys whenever upstream code imports a data TOML, and
+// ./catalog.ts re-attaches the extension keys to the generated output.
 import path from "node:path";
 import { existsSync, readFileSync } from "node:fs";
 import { mergeDeep } from "remeda";
@@ -173,42 +178,66 @@ export function overlayPathFor(filePath: string) {
   return existsSync(candidate) ? candidate : undefined;
 }
 
-async function importToml(filePath: string): Promise<Record<string, unknown>> {
-  const mod = await import(filePath, { with: { type: "toml" } });
-  // Module objects are cached and shared; never mutate them.
-  return structuredClone(mod.default);
+// Raw file read: never goes through the loader plugin in ./register.ts.
+function parseTomlFile(filePath: string): Record<string, unknown> {
+  return Bun.TOML.parse(readFileSync(filePath, "utf8")) as Record<string, unknown>;
 }
 
 /** Reads a TOML file with its overlay (if any) merged on top. */
-export async function readTomlWithOverlay(filePath: string): Promise<Record<string, unknown>> {
-  const base = await importToml(filePath);
+export function readTomlWithOverlaySync(filePath: string): Record<string, unknown> {
+  const base = parseTomlFile(filePath);
   const overlay = overlayPathFor(filePath);
   if (overlay === undefined) return base;
-  return mergeDeep(base, await importToml(overlay)) as Record<string, unknown>;
+  return mergeDeep(base, parseTomlFile(overlay)) as Record<string, unknown>;
+}
+export async function readTomlWithOverlay(filePath: string): Promise<Record<string, unknown>> {
+  return readTomlWithOverlaySync(filePath);
+}
+
+/**
+ * A data TOML as upstream code should see it: overlay merged, extension keys
+ * split off and validated. `kind` decides which extension keys apply.
+ */
+export function loadDataToml(filePath: string) {
+  const merged = readTomlWithOverlaySync(filePath);
+  const rel = path.relative(REPO_ROOT, filePath).split(path.sep);
+  if (rel[0] === "providers" && rel.length === 3 && rel[2] === "provider.toml") {
+    const { clean, ext } = split(merged, PROVIDER_EXT_KEYS);
+    return { toml: clean, ext: parseExt(ProviderExt, ext, filePath) as ProviderExt & ProviderModelExt };
+  }
+  const { clean, ext } = split(merged, MODEL_EXT_KEYS);
+  const schema = rel[0] === "providers" ? ProviderModelExt : LabModelExt;
+  return { toml: clean, ext: parseExt(schema, ext, filePath) as ProviderExt & ProviderModelExt };
 }
 
 /** provider.toml: upstream keys + validated extension keys. */
 export async function readProviderToml(filePath: string) {
-  const { clean, ext } = split(await readTomlWithOverlay(filePath), PROVIDER_EXT_KEYS);
-  return { toml: clean, ext: parseExt(ProviderExt, ext, filePath) };
+  const { toml, ext } = loadDataToml(filePath);
+  return { toml, ext: ext as ProviderExt };
 }
 
 /** Lab (`models/…`) or provider model file: upstream keys + validated extension keys. */
 export async function readModelToml(filePath: string) {
-  const { clean, ext } = split(await readTomlWithOverlay(filePath), MODEL_EXT_KEYS);
-  const isProviderModel = path.relative(REPO_ROOT, filePath).split(path.sep)[0] === "providers";
-  const schema = isProviderModel ? ProviderModelExt : LabModelExt;
-  return { toml: clean, ext: parseExt(schema, ext, filePath) as ProviderModelExt };
+  const { toml, ext } = loadDataToml(filePath);
+  return { toml, ext: ext as ProviderModelExt };
 }
 
-/** Upstream keys only (for the v2 generator, which stays upstream-shaped). */
+/** Upstream keys only. */
 export async function readUpstreamToml(filePath: string) {
-  const { clean } = split(await readTomlWithOverlay(filePath), [...PROVIDER_EXT_KEYS, ...MODEL_EXT_KEYS]);
-  return clean;
+  return loadDataToml(filePath).toml;
 }
+
+// Extension data of every data TOML loaded so far, by absolute path (filled by
+// the loader plugin in ./register.ts; ./catalog.ts reads it back).
+export const extByPath = new Map<string, { ext: ProviderExt & ProviderModelExt; toml: Record<string, unknown> }>();
 
 // Lab model extension data, keyed by lab model id (`<lab>/<model>`).
-export const labModelExt = new Map<string, ProviderModelExt>();
+export const labModelExt = {
+  get(id: string): ProviderModelExt | undefined {
+    const file = path.join(REPO_ROOT, "models", `${id}.toml`);
+    return (extByPath.get(file) ?? (existsSync(file) ? loadDataToml(file) : undefined))?.ext;
+  },
+};
 
 function withoutEmpty<T extends Record<string, unknown>>(value: T): Partial<T> {
   return Object.fromEntries(Object.entries(value).filter(([, v]) => v !== undefined)) as Partial<T>;
