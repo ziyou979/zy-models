@@ -22,7 +22,9 @@
 2. **只有上游 catalog 有、research 没有的模型**：上游数值没有官方来源，新增一条 research 记录（官方数据 + `sources`），导入器把它写成 overlay；与上游不同的数值按导入器既有规则以官方数据为准，列在 `research/IMPORT_REPORT.md`。
 3. **本地完全没有的模型**：仅当数据源给的是真实 API 模型 ID，且 `models/<lab>/` 下有同 ID 的 lab 模型、导入器也会解析到同一个 lab 文件时，才新增（导入器写 `providers/<p>/models/<id>.toml`，`base_model` 指向 lab）。否则进 issue，不生成占位 lab 文件，也不按"第一方别名"猜（例如七牛的 `deepseek/deepseek-v4-flash` 不会被自动映射到 DeepSeek 当前别名指向的 V4.1）。
 4. **从不删除**。本地有、官方源没列出的模型只在报告里列出。
-5. 自相矛盾的官方数据（如最大输出 > 上下文）不同步该字段并在报告中提示；能力类布尔值只取"支持"（七牛、硅基流动的部分 `false` 不可靠）。
+5. **原价（list price）**：research 里原价可能在 `original`（早期调研文件）或 `list_price`（cn-sync 写入）。已有原价时只补缺的键（写回原来那个键下），不同的值进冲突，不会再新建一个只含部分键的原价把旧的盖住。导入器把 `original`、`list_price`、「原价」分档和 `discount_note` 按键合并（文件里已有的优先），所以任何一处有的值（如缓存原价）都不会丢。
+6. **美元价 `cost` 一律由人民币主字段（当前实付价）换算**，与 `cost_cny` 主字段是同一个价格；原价只在 `cost_cny.list_price`。上游已有模型的美元价若正好等于我们的人民币原价换算值（上游按原价收录，例如 bailing 的 Ling 系列），视为官方原价，不覆盖，只在 `research/IMPORT_REPORT.md`「非数值差异」里列出。（2026-11-16 曾改为"美元价取原价"，导致 PR #12 中 PPIO tencent/hy4 的美元价被换成原价、`list_price.cache_read` 被删，2026-11-19 修正。）
+7. 自相矛盾的官方数据（如最大输出 > 上下文）不同步该字段并在报告中提示；能力类布尔值只取"支持"（七牛、硅基流动的部分 `false` 不可靠）。
 
 ## 已实现的平台（6 个，均无需 key）
 
@@ -72,6 +74,8 @@ bun scripts/import-research.ts --rate 6.685797 --rate-date 2026-11-12   # 用 re
 bun validate && bun scripts/build-dist.ts
 CN_SYNC_DRY=1 bash scripts/cn-sync-publish.sh ppio   # 走一遍工作流，不推送、不开 PR/issue（会 reset 工作区，先提交改动）
 ```
+
+在 GitHub 上测试修复分支：Actions → zy-models sync CN platforms → Run workflow，分支选修复分支（不要选 main）。非 main 分支的手动运行会检出该分支并强制 dry run（`CN_SYNC_DRY=1`），不推送、不动 PR/issue；改动了已有数据文件时日志里会打印完整 diff。
 
 ## 加一个平台
 

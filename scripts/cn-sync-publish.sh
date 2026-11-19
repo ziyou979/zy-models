@@ -100,6 +100,11 @@ while IFS=$'\t' read -r p name <&3; do
   cat "$report" >> "$summary"
   if [ -n "$dry" ]; then
     git status --short | sed 's/^/  /'
+    # Changed or deleted existing data files: the sync should only add, so show them in full.
+    if [ -n "$(git diff --name-only --diff-filter=MD -- providers overlays models)" ]; then
+      echo "Existing data files changed:"
+      git diff --diff-filter=MD -- providers overlays models | head -400
+    fi
     printf '| %s | 有变化（dry run，未推送）|\n' "$name" >> "$summary"
     echo "::endgroup::"
     continue
