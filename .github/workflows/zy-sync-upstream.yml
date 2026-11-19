@@ -12,6 +12,8 @@
 #   - anything else → merge aborted, nothing pushed, an `upstream-sync-conflict`
 #     issue is opened/updated. If even the issue can't be opened, the run fails
 #     so the problem is never silent.
+#   - a clean merge whose PR can't be created (repo setting below) is only a
+#     warning + job summary with a compare link: the run stays green.
 #
 # Opening the PR needs: Settings → Actions → General → Workflow permissions →
 # "Allow GitHub Actions to create and approve pull requests".
@@ -123,17 +125,18 @@ jobs:
           if [ -n "$num" ]; then
             gh pr edit "$num" --body-file /tmp/pr-body.md
           elif ! gh pr create --base main --head "$BRANCH" --title "chore(sync): 同步上游 models.dev" --body-file /tmp/pr-body.md 2> /tmp/pr-error.txt; then
-            cat /tmp/pr-error.txt
+            # Not fatal: the merged branch is pushed; only the PR is missing.
+            compare="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/compare/main...${BRANCH}?expand=1"
+            echo "::warning::Merged branch ${BRANCH} was pushed, but the PR could not be created ($(tr '\n' ' ' < /tmp/pr-error.txt)). Open it here: ${compare} — or enable Settings → Actions → General → Workflow permissions → \"Allow GitHub Actions to create and approve pull requests\"."
             {
-              echo "已把合并好的上游同步推到分支 \`$BRANCH\`，但工作流无法自动开 PR："
+              echo "### 上游同步已推送到 \`${BRANCH}\`，但没能自动开 PR"
               echo; echo '```'; cat /tmp/pr-error.txt; echo '```'
-              echo
-              echo "需要在 Settings → Actions → General → Workflow permissions 勾选 “Allow GitHub Actions to create and approve pull requests”；或手动开 PR：https://github.com/${GITHUB_REPOSITORY}/compare/main...${BRANCH}"
-            } > /tmp/body.md
-            echo "pr_failed=true" >> "$GITHUB_OUTPUT"
+              echo "- 手动开 PR：${compare}"
+              echo "- 或在 Settings → Actions → General → Workflow permissions 勾选 “Allow GitHub Actions to create and approve pull requests”"
+            } >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Report problems
-        if: always() && (steps.merge.outputs.conflict == 'true' || steps.push.outputs.pr_failed == 'true' || failure())
+        if: always() && (steps.merge.outputs.conflict == 'true' || failure())
         run: |
           set -uo pipefail
           run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
@@ -145,7 +148,7 @@ jobs:
               echo "原则：上游文件保持原样，我们的改动放 overlays/ 或自己的 cn*/zy* 文件（见 docs/upstream-sync.md）。"
               echo "本地处理：\`git fetch upstream && git merge upstream/dev\`，解决后运行 \`bash scripts/zy-reimport.sh && bun scripts/zy-validate.ts > /dev/null && bun scripts/build-dist.ts\`。"
             } > /tmp/body.md
-          elif [ "${{ steps.push.outputs.pr_failed }}" != "true" ]; then
+          else
             echo "上游同步工作流在合并之后失败（重新生成 / 校验 / 测试 / 构建 / 推送），没有推送坏的分支。请查看运行日志。" > /tmp/body.md
           fi
           echo >> /tmp/body.md; echo "运行：${run_url}" >> /tmp/body.md
@@ -162,7 +165,7 @@ jobs:
           echo "::error::Upstream sync needs attention and the upstream-sync-conflict issue could not be opened (are Issues enabled and is the workflow token allowed to write issues?)."
           exit 1
       - name: Close the conflict issue after a clean sync
-        if: success() && steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'false' && steps.push.outputs.pr_failed != 'true'
+        if: success() && steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'false'
         run: |
           num=$(gh issue list --label upstream-sync-conflict --state open --json number -q '.[0].number' 2>/dev/null || true)
           if [ -n "$num" ]; then

@@ -28,4 +28,4 @@
 1. `git merge upstream/dev`。`.gitattributes` 把 `bun.lock`、`models.json`（上游的生成文件，我们从不改）设为 `merge=zy-upstream`：冲突时直接取上游版本。
 2. 剩下的冲突交给 `scripts/sync-resolve-generated.sh`：只要是 importer 生成的文件上的 add/add，就取上游文件并重新导入；否则中止合并、**不推送任何分支**，并开 / 更新 `upstream-sync-conflict` issue。
 3. 合并成功后运行 `scripts/zy-reimport.sh`，在合并后的上游数据上重新生成 overlays/（不信任 git 对生成数据的合并），然后 `zy-validate`、测试、`build-dist`、网站构建。任何一步失败同样开 issue、不推送。
-4. 通过后推送 `sync/upstream` 并开 / 更新 PR。开不了 PR（仓库设置没允许 Actions 建 PR）时也开 issue 说明。连 issue 都开不了时让运行失败，避免静默停摆。
+4. 通过后推送 `sync/upstream` 并开 / 更新 PR。开不了 PR（仓库设置没允许 Actions 建 PR）只记 warning，并在运行摘要里给出手动开 PR 的 compare 链接，运行保持成功。冲突或失败时连 issue 都开不了，才让运行失败，避免静默停摆。干净同步后自动关闭 `upstream-sync-conflict` issue。

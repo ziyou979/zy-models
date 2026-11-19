@@ -124,7 +124,7 @@ bun scripts/cn-sync.ts <平台> --dry-run       # 从国内平台官方公开数
 | 工作流 | 触发 | 作用 |
 | --- | --- | --- |
 | `zy-build.yml` | push / PR 到 main | 校验 + 测试 + `dist/` 与网站构建，push 时把 `dist/` 强推到 `dist` 分支 |
-| `zy-sync-upstream.yml` | 每天 09:30（北京时间） | 合并 `anomalyco/models.dev@dev` 到 `sync/upstream`，重新生成 overlays，校验/测试/构建通过后开 / 更新 PR；无法自动解决的冲突或失败会开 `upstream-sync-conflict` issue（连 issue 都开不了时让运行失败） |
+| `zy-sync-upstream.yml` | 每天 09:30（北京时间） | 合并 `anomalyco/models.dev@dev` 到 `sync/upstream`，重新生成 overlays，校验/测试/构建通过后开 / 更新 PR；无法自动解决的冲突或失败会开 `upstream-sync-conflict` issue（连 issue 都开不了时让运行失败）；开不了 PR 只是 warning + 摘要里的 compare 链接 |
 | `zy-sync-cn.yml` | 每天 10:00（北京时间） | `bun scripts/cn-sync.ts` 逐个平台同步官方公开数据 → 导入 → 校验构建，按平台开 / 更新 draft PR（分支 `cn-sync/<平台>`）；冲突与需人工处理的模型按平台开 issue（见 `docs/cn-sync.md`） |
 | `zy-publish.yml` | 推送 `v*` tag | 构建并以 tag 版本号发布 npm（需要仓库 secret `NPM_TOKEN`），然后请求 npmmirror 立即同步 |
 
