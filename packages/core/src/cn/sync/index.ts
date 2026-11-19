@@ -93,7 +93,35 @@ export function sameLabel(a: number, b: number) {
 const samePrice = (a: number, b: number) => Math.abs(a - b) <= Math.max(1e-9, 1e-6 * Math.max(Math.abs(a), Math.abs(b)));
 const isEmpty = (v: unknown) => v === null || v === undefined || (Array.isArray(v) && v.length === 0);
 
-function reconcile(entry: Record<string, any>, remote: CnRemoteModel, result: CnSyncResult) {
+// 原价. Older research files keep it under `original`, cn-sync writes `list_price`;
+// the importer merges both (packages/core/src/cn/price.ts). An existing 原价 —
+// under either key — is the official value already on file: only its missing keys
+// are filled (in place, under the key it already uses) and differing keys are
+// conflicts. A second, partial list price next to it would hide its other keys.
+const LIST_KEYS = ["input", "output", "cache_read"] as const;
+type Fill = (field: string, value: unknown, set: () => void) => void;
+type Conflict = (field: string, local: unknown, remote: unknown) => void;
+export function reconcileListPrice(local: Record<string, any>, price: CnPrice, fill: Fill, conflict: Conflict) {
+  const want = price.list_price;
+  if (want === undefined) return;
+  const holder = !isEmpty(local.list_price) ? "list_price" : !isEmpty(local.original) ? "original" : undefined;
+  if (holder === undefined) {
+    // Only a real discount: a "list price" equal to the current price says nothing.
+    const discounted = LIST_KEYS.some((k) => price[k] !== undefined && want[k] !== undefined && !samePrice(price[k]!, want[k]!));
+    if (discounted) fill("price_cny.list_price", want, () => (local.list_price = { ...want }));
+    return;
+  }
+  const have: Record<string, unknown> = local[holder];
+  for (const k of LIST_KEYS) {
+    const w = want[k];
+    if (w === undefined) continue;
+    const h = numOf(have[k]);
+    if (h === undefined) fill(`price_cny.${holder}.${k}`, w, () => (have[k] = w));
+    else if (!samePrice(h, w)) conflict(`price_cny.${holder}.${k}`, h, w);
+  }
+}
+
+export function reconcile(entry: Record<string, any>, remote: CnRemoteModel, result: CnSyncResult) {
   let filled = 0;
   const localSources: string[] = Array.isArray(entry.sources) ? entry.sources : [];
   const fill = (field: string, value: unknown, set: () => void) => {
@@ -160,10 +188,7 @@ function reconcile(entry: Record<string, any>, remote: CnRemoteModel, result: Cn
         else if (!samePrice(have, want) && !has(localRows, key, want) && !has(remoteRows, key, have)) conflict(`price_cny.${key}`, have, want);
       }
       if ((price.tiers?.length ?? 0) >= 2 && isEmpty(local.tiers)) fill("price_cny.tiers", price.tiers, () => (local.tiers = price.tiers));
-      if (price.list_price !== undefined && isEmpty(local.list_price)) {
-        const discounted = PRICE_KEYS.some((k) => price[k] !== undefined && price.list_price![k as "input"] !== undefined && !samePrice(price[k]!, price.list_price![k as "input"]!));
-        if (discounted) fill("price_cny.list_price", price.list_price, () => (local.list_price = price.list_price));
-      }
+      if (price.list_price !== undefined) reconcileListPrice(local, price, fill, conflict);
       if (price.off_peak !== undefined && isEmpty(local.off_peak)) fill("price_cny.off_peak", price.off_peak, () => (local.off_peak = price.off_peak));
     }
   }

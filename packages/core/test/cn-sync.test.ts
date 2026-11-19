@@ -1,7 +1,8 @@
 // zy-models CN sync: parser and matching rules (offline, fixed fixtures).
 import { expect, test } from "bun:test";
 
-import { sameLabel } from "../src/cn/sync/index.js";
+import { reconcile, sameLabel, type CnSyncResult } from "../src/cn/sync/index.js";
+import { mergeListPrice, researchListPrice, usdBasis } from "../src/cn/price.js";
 import { markdownTables, priceCell } from "../src/cn/sync/parse.js";
 import { qiniuPrice } from "../src/cn/sync/providers/qiniu.js";
 import { sfPrice } from "../src/cn/sync/providers/siliconflow.js";
@@ -126,6 +127,12 @@ test("ppio: skips routers, test deployments and lane variants; list price only w
   expect(same.tools).toBe(true);
   const discounted = ppio.translateModel({ ...base, id: "tencent/hy4", pricing: { prompt: price("3", "6"), completion: price("9", "18") } })!;
   expect(discounted.price_cny!.list_price).toEqual({ input: 6, output: 18 });
+  const withCache = ppio.translateModel({
+    ...base,
+    id: "tencent/hy4",
+    pricing: { prompt: price("3", "6"), completion: price("9", "18"), input_cache_read: price("0.15", "0.3") },
+  })!;
+  expect(withCache.price_cny!.list_price).toEqual({ input: 6, output: 18, cache_read: 0.3 });
 });
 
 const DEEPSEEK = `# 模型 & 价格
@@ -179,4 +186,57 @@ test("deepseek: transposed 模型细节 table, peak price main, off-peak tier, f
   expect(pro!.price_cny).toMatchObject({ input: 9, output: 27, cache_read: 0.3 });
   expect(pro!.price_cny!.tiers).toEqual([{ when: OFF_PEAK_WHEN, input: 4.5, output: 13.5, cache_read: 0.15 }]);
   expect(pro!.price_cny!.off_peak).toMatch(/^空闲时段价格为高峰时段价格的一半/);
+});
+
+// Regression (cn-sync/ppio PR #12, tencent/hy4): research kept the 原价 under the
+// older `original` key; the sync added a second, partial `list_price` (no cache_read)
+// next to it, the importer then preferred it — dropping cost_cny.list_price.cache_read
+// — and converted USD `cost` from the 原价 6/18 instead of the current price 3/9.
+const emptyResult = (): CnSyncResult => ({
+  id: "ppio", name: "PPIO", researchFile: "ppio.json", sources: [], coverage: [], remoteCount: 0, changed: false,
+  added: [], adopted: [], filled: [], conflicts: [], missing: [], absent: [], notices: [],
+});
+const hy4Research = () => ({
+  id: "tencent/hy4",
+  sources: ["https://api.ppio.com/openai/v1/models", "https://ppio.com/pricing"],
+  limit: { context: 1_000_000, input: null, output: 64_000 },
+  price_cny: { unit: "per_million_tokens", input: 3, output: 9, cache_read: 0.15, cache_write: null, tiers: [], off_peak: null, original: { input: 6, output: 18, cache_read: 0.3 } },
+});
+
+test("cn-sync: an existing 原价 (`original`) is not shadowed by a partial list_price", () => {
+  const entry = hy4Research();
+  const result = emptyResult();
+  reconcile(entry, { id: "tencent/hy4", price_cny: { input: 3, output: 9, cache_read: 0.15, list_price: { input: 6, output: 18 } } }, result);
+  expect((entry.price_cny as any).list_price).toBeUndefined();
+  expect(entry.price_cny.original).toEqual({ input: 6, output: 18, cache_read: 0.3 });
+  expect(entry.price_cny).toMatchObject({ input: 3, output: 9, cache_read: 0.15 });
+  expect(result.filled).toEqual([]);
+  expect(result.conflicts).toEqual([]);
+});
+
+test("cn-sync: 原价 keys are only filled when missing; a different value is a conflict", () => {
+  const entry = hy4Research();
+  delete (entry.price_cny.original as any).cache_read;
+  const result = emptyResult();
+  reconcile(entry, { id: "tencent/hy4", price_cny: { input: 3, output: 9, list_price: { input: 7, output: 18, cache_read: 0.3 } } }, result);
+  expect(entry.price_cny.original).toEqual({ input: 6, output: 18, cache_read: 0.3 });
+  expect(result.filled.map((f) => f.field)).toEqual(["price_cny.original.cache_read"]);
+  expect(result.conflicts.map((c) => [c.field, c.local, c.remote])).toEqual([["price_cny.original.input", 6, 7]]);
+
+  const fresh = { id: "x/y", price_cny: { input: 3, output: 9 } } as Record<string, any>;
+  reconcile(fresh, { id: "x/y", price_cny: { input: 3, output: 9, list_price: { input: 6, output: 18, cache_read: 0.3 } } }, emptyResult());
+  expect(fresh.price_cny.list_price).toEqual({ input: 6, output: 18, cache_read: 0.3 });
+  const notDiscounted = { id: "x/z", price_cny: { input: 3, output: 9 } } as Record<string, any>;
+  reconcile(notDiscounted, { id: "x/z", price_cny: { input: 3, output: 9, list_price: { input: 3, output: 9 } } }, emptyResult());
+  expect(notDiscounted.price_cny.list_price).toBeUndefined();
+});
+
+test("importer: USD comes from the current CNY price; every stated 原价 key is kept", () => {
+  // The research as PR #12 left it: `original` (full) next to cn-sync's partial `list_price`.
+  const p = { ...hy4Research().price_cny, list_price: { input: 6, output: 18 } };
+  expect(researchListPrice(p)).toEqual({ input: 6, output: 18, cache_read: 0.3 });
+  expect([usdBasis(p, "input"), usdBasis(p, "output"), usdBasis(p, "cache_read")]).toEqual([3, 9, 0.15]);
+  // file values first, derived (tier / discount note) ones only fill gaps
+  expect(mergeListPrice({ input: 2, output: 8 }, { input: 9, output: 9, cache_read: 0.2 })).toEqual({ input: 2, output: 8, cache_read: 0.2 });
+  expect(mergeListPrice(undefined, null, {})).toBeUndefined();
 });
