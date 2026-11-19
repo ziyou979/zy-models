@@ -28,6 +28,7 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  actions: write # dispatch zy-build.yml on the pushed branch
 
 concurrency: zy-sync-upstream
 
@@ -109,6 +110,9 @@ jobs:
         run: |
           set -euo pipefail
           git push -f origin "$BRANCH"
+          # Pushes made with GITHUB_TOKEN don't trigger pull_request workflows, so run
+          # the PR's build check explicitly (workflow_dispatch is allowed).
+          gh workflow run zy-build.yml --ref "$BRANCH" || echo "::warning::could not dispatch zy-build.yml on $BRANCH"
           upstream_sha="${{ steps.merge.outputs.upstream_sha }}"
           {
             echo "自动合并上游 anomalyco/models.dev@${upstream_sha}；overlays 已在合并后重新生成，\`zy-validate\`、测试、\`build-dist\` 与网站构建均已通过。"
