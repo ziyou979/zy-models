@@ -16,37 +16,41 @@ mapfile -t conflicts < <(git diff --name-only --diff-filter=U)
 [ "${#conflicts[@]}" -gt 0 ] || exit 1
 
 generated=()
+upstream_owned=()
 for f in "${conflicts[@]}"; do
   # add/add: no common-ancestor stage, and the path is one our importer wrote.
   if ! git cat-file -e ":1:$f" 2>/dev/null && jq -e --arg f "$f" 'index($f) != null' scripts/import-manifest.json >/dev/null; then
     generated+=("$f")
+  elif [ "$(git check-attr merge -- "$f" | awk '{print $NF}')" = "zy-upstream" ]; then
+    # Upstream-owned generated file (bun.lock, models.json): we never edit it, take upstream's.
+    upstream_owned+=("$f")
   else
     echo "not auto-resolvable: $f"
     exit 1
   fi
 done
 
+if [ "${#upstream_owned[@]}" -gt 0 ]; then
+  echo "Taking upstream's version of ${#upstream_owned[@]} upstream-owned generated file(s):"
+  printf '  %s\n' "${upstream_owned[@]}"
+  git checkout --theirs -- "${upstream_owned[@]}"
+  git add -- "${upstream_owned[@]}"
+fi
 echo "Auto-resolving ${#generated[@]} add/add conflict(s) on importer-generated files:"
 printf '  %s\n' "${generated[@]}"
-git checkout --theirs -- "${generated[@]}"
-git add -- "${generated[@]}"
+if [ "${#generated[@]}" -gt 0 ]; then
+  git checkout --theirs -- "${generated[@]}"
+  git add -- "${generated[@]}"
+fi
 printf '%s\n' "${generated[@]}" | jq -R . | jq -s . > /tmp/zy-resolved.json
 jq --slurpfile drop /tmp/zy-resolved.json '[.[] | select(. as $f | $drop[0] | index($f) | not)]' \
   scripts/import-manifest.json > /tmp/zy-manifest.json && mv /tmp/zy-manifest.json scripts/import-manifest.json
 
-# Re-import with the exchange rate of the last import, so USD prices don't churn.
-rate=$(grep -oE '1 USD = [0-9.]+ CNY（[0-9-]+' research/IMPORT_REPORT.md | head -1)
-rate_value=$(echo "$rate" | grep -oE '= [0-9.]+' | tr -d '= ')
-rate_date=$(echo "$rate" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')
-if [ -z "$rate_value" ] || [ -z "$rate_date" ]; then
-  echo "could not read the last exchange rate from research/IMPORT_REPORT.md"
-  exit 1
-fi
 bun install
-if ! bun scripts/import-research.ts --rate "$rate_value" --rate-date "$rate_date"; then
+if ! bash scripts/zy-reimport.sh; then
   echo "import-research failed"
   exit 1
 fi
 git add -A overlays providers models labs research docs scripts/import-manifest.json
 git commit --no-edit -q
-printf '%s\n' "${generated[@]}" > /tmp/auto-resolved.txt
+printf '%s\n' "${generated[@]}" "${upstream_owned[@]}" | grep -v '^$' > /tmp/auto-resolved.txt || true

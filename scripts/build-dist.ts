@@ -11,7 +11,8 @@
 import path from "node:path";
 import fs from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { filterCatalogByModelType, generateCatalog, generateV2 } from "../packages/core/src/index.ts";
+import { filterCatalogByModelType } from "../packages/core/src/index.ts";
+import { generateCatalogCn, generateV2Cn } from "../packages/core/src/cn/catalog.ts";
 import { modelExtOutput, readModelToml } from "../packages/core/src/cn/ext.ts";
 
 const root = path.resolve(import.meta.dir, "..");
@@ -19,7 +20,7 @@ const out = path.join(root, "dist");
 await fs.rm(out, { recursive: true, force: true });
 await fs.mkdir(path.join(out, "v2"), { recursive: true });
 
-const catalog = await generateCatalog(root);
+const catalog = await generateCatalogCn(root);
 const view = filterCatalogByModelType({ models: catalog.models, providers: catalog.providers }, "default");
 
 const write = (file: string, value: unknown) => Bun.write(path.join(out, file), JSON.stringify(value));
@@ -36,7 +37,7 @@ await write("cn.json", cn);
 // v2: upstream-shaped, then extension keys copied from v1 by provider/model id.
 const PROVIDER_KEYS = ["name_zh", "region", "pricing_page", "plans", "notes"];
 const MODEL_KEYS = ["name_zh", "aliases", "cost_cny", "reasoning_default", "sources", "checked_at", "notes"];
-const v2 = (await generateV2(path.join(root, "providers"))) as Record<string, any>;
+const v2 = (await generateV2Cn(path.join(root, "providers"))) as Record<string, any>;
 for (const [providerID, provider] of Object.entries(v2)) {
   const v1 = (catalog.providers as Record<string, any>)[providerID] ?? { models: {} };
   for (const key of PROVIDER_KEYS) if (v1[key] !== undefined) provider[key] = v1[key];

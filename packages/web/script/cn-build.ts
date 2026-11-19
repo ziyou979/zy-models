@@ -1,0 +1,128 @@
+#!/usr/bin/env bun
+// zy-models: our fork of upstream script/build.ts (kept verbatim next to it):
+// renders cn-render.tsx with cn-index.html, drops overlays/removed.json models
+// from v2, and writes /cn.json. scripts/check-upstream-forks.ts reports when
+// upstream build.ts changes and needs porting here.
+
+import { RenderedPages, Providers, Models, SearchIndexJson, renderDocument } from "../src/cn-render";
+import {
+  filterCatalogByModelType,
+  filterProvidersByModelType,
+  MODEL_TYPES,
+  providerView,
+  type ModelTypeFilter,
+} from "@models.dev/core";
+import { generateV2Cn as generateV2 } from "@models.dev/core/src/cn/catalog.js";
+import fs from "fs/promises";
+import path from "path";
+
+await fs.rm("./dist", { recursive: true, force: true });
+await Bun.build({
+  entrypoints: ["./cn-index.html"],
+  outdir: "dist",
+  target: "bun",
+});
+
+for await (const file of new Bun.Glob("./public/*").scan()) {
+  await Bun.write(file.replace("./public/", "./dist/"), Bun.file(file));
+}
+
+// Copy provider logos to dist/logos/
+await fs.mkdir("./dist/logos", { recursive: true });
+
+// First, copy the default logo
+const defaultLogoPath = "../../providers/logo.svg";
+const defaultLogo = Bun.file(defaultLogoPath);
+if (await defaultLogo.exists()) {
+  await Bun.write("./dist/logos/default.svg", defaultLogo);
+}
+
+// Then copy provider-specific logos
+const providersDir = "../../providers";
+const entries = await fs.readdir(providersDir, { withFileTypes: true });
+for (const entry of entries) {
+  if (entry.isDirectory()) {
+    const provider = entry.name;
+    const logoPath = path.join(providersDir, provider, "logo.svg");
+    const logoFile = Bun.file(logoPath);
+
+    if (await logoFile.exists()) {
+      await Bun.write(`./dist/logos/${provider}.svg`, logoFile);
+    }
+  }
+}
+
+// Copy lab logos to dist/logos/labs/
+await fs.mkdir("./dist/logos/labs", { recursive: true });
+
+const labsDir = "../../labs";
+try {
+  const labEntries = await fs.readdir(labsDir, { withFileTypes: true });
+  for (const entry of labEntries) {
+    if (entry.isDirectory()) {
+      const lab = entry.name;
+      const logoPath = path.join(labsDir, lab, "logo.svg");
+      const logoFile = Bun.file(logoPath);
+
+      if (await logoFile.exists()) {
+        await Bun.write(`./dist/logos/labs/${lab}.svg`, logoFile);
+      }
+    }
+  }
+} catch (error) {
+  if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+    throw error;
+  }
+}
+
+const template = await Bun.file("./dist/cn-index.html").text();
+
+for (const [route, rendered] of RenderedPages) {
+  const filePath = route === "/"
+    ? "./dist/_index.html"
+    : path.join("./dist", route, "index.html");
+
+  await fs.mkdir(path.dirname(filePath), { recursive: true });
+  await Bun.write(filePath, renderDocument(template, rendered));
+}
+
+await Bun.write("./dist/search-index.json", SearchIndexJson);
+
+const catalog = { models: Models, providers: Providers };
+const variants: Array<[suffix: string, filter: ModelTypeFilter]> = [
+  ["", "default"],
+  ["-all", "all"],
+  ...MODEL_TYPES.map((type) => [`-${type}`, [type]] as const),
+];
+
+const providersV2 = await generateV2(providersDir);
+
+for (const [suffix, filter] of variants) {
+  const filtered = filterCatalogByModelType(catalog, filter);
+  await Bun.write(`./dist/_api${suffix}.json`, JSON.stringify(filtered.providers));
+  await Bun.write(`./dist/_models${suffix}.json`, JSON.stringify(filtered.models));
+  await Bun.write(`./dist/_catalog${suffix}.json`, JSON.stringify(filtered));
+  // v2 returns every model by default.
+  for (const expanded of [false, true]) {
+    await Bun.write(
+      `./dist/_experimental_v2.0_api${expanded ? "-optin" : ""}${suffix}.json`,
+      JSON.stringify(
+        filterProvidersByModelType(
+          providerView(providersV2, expanded),
+          filter === "default" ? "all" : filter,
+        ),
+      ),
+    );
+  }
+}
+
+// zy-models: /cn.json = /api.json filtered to providers with region = "cn".
+{
+  const view = filterCatalogByModelType(catalog, "default").providers as Record<string, { region?: string }>;
+  await Bun.write(
+    "./dist/cn.json",
+    JSON.stringify(Object.fromEntries(Object.entries(view).filter(([, p]) => p.region === "cn"))),
+  );
+}
+
+await fs.rm("./dist/cn-index.html", { force: true });

@@ -8,7 +8,7 @@
 #   CN_SYNC_DRY=1 bash scripts/cn-sync-publish.sh   # local: no push / PR / issue
 #
 # Per platform:
-#   1. bun cn:sync <p>         → research/<file>.json (+ .sync/cn-<p>-report.md, -issue.md)
+#   1. bun scripts/cn-sync.ts <p>         → research/<file>.json (+ .sync/cn-<p>-report.md, -issue.md)
 #   2. import-research.ts      → overlays/ + provider files, with the last import's exchange rate
 #   3. bun validate + build    → a platform that fails is reported and skipped
 #   4. branch cn-sync/<p>, force-pushed; draft PR opened or its body refreshed
@@ -82,9 +82,9 @@ while IFS=$'\t' read -r p name <&3; do
       result="无变化"
     elif ! bun scripts/import-research.ts --rate "$rate_value" --rate-date "$rate_date" < /dev/null > /tmp/cn-import-$p.log 2>&1; then
       result="导入失败"; tail -30 /tmp/cn-import-$p.log
-    elif ! bun validate > /tmp/cn-validate-$p.json < /dev/null; then
+    elif ! bun scripts/zy-validate.ts > /tmp/cn-validate-$p.json < /dev/null; then
       result="bun validate 失败"
-    elif ! bun run build > /tmp/cn-build-$p.log 2>&1 < /dev/null; then
+    elif ! bun scripts/build-dist.ts > /tmp/cn-build-$p.log 2>&1 < /dev/null; then
       result="构建失败"; tail -30 /tmp/cn-build-$p.log
     fi
   fi

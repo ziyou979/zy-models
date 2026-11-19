@@ -26,12 +26,23 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org
       - run: bun install
-      - run: bun validate > /tmp/validate.json
-      - run: bun run build
+      - run: bun scripts/zy-validate.ts > /tmp/validate.json
+      - run: bun scripts/build-dist.ts
+      - name: Stage the npm package
+        # The root package.json stays upstream's; the package is assembled from
+        # scripts/npm/package.json + dist/ + LICENSE + our README.
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/pkg
+          cp scripts/npm/package.json LICENSE /tmp/pkg/
+          cp .github/README.md /tmp/pkg/README.md
+          cp -r dist /tmp/pkg/dist
       - name: Set version from tag
         if: startsWith(github.ref, 'refs/tags/v')
+        working-directory: /tmp/pkg
         run: npm version --no-git-tag-version --allow-same-version "${GITHUB_REF_NAME#v}"
       - name: Publish
+        working-directory: /tmp/pkg
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |

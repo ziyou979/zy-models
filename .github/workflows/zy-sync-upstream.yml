@@ -1,7 +1,22 @@
 # zy-models: once a day, merge anomalyco/models.dev (branch dev) into a sync
-# branch, validate + build, and open (or update) a pull request against main.
-# Needs repo setting: Settings → Actions → General → "Allow GitHub Actions to
-# create and approve pull requests".
+# branch, regenerate our generated data, validate + build, and open (or update)
+# a pull request against main.
+#
+# Why this rarely conflicts: upstream files are kept byte-for-byte upstream.
+# Our data lives in overlays/ and our own files; our code in cn*/zy* files
+# (see docs/upstream-sync.md). The remaining conflict kinds are handled here:
+#   - add/add on a file our importer generated → take upstream's file, re-import
+#     (our values move to overlays/) — scripts/sync-resolve-generated.sh
+#   - upstream-owned generated files (bun.lock, models.json) → take upstream's
+#     (merge driver "zy-upstream", see .gitattributes)
+#   - anything else → merge aborted, nothing pushed, an `upstream-sync-conflict`
+#     issue is opened/updated. If even the issue can't be opened, the run fails
+#     so the problem is never silent.
+#   - a clean merge whose PR can't be created (repo setting below) is only a
+#     warning + job summary with a compare link: the run stays green.
+#
+# Opening the PR needs: Settings → Actions → General → Workflow permissions →
+# "Allow GitHub Actions to create and approve pull requests".
 name: zy-models sync upstream
 
 on:
@@ -13,6 +28,7 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  actions: write # dispatch zy-build.yml on the pushed branch
 
 concurrency: zy-sync-upstream
 
@@ -20,8 +36,12 @@ jobs:
   sync:
     if: github.repository == 'ziyou979/zy-models'
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Pin gh to this repo: with an `upstream` remote present, gh would otherwise
+      # target anomalyco/models.dev ("Resource not accessible by integration").
+      GH_REPO: ${{ github.repository }}
       BRANCH: sync/upstream
     steps:
       - uses: actions/checkout@v4
@@ -36,63 +56,122 @@ jobs:
           set -uo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Merge driver for upstream-owned generated files (.gitattributes): keep upstream's version.
+          git config merge.zy-upstream.name "take upstream's version"
+          git config merge.zy-upstream.driver 'cp -f %B %A'
           git remote add upstream https://github.com/anomalyco/models.dev.git
           git fetch --no-tags upstream dev
+          echo "upstream_sha=$(git rev-parse --short upstream/dev)" >> "$GITHUB_OUTPUT"
           if git merge-base --is-ancestor upstream/dev HEAD; then
             echo "Already up to date with upstream."; echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0
           fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
           git checkout -B "$BRANCH"
+          : > /tmp/conflicts.txt
           if git merge --no-edit -m "chore(sync): merge upstream models.dev $(git rev-parse --short upstream/dev)" upstream/dev; then
             echo "conflict=false" >> "$GITHUB_OUTPUT"
           else
             git diff --name-only --diff-filter=U > /tmp/conflicts.txt
-            # add/add on files our importer generated: take upstream, move our data to overlays/.
             if bash scripts/sync-resolve-generated.sh; then
               echo "conflict=false" >> "$GITHUB_OUTPUT"
             else
               echo "conflict=true" >> "$GITHUB_OUTPUT"
-              git merge --abort
+              git merge --abort || git reset --hard -q HEAD
             fi
           fi
-          echo "changed=true" >> "$GITHUB_OUTPUT"
-      - name: Report conflicts
-        if: steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'true'
-        run: |
-          {
-            echo "每日同步上游 models.dev 时出现合并冲突，需要手工处理："
-            echo; sed 's/^/- `/; s/$/`/' /tmp/conflicts.txt
-            echo; echo "本地处理：\`git fetch upstream && git merge upstream/dev\`，解决冲突后运行 \`bun validate && bun run build\`。"
-          } > /tmp/body.md
-          num=$(gh issue list --label upstream-sync-conflict --state open --json number -q '.[0].number' || true)
-          gh label create upstream-sync-conflict --color B60205 2>/dev/null || true
-          if [ -n "$num" ]; then gh issue comment "$num" --body-file /tmp/body.md
-          else gh issue create --title "上游同步冲突" --label upstream-sync-conflict --body-file /tmp/body.md || gh issue create --title "上游同步冲突" --body-file /tmp/body.md || echo "::warning::could not open the conflict issue"; fi
-          # The issue is the alert; don't also fail the run (a failed run emails every day).
-          echo "::warning::Upstream merge has conflicts; reported in the upstream-sync-conflict issue."
-          cat /tmp/body.md >> "$GITHUB_STEP_SUMMARY"
-      - name: Validate and build
+          exit 0
+      - name: Regenerate generated data
+        id: regen
         if: steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'false'
         run: |
+          set -euo pipefail
           bun install
-          bun validate > /tmp/validate.json
-          bun run build
+          # Our overlays/ and generated files are derived from research/*.json
+          # against the upstream data, so rebuild them on the merged tree
+          # instead of trusting what git merged (same exchange rate as last time).
+          bash scripts/zy-reimport.sh
+          git add -A overlays providers models labs research docs scripts/import-manifest.json
+          if ! git diff --cached --quiet; then
+            git commit -q -m "chore(sync): regenerate overlays after upstream merge"
+          fi
+      - name: Validate, test and build
+        id: build
+        if: steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'false'
+        run: |
+          set -euo pipefail
+          bun scripts/zy-validate.ts > /tmp/validate.json
+          bun test packages/function packages/core/test/cn-register.test.ts packages/core/test/cn-sync.test.ts
+          bun scripts/build-dist.ts
+          (cd packages/web && ./script/cn-build.ts)
+          bun scripts/check-upstream-forks.ts > /tmp/forks.md
       - name: Push branch and open PR
+        id: push
         if: steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'false'
         run: |
           set -euo pipefail
           git push -f origin "$BRANCH"
-          upstream_sha=$(git rev-parse --short upstream/dev)
-          body="自动合并上游 anomalyco/models.dev@${upstream_sha}，\`bun validate\` 与 \`bun run build\` 已通过。
-
-          合并后请检查：上游是否更新了我们 overlays/ 覆盖过的模型（必要时重新运行 \`bun scripts/import-research.ts\` 刷新冲突报告），以及 docs/upstream-fixes.md 中的条目是否已被上游修正。"
-          if [ -s /tmp/auto-resolved.txt ]; then
-            body="${body}
-
-          自动解决的 add/add 冲突（取上游文件；我们的数据已由 import-research 写入 overlays/，数值差异见 research/IMPORT_REPORT.md）：
-          $(sed 's/^/- `/; s/$/`/' /tmp/auto-resolved.txt)"
+          # Pushes made with GITHUB_TOKEN don't trigger pull_request workflows, so run
+          # the PR's build check explicitly (workflow_dispatch is allowed).
+          gh workflow run zy-build.yml --ref "$BRANCH" || echo "::warning::could not dispatch zy-build.yml on $BRANCH"
+          upstream_sha="${{ steps.merge.outputs.upstream_sha }}"
+          {
+            echo "自动合并上游 anomalyco/models.dev@${upstream_sha}；overlays 已在合并后重新生成，\`zy-validate\`、测试、\`build-dist\` 与网站构建均已通过。"
+            echo
+            echo "合并后请检查：上游是否更新了我们 overlays/ 覆盖过的模型（数值差异见 research/IMPORT_REPORT.md），以及 docs/upstream-fixes.md 中的条目是否已被上游修正。"
+            if [ -s /tmp/auto-resolved.txt ]; then
+              echo
+              echo "自动解决的冲突（取上游文件；我们的数据已由 import-research 写入 overlays/）："
+              sed 's/^/- `/; s/$/`/' /tmp/auto-resolved.txt
+            fi
+            if [ -s /tmp/forks.md ]; then echo; cat /tmp/forks.md; fi
+          } > /tmp/pr-body.md
+          num=$(gh pr list --head "$BRANCH" --base main --state open --json number -q '.[0].number' || true)
+          if [ -n "$num" ]; then
+            gh pr edit "$num" --body-file /tmp/pr-body.md
+          elif ! gh pr create --base main --head "$BRANCH" --title "chore(sync): 同步上游 models.dev" --body-file /tmp/pr-body.md 2> /tmp/pr-error.txt; then
+            # Not fatal: the merged branch is pushed; only the PR is missing.
+            compare="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/compare/main...${BRANCH}?expand=1"
+            echo "::warning::Merged branch ${BRANCH} was pushed, but the PR could not be created ($(tr '\n' ' ' < /tmp/pr-error.txt)). Open it here: ${compare} — or enable Settings → Actions → General → Workflow permissions → \"Allow GitHub Actions to create and approve pull requests\"."
+            {
+              echo "### 上游同步已推送到 \`${BRANCH}\`，但没能自动开 PR"
+              echo; echo '```'; cat /tmp/pr-error.txt; echo '```'
+              echo "- 手动开 PR：${compare}"
+              echo "- 或在 Settings → Actions → General → Workflow permissions 勾选 “Allow GitHub Actions to create and approve pull requests”"
+            } >> "$GITHUB_STEP_SUMMARY"
           fi
-          if gh pr view "$BRANCH" --json state -q .state 2>/dev/null | grep -q OPEN; then
-            gh pr edit "$BRANCH" --body "$body"
+      - name: Report problems
+        if: always() && (steps.merge.outputs.conflict == 'true' || failure())
+        run: |
+          set -uo pipefail
+          run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          if [ "${{ steps.merge.outputs.conflict }}" = "true" ]; then
+            {
+              echo "每日同步上游 models.dev@${{ steps.merge.outputs.upstream_sha }} 时出现无法自动解决的合并冲突，已中止合并，没有推送任何分支："
+              echo; sed 's/^/- `/; s/$/`/' /tmp/conflicts.txt
+              echo
+              echo "原则：上游文件保持原样，我们的改动放 overlays/ 或自己的 cn*/zy* 文件（见 docs/upstream-sync.md）。"
+              echo "本地处理：\`git fetch upstream && git merge upstream/dev\`，解决后运行 \`bash scripts/zy-reimport.sh && bun scripts/zy-validate.ts > /dev/null && bun scripts/build-dist.ts\`。"
+            } > /tmp/body.md
           else
-            gh pr create --base main --head "$BRANCH" --title "chore(sync): 同步上游 models.dev" --body "$body"
+            echo "上游同步工作流在合并之后失败（重新生成 / 校验 / 测试 / 构建 / 推送），没有推送坏的分支。请查看运行日志。" > /tmp/body.md
+          fi
+          echo >> /tmp/body.md; echo "运行：${run_url}" >> /tmp/body.md
+          cat /tmp/body.md >> "$GITHUB_STEP_SUMMARY"
+          gh label create upstream-sync-conflict --color B60205 --description "zy-models upstream sync needs a human" 2>/dev/null || true
+          num=$(gh issue list --label upstream-sync-conflict --state open --json number -q '.[0].number' 2>/dev/null || true)
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body-file /tmp/body.md && exit 0
+          else
+            gh issue create --title "上游同步需要处理" --label upstream-sync-conflict --body-file /tmp/body.md && exit 0
+            gh issue create --title "上游同步需要处理" --body-file /tmp/body.md && exit 0
+          fi
+          # Could not open the issue: fail the run so the problem is not silent.
+          echo "::error::Upstream sync needs attention and the upstream-sync-conflict issue could not be opened (are Issues enabled and is the workflow token allowed to write issues?)."
+          exit 1
+      - name: Close the conflict issue after a clean sync
+        if: success() && steps.merge.outputs.changed == 'true' && steps.merge.outputs.conflict == 'false'
+        run: |
+          num=$(gh issue list --label upstream-sync-conflict --state open --json number -q '.[0].number' 2>/dev/null || true)
+          if [ -n "$num" ]; then
+            gh issue close "$num" --comment "上游 ${{ steps.merge.outputs.upstream_sha }} 已自动合并到 \`${BRANCH}\`，关闭。" || true
           fi
