@@ -295,7 +295,7 @@
 - zhipuai/glm-4.5-air limit.context: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - zhipuai/glm-4.5-air limit.output: 上游 98304 / 研究 96000（同一标称值，沿用上游）
 
-## 新增 provider 模型文件（316）
+## 新增 provider 模型文件（347）
 
 - ai360/360zhinao/360zhinao-pro → base_model 360/360zhinao-pro
 - ai360/360zhinao-turbo-32k-agent → base_model 360/360zhinao-turbo-32k-agent
@@ -500,6 +500,37 @@
 - ppio/xiaomimimo/mimo-v2.6-pro → base_model xiaomi/mimo-v2.6-pro
 - ppio/stepfun/step-5-preview → base_model stepfun/step-5-preview
 - ppio/zai-org/glm-4.6v → base_model zhipuai/glm-4.6v
+- ppio/tencent/hy4-flash → base_model tencent/hy4-flash
+- ppio/tencent/hy4-preview → base_model tencent/hy4-preview
+- ppio/qwen/qwen3-vl-plus → base_model alibaba/qwen3-vl-plus
+- ppio/qwen/qwen4-max → base_model alibaba/qwen4-max
+- ppio/inclusionai/ling-3.1-flash → base_model inclusionai/ling-3.1-flash
+- ppio/xiaomimimo/mimo-v2.6-flash → base_model xiaomi/mimo-v2.6-flash
+- ppio/qwen/qwen3.8-27b → base_model alibaba/qwen3.8-27b
+- ppio/qwen/qwen3.8-2.4t-a95b → base_model alibaba/qwen3.8-2.4t-a95b
+- ppio/qwen/qwen3.7-max → base_model alibaba/qwen3.7-max
+- ppio/qwen/qwen3.6-27b → base_model alibaba/qwen3.6-27b
+- ppio/zai-org/glm-5.1 → base_model zhipuai/glm-5.1
+- ppio/minimax/minimax-m2.7-highspeed → base_model minimax/MiniMax-M2.7-highspeed
+- ppio/qwen/qwen3.5-27b → base_model alibaba/qwen3.5-27b
+- ppio/qwen/qwen3.5-122b-a10b → base_model alibaba/qwen3.5-122b-a10b
+- ppio/qwen/qwen3.5-35b-a3b → base_model alibaba/qwen3.5-35b-a3b
+- ppio/qwen/qwen3.5-397b-a17b → base_model alibaba/qwen3.5-397b-a17b
+- ppio/minimax/minimax-m2.5 → base_model minimax/MiniMax-M2.5
+- ppio/zai-org/glm-5 → base_model zhipuai/glm-5
+- ppio/deepseek/deepseek-ocr-2 → base_model deepseek/deepseek-ocr-2
+- ppio/moonshotai/kimi-k2.5 → base_model moonshotai/kimi-k2.5
+- ppio/zai-org/glm-4.7-flash → base_model zhipuai/glm-4.7-flash
+- ppio/zai-org/glm-4.7 → base_model zhipuai/glm-4.7
+- ppio/zai-org/autoglm-phone-9b-multilingual → base_model zhipuai/autoglm-phone-9b-multilingual
+- ppio/moonshotai/kimi-k2-thinking → base_model moonshotai/kimi-k2-thinking
+- ppio/qwen/qwen3.6-35b-a3b → base_model alibaba/qwen3.6-35b-a3b
+- ppio/zai-org/glm-4.6 → base_model zhipuai/glm-4.6
+- ppio/moonshotai/kimi-k2-0905 → base_model moonshotai/kimi-k2-0905
+- ppio/moonshotai/kimi-k2-instruct → base_model moonshotai/kimi-k2-instruct
+- ppio/zai-org/glm-4.5v → base_model zhipuai/glm-4.5v
+- ppio/minimaxai/minimax-m1-80k → base_model minimax/minimax-m1-80k
+- ppio/zai-org/glm-4.5-air → base_model zhipuai/glm-4.5-air
 - qianfan/ernie-5.5-flash-preview → base_model baidu/ernie-5.5-flash-preview
 - qianfan/ernie-light-dt-1.0 → base_model baidu/ernie-light-dt-1.0
 - qianfan/ernie-5.1 → base_model baidu/ernie-5.1
