@@ -1308,6 +1308,2953 @@
     "视频理解"
    ],
    "notes": "max_tokens 与 context_length 相同（原值照录）；协议: openai-chat；官方广场限速 RPM 10000 / TPM 5000000；备案号 Shanghai-JieYue-20231106；计划下线 2026-10-23，建议迁移 "
+  },
+  {
+   "id": "moonshotai/kimi-k2.6",
+   "name": "Kimi-K2.6",
+   "name_zh": null,
+   "aliases": [
+    "kimi-k2.6"
+   ],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262000,
+    "input": null,
+    "output": 262000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6.5,
+    "output": 27
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "minimax/minimax-m2.5",
+   "name": "MiniMax-M2.5",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 204800,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2.1,
+    "output": 8.4
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "z-ai/glm-5",
+   "name": "GLM-5",
+   "name_zh": null,
+   "aliases": [
+    "glm-5"
+   ],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 200000,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 18,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 4,
+      "output": 18
+     },
+     {
+      "when": "32k<input<=∞",
+      "input": 6,
+      "output": 22
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "doubao-seed-1.6",
+   "name": "Doubao-Seed-1.6",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.8,
+    "output": 2,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 0.8,
+      "output": 2
+     },
+     {
+      "when": "0k<input<=32k",
+      "input": 0.8,
+      "output": 8
+     },
+     {
+      "when": "32k<input<=128k",
+      "input": 1.2,
+      "output": 16
+     },
+     {
+      "when": "128k<input<=∞",
+      "input": 2.4,
+      "output": 24
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "doubao-seed-2.0-lite",
+   "name": "Doubao-Seed-2.0-Lite",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.6,
+    "output": 3.6,
+    "cache_read": 0.12,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 0.6,
+      "output": 3.6,
+      "cache_read": 0.12
+     },
+     {
+      "when": "32k<input<=128k",
+      "input": 0.9,
+      "output": 5.4,
+      "cache_read": 0.18
+     },
+     {
+      "when": "128k<input<=256k",
+      "input": 1.8,
+      "output": 10.8,
+      "cache_read": 0.36
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "doubao-1.5-pro-32k",
+   "name": "Doubao-1.5-Pro-32k",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": 12000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.8,
+    "output": 2
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "doubao-seed-2.0-code",
+   "name": "Doubao-Seed-2.0-Code",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 3.2,
+    "output": 16,
+    "cache_read": 0.64,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 3.2,
+      "output": 16,
+      "cache_read": 0.64
+     },
+     {
+      "when": "32k<input<=128k",
+      "input": 4.8,
+      "output": 24,
+      "cache_read": 0.96
+     },
+     {
+      "when": "128k<input<=256k",
+      "input": 9.6,
+      "output": 48,
+      "cache_read": 1.92
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "doubao-seed-2.0-pro",
+   "name": "Doubao-Seed-2.0-Pro",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 3.2,
+    "output": 16,
+    "cache_read": 0.64,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 3.2,
+      "output": 16,
+      "cache_read": 0.64
+     },
+     {
+      "when": "32k<input<=128k",
+      "input": 4.8,
+      "output": 24,
+      "cache_read": 0.96
+     },
+     {
+      "when": "128k<input<=256k",
+      "input": 9.6,
+      "output": 48,
+      "cache_read": 1.92
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "doubao-seed-2.0-mini",
+   "name": "Doubao-Seed-2.0-Mini",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.2,
+    "output": 2,
+    "cache_read": 0.04,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 0.2,
+      "output": 2,
+      "cache_read": 0.04
+     },
+     {
+      "when": "32k<input<=128k",
+      "input": 0.4,
+      "output": 4,
+      "cache_read": 0.08
+     },
+     {
+      "when": "128k<input<=256k",
+      "input": 0.8,
+      "output": 8,
+      "cache_read": 0.16
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-30b-a3b",
+   "name": "Qwen3-30B-A3B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 40000,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": null,
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen-vl-max-2025-01-25",
+   "name": "Qwen-VL-MAX-2025-01-25",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "audio",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 3,
+    "output": 9
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-next-80b-a3b-instruct",
+   "name": "Qwen3-Next-80B-A3B-Instruct",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 131072,
+    "input": null,
+    "output": 32768
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1,
+    "output": 4
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-235b-a22b-instruct-2507",
+   "name": "Qwen3-235b-A22B-Instruct-2507",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 64000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 8
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-max-preview",
+   "name": "Qwen3-Max-Preview",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 64000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6,
+    "output": 24,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 6,
+      "output": 24
+     },
+     {
+      "when": "32k<input<=128k",
+      "input": 10,
+      "output": 40
+     },
+     {
+      "when": "128k<input<=∞",
+      "input": 15,
+      "output": 60
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-235b-a22b",
+   "name": "Qwen-3-235B-A22B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": null,
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-32b",
+   "name": "Qwen3-32B",
+   "name_zh": null,
+   "aliases": [
+    "aliyun/qwen3-32b"
+   ],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 40000,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": null,
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-next-80b-a3b-thinking",
+   "name": "Qwen3-Next-80B-A3B-Thinking",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 131072,
+    "input": null,
+    "output": 32768
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1,
+    "output": 10
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen-turbo",
+   "name": "Qwen-Turbo",
+   "name_zh": null,
+   "aliases": [
+    "aliyun/qwen-turbo"
+   ],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": null,
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-coder-480b-a35b-instruct",
+   "name": "Qwen3-Coder-480B-A35B-Instruct",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 262000,
+    "input": null,
+    "output": 4096
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6,
+    "output": 24,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 6,
+      "output": 24
+     },
+     {
+      "when": "32k<input<=128k",
+      "input": 9,
+      "output": 36
+     },
+     {
+      "when": "128k<input<=∞",
+      "input": 15,
+      "output": 60
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-235b-a22b-thinking-2507",
+   "name": "Qwen3-235B-A22B-Thinking-2507",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 4096
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 20
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "MiniMax-M1",
+   "name": "MiniMax-M1",
+   "name_zh": null,
+   "aliases": [
+    "minimax/minimax-m1"
+   ],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 80000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 16
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "moonshotai/kimi-k2.5",
+   "name": "Kimi-K2.5",
+   "name_zh": null,
+   "aliases": [
+    "kimi-k2.5"
+   ],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 256000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 21
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.6-27b",
+   "name": "Qwen3.6-27B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 262100,
+    "input": null,
+    "output": 262100
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2.304,
+    "output": 23.04
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "z-ai/glm-5.1",
+   "name": "GLM-5.1",
+   "name_zh": null,
+   "aliases": [
+    "glm-5.1"
+   ],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 200000,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6,
+    "output": 24,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 6,
+      "output": 24
+     },
+     {
+      "when": "32k<input<=∞",
+      "input": 8,
+      "output": 28
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-30b-a3b-thinking-2507",
+   "name": "Qwen3-30b-A3b-Thinking-2507",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 126000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.75,
+    "output": 7.5
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.7-max",
+   "name": "Qwen3.7-Max",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 64000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 12,
+    "output": 36,
+    "cache_read": 2.4
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "bytedance/doubao-seed-2-1-turbo",
+   "name": "Doubao-Seed-2.1-turbo",
+   "name_zh": null,
+   "aliases": [
+    "doubao-seed-2-1-turbo",
+    "doubao-seed-2.1-turbo"
+   ],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 256000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 3,
+    "output": 15,
+    "cache_read": 0.6
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "tencent/hy4-preview",
+   "name": "Hy4 Preview",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "tencent",
+   "open_weights": null,
+   "release_date": "2026-08-28",
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6,
+    "output": 18,
+    "cache_read": 0.3
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.7-flash",
+   "name": "Qwen3.7 Flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": "2026-08-26",
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.2,
+    "output": 0.8,
+    "cache_read": 0.04,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 0.2,
+      "output": 0.8,
+      "cache_read": 0.04
+     },
+     {
+      "when": "32k<input<=256k",
+      "input": 0.6,
+      "output": 2.4,
+      "cache_read": 0.12
+     },
+     {
+      "when": "256k<input<=∞",
+      "input": 1.2,
+      "output": 4.8,
+      "cache_read": 0.24
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "xiaomi/mimo-v2.6-flash",
+   "name": "Mimo-V2.6-Flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "xiaomi",
+   "open_weights": null,
+   "release_date": "2026-09-22",
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video",
+     "audio"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1,
+    "output": 2,
+    "cache_read": 0.02
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "bytedance/doubao-seed-2-1-lite",
+   "name": "Doubao-Seed-2.1-lite",
+   "name_zh": null,
+   "aliases": [
+    "doubao-seed-2-1-lite",
+    "doubao-seed-2.1-lite"
+   ],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1024000,
+    "input": null,
+    "output": 256000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video",
+     "audio"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.8,
+    "output": 2.7,
+    "cache_read": 0.16
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.8-omni-flash",
+   "name": "Qwen3.8-Omni-Flash",
+   "name_zh": null,
+   "aliases": [
+    "qwen3.8-omni-flash"
+   ],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 131072
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "audio",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.8,
+    "output": 2.7,
+    "cache_read": 0.1
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen-audio-3.0-asr-flash",
+   "name": "Qwen-Audio-3.0-ASR-Flash",
+   "name_zh": null,
+   "aliases": [
+    "qwen-audio-3.0-asr-flash"
+   ],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": "2026-10-16",
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 100000
+   },
+   "modalities": {
+    "input": [
+     "audio"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": null,
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "deepseek/deepseek-v4.1-flash-1017",
+   "name": "DeepSeek-V4.1-Flash-1017",
+   "name_zh": null,
+   "aliases": [
+    "deepseek-flash",
+    "deepseek-v4.1-flash-1017"
+   ],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": "2026-10-17",
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 384000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 8,
+    "cache_read": 0.04,
+    "tiers": [
+     {
+      "when": "高峰",
+      "input": 2,
+      "output": 8,
+      "cache_read": 0.04
+     },
+     {
+      "when": "空闲",
+      "input": 1,
+      "output": 4,
+      "cache_read": 0.02
+     }
+    ],
+    "off_peak": "按量计费分高峰/空闲两档（模型广场数据未给出具体时段），主字段为高峰价"
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "tencent/hy3-preview",
+   "name": "Hy3-Preview",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "tencent",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 262144
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1.2,
+    "output": 4,
+    "cache_read": 0.4,
+    "tiers": [
+     {
+      "when": "0k<input<=16k",
+      "input": 1.2,
+      "output": 4,
+      "cache_read": 0.4
+     },
+     {
+      "when": "16k<input<=32k",
+      "input": 1.6,
+      "output": 6.4,
+      "cache_read": 0.6
+     },
+     {
+      "when": "32k<input<=∞",
+      "input": 2,
+      "output": 8,
+      "cache_read": 0.8
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen4-max",
+   "name": "Qwen4-Max",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 393000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 10,
+    "output": 30,
+    "cache_read": 0.5
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "tencent/hy4-flash",
+   "name": "Hy4 Flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "tencent",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 64000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.5,
+    "output": 2,
+    "cache_read": 0.02
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-30b-a3b-instruct-2507",
+   "name": "Qwen3-30b-A3b-Instruct-2507",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.75,
+    "output": 3
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-vl-30b-a3b-instruct",
+   "name": "Qwen3-Vl-30b-A3b-Instruct",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.75,
+    "output": 3
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-vl-30b-a3b-thinking",
+   "name": "Qwen3-Vl-30b-A3b-Thinking",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.75,
+    "output": 7.5
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3.5-397b-a17b",
+   "name": "Qwen3.5-397B-A17B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 64000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1.2,
+    "output": 7.2,
+    "tiers": [
+     {
+      "when": "0k<input<=128k",
+      "input": 1.2,
+      "output": 7.2
+     },
+     {
+      "when": "128k<input<=∞",
+      "input": 3,
+      "output": 18
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "minimax/minimax-m2.5-highspeed",
+   "name": "MiniMax-M2.5-Highspeed",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 204800,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4.2,
+    "output": 16.8
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.5-plus",
+   "name": "Qwen3.5-Plus",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 64000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.8,
+    "output": 4.8,
+    "cache_read": 0.16,
+    "tiers": [
+     {
+      "when": "0k<input<=128k",
+      "input": 0.8,
+      "output": 4.8,
+      "cache_read": 0.16
+     },
+     {
+      "when": "128k<input<=256k",
+      "input": 2,
+      "output": 12,
+      "cache_read": 0.4
+     },
+     {
+      "when": "256k<input<=∞",
+      "input": 4,
+      "output": 24,
+      "cache_read": 0.8
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.6-plus",
+   "name": "Qwen3.6-Plus",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 64000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 12,
+    "cache_read": 0.4,
+    "tiers": [
+     {
+      "when": "0k<input<=256k",
+      "input": 2,
+      "output": 12,
+      "cache_read": 0.4
+     },
+     {
+      "when": "256k<input<=∞",
+      "input": 8,
+      "output": 48,
+      "cache_read": 1.6
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "doubao-seed-1.6-flash",
+   "name": "Doubao-Seed-1.6-Flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.15,
+    "output": 1.5,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 0.15,
+      "output": 1.5
+     },
+     {
+      "when": "32k<input<=128k",
+      "input": 0.3,
+      "output": 3
+     },
+     {
+      "when": "128k<input<=∞",
+      "input": 0.6,
+      "output": 6
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen3-max",
+   "name": "Qwen3-Max",
+   "name_zh": null,
+   "aliases": [
+    "aliyun/qwen3-max"
+   ],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 65536
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6,
+    "output": 24,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 6,
+      "output": 24
+     },
+     {
+      "when": "32k<input<=128k",
+      "input": 10,
+      "output": 40
+     },
+     {
+      "when": "128k<input<=∞",
+      "input": 15,
+      "output": 60
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "minimax/minimax-m2.1",
+   "name": "MiniMax-M2.1",
+   "name_zh": null,
+   "aliases": [
+    "minimax-m2.1"
+   ],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 204800,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2.1,
+    "output": 8.4
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "minimax/minimax-m2",
+   "name": "MiniMax-M2",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 200000,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2.1,
+    "output": 8.4
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "kimi-k2",
+   "name": "Kimi-K2",
+   "name_zh": null,
+   "aliases": [
+    "moonshotai/kimi-k2"
+   ],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 16
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen2.5-vl-72b-instruct",
+   "name": "Qwen-2.5-VL-72B-Instruct",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": 8192
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "audio",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 16,
+    "output": 48
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "doubao-1.5-vision-pro",
+   "name": "Doubao-1.5-Vision-Pro",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": 16000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 3,
+    "output": 9
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "doubao-seed-1.6-thinking",
+   "name": "Doubao-Seed-1.6-Thinking",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "bytedance",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "image",
+     "text",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.8,
+    "output": 8,
+    "tiers": [
+     {
+      "when": "0k<input<=32k",
+      "input": 0.8,
+      "output": 8
+     },
+     {
+      "when": "32k<input<=128k",
+      "input": 1.2,
+      "output": 16
+     },
+     {
+      "when": "128k<input<=∞",
+      "input": 2.4,
+      "output": 24
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "glm-4.5",
+   "name": "GLM-4.5",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 131072,
+    "input": null,
+    "output": 98304
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 16
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "z-ai/glm-4.6",
+   "name": "GLM-4.6",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 200000,
+    "input": null,
+    "output": 200000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 7.2,
+    "output": 12.6
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen-max-2025-01-25",
+   "name": "Qwen2.5-Max-2025-01-25",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": 4096
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2.4,
+    "output": 9.6
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "meituan/longcat-flash-lite",
+   "name": "Longcat-Flash-Lite",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "meituan",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": null
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0,
+    "output": 0
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "moonshotai/kimi-k2-thinking",
+   "name": "Kimi-K2-Thinking",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 256000,
+    "input": null,
+    "output": 100000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 16
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "z-ai/glm-4.7",
+   "name": "GLM-4.7",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "deprecated",
+   "limit": {
+    "context": 200000,
+    "input": null,
+    "output": 200000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 3.168,
+    "output": 12.528
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://www.qiniu.com/ai/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
   }
  ],
  "notes": "价格与规格取自七牛模型广场页内嵌数据（www.qiniu.com/ai/models 的 __NEXT_DATA__，pricing_rules_v2 单位为元/千 token，已×1000 换算为每百万）；/v1/models 公开接口另给 context_length/max_tokens，两者偶有出入（见各模型 notes）。思考参数：通用 chat 接口支持 thinking={type:enabled, budget_tokens} 与 reasoning_effort（low/medium/high），文档称『在大部分模型上，这两个思考参数都可以使用』，不同 kimi 版本有差异（https://developer.qiniu.com/aitokenapi/13390/chat-completions）。实名认证：新用户自首次使用起 24 小时免认证体验期，过期未实名将无法继续使用；未实名账户 RPM/TPM 受限（https://developer.qiniu.com/aitokenapi/13255/verify-real-name）。新用户赠 300 万 tokens 共享资源包（使用并计费后自动发放）。模型广场每个模型列出网信办备案号。另有免费模型 qiniu/conatus-free、moonshotai/kimi-k3-free（计划 2026-10-27 下线）、nvidia/nemotron-3-ultra-550b-a55b0-free 未纳入。广场数据含 Claude/GPT/Gemini 等海外模型（models.dev 版已收录），本文件仅列国内主力模型。"

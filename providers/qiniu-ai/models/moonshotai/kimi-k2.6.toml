@@ -1,0 +1,28 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-21)
+# Source: https://www.qiniu.com/ai/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6.5, output 27
+schema = 2
+base_model = "moonshotai/kimi-k2.6"
+aliases = ["kimi-k2.6"]
+sources = ["https://www.qiniu.com/ai/models"]
+checked_at = "2026-11-21"
+notes = "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+context = 262_000
+output = 262_000
+
+[cost.text.input]
+price = 0.97221019
+
+[cost.text.output]
+price = 4.03841158
+
+[cost_cny]
+input = 6.5
+output = 27

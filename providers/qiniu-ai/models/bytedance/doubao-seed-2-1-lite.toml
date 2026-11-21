@@ -1,0 +1,28 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-21)
+# Source: https://www.qiniu.com/ai/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.8, output 2.7, cache_read 0.16
+schema = 2
+base_model = "bytedance-seed/seed-2.1-lite"
+aliases = ["doubao-seed-2-1-lite", "doubao-seed-2.1-lite"]
+sources = ["https://www.qiniu.com/ai/models"]
+checked_at = "2026-11-21"
+notes = "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[cost.text.input]
+price = 0.11965664
+
+[cost.text.input.cache]
+read = 0.02393133
+
+[cost.text.output]
+price = 0.40384116
+
+[cost_cny]
+input = 0.8
+output = 2.7
+cache_read = 0.16

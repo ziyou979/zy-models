@@ -37,7 +37,7 @@
 - youdao (新建)
 - zhipuai ← research/zhipu.json
 
-## 数值冲突（以研究数据为准，已写入 overlays/）（27）
+## 数值冲突（以研究数据为准，已写入 overlays/）（73）
 
 - alibaba-cn/qwen3.7-plus limit.output: 64000 → 128000
 - alibaba-cn/qwen3.7-max cost.input (USD): 1.65 → 1.79484959 (¥12 ÷ 6.685797)
@@ -57,6 +57,52 @@
 - moark/MiniMax-M2.7 cost.input (USD): 0.29 → 0.31409868 (¥2.1 ÷ 6.685797)
 - moark/MiniMax-M2.7 cost.output (USD): 1.2 → 1.25639471 (¥8.4 ÷ 6.685797)
 - huawei-maas/glm-5.1 limit.context: 200000 → 202752
+- qiniu-ai/minimax/minimax-m2.5 cost.input (USD): 0.30434783 → 0.31409868 (¥2.1 ÷ 6.685797)
+- qiniu-ai/minimax/minimax-m2.5 cost.output (USD): 1.2173913 → 1.25639471 (¥8.4 ÷ 6.685797)
+- qiniu-ai/doubao-1.5-pro-32k cost.input (USD): 0.11594203 → 0.11965664 (¥0.8 ÷ 6.685797)
+- qiniu-ai/doubao-1.5-pro-32k cost.output (USD): 0.28985507 → 0.2991416 (¥2 ÷ 6.685797)
+- qiniu-ai/qwen-vl-max-2025-01-25 cost.input (USD): 0.43478261 → 0.4487124 (¥3 ÷ 6.685797)
+- qiniu-ai/qwen-vl-max-2025-01-25 cost.output (USD): 1.30434783 → 1.34613719 (¥9 ÷ 6.685797)
+- qiniu-ai/qwen3-next-80b-a3b-instruct cost.input (USD): 0.14492754 → 0.1495708 (¥1 ÷ 6.685797)
+- qiniu-ai/qwen3-next-80b-a3b-instruct cost.output (USD): 0.57971014 → 0.5982832 (¥4 ÷ 6.685797)
+- qiniu-ai/qwen3-235b-a22b-instruct-2507 cost.input (USD): 0.28985507 → 0.2991416 (¥2 ÷ 6.685797)
+- qiniu-ai/qwen3-235b-a22b-instruct-2507 cost.output (USD): 1.15942029 → 1.19656639 (¥8 ÷ 6.685797)
+- qiniu-ai/qwen3-next-80b-a3b-thinking cost.input (USD): 0.14492754 → 0.1495708 (¥1 ÷ 6.685797)
+- qiniu-ai/qwen3-next-80b-a3b-thinking cost.output (USD): 1.44927536 → 1.49570799 (¥10 ÷ 6.685797)
+- qiniu-ai/qwen3-235b-a22b-thinking-2507 cost.input (USD): 0.28985507 → 0.2991416 (¥2 ÷ 6.685797)
+- qiniu-ai/qwen3-235b-a22b-thinking-2507 cost.output (USD): 2.89855072 → 2.99141598 (¥20 ÷ 6.685797)
+- qiniu-ai/MiniMax-M1 cost.input (USD): 0.57971014 → 0.5982832 (¥4 ÷ 6.685797)
+- qiniu-ai/MiniMax-M1 cost.output (USD): 2.31884058 → 2.39313279 (¥16 ÷ 6.685797)
+- qiniu-ai/moonshotai/kimi-k2.5 cost.input (USD): 0.57971014 → 0.5982832 (¥4 ÷ 6.685797)
+- qiniu-ai/moonshotai/kimi-k2.5 cost.output (USD): 3.04347826 → 3.14098678 (¥21 ÷ 6.685797)
+- qiniu-ai/qwen3-30b-a3b-thinking-2507 cost.input (USD): 0.10869565 → 0.1121781 (¥0.75 ÷ 6.685797)
+- qiniu-ai/qwen3-30b-a3b-thinking-2507 cost.output (USD): 1.08695652 → 1.12178099 (¥7.5 ÷ 6.685797)
+- qiniu-ai/qwen3-30b-a3b-instruct-2507 cost.input (USD): 0.10869565 → 0.1121781 (¥0.75 ÷ 6.685797)
+- qiniu-ai/qwen3-30b-a3b-instruct-2507 cost.output (USD): 0.43478261 → 0.4487124 (¥3 ÷ 6.685797)
+- qiniu-ai/qwen3-vl-30b-a3b-thinking cost.input (USD): 0.10869565 → 0.1121781 (¥0.75 ÷ 6.685797)
+- qiniu-ai/qwen3-vl-30b-a3b-thinking cost.output (USD): 1.08695652 → 1.12178099 (¥7.5 ÷ 6.685797)
+- qiniu-ai/minimax/minimax-m2.5-highspeed cost.input (USD): 0.60869565 → 0.62819736 (¥4.2 ÷ 6.685797)
+- qiniu-ai/minimax/minimax-m2.5-highspeed cost.output (USD): 2.43478261 → 2.51278943 (¥16.8 ÷ 6.685797)
+- qiniu-ai/minimax/minimax-m2.1 cost.input (USD): 0.30434783 → 0.31409868 (¥2.1 ÷ 6.685797)
+- qiniu-ai/minimax/minimax-m2.1 cost.output (USD): 1.2173913 → 1.25639471 (¥8.4 ÷ 6.685797)
+- qiniu-ai/minimax/minimax-m2 cost.input (USD): 0.30434783 → 0.31409868 (¥2.1 ÷ 6.685797)
+- qiniu-ai/minimax/minimax-m2 cost.output (USD): 1.2173913 → 1.25639471 (¥8.4 ÷ 6.685797)
+- qiniu-ai/kimi-k2 cost.input (USD): 0.57971014 → 0.5982832 (¥4 ÷ 6.685797)
+- qiniu-ai/kimi-k2 cost.output (USD): 2.31884058 → 2.39313279 (¥16 ÷ 6.685797)
+- qiniu-ai/qwen2.5-vl-72b-instruct cost.input (USD): 2.31884058 → 2.39313279 (¥16 ÷ 6.685797)
+- qiniu-ai/qwen2.5-vl-72b-instruct cost.output (USD): 6.95652174 → 7.17939836 (¥48 ÷ 6.685797)
+- qiniu-ai/doubao-1.5-vision-pro cost.input (USD): 0.43478261 → 0.4487124 (¥3 ÷ 6.685797)
+- qiniu-ai/doubao-1.5-vision-pro cost.output (USD): 1.30434783 → 1.34613719 (¥9 ÷ 6.685797)
+- qiniu-ai/glm-4.5 cost.input (USD): 0.57971014 → 0.5982832 (¥4 ÷ 6.685797)
+- qiniu-ai/glm-4.5 cost.output (USD): 2.31884058 → 2.39313279 (¥16 ÷ 6.685797)
+- qiniu-ai/z-ai/glm-4.6 cost.input (USD): 1.04347826 → 1.07690975 (¥7.2 ÷ 6.685797)
+- qiniu-ai/z-ai/glm-4.6 cost.output (USD): 1.82608696 → 1.88459207 (¥12.6 ÷ 6.685797)
+- qiniu-ai/qwen-max-2025-01-25 cost.input (USD): 0.34782609 → 0.35896992 (¥2.4 ÷ 6.685797)
+- qiniu-ai/qwen-max-2025-01-25 cost.output (USD): 1.39130435 → 1.43587967 (¥9.6 ÷ 6.685797)
+- qiniu-ai/moonshotai/kimi-k2-thinking cost.input (USD): 0.57971014 → 0.5982832 (¥4 ÷ 6.685797)
+- qiniu-ai/moonshotai/kimi-k2-thinking cost.output (USD): 2.31884058 → 2.39313279 (¥16 ÷ 6.685797)
+- qiniu-ai/z-ai/glm-4.7 cost.input (USD): 0.45913043 → 0.47384029 (¥3.168 ÷ 6.685797)
+- qiniu-ai/z-ai/glm-4.7 cost.output (USD): 1.81565217 → 1.87382297 (¥12.528 ÷ 6.685797)
 - sensenova/deepseek-flash limit.output: 65536 → 393216
 - tencent-tokenhub/hy4 cost.input (USD): 0.834 → 0.89742479 (¥6 ÷ 6.685797)
 - tencent-tokenhub/hy4 cost.output (USD): 2.501 → 2.69227438 (¥18 ÷ 6.685797)
@@ -136,7 +182,7 @@
 - plan `glm-coding-max` → provider `zhipuai-coding-plan` (matched api https://open.bigmodel.cn/api/coding/paas/v4)
 - plan `glm-coding-intl` → provider `zai-coding-plan` (matched api https://api.z.ai/api/coding/paas/v4)
 
-## 非数值差异（仅报告，未覆盖）（48）
+## 非数值差异（仅报告，未覆盖）（60）
 
 - bailing/Ling-3.0-flash-VL release_date: upstream 2026-09-10 vs research 2026-09-04
 - bailing/Ling-3.0-tiny open_weights: upstream true vs research false
@@ -155,6 +201,18 @@
 - huawei-maas/glm-5.1 cost.input: upstream $0.89955 vs research ¥8（研究价格分档，基础价为最低档，未覆盖）
 - huawei-maas/deepseek-v4.1-flash-1017 reasoning.effort: upstream ["low","high","max"] vs research ["none","low","high","max"]
 - huawei-maas/deepseek-v4-flash reasoning.effort: upstream ["low","high","max"] vs research ["high","max"]
+- qiniu-ai/z-ai/glm-5 cost.input: upstream $0.57971014 vs research ¥4（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/doubao-seed-1.6 cost.input: upstream $0.11594203 vs research ¥0.8（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/doubao-seed-2.0-lite cost.input: upstream $0.08695652 vs research ¥0.6（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/doubao-seed-2.0-code cost.input: upstream $0.46376812 vs research ¥3.2（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/doubao-seed-2.0-pro cost.input: upstream $0.46376812 vs research ¥3.2（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/doubao-seed-2.0-mini cost.input: upstream $0.02898551 vs research ¥0.2（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/qwen3-max-preview cost.input: upstream $0.86956522 vs research ¥6（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/qwen3-coder-480b-a35b-instruct cost.input: upstream $0.86956522 vs research ¥6（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/qwen3.5-397b-a17b cost.input: upstream $0.17391304 vs research ¥1.2（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/doubao-seed-1.6-flash cost.input: upstream $0.02173913 vs research ¥0.15（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/qwen3-max cost.input: upstream $0.86956522 vs research ¥6（研究价格分档，基础价为最低档，未覆盖）
+- qiniu-ai/doubao-seed-1.6-thinking cost.input: upstream $0.11594203 vs research ¥0.8（研究价格分档，基础价为最低档，未覆盖）
 - sensenova/sensenova-6.8-flash-lite reasoning.effort: upstream ["none","low","medium","high"] vs research ["low","medium","high","max"]
 - sensenova/kimi-k3 reasoning.effort: upstream ["low","high","max"] vs research ["low","medium","high","max"]
 - siliconflow-cn/deepseek-ai/DeepSeek-V4-Flash reasoning.effort: upstream ["high","max"] vs research ["low","high","max"]
@@ -295,7 +353,7 @@
 - zhipuai/glm-4.5-air limit.context: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - zhipuai/glm-4.5-air limit.output: 上游 98304 / 研究 96000（同一标称值，沿用上游）
 
-## 新增 provider 模型文件（316）
+## 新增 provider 模型文件（334）
 
 - ai360/360zhinao/360zhinao-pro → base_model 360/360zhinao-pro
 - ai360/360zhinao-turbo-32k-agent → base_model 360/360zhinao-turbo-32k-agent
@@ -533,6 +591,24 @@
 - qiniu-ai/xiaomi/mimo-v2.6-pro → base_model xiaomi/mimo-v2.6-pro
 - qiniu-ai/sensenova/sensenova-6.8-flash → base_model sensetime/sensenova-6.8-flash
 - qiniu-ai/stepfun/step-3.7-flash → base_model stepfun/step-3.7-flash
+- qiniu-ai/moonshotai/kimi-k2.6 → base_model moonshotai/kimi-k2.6
+- qiniu-ai/qwen/qwen3.6-27b → base_model alibaba/qwen3.6-27b
+- qiniu-ai/z-ai/glm-5.1 → base_model zhipuai/glm-5.1
+- qiniu-ai/qwen/qwen3.7-max → base_model alibaba/qwen3.7-max
+- qiniu-ai/bytedance/doubao-seed-2-1-turbo → base_model bytedance-seed/seed-2.1-turbo
+- qiniu-ai/tencent/hy4-preview → base_model tencent/hy4-preview
+- qiniu-ai/qwen/qwen3.7-flash → base_model alibaba/qwen3.7-flash
+- qiniu-ai/xiaomi/mimo-v2.6-flash → base_model xiaomi/mimo-v2.6-flash
+- qiniu-ai/bytedance/doubao-seed-2-1-lite → base_model bytedance-seed/seed-2.1-lite
+- qiniu-ai/qwen/qwen3.8-omni-flash → base_model alibaba/qwen3.8-omni-flash
+- qiniu-ai/qwen/qwen-audio-3.0-asr-flash → base_model alibaba/qwen-audio-3.0-asr-flash
+- qiniu-ai/deepseek/deepseek-v4.1-flash-1017 → base_model deepseek/deepseek-v4.1-flash-1017
+- qiniu-ai/tencent/hy3-preview → base_model tencent/hy3-preview
+- qiniu-ai/qwen/qwen4-max → base_model alibaba/qwen4-max
+- qiniu-ai/tencent/hy4-flash → base_model tencent/hy4-flash
+- qiniu-ai/qwen3-vl-30b-a3b-instruct → base_model alibaba/qwen3-vl-30b-a3b-instruct
+- qiniu-ai/qwen/qwen3.5-plus → base_model alibaba/qwen3.5-plus
+- qiniu-ai/qwen/qwen3.6-plus → base_model alibaba/qwen3.6-plus
 - sensenova/sensenova-6.8-flash → base_model sensetime/sensenova-6.8-flash
 - sensenova/glm-5.3 → base_model zhipuai/glm-5.3
 - siliconflow-cn/moonshotai/Kimi-K2.7-Code → base_model moonshotai/kimi-k2.7-code
@@ -810,4 +886,4 @@
 - research/paratera.json: 无可导入模型，平台 paratera 暂不建立
 - skywork: 所有模型均因缺上下文且无对应 lab 模型而跳过，平台暂不建立
 
-overlay 文件数：139
+overlay 文件数：179
