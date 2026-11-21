@@ -1,0 +1,30 @@
+# Imported from research/ppio.json by scripts/import-research.ts (checked 2026-11-21)
+# Source: https://api.ppio.com/openai/v1/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 6, output 18, cache_read 1.2
+schema = 2
+base_model = "alibaba/qwen3.7-max"
+sources = ["https://api.ppio.com/openai/v1/models"]
+checked_at = "2026-11-21"
+notes = "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+output = 65_536
+
+[cost.text.input]
+price = 0.89742479
+
+[cost.text.input.cache]
+read = 0.17948496
+
+[cost.text.output]
+price = 2.69227438
+
+[cost_cny]
+input = 6
+output = 18
+cache_read = 1.2

@@ -964,6 +964,10 @@
      "input": 6,
      "output": 18,
      "cache_read": 0.3
+    },
+    "list_price": {
+     "input": 6,
+     "output": 18
     }
    },
    "price_usd_intl": null,
@@ -971,7 +975,7 @@
     "https://api.ppio.com/openai/v1/models",
     "https://ppio.com/pricing"
    ],
-   "checked_at": "2026-11-13",
+   "checked_at": "2026-11-21",
    "description_zh": "Hy4正式版整体相比 Hy4 preview 实现了全面大幅提升，尤其强化了 Agent 能力和各类长程和真实生产力任务的能力，并首次引入了视觉理解。",
    "notes": "官方 API 同时给出原价(origin_price) 输入6/输出18/缓存0.3 元/百万，当前价 3/9/0.15（限时/折扣价，未注明截止时间）；支持端点: chat/completions, anthropic, responses"
   },
@@ -1146,6 +1150,1542 @@
    "checked_at": "2026-11-13",
    "description_zh": "Zhipu 最新的视觉推理模型，在同等规模下视觉理解准确率达到了 SOTA 水平，原生支持工具调用，能够自动完成任务，支持 128K 超长上下文，并允许灵活开启或关闭思考功能。",
    "notes": "is_tiered_billing=true；顶层 input/output 为 API 顶层 pricing 字段（等于最高档），实际按 tiers 计费；支持端点: chat/completions, anthropic"
+  },
+  {
+   "id": "tencent/hy4-flash",
+   "name": "Hy4 Flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "tencent",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 64000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.25,
+    "output": 1,
+    "cache_read": 0.01,
+    "list_price": {
+     "input": 0.5,
+     "output": 2
+    }
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "tencent/hy4-preview",
+   "name": "Hy4 Preview",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "tencent",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 64000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6,
+    "output": 18,
+    "cache_read": 0.3
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3-vl-plus",
+   "name": "Qwen3 VL Plus",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262000,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1,
+    "output": 1,
+    "cache_read": 1,
+    "tiers": [
+     {
+      "when": "0K<input<=32K",
+      "input": 1.008,
+      "output": 10.038,
+      "cache_read": 0.098
+     },
+     {
+      "when": "32K<input<=125K",
+      "input": 1.512,
+      "output": 15.057,
+      "cache_read": 0.154
+     },
+     {
+      "when": "125K<input<=250K",
+      "input": 3.017,
+      "output": 30.107,
+      "cache_read": 0.301
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen4-max",
+   "name": "Qwen4 Max",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 131000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 10,
+    "output": 30,
+    "cache_read": 0.5,
+    "cache_write": 12.5
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "inclusionai/ling-3.1-flash",
+   "name": "Ling 3.1 Flash 1019",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "ant",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 262144
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 6,
+    "cache_read": 0.4
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "xiaomimimo/mimo-v2.6-flash",
+   "name": "MiMo V2.6 Flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "xiaomi",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1048576,
+    "input": null,
+    "output": 131072
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video",
+     "audio"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1,
+    "output": 2,
+    "cache_read": 0.02
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.8-27b",
+   "name": "Qwen3.8 27B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 131072
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 3,
+    "output": 12,
+    "cache_read": 0.6
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.8-2.4t-a95b",
+   "name": "Qwen3.8 2.4T A95B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 131072
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 12,
+    "output": 36,
+    "cache_read": 1.5
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.7-max",
+   "name": "Qwen3.7 Max",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 1000000,
+    "input": null,
+    "output": 65536
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6,
+    "output": 18,
+    "cache_read": 1.2
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.6-27b",
+   "name": "Qwen3.6 27B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 65536
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 3,
+    "output": 18
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "zai-org/glm-5.1",
+   "name": "GLM 5.1",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 204800,
+    "input": null,
+    "output": 131072
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 8,
+    "output": 28,
+    "cache_read": 2,
+    "tiers": [
+     {
+      "when": "0K<input<=32K",
+      "input": 6,
+      "output": 24,
+      "cache_read": 1.3
+     },
+     {
+      "when": "32K<input<=200K",
+      "input": 8,
+      "output": 28,
+      "cache_read": 2
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "minimax/minimax-m2.7-highspeed",
+   "name": "MiniMax M2.7-highspeed",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 204800,
+    "input": null,
+    "output": 131072
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4.2,
+    "output": 16.8,
+    "cache_read": 0.42,
+    "cache_write": 2.625
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.5-27b",
+   "name": "Qwen3.5 27B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 65536
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1.8,
+    "output": 14.4,
+    "tiers": [
+     {
+      "when": "0K<input<=125K",
+      "input": 0.6,
+      "output": 4.8
+     },
+     {
+      "when": "125K<input<=256K",
+      "input": 1.8,
+      "output": 14.4
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.5-122b-a10b",
+   "name": "Qwen3.5 122B A10B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 65536
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2,
+    "output": 16,
+    "tiers": [
+     {
+      "when": "0K<input<=125K",
+      "input": 0.8,
+      "output": 6.4
+     },
+     {
+      "when": "125K<input<=256K",
+      "input": 2,
+      "output": 16
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.5-35b-a3b",
+   "name": "Qwen3.5 35B A3B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 65536
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1.6,
+    "output": 12.8,
+    "tiers": [
+     {
+      "when": "0K<input<=125K",
+      "input": 0.4,
+      "output": 3.2
+     },
+     {
+      "when": "125K<input<=256K",
+      "input": 1.6,
+      "output": 12.8
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.5-397b-a17b",
+   "name": "Qwen3.5 397B A17B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 65536
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 3,
+    "output": 18,
+    "tiers": [
+     {
+      "when": "0K<input<=125K",
+      "input": 1.2,
+      "output": 7.2
+     },
+     {
+      "when": "125K<input<=256K",
+      "input": 3,
+      "output": 18
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "minimax/minimax-m2.5",
+   "name": "MiniMax M2.5",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 204800,
+    "input": null,
+    "output": 131072
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 2.1,
+    "output": 8.4,
+    "cache_read": 0.21,
+    "cache_write": 2.625
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "zai-org/glm-5",
+   "name": "GLM 5",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 202800,
+    "input": null,
+    "output": 131072
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 6,
+    "output": 22,
+    "cache_read": 1.5,
+    "tiers": [
+     {
+      "when": "0K<input<=32K",
+      "input": 4,
+      "output": 18,
+      "cache_read": 1
+     },
+     {
+      "when": "32K<input<=200K",
+      "input": 6,
+      "output": 22,
+      "cache_read": 1.5
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "deepseek/deepseek-ocr-2",
+   "name": "DeepSeek OCR 2",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "deepseek",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 8192,
+    "input": null,
+    "output": 8192
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.216,
+    "output": 0.216
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "moonshotai/kimi-k2.5",
+   "name": "Kimi K2.5",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 262144
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 21,
+    "cache_read": 0.7
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "zai-org/glm-4.7-flash",
+   "name": "GLM 4.7 Flash",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 200000,
+    "input": null,
+    "output": 128000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.5,
+    "output": 3,
+    "cache_read": 0.1
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "zai-org/glm-4.7",
+   "name": "GLM 4.7",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 204800,
+    "input": null,
+    "output": 131072
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 16,
+    "cache_read": 0.8,
+    "cache_write": 0.8,
+    "tiers": [
+     {
+      "when": "0K<input<=32K",
+      "input": 2,
+      "output": 8,
+      "cache_read": 0.4
+     },
+     {
+      "when": "0K<input<=32K",
+      "input": 3,
+      "output": 14,
+      "cache_read": 0.6
+     },
+     {
+      "when": "32K<input<=200K",
+      "input": 4,
+      "output": 16,
+      "cache_read": 0.8
+     }
+    ]
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "zai-org/autoglm-phone-9b-multilingual",
+   "name": "AutoGLM Phone 9B Multilingual",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 65536,
+    "input": null,
+    "output": 32000
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": null,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 0.25,
+    "output": 1
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "moonshotai/kimi-k2-thinking",
+   "name": "Kimi K2 Thinking",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 100352
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 16
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "qwen/qwen3.6-35b-a3b",
+   "name": "Qwen3.6 35B A3B",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "qwen",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 65536
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "image",
+     "video"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1.8,
+    "output": 10.8
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "zai-org/glm-4.6",
+   "name": "GLM 4.6",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 204800,
+    "input": null,
+    "output": 131072
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 16,
+    "cache_read": 0.8,
+    "cache_write": 0.8
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "moonshotai/kimi-k2-0905",
+   "name": "Kimi K2 Instruct 0905",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 262144,
+    "input": null,
+    "output": 100352
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 16
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "moonshotai/kimi-k2-instruct",
+   "name": "Kimi K2 Instruct",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "moonshot",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 131072,
+    "input": null,
+    "output": 100352
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": null,
+   "reasoning": {
+    "supported": null,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 16
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "zai-org/glm-4.5v",
+   "name": "GLM 4.5V",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 65536,
+    "input": null,
+    "output": 16384
+   },
+   "modalities": {
+    "input": [
+     "text",
+     "video",
+     "image"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 12,
+    "cache_read": 0.8
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "minimaxai/minimax-m1-80k",
+   "name": "MiniMaxAI/MiniMax-M1-80k",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "minimax",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 128000,
+    "input": null,
+    "output": 40000
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": null,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 4,
+    "output": 16
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+  },
+  {
+   "id": "zai-org/glm-4.5-air",
+   "name": "GLM 4.5 Air",
+   "name_zh": null,
+   "aliases": [],
+   "lab": "zhipu",
+   "open_weights": null,
+   "release_date": null,
+   "status": "ga",
+   "limit": {
+    "context": 131072,
+    "input": null,
+    "output": 98304
+   },
+   "modalities": {
+    "input": [
+     "text"
+    ],
+    "output": [
+     "text"
+    ]
+   },
+   "tools": true,
+   "structured_output": true,
+   "reasoning": {
+    "supported": true,
+    "toggle": null,
+    "effort": null,
+    "default": null,
+    "default_source": null,
+    "field": null
+   },
+   "price_cny": {
+    "unit": "per_million_tokens",
+    "input": 1.2,
+    "output": 2,
+    "cache_read": 0.24
+   },
+   "price_usd_intl": null,
+   "sources": [
+    "https://api.ppio.com/openai/v1/models"
+   ],
+   "checked_at": "2026-11-21",
+   "notes": "由 cn-sync 自动添加（2026-11-21），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
   }
  ],
  "notes": "价格与规格全部来自官方公开接口 GET https://api.ppio.com/openai/v1/models（无需鉴权，pricing.*.price_per_m_decimal 单位为元/百万 token；origin_price 为原价）。实名认证：部分模型要求实名认证后才能使用，部分大语言模型需完成企业认证（https://ppio.com/docs/support/identity-verification.md）；个人认证每个主体最多 3 个账号。限速：按账户等级 T1–T5（依最近 3 个自然月单月最高充值额：<¥50 / ≥¥50 / ≥¥500 / ≥¥3000 / ≥¥10000）分级 RPM/TPM（按每模型计），具体数值表格未在 md 文档中渲染（https://ppio.com/docs/model/llm-rate-limits.md）。思考：未在专页列出的早期模型可用 enable_thinking 参数开关。另有 pprouter/auto、pprouter/fusion（Fusion 融合模型，多模型并行+融合）路由模型未纳入。PPIO 海外品牌为 Novita AI（models.dev 的 novita-ai），国内站与之独立计价。Prompt Cache 为平台自动缓存，无需改请求。"
