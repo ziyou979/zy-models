@@ -6,8 +6,8 @@
   },
   "packages/web/script/cn-build.ts": {
     "upstream": "packages/web/script/build.ts",
-    "ported_from_blob": "646a2f4b9f162b0946d9037ff83457c23b2d38fe",
-    "ported_from_commit": "7b22cc903b46d459e83ec6420d702426f34f813c"
+    "ported_from_blob": "548c491f5e71567e9aa96e99fd3dfed73b58c3f1",
+    "ported_from_commit": "6b6e7e8aee569f104691d4ccabd1577ebb2ac239"
   },
   "packages/web/cn-index.html": {
     "upstream": "packages/web/index.html",
