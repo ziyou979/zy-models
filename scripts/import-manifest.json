@@ -198,7 +198,6 @@
   "providers/lanyun/models/qwen3.7-plus.toml",
   "providers/lanyun/models/qwen3.8-max.toml",
   "providers/lanyun/provider.toml",
-  "providers/longcat/models/LongCat-2.5.toml",
   "providers/moark/models/DeepSeek-V4-Pro-0813.toml",
   "providers/moark/models/DeepSeek-V4.1-Flash-1017.toml",
   "providers/moark/models/ERNIE-5.0-Thinking.toml",
