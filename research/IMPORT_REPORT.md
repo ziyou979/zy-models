@@ -295,7 +295,7 @@
 - zhipuai/glm-4.5-air limit.context: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - zhipuai/glm-4.5-air limit.output: 上游 98304 / 研究 96000（同一标称值，沿用上游）
 
-## 新增 provider 模型文件（316）
+## 新增 provider 模型文件（315）
 
 - ai360/360zhinao/360zhinao-pro → base_model 360/360zhinao-pro
 - ai360/360zhinao-turbo-32k-agent → base_model 360/360zhinao-turbo-32k-agent
@@ -463,7 +463,6 @@
 - lanyun/qwen3.7-max → base_model alibaba/qwen3.7-max
 - lanyun/qwen3.7-plus → base_model alibaba/qwen3.7-plus
 - lanyun/qwen3.6-flash → base_model alibaba/qwen3.6-flash
-- longcat/LongCat-2.5 → base_model meituan/longcat-2.5
 - modelscope/deepseek-ai/DeepSeek-V4-Pro-0813 → base_model deepseek/deepseek-v4-pro-0813
 - modelscope/deepseek-ai/DeepSeek-V4-Pro → base_model deepseek/deepseek-v4-pro-0813
 - modelscope/deepseek-ai/DeepSeek-V4-Flash-0731 → base_model deepseek/deepseek-v4-flash-0731
@@ -810,4 +809,4 @@
 - research/paratera.json: 无可导入模型，平台 paratera 暂不建立
 - skywork: 所有模型均因缺上下文且无对应 lab 模型而跳过，平台暂不建立
 
-overlay 文件数：139
+overlay 文件数：140
