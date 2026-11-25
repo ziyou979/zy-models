@@ -41,6 +41,8 @@ const num = (p: z.infer<typeof Price> | undefined, key: "price_per_m_decimal" | 
   const v = p?.[key];
   return v === undefined || v === "" ? undefined : Number(v);
 };
+const stripUndefined = <T extends Record<string, unknown>>(o: T) =>
+  Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined)) as T;
 const kTokens = (n: number) => (n % 1024 === 0 ? `${n / 1024}K` : `${Math.round(n / 1000)}K`);
 
 export const ppio = {
@@ -78,6 +80,7 @@ export const ppio = {
     }));
     const listInput = num(m.pricing?.prompt, "origin_price_per_m_decimal");
     const listOutput = num(m.pricing?.completion, "origin_price_per_m_decimal");
+    const listCacheRead = num(m.pricing?.input_cache_read, "origin_price_per_m_decimal");
     return {
       id: m.id,
       name: m.display_name,
@@ -100,7 +103,7 @@ export const ppio = {
               tiers: tiers.length >= 2 ? tiers : undefined,
               list_price:
                 listInput !== undefined && listOutput !== undefined && (listInput !== input || listOutput !== output)
-                  ? { input: listInput, output: listOutput }
+                  ? stripUndefined({ input: listInput, output: listOutput, cache_read: listCacheRead })
                   : undefined,
             },
     };

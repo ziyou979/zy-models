@@ -136,9 +136,18 @@
 - plan `glm-coding-max` → provider `zhipuai-coding-plan` (matched api https://open.bigmodel.cn/api/coding/paas/v4)
 - plan `glm-coding-intl` → provider `zai-coding-plan` (matched api https://api.z.ai/api/coding/paas/v4)
 
-## 非数值差异（仅报告，未覆盖）（48）
+## 非数值差异（仅报告，未覆盖）（57）
 
+- bailing/Ling-3.1-flash cost.input: upstream $0.3 = 原价 ¥2，研究当前价 ¥0.5（未覆盖，当前价见 cost_cny）
+- bailing/Ling-3.1-flash cost.output: upstream $0.9 = 原价 ¥6，研究当前价 ¥1.5（未覆盖，当前价见 cost_cny）
+- bailing/Ling-3.1-flash cost.cache_read: upstream $0.06 = 原价 ¥0.4，研究当前价 ¥0.1（未覆盖，当前价见 cost_cny）
+- bailing/Ling-3.0-flash-VL cost.input: upstream $0.075 = 原价 ¥0.5，研究当前价 ¥0.14（未覆盖，当前价见 cost_cny）
+- bailing/Ling-3.0-flash-VL cost.output: upstream $0.224 = 原价 ¥1.5，研究当前价 ¥0.42（未覆盖，当前价见 cost_cny）
+- bailing/Ling-3.0-flash-VL cost.cache_read: upstream $0.015 = 原价 ¥0.1，研究当前价 ¥0.028（未覆盖，当前价见 cost_cny）
 - bailing/Ling-3.0-flash-VL release_date: upstream 2026-09-10 vs research 2026-09-04
+- bailing/Ling-3.0-flash cost.input: upstream $0.075 = 原价 ¥0.5，研究当前价 ¥0.14（未覆盖，当前价见 cost_cny）
+- bailing/Ling-3.0-flash cost.output: upstream $0.224 = 原价 ¥1.5，研究当前价 ¥0.42（未覆盖，当前价见 cost_cny）
+- bailing/Ling-3.0-flash cost.cache_read: upstream $0.015 = 原价 ¥0.1，研究当前价 ¥0.028（未覆盖，当前价见 cost_cny）
 - bailing/Ling-3.0-tiny open_weights: upstream true vs research false
 - alibaba-cn/qwen3.8-max reasoning.default: upstream {"type":"effort","value":"xhigh"} vs research "on"（类型不同，未覆盖上游字段；reasoning_default 扩展字段按研究写入）
 - alibaba-cn/qwen3.8-flash reasoning.default: upstream {"type":"effort","value":"xhigh"} vs research "on"（类型不同，未覆盖上游字段；reasoning_default 扩展字段按研究写入）
