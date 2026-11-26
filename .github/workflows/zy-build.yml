@@ -32,12 +32,18 @@ jobs:
       - name: Validate
         run: bun scripts/zy-validate.ts > /tmp/validate.json
       - name: Upstream files unchanged
-        # Every upstream file except LICENSE must be byte-for-byte upstream, so the
+        # Every upstream file except LICENSE (and upstream's .github/workflows/) must be byte-for-byte upstream, so the
         # daily upstream merge can't conflict on our edits (docs/upstream-sync.md).
         run: |
           git fetch -q --no-tags https://github.com/anomalyco/models.dev.git dev
           base=$(git merge-base HEAD FETCH_HEAD)
-          changed=$(git diff --name-only --diff-filter=M "$base" HEAD | grep -v -x -e LICENSE || true)
+          # Upstream's own workflows are exempt: the sync keeps our version of them
+          # because GITHUB_TOKEN may not push workflow changes (scripts/sync-keep-workflows.sh).
+          changed=$(git diff --name-only --diff-filter=M "$base" HEAD | grep -v -x -e LICENSE | grep -v -E '^\.github/workflows/' || true)
+          skipped=$(git diff --name-only "$base" HEAD -- .github/workflows/ | grep -v -E '^\.github/workflows/zy-' || true)
+          if [ -n "$skipped" ]; then
+            echo "::notice::Upstream workflow files kept at this repo's version (upstream changes not adopted): $(echo $skipped)"
+          fi
           if [ -n "$changed" ]; then
             echo "::error::These upstream files were edited in place; move the change into overlays/ or a cn*/zy* file:"; echo "$changed"; exit 1
           fi

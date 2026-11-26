@@ -17,9 +17,13 @@ mapfile -t conflicts < <(git diff --name-only --diff-filter=U)
 
 generated=()
 upstream_owned=()
+workflows=()
 for f in "${conflicts[@]}"; do
+  if [[ "$f" == .github/workflows/* && "$f" != .github/workflows/zy-* ]]; then
+    # Upstream's own workflow: we keep ours (scripts/sync-keep-workflows.sh restores it anyway).
+    workflows+=("$f")
   # add/add: no common-ancestor stage, and the path is one our importer wrote.
-  if ! git cat-file -e ":1:$f" 2>/dev/null && jq -e --arg f "$f" 'index($f) != null' scripts/import-manifest.json >/dev/null; then
+  elif ! git cat-file -e ":1:$f" 2>/dev/null && jq -e --arg f "$f" 'index($f) != null' scripts/import-manifest.json >/dev/null; then
     generated+=("$f")
   elif [ "$(git check-attr merge -- "$f" | awk '{print $NF}')" = "zy-upstream" ]; then
     # Upstream-owned generated file (bun.lock, models.json): we never edit it, take upstream's.
@@ -30,6 +34,14 @@ for f in "${conflicts[@]}"; do
   fi
 done
 
+if [ "${#workflows[@]}" -gt 0 ]; then
+  echo "Keeping our version of ${#workflows[@]} upstream workflow file(s):"
+  printf '  %s\n' "${workflows[@]}"
+  for f in "${workflows[@]}"; do
+    if git cat-file -e "HEAD:$f" 2>/dev/null; then git checkout HEAD -- "$f"; else git rm -q -f -- "$f"; fi
+  done
+  git add -A -- .github/workflows/
+fi
 if [ "${#upstream_owned[@]}" -gt 0 ]; then
   echo "Taking upstream's version of ${#upstream_owned[@]} upstream-owned generated file(s):"
   printf '  %s\n' "${upstream_owned[@]}"
