@@ -17,7 +17,7 @@
 | Worker | `packages/function/src/zy-worker.ts`（wrangler `main`） | 包装上游 `worker.ts`：不上报遥测、首页、`$id`、CORS、`/plans` |
 | 本库 README | `.github/README.md`（GitHub 优先显示它） | 根目录 `README.md` 保持上游原版 |
 | npm 包信息 | `scripts/npm/package.json` | `zy-publish.yml` 在临时目录里组包发布；根 `package.json` 保持上游原版 |
-| 工作流 | `.github/workflows/zy-*.yml` | 上游工作流不改（它们限定 `anomalyco/models.dev`，在本库自动跳过） |
+| 工作流 | `.github/workflows/zy-*.yml` | 上游工作流不改（它们限定 `anomalyco/models.dev`，在本库自动跳过）。同步时上游对 `.github/workflows/` 的改动**不带进来**，保留本库版本（见下文） |
 
 ## Fork 的上游文件
 
@@ -27,5 +27,6 @@
 
 1. `git merge upstream/dev`。`.gitattributes` 把 `bun.lock`、`models.json`（上游的生成文件，我们从不改）设为 `merge=zy-upstream`：冲突时直接取上游版本。
 2. 剩下的冲突交给 `scripts/sync-resolve-generated.sh`：只要是 importer 生成的文件上的 add/add，就取上游文件并重新导入；否则中止合并、**不推送任何分支**，并开 / 更新 `upstream-sync-conflict` issue。
-3. 合并成功后运行 `scripts/zy-reimport.sh`，在合并后的上游数据上重新生成 overlays/（不信任 git 对生成数据的合并），然后 `zy-validate`、测试、`build-dist`、网站构建。任何一步失败同样开 issue、不推送。
-4. 通过后推送 `sync/upstream` 并开 / 更新 PR。开不了 PR（仓库设置没允许 Actions 建 PR）只记 warning，并在运行摘要里给出手动开 PR 的 compare 链接，运行保持成功。冲突或失败时连 issue 都开不了，才让运行失败，避免静默停摆。干净同步后自动关闭 `upstream-sync-conflict` issue。
+3. 合并成功后运行 `scripts/sync-keep-workflows.sh`：上游自带的 `.github/workflows/*`（非 `zy-*`）恢复为合并前本库的版本并并入合并提交。原因：同步用 `GITHUB_TOKEN` 推送，GitHub 不允许它新建或修改 workflow 文件（`refusing to allow a GitHub App to create or update workflow ... without workflows permission`），而上游的 workflow 在本库本来就不运行。跳过的改动连同上游 commit 链接列在同步 PR 说明里；需要时本地 `git checkout upstream/dev -- <文件>` 再用有 workflow 权限的身份推送。`zy-build` 的“上游文件不改”检查对 `.github/workflows/` 豁免（只打 notice）。这些文件若出现合并冲突，`sync-resolve-generated.sh` 直接取本库版本。
+4. 然后运行 `scripts/zy-reimport.sh`，在合并后的上游数据上重新生成 overlays/（不信任 git 对生成数据的合并），然后 `zy-validate`、测试、`build-dist`、网站构建。任何一步失败同样开 issue、不推送。
+5. 通过后推送 `sync/upstream` 并开 / 更新 PR。开不了 PR（仓库设置没允许 Actions 建 PR）只记 warning，并在运行摘要里给出手动开 PR 的 compare 链接，运行保持成功。冲突或失败时连 issue 都开不了，才让运行失败，避免静默停摆。干净同步后自动关闭 `upstream-sync-conflict` issue。

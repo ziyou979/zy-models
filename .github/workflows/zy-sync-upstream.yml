@@ -12,6 +12,10 @@
 #   - anything else → merge aborted, nothing pushed, an `upstream-sync-conflict`
 #     issue is opened/updated. If even the issue can't be opened, the run fails
 #     so the problem is never silent.
+#   - upstream's own workflows (.github/workflows/*, not zy-*) keep this repo's
+#     version: GITHUB_TOKEN may not push workflow changes, and upstream's
+#     workflows only run in anomalyco/models.dev anyway. Skipped changes are
+#     listed in the PR body — scripts/sync-keep-workflows.sh
 #   - a clean merge whose PR can't be created (repo setting below) is only a
 #     warning + job summary with a compare link: the run stays green.
 #
@@ -67,17 +71,31 @@ jobs:
           fi
           echo "changed=true" >> "$GITHUB_OUTPUT"
           git checkout -B "$BRANCH"
+          pre=$(git rev-parse HEAD)
           : > /tmp/conflicts.txt
           if git merge --no-edit -m "chore(sync): merge upstream models.dev $(git rev-parse --short upstream/dev)" upstream/dev; then
-            echo "conflict=false" >> "$GITHUB_OUTPUT"
+            merged=true
           else
             git diff --name-only --diff-filter=U > /tmp/conflicts.txt
             if bash scripts/sync-resolve-generated.sh; then
-              echo "conflict=false" >> "$GITHUB_OUTPUT"
+              merged=true
             else
-              echo "conflict=true" >> "$GITHUB_OUTPUT"
+              merged=false
               git merge --abort || git reset --hard -q HEAD
             fi
+          fi
+          # Keep our version of upstream's own workflows (GITHUB_TOKEN can't push
+          # workflow changes); skipped changes go into the PR body.
+          if [ "$merged" = true ] && ! bash scripts/sync-keep-workflows.sh "$pre" upstream/dev; then
+            echo "::error::could not keep this repo's upstream workflow files"
+            merged=false
+            git reset --hard -q "$pre"
+            echo ".github/workflows/ (scripts/sync-keep-workflows.sh failed)" >> /tmp/conflicts.txt
+          fi
+          if [ "$merged" = true ]; then
+            echo "conflict=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "conflict=true" >> "$GITHUB_OUTPUT"
           fi
           exit 0
       - name: Regenerate generated data
@@ -123,8 +141,10 @@ jobs:
               echo "自动解决的冲突（取上游文件；我们的数据已由 import-research 写入 overlays/）："
               sed 's/^/- `/; s/$/`/' /tmp/auto-resolved.txt
             fi
+            if [ -s /tmp/skipped-workflows.md ]; then echo; cat /tmp/skipped-workflows.md; fi
             if [ -s /tmp/forks.md ]; then echo; cat /tmp/forks.md; fi
           } > /tmp/pr-body.md
+          if [ -s /tmp/skipped-workflows.md ]; then cat /tmp/skipped-workflows.md >> "$GITHUB_STEP_SUMMARY"; fi
           num=$(gh pr list --head "$BRANCH" --base main --state open --json number -q '.[0].number' || true)
           if [ -n "$num" ]; then
             gh pr edit "$num" --body-file /tmp/pr-body.md
