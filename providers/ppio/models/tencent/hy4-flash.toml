@@ -1,0 +1,36 @@
+# Imported from research/ppio.json by scripts/import-research.ts (checked 2026-11-28)
+# Source: https://api.ppio.com/openai/v1/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.25, output 1, cache_read 0.01
+# USD uses the CNY list price (原价): {"input":0.5,"output":2}
+schema = 2
+base_model = "tencent/hy4-flash"
+sources = ["https://api.ppio.com/openai/v1/models"]
+checked_at = "2026-11-28"
+notes = "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+context = 1_000_000
+output = 64_000
+
+[cost.text.input]
+price = 0.0747854
+
+[cost.text.input.cache]
+read = 0.00149571
+
+[cost.text.output]
+price = 0.2991416
+
+[cost_cny]
+input = 0.25
+output = 1
+cache_read = 0.01
+
+[cost_cny.list_price]
+input = 0.5
+output = 2
