@@ -1,0 +1,27 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-28)
+# Source: https://www.qiniu.com/ai/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.75, output 3
+schema = 2
+base_model = "alibaba/qwen3-vl-30b-a3b-instruct"
+status = "deprecated"
+sources = ["https://www.qiniu.com/ai/models"]
+checked_at = "2026-11-28"
+notes = "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+
+[capabilities]
+structured_output = true
+
+[limit]
+context = 128_000
+output = 32_000
+
+[cost.text.input]
+price = 0.1121781
+
+[cost.text.output]
+price = 0.4487124
+
+[cost_cny]
+input = 0.75
+output = 3

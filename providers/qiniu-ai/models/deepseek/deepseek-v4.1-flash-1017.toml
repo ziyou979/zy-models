@@ -1,0 +1,41 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-28)
+# Source: https://www.qiniu.com/ai/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 2, output 8, cache_read 0.04
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash-1017"
+aliases = ["deepseek-flash", "deepseek-v4.1-flash-1017"]
+sources = ["https://www.qiniu.com/ai/models"]
+checked_at = "2026-11-28"
+notes = "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[cost.text.input]
+price = 0.2991416
+
+[cost.text.input.cache]
+read = 0.00598283
+
+[cost.text.output]
+price = 1.19656639
+
+[cost_cny]
+input = 2
+output = 8
+cache_read = 0.04
+off_peak = "按量计费分高峰/空闲两档（模型广场数据未给出具体时段），主字段为高峰价"
+
+[[cost_cny.tiers]]
+when = "高峰"
+input = 2
+output = 8
+cache_read = 0.04
+
+[[cost_cny.tiers]]
+when = "空闲"
+input = 1
+output = 4
+cache_read = 0.02

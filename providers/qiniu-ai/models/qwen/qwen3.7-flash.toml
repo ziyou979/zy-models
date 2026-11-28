@@ -1,0 +1,55 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-28)
+# Source: https://www.qiniu.com/ai/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 0.2, output 0.8, cache_read 0.04
+schema = 2
+base_model = "alibaba/qwen3.7-flash"
+aliases = ["qwen3.7-flash"]
+sources = ["https://www.qiniu.com/ai/models"]
+checked_at = "2026-11-28"
+notes = "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+output = 128_000
+
+[cost.text.input]
+price = 0.02991416
+
+[cost.text.input.cache]
+read = 0.00598283
+
+[cost.text.output]
+price = 0.11965664
+
+[cost_cny]
+input = 0.2
+output = 0.8
+cache_read = 0.04
+
+[[cost_cny.tiers]]
+when = "0k<input<=32k"
+context_min = 0
+context_max = 32_000
+input = 0.2
+output = 0.8
+cache_read = 0.04
+
+[[cost_cny.tiers]]
+when = "32k<input<=256k"
+context_min = 32_000
+context_max = 256_000
+input = 0.6
+output = 2.4
+cache_read = 0.12
+
+[[cost_cny.tiers]]
+when = "256k<input<=0k"
+context_min = 256_000
+context_max = 0
+input = 1.2
+output = 4.8
+cache_read = 0.24
