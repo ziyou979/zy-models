@@ -37,7 +37,7 @@
 - youdao (新建)
 - zhipuai ← research/zhipu.json
 
-## 数值冲突（以研究数据为准，已写入 overlays/）（27）
+## 数值冲突（以研究数据为准，已写入 overlays/）（29）
 
 - alibaba-cn/qwen3.7-plus limit.output: 64000 → 128000
 - alibaba-cn/qwen3.7-max cost.input (USD): 1.65 → 1.79484959 (¥12 ÷ 6.685797)
@@ -58,6 +58,8 @@
 - moark/MiniMax-M2.7 cost.output (USD): 1.2 → 1.25639471 (¥8.4 ÷ 6.685797)
 - huawei-maas/glm-5.1 limit.context: 200000 → 202752
 - sensenova/deepseek-flash limit.output: 65536 → 393216
+- siliconflow-cn/Qwen/Qwen2.5-72B-Instruct limit.context: 33000 → 32768
+- siliconflow-cn/Qwen/Qwen2.5-7B-Instruct limit.context: 33000 → 32768
 - tencent-tokenhub/hy4 cost.input (USD): 0.834 → 0.89742479 (¥6 ÷ 6.685797)
 - tencent-tokenhub/hy4 cost.output (USD): 2.501 → 2.69227438 (¥18 ÷ 6.685797)
 - tencent-tokenhub/hy4 cost.cache_read (USD): 0.042 → 0.04487124 (¥0.3 ÷ 6.685797)
@@ -136,7 +138,7 @@
 - plan `glm-coding-max` → provider `zhipuai-coding-plan` (matched api https://open.bigmodel.cn/api/coding/paas/v4)
 - plan `glm-coding-intl` → provider `zai-coding-plan` (matched api https://api.z.ai/api/coding/paas/v4)
 
-## 非数值差异（仅报告，未覆盖）（48）
+## 非数值差异（仅报告，未覆盖）（51）
 
 - bailing/Ling-3.0-flash-VL release_date: upstream 2026-09-10 vs research 2026-09-04
 - bailing/Ling-3.0-tiny open_weights: upstream true vs research false
@@ -165,6 +167,9 @@
 - siliconflow-cn/stepfun-ai/Step-3.5-Flash release_date: upstream 2026-01-29 vs research 2026-02-02
 - siliconflow-cn/inclusionAI/Ling-flash-2.0 release_date: upstream 2025-09-18 vs research 2025-09-17
 - siliconflow-cn/ByteDance-Seed/Seed-OSS-36B-Instruct release_date: upstream 2025-09-04 vs research 2025-08-20
+- siliconflow-cn/Qwen/Qwen3.5-27B cost.input: upstream $0.08966849 vs research ¥1.8（研究价格分档，基础价为最低档，未覆盖）
+- siliconflow-cn/Qwen/Qwen3.5-35B-A3B cost.input: upstream $0.05977899 vs research ¥1.6（研究价格分档，基础价为最低档，未覆盖）
+- siliconflow-cn/Qwen/Qwen3.5-9B cost.input: upstream $0.07472374 vs research ¥1.5（研究价格分档，基础价为最低档，未覆盖）
 - tencent-tokenhub/hy4 reasoning.effort: upstream ["none","high"] vs research ["high","no_think"]
 - tencent-tokenhub/hy4-preview reasoning.effort: upstream ["none","high"] vs research ["high","no_think"]
 - tencent-tokenhub/hy3 reasoning.effort: upstream ["none","high"] vs research ["low","high","no_think"]
@@ -187,7 +192,7 @@
 - zhipuai/glm-5.3-flashx reasoning.effort: upstream ["low","high","max"] vs research ["high","max"]
 - zhipuai/glm-4.7 cost.input: upstream $0.44819 vs research ¥2（研究价格分档，基础价为最低档，未覆盖）
 
-## K/M 换算口径差异（同一标称值，沿用上游写法）（105）
+## K/M 换算口径差异（同一标称值，沿用上游写法）（119）
 
 - bailing/Ling-3.0-flash-VL limit.context: 上游 262144 / 研究 256000（同一标称值，沿用上游）
 - bailing/Ling-3.0-flash limit.context: 上游 262144 / 研究 256000（同一标称值，沿用上游）
@@ -235,6 +240,20 @@
 - siliconflow-cn/inclusionAI/Ling-flash-2.0 limit.context: 上游 131000 / 研究 131072（同一标称值，沿用上游）
 - siliconflow-cn/ByteDance-Seed/Seed-OSS-36B-Instruct limit.context: 上游 262000 / 研究 262144（同一标称值，沿用上游）
 - siliconflow-cn/Qwen/Qwen3-VL-32B-Instruct limit.context: 上游 262000 / 研究 262144（同一标称值，沿用上游）
+- siliconflow-cn/Pro/deepseek-ai/DeepSeek-R1 limit.context: 上游 164000 / 研究 163840（同一标称值，沿用上游）
+- siliconflow-cn/Pro/deepseek-ai/DeepSeek-V3 limit.context: 上游 164000 / 研究 163840（同一标称值，沿用上游）
+- siliconflow-cn/Pro/deepseek-ai/DeepSeek-V3.1-Terminus limit.context: 上游 164000 / 研究 163840（同一标称值，沿用上游）
+- siliconflow-cn/Qwen/Qwen3-14B limit.context: 上游 131000 / 研究 131072（同一标称值，沿用上游）
+- siliconflow-cn/Qwen/Qwen3-30B-A3B-Instruct-2507 limit.context: 上游 262000 / 研究 262144（同一标称值，沿用上游）
+- siliconflow-cn/Qwen/Qwen3-32B limit.context: 上游 131000 / 研究 131072（同一标称值，沿用上游）
+- siliconflow-cn/Qwen/Qwen3-8B limit.context: 上游 131000 / 研究 131072（同一标称值，沿用上游）
+- siliconflow-cn/Qwen/Qwen3-VL-30B-A3B-Instruct limit.context: 上游 262000 / 研究 262144（同一标称值，沿用上游）
+- siliconflow-cn/Qwen/Qwen3-VL-32B-Thinking limit.context: 上游 262000 / 研究 262144（同一标称值，沿用上游）
+- siliconflow-cn/Qwen/Qwen3-VL-8B-Instruct limit.context: 上游 262000 / 研究 262144（同一标称值，沿用上游）
+- siliconflow-cn/deepseek-ai/DeepSeek-R1 limit.context: 上游 164000 / 研究 163840（同一标称值，沿用上游）
+- siliconflow-cn/deepseek-ai/DeepSeek-V3 limit.context: 上游 164000 / 研究 163840（同一标称值，沿用上游）
+- siliconflow-cn/deepseek-ai/DeepSeek-V3.1-Terminus limit.context: 上游 164000 / 研究 163840（同一标称值，沿用上游）
+- siliconflow-cn/zai-org/GLM-4.5-Air limit.context: 上游 131000 / 研究 131072（同一标称值，沿用上游）
 - stepfun/step-5-preview limit.output: 上游 65536 / 研究 64000（同一标称值，沿用上游）
 - tencent-tokenhub/hy4 limit.input: 上游 983010 / 研究 983040（同一标称值，沿用上游）
 - tencent-tokenhub/hy4-preview limit.context: 上游 1024000 / 研究 1048576（同一标称值，沿用上游）
@@ -295,7 +314,7 @@
 - zhipuai/glm-4.5-air limit.context: 上游 131072 / 研究 128000（同一标称值，沿用上游）
 - zhipuai/glm-4.5-air limit.output: 上游 98304 / 研究 96000（同一标称值，沿用上游）
 
-## 新增 provider 模型文件（315）
+## 新增 provider 模型文件（318）
 
 - ai360/360zhinao/360zhinao-pro → base_model 360/360zhinao-pro
 - ai360/360zhinao-turbo-32k-agent → base_model 360/360zhinao-turbo-32k-agent
@@ -537,6 +556,9 @@
 - siliconflow-cn/moonshotai/Kimi-K2.7-Code → base_model moonshotai/kimi-k2.7-code
 - siliconflow-cn/tencent/Hy4-preview → base_model tencent/hy4-preview
 - siliconflow-cn/meituan-longcat/LongCat-2.0 → base_model meituan/longcat-2.0
+- siliconflow-cn/Pro/Qwen/Qwen2.5-7B-Instruct → base_model alibaba/qwen2.5-7b-instruct
+- siliconflow-cn/Qwen/Qwen3-Omni-30B-A3B-Thinking → base_model alibaba/qwen3-omni-30b-a3b-thinking
+- siliconflow-cn/deepseek-ai/DeepSeek-R1-0528-Qwen3-8B → base_model deepseek/deepseek-r1-0528-qwen3-8b
 - stepfun/step-1o-turbo-vision → base_model stepfun/step-1o-turbo-vision
 - tencent-tokenhub/hunyuan-role-latest → base_model tencent/hunyuan-role-latest
 - tencent-tokenhub/deepseek-v4.1-flash → base_model deepseek/deepseek-v4.1-flash
@@ -809,4 +831,4 @@
 - research/paratera.json: 无可导入模型，平台 paratera 暂不建立
 - skywork: 所有模型均因缺上下文且无对应 lab 模型而跳过，平台暂不建立
 
-overlay 文件数：140
+overlay 文件数：162
