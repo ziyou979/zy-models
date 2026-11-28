@@ -1185,6 +1185,1186 @@
       ],
       "checked_at": "2026-11-12",
       "notes": "参数规模（官方页 size 字段，单位 B）：32"
+    },
+    {
+      "id": "PaddlePaddle/PaddleOCR-VL-1.5",
+      "name": "PaddleOCR-VL-1.5",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "siliconflow-cn",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": null,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0,
+        "output": 0
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Pro/Qwen/Qwen2.5-7B-Instruct",
+      "name": "Qwen2.5-7B-Instruct (Pro)",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32768,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.35,
+        "output": 0.35
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Pro/deepseek-ai/DeepSeek-R1",
+      "name": "DeepSeek-R1 (Pro)",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 163840,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "output": 16,
+        "input": 4,
+        "cache_read": 0.4
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Pro/deepseek-ai/DeepSeek-V3",
+      "name": "DeepSeek-V3 (Pro)",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 163840,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.2
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Pro/deepseek-ai/DeepSeek-V3.1-Terminus",
+      "name": "DeepSeek-V3.1-Terminus (Pro)",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 163840,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 4,
+        "output": 12,
+        "cache_read": 0.4
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen2.5-72B-Instruct",
+      "name": "Qwen2.5-72B-Instruct",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32768,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "output": 4.13,
+        "input": 4.13
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "name": "Qwen2.5-7B-Instruct (Free)",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 32768,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0,
+        "output": 0
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3-14B",
+      "name": "Qwen3-14B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 131072,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "output": 2,
+        "input": 0.5
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "name": "Qwen3-30B-A3B-Instruct-2507",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.7,
+        "output": 2.8
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3-32B",
+      "name": "Qwen3-32B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 131072,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "output": 4,
+        "input": 1
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3-8B",
+      "name": "Qwen3-8B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 131072,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0,
+        "output": 0
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3-Omni-30B-A3B-Thinking",
+      "name": "Qwen3-Omni-30B-A3B-Thinking",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 65536,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0.7,
+        "output": 2.8
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+      "name": "Qwen3-VL-30B-A3B-Instruct",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "output": 2.8,
+        "input": 0.7
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3-VL-32B-Thinking",
+      "name": "Qwen3-VL-32B-Thinking",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "output": 10,
+        "input": 1
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3-VL-8B-Instruct",
+      "name": "Qwen3-VL-8B-Instruct",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "output": 2,
+        "input": 0.5
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3.5-27B",
+      "name": "Qwen3.5-27B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 1.8,
+        "output": 14.4,
+        "tiers": [
+          {
+            "when": "北京时间 input-tokens-range: 输入 [128k, +∞)",
+            "input": 1.8,
+            "output": 14.4
+          },
+          {
+            "when": "北京时间 input-tokens-range: 输入 [0, 128k)",
+            "input": 0.6,
+            "output": 4.8
+          }
+        ],
+        "off_peak": "分时计价：input-tokens-range: 输入 [0, 128k) 输入¥0.6/输出¥4.8；主字段为高峰价"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3.5-35B-A3B",
+      "name": "Qwen3.5-35B-A3B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 1.6,
+        "output": 12.8,
+        "tiers": [
+          {
+            "when": "北京时间 input-tokens-range: 输入 [128k, +∞)",
+            "input": 1.6,
+            "output": 12.8
+          },
+          {
+            "when": "北京时间 input-tokens-range: 输入 [0, 128k)",
+            "input": 0.4,
+            "output": 3.2
+          }
+        ],
+        "off_peak": "分时计价：input-tokens-range: 输入 [0, 128k) 输入¥0.4/输出¥3.2；主字段为高峰价"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3.5-4B",
+      "name": "Qwen3.5-4B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0,
+        "output": 0
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "Qwen/Qwen3.5-9B",
+      "name": "Qwen3.5-9B",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "qwen",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 262144,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 1.5,
+        "output": 12,
+        "tiers": [
+          {
+            "when": "北京时间 input-tokens-range: 输入 [128k, +∞)",
+            "input": 1.5,
+            "output": 12
+          },
+          {
+            "when": "北京时间 input-tokens-range: 输入 [0, 128k)",
+            "input": 0.5,
+            "output": 4
+          }
+        ],
+        "off_peak": "分时计价：input-tokens-range: 输入 [0, 128k) 输入¥0.5/输出¥4；主字段为高峰价"
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-OCR",
+      "name": "DeepSeek-OCR",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 8192,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0,
+        "output": 0
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-R1",
+      "name": "DeepSeek-R1",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 163840,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "output": 16,
+        "input": 4,
+        "cache_read": 0.4
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+      "name": "DeepSeek-R1-0528-Qwen3-8B (Free)",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 131072,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": null,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 0,
+        "output": 0
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V3",
+      "name": "DeepSeek-V3",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 163840,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.2
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V3.1-Terminus",
+      "name": "DeepSeek-V3.1-Terminus",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "deepseek",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 163840,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "input": 4,
+        "output": 12,
+        "cache_read": 0.4
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+    },
+    {
+      "id": "zai-org/GLM-4.5-Air",
+      "name": "GLM-4.5-Air",
+      "name_zh": null,
+      "aliases": [],
+      "lab": "zhipu",
+      "open_weights": null,
+      "release_date": null,
+      "status": "ga",
+      "limit": {
+        "context": 131072,
+        "input": null,
+        "output": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "tools": true,
+      "structured_output": null,
+      "reasoning": {
+        "supported": null,
+        "toggle": null,
+        "effort": null,
+        "default": null,
+        "default_source": null,
+        "field": null
+      },
+      "price_cny": {
+        "unit": "per_million_tokens",
+        "output": 6,
+        "input": 1
+      },
+      "price_usd_intl": null,
+      "sources": [
+        "https://www.siliconflow.cn/pricing",
+        "https://www.siliconflow.cn/models"
+      ],
+      "checked_at": "2026-11-28",
+      "notes": "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
     }
   ],
   "notes": "第三方托管平台，lab 为原厂。价格取自 siliconflow.cn/pricing 页内嵌的实时价格数据（pricingApiItems，按 K tokens 计，已×1000 换成每百万）；注意 siliconflow.cn/models 模型卡片上的『price』字段与价格页有出入（如 DeepSeek-V4-Flash 卡片 1/2 元，价格页 3/9 元高峰、1.5/4.5 元 02:00–08:00），以价格页为准。部分模型（DeepSeek-V4-Flash、V4.1-Flash、Hunyuan-A13B）按北京时间分时计价。Qwen3.5 系列按输入长度 128k 分档。通用思考参数：enable_thinking（开关，适用于『大多数推理模型』）、thinking_budget（128–32768）；reasoning_effort 仅列明适用于 DeepSeek-V4 / V4-Flash / GLM-5.2，取值 high|max，默认 high，Claude Code/OpenCode 等智能体请求自动设为 max。思考内容字段 reasoning_content。max_tokens 不含思维链。每个模型均附国家网信办生成式 AI 备案信息（filling 字段）。新版主力模型最大输出大多未公开（null）。官网未发现编程订阅套餐；另有 TokenPlus 词元优选（www.tokenplus.cn，独立产品，未纳入）。文档设有『实名认证』FAQ。"
