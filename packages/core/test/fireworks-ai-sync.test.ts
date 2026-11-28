@@ -188,46 +188,65 @@ test("does not report retired pricing rows or their aliases as missing models", 
   try {
     await syncProvider(provider, { openIssues: true });
     expect(issues).toHaveBeenCalledTimes(1);
-    expect(issues.mock.calls[0]?.[1]).toEqual(["accounts/fireworks/models/new"]);
+    // Documented routes without a file are reported too; this test is about the retired rows.
+    expect(issues.mock.calls[0]?.[1]?.filter((id) => !id.endsWith("-us") && !id.endsWith("-flex")))
+      .toEqual(["accounts/fireworks/models/new"]);
   } finally {
     issues.mockRestore();
     await rm(dir, { recursive: true, force: true });
   }
 });
 
-test("excludes expired serverless deprecations including fast routes", () => {
-  const retiring = {
-    ...inventoryModel({ name: "accounts/fireworks/models/retiring" }),
+test("keeps models past their deprecation date as deprecated, fast routes included, while Fireworks lists them", () => {
+  const retired = {
+    ...inventoryModel({ name: "accounts/fireworks/models/retired" }),
     deprecationDate: { year: 2026, month: 9, day: 25 },
   };
   const live = inventoryModel({ name: "accounts/fireworks/models/live" });
   const pricing = [
-    fireworksModel({ id: retiring.name }),
+    fireworksModel({ id: retired.name }),
     fireworksModel({
-      id: retiring.name,
+      id: retired.name,
       serverless_mode: "fast",
-      usage_identifier: "accounts/fireworks/routers/retiring-fast",
+      usage_identifier: "accounts/fireworks/routers/retired-fast",
     }),
     fireworksModel({ id: live.name }),
   ];
 
-  expect(mergeFireworksModels(pricing, [retiring, live], new Date("2026-09-28T00:00:00Z"))
-    .map((model) => model.catalogId)).toEqual([live.name]);
-  expect(mergeFireworksModels(pricing, [retiring, live], new Date("2026-09-25T12:00:00Z"))
-    .map((model) => model.catalogId)).toEqual([
-    retiring.name,
-    "accounts/fireworks/routers/retiring-fast",
-    live.name,
+  const models = mergeFireworksModels(pricing, [retired, live]);
+  expect(models.map((model) => [model.catalogId, model.deprecated])).toEqual([
+    [retired.name, true],
+    ["accounts/fireworks/routers/retired-fast", true],
+    [live.name, undefined],
   ]);
+  expect(fireworksAi.translateModel(models[0]!, {
+    existing: () => existingModel(),
+    authored: () => existingModel(),
+  })?.model?.status).toBe("deprecated");
 });
 
-test("honors the documented GLM 5.2 retirement while Fireworks still flags it as serverless", () => {
+test("removes a model past its deprecation date once Fireworks no longer lists it as serverless", () => {
+  const live = inventoryModel({ name: "accounts/fireworks/models/live" });
+  const pricing = [
+    fireworksModel({ id: "accounts/fireworks/models/retired" }),
+    fireworksModel({ id: live.name }),
+  ];
+  const delisted = {
+    ...inventoryModel({ name: "accounts/fireworks/models/retired", supportsServerless: false }),
+    deprecationDate: { year: 2026, month: 9, day: 25 },
+  };
+
+  expect(mergeFireworksModels(pricing, [delisted, live]).map((model) => model.catalogId)).toEqual([live.name]);
+  expect(mergeFireworksModels(pricing, [live]).map((model) => model.catalogId)).toEqual([live.name]);
+});
+
+test("keeps GLM 5.2 deprecated from its documented retirement while Fireworks still flags it as serverless", () => {
   const retired = inventoryModel({ name: "accounts/fireworks/models/glm-5p2" });
   const live = inventoryModel({ name: "accounts/fireworks/models/glm-5p3" });
   const pricing = [fireworksModel({ id: retired.name }), fireworksModel({ id: live.name })];
 
-  expect(mergeFireworksModels(pricing, [retired, live], new Date("2026-09-28T00:00:00Z"))
-    .map((model) => model.catalogId)).toEqual([live.name]);
+  expect(mergeFireworksModels(pricing, [retired, live]).map((model) => [model.catalogId, model.deprecated]))
+    .toEqual([[retired.name, true], [live.name, undefined]]);
 });
 
 test("refuses destructive sync when either Fireworks source is empty", () => {
@@ -423,7 +442,6 @@ test("marks models with a List Models deprecation date as deprecated", () => {
       fireworksModel({ id: live.name }),
     ],
     [retiring, live, inventoryOnly],
-    new Date("2026-10-21T00:00:00Z"),
   );
 
   expect(models.map((model) => [model.catalogId, model.deprecated])).toEqual([
@@ -583,4 +601,175 @@ test("lists the Responses and Messages APIs after a Fireworks model's first tabl
   expect(Object.keys(once)).toEqual(["chat-completions", "responses", "messages"]);
   expect(once).toEqual({ ...first, ...extra });
   expect(chatApis(once)).toEqual(once);
+});
+
+test("keeps a System One model's APIs to System One", () => {
+  const systemone = {
+    systemone: {
+      base_url: "https://api.fireworks.ai/inference/v1",
+      sdk: { aisdk: "@ai-sdk/typesafe-ai", opencodeai: "@opencode/ai/providers/typesafe-ai/decisions" },
+    },
+  };
+  expect(chatApis(systemone)).toEqual(systemone);
+  // Responses and Messages tables written by an earlier sync are dropped.
+  expect(chatApis({ ...systemone, responses: {}, messages: {} })).toEqual(systemone);
+});
+
+test("moves an alias to its new target's base_model and reports it", () => {
+  const alias = catalogModel({
+    id: "accounts/fireworks/models/kimi-k3p1-pro",
+    catalogId: "accounts/fireworks/routers/kimi-latest",
+    flagModes: [],
+  });
+  const old = { ...existingModel(), name: "Kimi Latest", description: "Kimi K3", base_model: "moonshotai/kimi-k3" };
+  const target = { ...existingModel(), name: "Kimi K3.1 Pro", description: "Kimi K3.1 Pro", base_model: "moonshotai/kimi-k3.1-pro" };
+  const files: Record<string, ExistingModel> = {
+    [alias.catalogId]: old,
+    [alias.id]: target,
+  };
+  const translated = fireworksAi.translateModel(alias, {
+    existing: (id) => files[id],
+    authored: (id) => id === alias.catalogId ? { name: "Kimi Latest" } as ExistingModel : undefined,
+  });
+
+  expect(translated && "model" in translated ? translated.model : undefined).toMatchObject({
+    base_model: "moonshotai/kimi-k3.1-pro",
+    name: "Kimi Latest",
+  });
+  // The old lab's description isn't carried over as an override.
+  expect(translated && "model" in translated ? translated.model : undefined).not.toHaveProperty("description", "Kimi K3");
+  expect(translated && "notices" in translated ? translated.notices : undefined).toEqual([
+    expect.stringContaining("base_model moved from `moonshotai/kimi-k3` to `moonshotai/kimi-k3.1-pro`"),
+  ]);
+
+  const same = fireworksAi.translateModel(alias, {
+    existing: (id) => id === alias.catalogId ? { ...old, base_model: "moonshotai/kimi-k3.1-pro" } : target,
+    authored: () => undefined,
+  });
+  expect(same && "notices" in same ? same.notices : undefined).toBeUndefined();
+});
+
+test("reports embedding and reranker rows without a local file as missing", async () => {
+  const dir = await mkdtemp(path.join(tmpdir(), "fireworks-rerank-"));
+  const modelsDir = path.join(dir, "providers/fireworks-ai/models");
+  await mkdir(modelsDir, { recursive: true });
+  const issues = spyOn(missingIssues, "openMissingModelIssues").mockResolvedValue([]);
+  const reranker = "accounts/fireworks/models/qwen3-reranker-8b";
+  const provider = {
+    ...fireworksAi,
+    modelsDir,
+    async fetchModels() {
+      return {
+        serverless: {
+          object: "list" as const,
+          data: [
+            fireworksModel(),
+            fireworksModel({
+              id: reranker,
+              output_modalities: ["embeddings"],
+              pricing: [{ sku: "Embedding input tokens", amount: "0.2", unit: "1M tokens" as const }],
+            }),
+          ],
+        },
+        inventory: [inventoryModel(), inventoryModel({ name: reranker, kind: "EMBEDDING_MODEL" })],
+      };
+    },
+  };
+
+  try {
+    await syncProvider(provider, { openIssues: true });
+    const reported = issues.mock.calls[0]?.[1] ?? [];
+    expect(reported).toContain(reranker);
+    // Legacy embeddings aren't in either source, so a missing file isn't news.
+    expect(reported).not.toContain("BAAI/bge-small-en-v1.5");
+  } finally {
+    issues.mockRestore();
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("keeps documented routes neither source lists, without rewriting or deleting them", async () => {
+  const dir = await mkdtemp(path.join(tmpdir(), "fireworks-documented-"));
+  const modelsDir = path.join(dir, "providers/fireworks-ai/models");
+  const us = path.join(modelsDir, "accounts/fireworks/routers/glm-5p3-us.toml");
+  const labPath = path.join(dir, "models/zhipuai/glm-5.3.toml");
+  await mkdir(path.dirname(labPath), { recursive: true });
+  await Bun.write(labPath, Bun.file(path.join(import.meta.dir, "../../../models/zhipuai/glm-5.3.toml")));
+  await mkdir(path.dirname(us), { recursive: true });
+  const text = `# US-only route, https://docs.fireworks.ai/serverless/us-only-serverless
+schema = 2
+base_model = "zhipuai/glm-5.3"
+name = "GLM 5.3 (US)"
+
+[capabilities]
+reasoning = { supported = true, effort = ["low", "high", "max"] }
+structured_output = true
+cache = { implicit = true }
+
+[api.chat-completions]
+base_url = "https://us.api.fireworks.ai/inference/v1"
+compatibility = { reasoning_field = "reasoning_content" }
+
+[api.responses]
+base_url = "https://us.api.fireworks.ai/inference/v1"
+sdk = { aisdk = "@ai-sdk/openai", opencodeai = "@opencode/ai/providers/openai-compatible/responses" }
+
+[api.messages]
+base_url = "https://us.api.fireworks.ai/inference/v1"
+sdk = { aisdk = "@ai-sdk/anthropic", opencodeai = "@opencode/ai/providers/anthropic-compatible" }
+
+[cost.text.input]
+price = 2.1
+cache = { read = 0.39 }
+
+[cost.text.output]
+price = 6.6
+`;
+  await Bun.write(us, text);
+  const provider = {
+    ...fireworksAi,
+    modelsDir,
+    async fetchModels() {
+      return { serverless: { object: "list" as const, data: [fireworksModel()] }, inventory: [inventoryModel()] };
+    },
+  };
+
+  // A route that only lists its own first table doesn't get the global Responses and Messages tables.
+  const flex = path.join(modelsDir, "accounts/fireworks/routers/deepseek-v4p1-flash-1017-flex.toml");
+  const flexText = text
+    .replace(/\n\[api\.responses\][\s\S]*?(?=\n\[cost)/, "\n")
+    .replaceAll('base_url = "https://us.api.fireworks.ai/inference/v1"\n', "");
+  await Bun.write(flex, flexText);
+
+  try {
+    const result = await syncProvider(provider);
+    expect(result.deleted).toBe(0);
+    expect(await Bun.file(us).text()).toBe(text);
+    expect(await Bun.file(flex).text()).toBe(flexText);
+    expect(flexText).not.toContain("[api.responses]");
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+
+  // Once a source lists the ID, the normal sync owns it and the curated entry steps aside.
+  const listed = fireworksAi.parseModels({
+    serverless: {
+      object: "list",
+      data: [fireworksModel({ serverless_mode: "us", usage_identifier: "accounts/fireworks/routers/glm-5p3-us" })],
+    },
+    inventory: [inventoryModel()],
+  }).filter((model) => model.catalogId === "accounts/fireworks/routers/glm-5p3-us");
+  expect(listed).toHaveLength(1);
+  expect("documented" in listed[0]!).toBe(false);
+});
+
+test("keeps a base_url on existing Responses and Messages tables", () => {
+  const us = "https://us.api.fireworks.ai/inference/v1";
+  const apis = chatApis({
+    "chat-completions": { base_url: us },
+    responses: { base_url: us },
+    messages: { base_url: us },
+  });
+  expect(apis.responses).toMatchObject({ base_url: us, sdk: { aisdk: "@ai-sdk/openai" } });
+  expect(apis.messages).toMatchObject({ base_url: us, sdk: { aisdk: "@ai-sdk/anthropic" } });
 });

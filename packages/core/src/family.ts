@@ -77,7 +77,9 @@ export const ModelFamilyValues = [
   "glmv",
   "glm-air",
   "glm-flash",
+  "glm-flash-legal",
   "cogvideox",
+  "cogview",
   "glmv-flash",
   "autoglm",
   "glm-asr",
@@ -118,6 +120,7 @@ export const ModelFamilyValues = [
   "qwen-asr",
   "qwen-tts-plus",
   "qwen-image-turbo",
+  "z-image-turbo",
   "qwen-vl-max",
   "qwen-mt-plus",
   "qwen-turbo",
@@ -259,6 +262,8 @@ export const ModelFamilyValues = [
   // Step (StepFun)
   "step",
   "step-flash",
+  "step-vision",
+  "step-audio",
   "step-tts",
   "step-asr",
 
@@ -410,6 +415,7 @@ export const ModelFamilyValues = [
   "seed-turbo",
   "seedream-lite",
   "seedance-mini",
+  "seedance-flash",
   "seed-oss",
   "seed-pro",
 
@@ -422,6 +428,9 @@ export const ModelFamilyValues = [
   // RNJ
   "rnj",
 
+  // Elorian
+  "glimpse",
+
   // Tecent Hy
 
   // Ling & Ring (InclusionAI)
@@ -430,6 +439,7 @@ export const ModelFamilyValues = [
   "inkling-small",
   "inkling-mini",
   "ling-tiny",
+  "lingsante",
   "ming-image",
   "ring",
 
@@ -555,6 +565,11 @@ export const ModelFamilyValues = [
 
   // Elephant
   "elephant",
+
+  // Base Labs decision models
+  "joey",
+  "bison",
+  "groundhog",
 
   // Free variants: the base family plus "-free"
   "beam-free",
@@ -771,6 +786,7 @@ export const ModelFamilyValues = [
   "perceptron-mk",
   "phi-mini",
   "phocinae-largha",
+  "phonellm-mini",
   "pixtral-large",
   "plamo-embedding",
   "pplx-decider",

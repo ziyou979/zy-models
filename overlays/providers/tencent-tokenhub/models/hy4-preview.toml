@@ -11,9 +11,6 @@ cache_read = 0.3
 value = "high"
 source = "https://cloud.tencent.com/document/product/1823/131208"
 
-[limit]
-input = 983_040
-
 [cost.text.input]
 price = 0.89742479
 

@@ -12,6 +12,15 @@ cache_read = 0.25
 value = "high"
 source = "https://cloud.tencent.com/document/product/1823/131208"
 
+[cost.text.input]
+price = 0.1495708
+
+[cost.text.input.cache]
+read = 0.0373927
+
+[cost.text.output]
+price = 0.5982832
+
 [capabilities.reasoning.default]
 type = "effort"
 value = "high"

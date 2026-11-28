@@ -15,6 +15,7 @@ reasoning = { supported = true }
 
 [limit]
 input = 991_000
+output = 65_536
 
 [cost.text.input]
 price = 0.2991416

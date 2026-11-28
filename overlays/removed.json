@@ -3,10 +3,5 @@
     "path": "providers/longcat/models/LongCat-2.0.toml",
     "reason": "LongCat 按量价目表已不再列出 LongCat-2.0，按量仅支持 LongCat-2.5（research/longcat.json notes）",
     "source": "https://longcat.chat/platform/docs/zh/pricing/longcat-2.5"
-  },
-  {
-    "path": "providers/longcat/models/LongCat-2.5-Preview.toml",
-    "reason": "LongCat-2.5-Preview 不在官方按量价目表（仅 LongCat-2.5）",
-    "source": "https://longcat.chat/platform/docs/zh/pricing/longcat-2.5"
   }
 ]

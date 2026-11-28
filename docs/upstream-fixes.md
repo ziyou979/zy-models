@@ -10,8 +10,7 @@
 ## 已下架 / ID 变更的模型（本仓库已移除）
 
 - `providers/longcat/models/LongCat-2.0.toml`：LongCat 按量价目表已不再列出 LongCat-2.0，按量仅支持 LongCat-2.5（research/longcat.json notes）。来源：https://longcat.chat/platform/docs/zh/pricing/longcat-2.5
-- `providers/longcat/models/LongCat-2.5-Preview.toml`：LongCat-2.5-Preview 不在官方按量价目表（仅 LongCat-2.5）。来源：https://longcat.chat/platform/docs/zh/pricing/longcat-2.5
 
 ## 数值修正候选（研究数据与上游冲突，已在本仓库按研究数据覆盖）
 
-完整列表与换算说明见 `research/IMPORT_REPORT.md` 的「数值冲突」一节（27 项）。提交上游前请逐项复核来源（每个模型 overlay 的 `sources`）。
+完整列表与换算说明见 `research/IMPORT_REPORT.md` 的「数值冲突」一节（62 项）。提交上游前请逐项复核来源（每个模型 overlay 的 `sources`）。

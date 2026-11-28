@@ -1,38 +1,26 @@
-# Imported from research/tencent-tokenhub.json by scripts/import-research.ts (checked 2026-11-12)
-# Source: https://cloud.tencent.com/document/product/1823/130051
-# Source: https://cloud.tencent.com/document/product/1823/130055
-# Source: https://cloud.tencent.com/document/product/1823/131208
-# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
-# CNY: input 20, output 100, cache_read 2
+# Pricing (USD per million tokens, intl list price, accessed 2026-11-24):
+#   https://intl.cloud.tencent.com/document/product/1300/78937 (input 3, output 15, cache hit 0.3, cache write 5m 3, 1h 6).
+#   China list: https://cloud.tencent.com/document/product/1823/130055
+# Availability and limits: https://cloud.tencent.com/document/product/1823/130051 (updated 2026-11-17)
+# Implicit cache: https://cloud.tencent.com/document/product/1823/131410
+# API: https://cloud.tencent.com/document/product/1823/132232
+# Effort: reasoning_effort = low|high|max (default max); thinking cannot be disabled.
+# Reasoning guide: https://cloud.tencent.com/document/product/1823/131208 (updated 2026-11-16)
 schema = 2
 base_model = "moonshotai/kimi-k3"
-sources = ["https://cloud.tencent.com/document/product/1823/130051", "https://cloud.tencent.com/document/product/1823/130055", "https://cloud.tencent.com/document/product/1823/131208"]
-checked_at = "2026-11-12"
-notes = "思考不支持关闭。缓存写入 5min 20 元、1h 40 元。"
 
 [capabilities]
-reasoning = { supported = true, effort = ["low", "high", "max"], default = { type = "effort", value = "max" } }
+reasoning = { supported = true, effort = ["low", "high", "max"] }
 structured_output = true
+cache = { implicit = true }
 
-[limit]
-input = 1_048_576
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_content" }
+
 
 [cost.text.input]
-price = 2.99141598
-
-[cost.text.input.cache]
-read = 0.2991416
+price = 3
+cache = { read = 0.3, write = { "5m" = 3, "1h" = 6 } }
 
 [cost.text.output]
-price = 14.95707991
-
-[cost_cny]
-input = 20
-output = 100
-cache_read = 2
-cache_write = 20
-cache_write_1h = 40
-
-[reasoning_default]
-value = "max"
-source = "https://cloud.tencent.com/document/product/1823/131208"
+price = 15
