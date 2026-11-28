@@ -73,7 +73,9 @@ import { requesty } from "./providers/requesty.js";
 import { sambaNova } from "./providers/sambanova.js";
 import { morph } from "./providers/morph.js";
 import { moonshotai } from "./providers/moonshotai.js";
+import { thinkingmachines } from "./providers/thinkingmachines.js";
 import { tinfoil } from "./providers/tinfoil.js";
+import { togetherai } from "./providers/togetherai.js";
 import { vercel } from "./providers/vercel.js";
 import { venice } from "./providers/venice.js";
 import { wandb } from "./providers/wandb.js";
@@ -122,6 +124,8 @@ export interface SyncProvider<SourceModel> {
   /** Report remote-only models skipped by skipCreates as GitHub issues. */
   trackMissingModels?: boolean;
   deleteMissing?: boolean;
+  /** Local model IDs the source lists as retired. Their files are removed even when deleteMissing is false. */
+  retiredIDs?(models: SourceModel[]): string[];
   preserveSymlinks?: boolean;
   preserveBaseModels?: boolean;
   preserveDescriptions?: boolean;
@@ -151,6 +155,8 @@ export interface SyncProvider<SourceModel> {
       authored(id: string): ExistingModel | undefined;
       /** The existing file's TOML. */
       v2?(id: string): Record<string, unknown> | undefined;
+      /** The existing file's leading comment block. */
+      header?(id: string): string | undefined;
     },
   ): {
     id: string;
@@ -171,6 +177,12 @@ export interface SyncProvider<SourceModel> {
      * next to context tiers.
      */
     v2Set?: Record<string, unknown>;
+    /**
+     * Capability paths the source states are unsupported (e.g.
+     * `capabilities.system_updates`). A new file doesn't inherit them from
+     * the same host's previous model in the family.
+     */
+    unsupported?: string[];
     /** Source data the module skipped, listed with the sync's notices. */
     notices?: string[];
   } | SyncedV2Model | undefined;
@@ -254,7 +266,9 @@ export const providers: {
   sambanova: SyncProvider<any>;
   morph: SyncProvider<any>;
   moonshotai: SyncProvider<any>;
+  thinkingmachines: SyncProvider<any>;
   tinfoil: SyncProvider<any>;
+  togetherai: SyncProvider<any>;
   vercel: SyncProvider<any>;
   venice: SyncProvider<any>;
   wandb: SyncProvider<any>;
@@ -314,7 +328,9 @@ export const providers: {
   sambanova: sambaNova,
   morph,
   moonshotai,
+  thinkingmachines,
   tinfoil,
+  togetherai,
   vercel,
   venice,
   wandb,
@@ -346,7 +362,7 @@ export const groups = {
     "vercel",
   ],
   cloudflare: ["cloudflare-ai-gateway", "cloudflare-workers-ai"],
-  direct: ["aiand", "alibaba", "amazon-bedrock", "ambient", "anthropic", "azure", "baseten", "cerebras", "chutes", "cortecs", "deepinfra", "deepseek", "digitalocean", "engy", "fireworks-ai", "friendli", "github-copilot", "google", "groq", "hyper", "meta", "mistral", "moonshotai", "morph", "nearai", "nebius", "obscurify", "ollama-cloud", "openai", "ovhcloud", "pioneer", "sambanova", "tinfoil", "venice", "wandb", "xai"],
+  direct: ["aiand", "alibaba", "amazon-bedrock", "ambient", "anthropic", "azure", "baseten", "cerebras", "chutes", "cortecs", "deepinfra", "deepseek", "digitalocean", "engy", "fireworks-ai", "friendli", "github-copilot", "google", "groq", "hyper", "meta", "mistral", "moonshotai", "morph", "nearai", "nebius", "obscurify", "ollama-cloud", "openai", "ovhcloud", "pioneer", "sambanova", "thinkingmachines", "tinfoil", "togetherai", "venice", "wandb", "xai"],
 } as const;
 
 type ProviderID = keyof typeof providers;
@@ -376,6 +392,7 @@ export async function syncProvider<SourceModel>(
     model: z.infer<typeof SyncedAuthoredModel>;
     header: string;
     v2Set?: Record<string, unknown>;
+    unsupported?: string[];
   }>();
   const desiredV2 = new Map<string, { content: string }>();
   const caseNormalizedDesiredPaths = new Map<string, string>();
@@ -385,6 +402,7 @@ export async function syncProvider<SourceModel>(
   const translateNotices: string[] = [];
   const translateFailures: string[] = [];
   let nonTextLabs: Set<string> | undefined;
+  const retiredIDs = new Set(provider.retiredIDs?.(sourceModels) ?? []);
   for (const notice of provider.sourceNotices?.(sourceModels) ?? []) {
     translateNotices.push(notice);
     console.warn(notice);
@@ -402,6 +420,9 @@ export async function syncProvider<SourceModel>(
         },
         v2(id) {
           return existing.get(`${id}.toml`)?.v2;
+        },
+        header(id) {
+          return existing.get(`${id}.toml`)?.header;
         },
       });
     } catch (error) {
@@ -509,6 +530,7 @@ export async function syncProvider<SourceModel>(
       model: parsed.data,
       header,
       v2Set: translated.v2Set,
+      unsupported: translated.unsupported,
     });
   }
 
@@ -540,7 +562,7 @@ export async function syncProvider<SourceModel>(
       if (content === undefined) continue;
       const inherited = provider.inheritPredecessorCapabilities === false
         ? content
-        : withPredecessorCapabilities(content, [...existing].map(([file, entry]) => [file, entry.v2]), modelMetadata, protocol);
+        : withPredecessorCapabilities(content, [...existing].map(([file, entry]) => [file, entry.v2]), modelMetadata, protocol, file.unsupported);
       files.push({ status: "created", path: filePath });
       if (options.dryRun) {
         console.log(`Would create ${relativePath}`);
@@ -648,7 +670,7 @@ export async function syncProvider<SourceModel>(
       unchanged++;
       continue;
     }
-    if (provider.deleteMissing === false || translateFailures.length > 0) {
+    if ((provider.deleteMissing === false && !retiredIDs.has(relativePath.slice(0, -5))) || translateFailures.length > 0) {
       missingLocal.push(relativePath);
       console.log(`Retaining model missing from source: ${relativePath}`);
       unchanged++;
@@ -864,6 +886,8 @@ export function preserveBaseModel(model: SyncedModel, existing: ExistingModel | 
   const translatedBase = "base_model" in model ? model.base_model : undefined;
   if (translatedBase !== undefined) {
     const translatedOmit = "base_model_omit" in model ? model.base_model_omit : undefined;
+    // An empty list says the module omits nothing: the file's own list goes and none is written.
+    if (translatedOmit?.length === 0) return { ...model, base_model_omit: undefined };
     if (translatedBase !== existing.base_model || translatedOmit !== undefined) return model;
     return { ...model, base_model_omit: existing.base_model_omit };
   }
@@ -1290,7 +1314,33 @@ function leadingComments(text: string) {
   return header.length > 0 ? `${header.join("\n")}\n` : "";
 }
 
+const SYNC_FLAGS = ["--dry-run", "--new-only", "--open-issues", "--no-issues", "--list-providers"];
+
+export const SYNC_USAGE = `Usage: bun ./packages/core/script/sync-models.ts [target] [flags]
+
+target    a provider id, or a group (${Object.keys(groups).join(", ")}); default "aggregators"
+
+flags
+  --dry-run         report changes without writing files
+  --new-only        only create models that have no file yet
+  --open-issues     open missing-model issues (default only in GitHub Actions)
+  --no-issues       never open missing-model issues
+  --list-providers  print the provider matrix as JSON
+  -h, --help        print this message`;
+
 export async function main(args = process.argv.slice(2)) {
+  if (args.includes("--help") || args.includes("-h")) {
+    console.log(SYNC_USAGE);
+    return;
+  }
+  // An unknown flag must not fall through to a real sync of the default target.
+  const unknown = args.filter((arg) => arg.startsWith("-") && !SYNC_FLAGS.includes(arg));
+  if (unknown.length > 0) {
+    console.error(`Unknown flag: ${unknown.join(", ")}\n\n${SYNC_USAGE}`);
+    process.exitCode = 1;
+    return;
+  }
+
   if (args.includes("--list-providers")) {
     console.log(JSON.stringify(syncProviderMatrix()));
     return;

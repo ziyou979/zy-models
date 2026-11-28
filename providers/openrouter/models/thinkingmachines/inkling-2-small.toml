@@ -9,9 +9,6 @@ reasoning = { supported = true, effort = ["minimal", "low", "medium", "high", "m
 structured_output = true
 tools = { supported = true, choice = ["auto", "none", "required", "tool"] }
 
-[limit]
-output = 943_718
-
 [api.chat-completions]
 capabilities = { system_updates = true }
 compatibility = { reasoning_field = "reasoning_content" }
@@ -23,8 +20,8 @@ sdk = { aisdk = "@ai-sdk/openai", opencodeai = "@opencode/ai/providers/openai-co
 sdk = { aisdk = "@ai-sdk/anthropic", opencodeai = "@opencode/ai/providers/anthropic-compatible" }
 
 [cost.text.input]
-price = 0.3
+price = 0.15
 cache = { read = 0.03 }
 
 [cost.text.output]
-price = 1
+price = 0.5

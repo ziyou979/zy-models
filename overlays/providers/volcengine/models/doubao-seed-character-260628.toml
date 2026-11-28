@@ -29,6 +29,8 @@ value = "medium"
 source = "https://www.volcengine.com/docs/ark/deep-thinking"
 
 [limit]
-context = 131_072
 input = 98_304
-output = 32_768
+
+[capabilities.reasoning.default]
+type = "effort"
+value = "medium"

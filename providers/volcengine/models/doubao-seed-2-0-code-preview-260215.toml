@@ -1,42 +1,56 @@
-# Model ID verified against POST /api/v3/chat/completions (2026-08-26): `doubao-seed-2-0-code-preview-260215`
-# CNY→USD rate: 6.737012, 2026-08-26, source: https://open.er-api.com/v6/latest/USD
-# CNY list price source: https://www.volcengine.com/docs/82379/1544106
-# Effort: reasoning_effort = none|minimal|low|medium|high|xhigh|max
-# none/minimal disable thinking, so no separate toggle: sending effort alone
-# already enables it, and thinking.type=disabled + a graded effort is rejected.
-# Deprecated: in Ark's 10th deprecation batch (no new purchases from 2026-09-24, EOS 2026-11-24 14:00 UTC+8). https://www.volcengine.com/docs/ark/model-deprecation-notice
+# Imported from research/volcengine.json by scripts/import-research.ts (checked 2026-11-12)
+# Source: https://www.volcengine.com/docs/82379/1330310
+# Source: https://www.volcengine.com/docs/82379/1544106
+# Source: https://www.volcengine.com/docs/ark/deep-thinking
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 3.2, output 16, cache_read 0.64
 schema = 2
-base_model = "bytedance-seed/seed-2.0-code"
+base_model = "bytedance-seed/seed-2.0-code-preview"
 status = "deprecated"
+sources = ["https://www.volcengine.com/docs/82379/1330310", "https://www.volcengine.com/docs/82379/1544106", "https://www.volcengine.com/docs/ark/deep-thinking"]
+checked_at = "2026-11-12"
+notes = "价格表名称为 doubao-seed-2.0-code；模型列表标注“即将下线”，能力列未含结构化输出。"
 
 [capabilities]
-reasoning = { supported = true, effort = ["none", "minimal", "low", "medium", "high", "xhigh", "max"] }
-structured_output = true
-
-[api.chat-completions]
-compatibility = { reasoning_field = "reasoning_content" }
+reasoning = { supported = true, toggle = true, effort = ["minimal", "low", "medium", "high"], default = { type = "effort", value = "medium" } }
 
 [cost.text.input]
-price = 0.47499
-cache = { read = 0.095 }
+price = 0.47862656
 
-[[cost.text.input.overrides]]
-when = { context = { gt = 32_000 } }
-price = 0.71248
-cache = { read = 0.1425 }
-
-[[cost.text.input.overrides]]
-when = { context = { gt = 128_000 } }
-price = 1.42496
-cache = { read = 0.28499 }
+[cost.text.input.cache]
+read = 0.09572531
 
 [cost.text.output]
-price = 2.37494
+price = 2.39313279
 
-[[cost.text.output.overrides]]
-when = { context = { gt = 32_000 } }
-price = 3.56241
+[cost_cny]
+input = 3.2
+output = 16
+cache_read = 0.64
 
-[[cost.text.output.overrides]]
-when = { context = { gt = 128_000 } }
-price = 7.12482
+[[cost_cny.tiers]]
+when = "input<=32k"
+context_max = 32_000
+input = 3.2
+output = 16
+cache_read = 0.64
+
+[[cost_cny.tiers]]
+when = "32k<input<=128k"
+context_min = 32_000
+context_max = 128_000
+input = 4.8
+output = 24
+cache_read = 0.96
+
+[[cost_cny.tiers]]
+when = "128k<input<=256k"
+context_min = 128_000
+context_max = 256_000
+input = 9.6
+output = 48
+cache_read = 1.92
+
+[reasoning_default]
+value = "medium"
+source = "https://www.volcengine.com/docs/ark/deep-thinking"

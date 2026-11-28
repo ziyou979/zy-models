@@ -1,29 +1,30 @@
-# Imported from research/stepfun.json by scripts/import-research.ts (checked 2026-11-12)
-# Source: https://platform.stepfun.com/docs/zh/guides/models/vision
-# Source: https://platform.stepfun.com/docs/zh/guides/models/list
-# Source: https://platform.stepfun.com/docs/zh/guides/pricing/details
-# 占位: limit.output 未公开，按上游惯例取 context
-# 占位: release_date 未公开，占位为核查日 2026-11-12
-# 占位: open_weights 未确认，写 false
-# 占位: tools 未确认，写 false
-# 占位: temperature/top_p/top_k 为默认值 true/true/false，未核实
+# https://platform.stepfun.com/docs/zh/guides/models/vision, https://platform.stepfun.com/docs/zh/guides/models/list (accessed 2026-11-24)
+# Context 32K; text, image and video in, text out. Up to 60 images (20 MB total) or an MP4 under 128 MB per request.
+# Images JPG/JPEG, PNG, static GIF, WebP; video MP4 (https://platform.stepfun.com/docs/zh/api-reference/chat/chat-completion-create).
+# Output limit isn't documented; Chat Completions max_tokens is bounded only by the context, so output = context.
+# Tools: the Tool Call API lists step-1o-turbo-vision under "其他兼容" (other compatible models):
+#   https://platform.stepfun.com/docs/zh/api-reference/tool-call (accessed 2026-11-24)
+# Sampling: Chat Completions documents temperature and top_p, not top_k.
+# release_date: closest documented date. No launch date is published for the Turbo variant; Step-1o Vision, the model it
+#   speeds up, launched on 2025-01-21 (https://baike.baidu.com/item/Step-1o%20Vision/69298584).
 schema = 2
 name = "Step-1o Turbo Vision"
-description = "Step-1o Turbo Vision by StepFun."
+description = "Fast StepFun vision model for image and video understanding with text output"
+family = "step-vision"
 open_weights = false
-release_date = "2026-11-12"
+release_date = "2025-01-21"
 
 [modalities]
-input = ["text", "image", "video"]
+input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp", "video/mp4"]
 output = ["text"]
 
 [capabilities]
-tools = { supported = false }
+tools = { supported = true }
 reasoning = { supported = false }
 temperature = true
 top_p = true
 top_k = false
 
 [limit]
-context = 32_000
-output = 32_000
+context = 32_768
+output = 32_768

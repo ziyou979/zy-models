@@ -25,6 +25,3 @@ output = 24
 [reasoning_default]
 value = "on"
 source = "https://help.aliyun.com/zh/model-studio/deep-thinking"
-
-[limit]
-output = 128_000

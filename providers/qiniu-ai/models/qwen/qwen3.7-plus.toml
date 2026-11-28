@@ -13,6 +13,9 @@ notes = "显式缓存命中 0.2 元/百万；协议: openai-chat；官方广场�
 reasoning = { supported = true }
 structured_output = true
 
+[limit]
+output = 64_000
+
 [cost.text.input]
 price = 0.2991416
 

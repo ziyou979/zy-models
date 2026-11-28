@@ -36,9 +36,6 @@ cache_read = 0.36
 value = "medium"
 source = "https://www.volcengine.com/docs/ark/deep-thinking"
 
-[limit]
-input = 229_376
-
 [capabilities.reasoning.default]
 type = "effort"
 value = "medium"

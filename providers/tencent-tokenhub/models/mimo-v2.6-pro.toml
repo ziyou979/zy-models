@@ -1,31 +1,30 @@
-# Imported from research/tencent-tokenhub.json by scripts/import-research.ts (checked 2026-11-12)
-# Source: https://cloud.tencent.com/document/product/1823/130051
-# Source: https://cloud.tencent.com/document/product/1823/130055
-# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
-# CNY: input 3, output 6, cache_read 0.025
+# Pricing (USD per million tokens, intl list price, accessed 2026-11-24):
+#   https://intl.cloud.tencent.com/document/product/1300/78937 (input 0.435, output 0.87, cache hit 0.0036).
+#   China list: https://cloud.tencent.com/document/product/1823/130055
+# Availability and limits: https://cloud.tencent.com/document/product/1823/130051 (updated 2026-11-17)
+# Implicit cache: https://cloud.tencent.com/document/product/1823/131410; no cache-write price is published.
+# API: https://cloud.tencent.com/document/product/1823/138677
+# Toggle: thinking.type = enabled|disabled (default enabled)
+# The host lists text/image/video input, not audio (same as the Tencent Token Plan entry).
 schema = 2
 base_model = "xiaomi/mimo-v2.6-pro"
-sources = ["https://cloud.tencent.com/document/product/1823/130051", "https://cloud.tencent.com/document/product/1823/130055"]
-checked_at = "2026-11-12"
-notes = "官方标注“多模态理解”。另有 mimo-v2.6-flash（1/2/0.02）、mimo-v2.5-pro（3/6/0.025，纯文本）。"
+
+[modalities]
+input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp", "image/bmp", "video/mp4", "video/quicktime", "video/x-msvideo", "video/x-ms-wmv"]
+output = ["text"]
 
 [capabilities]
-reasoning = { supported = true }
+reasoning = { supported = true, toggle = true }
 structured_output = true
+top_k = false
+cache = { implicit = true }
 
-[limit]
-input = 1_048_576
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_content" }
 
 [cost.text.input]
-price = 0.4487124
-
-[cost.text.input.cache]
-read = 0.00373927
+price = 0.435
+cache = { read = 0.0036 }
 
 [cost.text.output]
-price = 0.89742479
-
-[cost_cny]
-input = 3
-output = 6
-cache_read = 0.025
+price = 0.87
