@@ -1,0 +1,56 @@
+# Imported from research/qiniu.json by scripts/import-research.ts (checked 2026-11-28)
+# Source: https://www.qiniu.com/ai/models
+# Prices: CNY per 1M tokens from the official pricing page, converted to USD (rate 6.685797 CNY/USD, 2026-11-12, https://open.er-api.com/v6/latest/USD).
+# CNY: input 1.2, output 4, cache_read 0.4
+schema = 2
+base_model = "tencent/hy3-preview"
+status = "deprecated"
+sources = ["https://www.qiniu.com/ai/models"]
+checked_at = "2026-11-28"
+notes = "由 cn-sync 自动添加（2026-11-28），字段取自官方公开数据，未经人工复核；思考开关/档位等未公开字段留空。"
+
+[capabilities]
+reasoning = { supported = true }
+structured_output = true
+
+[limit]
+context = 262_144
+output = 262_144
+
+[cost.text.input]
+price = 0.17948496
+
+[cost.text.input.cache]
+read = 0.05982832
+
+[cost.text.output]
+price = 0.5982832
+
+[cost_cny]
+input = 1.2
+output = 4
+cache_read = 0.4
+
+[[cost_cny.tiers]]
+when = "0k<input<=16k"
+context_min = 0
+context_max = 16_000
+input = 1.2
+output = 4
+cache_read = 0.4
+
+[[cost_cny.tiers]]
+when = "16k<input<=32k"
+context_min = 16_000
+context_max = 32_000
+input = 1.6
+output = 6.4
+cache_read = 0.6
+
+[[cost_cny.tiers]]
+when = "32k<input<=0k"
+context_min = 32_000
+context_max = 0
+input = 2
+output = 8
+cache_read = 0.8
