@@ -809,4 +809,4 @@
 - research/paratera.json: 无可导入模型，平台 paratera 暂不建立
 - skywork: 所有模型均因缺上下文且无对应 lab 模型而跳过，平台暂不建立
 
-overlay 文件数：140
+overlay 文件数：143
